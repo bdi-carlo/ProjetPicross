@@ -29,6 +29,7 @@ class Map
   end
   ##
   # Rempli la matrice de manière aléatoire entre 0 et 2
+  #
   # Retourne la grille
 	def fillRand
 		prng=Random.new
@@ -67,6 +68,7 @@ class Map
   end
 ##
 # Affiche la grille
+#
 # Retourne nil
  	def display
 
@@ -87,13 +89,48 @@ class Map
  		end
     return nil
 	end
-
+##
+# Getter du tableau de case
+#
+# Retourne le tableau
+  def getMap()
+    return @map
+  end
+##
+# Vérifie que deux grille sont égales
+#
+# Param : Map à comparer (La classe, pas le tableau)
+#
+# Retourne un booléen true si égales, false sinon
+  def compare(res)
+    return (@map == res.getMap)
+  end
 end
 
+##
+#Test de la Map
+
 test = Map.create(10,10)
-test.fillRand
+#test.fillRand
+same = Map.create(10,10)
+#same = test
+diff = Map.create(10,10)
+diff.fillRand
 print "Test accessAt(5,6)  :  #{test.accessAt(5,6)}\n"
 print "Test putAt!(5,6,8)\n"
 test.putAt!(5,6,8)
+same.putAt!(5,6,8)
 print "Test accessAt(5,6)  :  #{test.accessAt(5,6)}\n"
+
+if test.compare(same)
+  print "Les grilles test et same sont Pareilles\n"
+else
+  print "Pas pareil\n"
+end
+if test.compare(diff)
+  print "Les grilles test et diff sont Pareilles\n"
+else
+  print "Pas pareil\n"
+end
+
 test.display
