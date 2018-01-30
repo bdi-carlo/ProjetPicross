@@ -103,13 +103,20 @@ class Map
 #
 # Retourne un booléen true si égales, false sinon
   def compare(res)
-    return (@map == res.getMap)
+    0.upto(@rows-1) do |row|
+			0.upto(@cols-1) do |col|
+				if self.accessAt(row,col).getColor != res.accessAt(row,col).getColor
+          return False
+        end
+			end
+		end
+    return True
   end
 end
 
 ##
 #Test de la Map
-
+=begin
 test = Map.create(10,10)
 #test.fillRand
 same = Map.create(10,10)
@@ -132,5 +139,5 @@ if test.compare(diff)
 else
   print "Pas pareil\n"
 end
-
 test.display
+=end
