@@ -26,6 +26,21 @@ class Case
   def getColor
     return @value
   end
+  ##
+  # Getter de couleur de la case avec les blanc et les barrés pareil
+  #
+  # Retour : couleur de la case, colorié ou non
+  def verifColor
+    if @value == 1
+      return @value
+    end
+    if @value == 0
+      return 0
+    end
+    if @value == 2
+      return 0
+    end
+  end
   def
   ##
   # redéfinition de l'affichage

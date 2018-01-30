@@ -105,7 +105,7 @@ class Map
   def compare(res)
     0.upto(@rows-1) do |row|
 			0.upto(@cols-1) do |col|
-				if self.accessAt(row,col).getColor != res.accessAt(row,col).getColor
+				if self.accessAt(row,col).verifColor != res.accessAt(row,col).verifColor
           return False
         end
 			end
