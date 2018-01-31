@@ -1,3 +1,4 @@
+load "Case.rb"
 ##
 # Classe représentant une Grille de Picross, elle est sous la forme d'une matrice de case.
 class Map
@@ -10,46 +11,158 @@ class Map
   # * map : représente le tableau de tableau (matrice)
   # * rows : Représente le nombre de lignes de la grille
   # * cols : Représente le nombre de colonnes de la grille
+  # * side : Tableau des chiffres sur le coté
+  # * top : Tableau des chiffres du dessus
+  # * res : matrice de résultat(pour comparaison)
 
   private_class_method :new
-	##
-  # Constructeur de la classe
-  #
-  # Param :
-  # * x : Nombre de lignes
-  # * y : Nombre de colonnes
-	def initialize(x,y)
+
+############################## CRÉATION ##############################
+##
+# Constructeur de la classe
+#
+# Param :
+# * x : Nombre de lignes
+# * y : Nombre de colonnes
+# * filename : Nom du fichier de resultat
+	def initialize(x,y,filename)
 		@rows,@cols=x,y
+    @side = Array.new()
+    @top = Array.new()
 		@map = Array.new(x){Array.new(y)}
+    @res = Array.new();
+    @filename = filename
 	end
-  ##
-  # Création de la Grille
-  def Map.create(x,y)
-    new(x,y)
+##
+# Création de la Grille
+  def Map.create(x,y,filename)
+    new(x,y,filename)
   end
-  ##
-  # Rempli la matrice de manière aléatoire entre 0 et 2
-  #
-  # Retourne la grille
-	def fillRand
-		prng=Random.new
-		i=0
-		j=0
+
+#####################################################################
+
+
+
+###################### GETTERS #################################
+##
+# Getter du tableau de case
+#
+# Retourne le tableau
+    def getMap()
+      return @map
+    end
+##
+# Getter de top
+#
+# Retourne @top
+    def getTop
+      return @top
+    end
+##
+# Getter de side
+#
+# Retourne @side
+    def getSide
+      return @side
+    end
+##############################################################
+
+
+
+
+################################## REMPLISSAGE DES VARIABLES D'INSTANCE ########################
+
+##
+# Rempli la matrice de case vides
+#
+# Retourne nil
+	def empty
     # On itère dans la matrice comme en C de 0 à Nb colonne -1 (Faut faire gaffe au -1)
 		0.upto(@rows-1) do |row|
 			0.upto(@cols-1) do |col|
-				@map[row][col] = prng.rand(3)
+				@map[row][col] = Case.create(0)
 			end
 		end
-    return self
+    return nil
 	end
+##
+# Génère la liste de chiffre sur le coté
+#
+# Retourne nil
+  def generateSide
+    count = 0
+    for row in @map do
+      lign = Array.new()
+      for num in row do
+        if num == 1
+          count +=1
+        end
+        if (num == 0 && count != 0 )
+          lign.push(count)
+          count=0
+        end
+      end
+      if (count != 0 )
+        lign.push(count)
+        count=0
+      end
+      @side.push(lign)
+    end
+    return nil
+  end
+##
+# Génère la liste de chiffre sur le coté
+#
+# Retourne nil
+  def generateTop
+    count = 0
+    0.upto(@cols -1) do |num|
+      lign = Array.new()
+      for tab in @grid do
+        if tab[num] == 1
+          count +=1
+        end
+        if (tab[num] == 0 && count != 0 )
+          lign.push(count)
+          count=0
+        end
+      end
+      if (count != 0 )
+        lign.push(count)
+        count=0
+      end
+      @top.push(lign)
+    end
+  end
+##
+# Importe un fichier au format texte en tableau de resultat
+#
+# Si le fichier n'existe pas ça plante, il faut mettre le chemin relatif
+  def import ()
+    fd=File.open(@filename,'r')
+    fd.each_line do |x|
+      lign=Array.new()
+      x.split(//).each do |char|
+        lign.push(char.to_i)
+      end
+      @res.push(lign)
+    end
+  end
+################################################################################################
+
+
+
+
+
+
+################################### GESTION DES CASES #########################################
 ##
 # Accède à une case de la grille en mode <b>LIGNE COLONNE</b>
 #
 # Param :
 # * row : Ligne à acceder
 # * col : Colonne à acceder
-# Retourne la case de la grille EN LECTURE SEULE
+# Retourne la case de la grille EN LECTURE SEULE (pas touche)
 
 	def accessAt(row,col)
 		return @map[row][col]
@@ -61,11 +174,35 @@ class Map
 # * row : Ligne à acceder
 # * col : Colonne à acceder
 # * value : Nouvelle valeur
-# Retourne la grille
+# Retourne nil
   def putAt!(row,col,value)
     @map[row][col]=value
-    return self
+    return nil
   end
+
+################################################################################################
+
+##
+# Vérifie que deux grille sont égales
+#
+# Param : Map à comparer (La classe, pas le tableau)
+#
+# Retourne un booléen true si égales, false sinon
+  def compare(res)
+    0.upto(@rows-1) do |row|
+			0.upto(@cols-1) do |col|
+				if self.accessAt(row,col).verifColor != res.accessAt(row,col).verifColor
+          return False
+        end
+			end
+		end
+    return True
+  end
+
+
+
+
+
 ##
 # Affiche la grille
 #
@@ -89,55 +226,6 @@ class Map
  		end
     return nil
 	end
-##
-# Getter du tableau de case
-#
-# Retourne le tableau
-  def getMap()
-    return @map
-  end
-##
-# Vérifie que deux grille sont égales
-#
-# Param : Map à comparer (La classe, pas le tableau)
-#
-# Retourne un booléen true si égales, false sinon
-  def compare(res)
-    0.upto(@rows-1) do |row|
-			0.upto(@cols-1) do |col|
-				if self.accessAt(row,col).verifColor != res.accessAt(row,col).verifColor
-          return False
-        end
-			end
-		end
-    return True
-  end
-end
 
-##
-#Test de la Map
-=begin
-test = Map.create(10,10)
-#test.fillRand
-same = Map.create(10,10)
-#same = test
-diff = Map.create(10,10)
-diff.fillRand
-print "Test accessAt(5,6)  :  #{test.accessAt(5,6)}\n"
-print "Test putAt!(5,6,8)\n"
-test.putAt!(5,6,8)
-same.putAt!(5,6,8)
-print "Test accessAt(5,6)  :  #{test.accessAt(5,6)}\n"
 
-if test.compare(same)
-  print "Les grilles test et same sont Pareilles\n"
-else
-  print "Pas pareil\n"
-end
-if test.compare(diff)
-  print "Les grilles test et diff sont Pareilles\n"
-else
-  print "Pas pareil\n"
-end
-test.display
-=end
+end #Fin de Classe

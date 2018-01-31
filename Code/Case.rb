@@ -9,6 +9,9 @@ class Case
 		@value = val
 	end
 
+	def Case.create(val)
+		new(val)
+	end
   ##
   # Colore une case de la couleur choisie, 0 = blanc, 1 = noir, 2 = barré
   #
