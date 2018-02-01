@@ -95,9 +95,11 @@ end
 	grille1 = Map.create(18,18,"./scenario_bateau")
 	grille1.import()
 
+	# Exemple de sauvegarde d'une partie vierge
 	s1 = Save.new()
 	s1.sauvegarder("Sauvegardes/grille1", grille1)
 
+	# On modifie cette meme grille après l'avoir charger, puis on la sauvegarde
 	s2 = Save.new()
 	grille2 = s2.charger("Sauvegardes/grille1")
 	grille2.putAt!(0,0,1)
