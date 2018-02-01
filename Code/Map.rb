@@ -65,6 +65,21 @@ class Map
     def getSide
       return @side
     end
+
+##
+# Getter de cols
+#
+# Retourne @cols
+    def getCols
+      return @cols
+    end
+##
+# Getter de rows
+#
+# Retourne @rows
+    def getRows
+      return @rows
+    end
 ##############################################################
 
 
@@ -207,7 +222,7 @@ class Map
 # Affiche la grille
 #
 # Retourne nil
- 	def display
+  def display
 
     i=0
     print "  "
