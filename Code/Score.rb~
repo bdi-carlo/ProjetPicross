@@ -21,21 +21,24 @@ class Score
 	# Méthode qui permet de rentrer le score d'un joueur dans un fichier nommé "Score.txt"
 	
 	def rentrerScore()
+		#begin
+		
 		f = File.new(@nomFichier,"w")
 		
 		f.puts("#{@temps} " + "#{@pseudo} " + "#{@difficulte}")
 		
-		f.close()
+		#rescue
+			#puts "Le fichier n'a pas pu etre ouvert, veuillez saisir un nom correct"
+			#retry
+		#end
 		
 	end
 	
 	def lireScore() 
-		f = File.open(@nomFichier, "r")
-		f.each_line do |line|
+		fichier = File.open(@nomFichier, "r")
+		fichier.each_line do |line|
 			print "#{line}"
 		end
-		
-		f.close()
 	end
 	
 end
