@@ -49,11 +49,11 @@ class Case
   # redéfinition de l'affichage
 	def to_s
 		if @value==0
-      return "Blanc"
+      return " "
     elsif @value==1
-      return "Noir"
+      return "■"
     elsif @value==2
-      return "Croix"
+      return "x"
     end
 	end
 

@@ -22,21 +22,26 @@ class Map
 # Constructeur de la classe
 #
 # Param :
-# * x : Nombre de lignes
-# * y : Nombre de colonnes
 # * filename : Nom du fichier de resultat
-	def initialize(x,y,filename)
-		@rows,@cols=x,y
+	def initialize(filename)
+
     @side = Array.new()
     @top = Array.new()
-		@map = Array.new(x){Array.new(y)}
-    @res = Array.new();
+    @res = Array.new()
     @filename = filename
+    self.import
+    @rows=@res.length
+    @cols=@res[0].length
+    self.generateSide()
+    self.generateTop()
+    @map = Array.new(@rows){Array.new(@cols)}
+    self.empty
+
 	end
 ##
 # Création de la Grille
-  def Map.create(x,y,filename)
-    new(x,y,filename)
+  def Map.create(filename)
+    new(filename)
   end
 
 #####################################################################
@@ -106,7 +111,7 @@ class Map
 # Retourne nil
   def generateSide
     count = 0
-    for row in @map do
+    for row in @res do
       lign = Array.new()
       for num in row do
         if num == 1
@@ -133,7 +138,7 @@ class Map
     count = 0
     0.upto(@cols -1) do |num|
       lign = Array.new()
-      for tab in @grid do
+      for tab in @res do
         if tab[num] == 1
           count +=1
         end
@@ -225,9 +230,12 @@ class Map
   def display
 
     i=0
-    print "  "
-    0.upto(@cols-1) do |x|
+    print "   "
+    0.upto(9) do |x|
       print" #{x} "
+    end
+    10.upto(@cols-1) do |x|
+      print" #{x}"
     end
     print "\n"
     print "  "
@@ -235,12 +243,17 @@ class Map
       print"---"
     end
     print "\n"
- 		for row in @map do
- 			print "#{i} #{row}\n"
-      i+=1
+    0.upto(9) do |x|
+ 		  print " #{x} #{@res[x]}\n"
  		end
+    10.upto(@rows-1) do |x|
+      print "#{x} #{@res[x]}\n"
+    end
     return nil
 	end
 
 
 end #Fin de Classe
+
+map = Map.create("./scenario_bateau")
+map.display
