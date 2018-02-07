@@ -1,3 +1,4 @@
+# encoding: UTF-8
 ##
 # Classe représentant une case de la grille
 class Case
