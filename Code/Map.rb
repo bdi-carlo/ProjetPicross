@@ -162,7 +162,7 @@ class Map
     fd=File.open(@filename,'r')
     fd.each_line do |x|
       lign=Array.new()
-      x.split(//).each do |char|
+      x.chomp.split(//).each do |char|
         lign.push(char.to_i)
       end
       @res.push(lign)
@@ -208,15 +208,15 @@ class Map
 # Param : Map à comparer (La classe, pas le tableau)
 #
 # Retourne un booléen true si égales, false sinon
-  def compare(res)
+  def compare
     0.upto(@rows-1) do |row|
 			0.upto(@cols-1) do |col|
-				if self.accessAt(row,col).verifColor != res.accessAt(row,col).verifColor
-          return False
+				if self.accessAt(row,col).verifColor != @res[row][col]
+          return FALSE
         end
 			end
 		end
-    return True
+    return TRUE
   end
 
 
@@ -255,5 +255,28 @@ class Map
 
 end #Fin de Classe
 
-map = Map.create("./scenario_bateau")
+map = Map.create("./Test2x2")
+print "Chiffres du dessus :\n"
+print "#{map.getTop}\n"
+print "Chiffres du coté :\n"
+print "#{map.getSide}\n"
+print "Nombre de colonnes :\n"
+print "#{map.getCols}\n"
+print "Nombre de lignes :\n"
+print "#{map.getRows}\n"
+print "Test de compare (erreur) : \n"
+if map.compare
+  print "Map Bonne\n"
+else
+  print "Map Fausse\n"
+end
+print "Correction de la grille :\n"
+map.putAt!(1,0,Case.create(1))
+map.putAt!(0,1,Case.create(1))
+map.putAt!(0,0,Case.create(1))
+if map.compare
+  print "Map Bonne\n"
+else
+  print "Map Fausse\n"
+end
 map.display
