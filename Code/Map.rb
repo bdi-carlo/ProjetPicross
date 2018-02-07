@@ -1,3 +1,4 @@
+# encoding: UTF-8
 load "Case.rb"
 ##
 # Classe représentant une Grille de Picross, elle est sous la forme d'une matrice de case.
@@ -258,7 +259,7 @@ end #Fin de Classe
 map = Map.create("./Test2x2")
 print "Chiffres du dessus :\n"
 print "#{map.getTop}\n"
-print "Chiffres du coté :\n"
+print "Chiffres du cote :\n"
 print "#{map.getSide}\n"
 print "Nombre de colonnes :\n"
 print "#{map.getCols}\n"
