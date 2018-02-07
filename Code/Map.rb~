@@ -274,7 +274,7 @@ end
 print "Correction de la grille :\n"
 map.putAt!(1,0,Case.create(1))
 map.putAt!(0,1,Case.create(1))
-#map.putAt!(0,0,Case.create(1))
+map.putAt!(0,0,Case.create(1))
 if map.compare
   print "Map Bonne\n"
 else

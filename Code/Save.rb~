@@ -35,7 +35,6 @@ class Save
 		@nomSave = "Sauvegardes/"+unNom
 		@grille = uneGrille
 	end
-
 =end
 
 	##
@@ -90,12 +89,13 @@ class Save
 end
 
 
-
+# Test Obsolete  car Map.rb à été modifié
+=begin
 	# Partie test
 	grille1 = Map.create(18,18,"./scenario_bateau")
 	grille1.import()
 
-	# Exemple de sauvegarde d'une partie vierge
+	# Exemple de sauvegarde d'une grille vierge
 	s1 = Save.new()
 	s1.sauvegarder("Sauvegardes/grille1", grille1)
 
@@ -105,6 +105,7 @@ end
 	grille2.putAt!(0,0,1)
 	grille2.putAt!(0,1,0)
 	s2.sauvegarder("Sauvegardes/grille2",grille2)
+=end
 
 	
 

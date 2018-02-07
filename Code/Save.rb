@@ -35,7 +35,6 @@ class Save
 		@nomSave = "Sauvegardes/"+unNom
 		@grille = uneGrille
 	end
-
 =end
 
 	##
@@ -61,7 +60,7 @@ class Save
 	# Charge la partie
 	#
 	# Param : identificateurs d'une partie 
-	# Retour La grille chargée
+	# Retour : La grille chargée
 	def charger(nomSave)
 		
 		@nomSave=nomSave
@@ -90,7 +89,8 @@ class Save
 end
 
 
-
+# Test Obsolete  car Map.rb à été modifié
+=begin
 	# Partie test
 	grille1 = Map.create(18,18,"./scenario_bateau")
 	grille1.import()
@@ -105,6 +105,7 @@ end
 	grille2.putAt!(0,0,1)
 	grille2.putAt!(0,1,0)
 	s2.sauvegarder("Sauvegardes/grille2",grille2)
+=end
 
 	
 
