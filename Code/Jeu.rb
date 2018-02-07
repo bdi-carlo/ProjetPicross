@@ -16,7 +16,7 @@ class Jeu
     # Constructeur qui rappelle que l'on ne peut pas instancier cette classe
     #
 
-    def Jeu.lancerJeu()
+    def Jeu.lanceToi()
         new()
     end
 

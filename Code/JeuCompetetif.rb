@@ -21,8 +21,8 @@ class JeuCompetitif < Jeu
 
 	private_class_method :new
 
-	def JeuCompetitif.lancerJeu()
-		new()
+	def JeuCompetitif.lanceToi()
+		super()
 	end
 
 	def initialize()
@@ -59,4 +59,4 @@ class JeuCompetitif < Jeu
 end
 
 
-j = JeuCompetitif.lancerJeu()
+j = JeuCompetitif.lanceToi()
