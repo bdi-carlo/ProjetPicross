@@ -14,7 +14,7 @@ require 'facets/timer'
 # l'installation du gem se fait par "gem install facets"
     class Timers
 
-      private_class_method :update
+
 
       def initialize(increment)
           @timers = Timer.new(1) { self.update{yield} }
@@ -49,7 +49,9 @@ require 'facets/timer'
       #
       # Retour : nil
       def start
-        @time =0
+        if @time == nil
+          @time = 0
+        end
         @timers.start
         return nil
       end
@@ -83,7 +85,7 @@ require 'facets/timer'
         self.resume
         return nil
       end
-      
+
     end
 #Exemple (y'a pas le =begin et =end) :
 

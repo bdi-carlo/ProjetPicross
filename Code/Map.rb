@@ -255,7 +255,7 @@ class Map
 
 
 end #Fin de Classe
-
+=begin
 map = Map.create("./Test2x2")
 print "Chiffres du dessus :\n"
 print "#{map.getTop}\n"
@@ -281,3 +281,4 @@ else
   print "Map Fausse\n"
 end
 map.display
+=end
