@@ -13,7 +13,7 @@ load "Timers.rb"
 class Gui
   def initialize
     Gtk.init
-    @map = Map.create("./scenario_bateau")
+    @map = Map.create("./grilles/Scenario/Bateau")
 
     @timer = Timers.new(-1,300){
       @time=@timer.getTime
@@ -121,11 +121,13 @@ class Gui
       tabrow = Array.new
       tabPress = Array.new
       0.upto(@map.getCols-1) do |y|
-        button=Gtk::Button.new(:expand => TRUE).set_size_request(10,10)
+        button=Gtk::Button.new(:expand => FALSE).set_size_request(15,15)
         tabrow.push(button)
         tabPress.push(0)
-        button.set_image(Gtk::Image.new(:file =>"blanc.png"))
+        button.set_image(Gtk::Image.new(:file =>"images/blanc.png"))
+        button.border_width=(15)
         button.set_always_show_image(TRUE)
+
         button.signal_connect("clicked"){onPress(x,y)}
         i+=1
         row.add(button)
@@ -147,7 +149,7 @@ class Gui
     hbox3.add(Gtk::Label.new().set_markup("<span color=\"#33FF00\" >15 secondes     </span>"))
     boxAide.add(hbox3)
     boxAide.name = "boxAide"
-    @provider.load(:data=>"#boxAide {background-image : url(\"zoneaide.png\");
+    @provider.load(:data=>"#boxAide {background-image : url(\"images/zoneaide.png\");
                                       background-repeat:no-repeat;
                                       background-position:100% 100%;
                                     }")
@@ -186,11 +188,14 @@ class Gui
 
     #@buttonTab[x*y+y].image=(@noir)
     if @timePress[x][y]%2 == 0
-       @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"noir.png"))
+       @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"images/noir.png"))
+      @buttonTab[x][y].border_width=(0)
+
        @map.putAt!(x,y,Case.create(1))
    else
     @map.putAt!(x,y,Case.create(0))
-    @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"blanc.png"))
+    @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"images/blanc.png"))
+    @buttonTab[x][y].border_width=(0)
    end
     @timePress[x][y]+=1
     print "\nj'ai appuyé à la case #{x},#{y}\n"
