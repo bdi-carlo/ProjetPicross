@@ -13,7 +13,7 @@ class IndiceFaible < Indice
 # renvoie indice chaine de caractere contenant le plus gros chiffre "max" et sa position
 #
 
-	def afficherIndice
+	def envoyerIndice
 		if @nbUtilisation < @nbMax
 			@nbUtilisation += 1
 			somme = 0
@@ -50,11 +50,13 @@ class IndiceFaible < Indice
 		
 			# affiche le plus gros chiffre avec son indice si c'est une ligne 
 			if !@orientation
-				@indice = ("La ligne #{position} possède le plus gros chiffre qui est #{max}")
+				@indice = ("La ligne #{position} possede le plus gros chiffre qui est #{max}")
+			end
 		
 			# affiche le plus gros chiffre avec son indice si c'est une colonne 
 			if @orientation
-				@indice = ("La colonne #{position} possède le plus gros chiffre qui est #{max}")
+				@indice = ("La colonne #{position} possede le plus gros chiffre qui est #{max}")
+			end
 		end
 
 		else
