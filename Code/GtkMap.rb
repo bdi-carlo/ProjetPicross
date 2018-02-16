@@ -38,6 +38,7 @@ class Gui
     @window.set_window_position( Gtk::WindowPosition::CENTER_ALWAYS)
     # On set le titre
     @window.set_title("Test GTK")
+
     # Position de la fenetre
     @provider = Gtk::CssProvider.new
 
@@ -66,7 +67,7 @@ class Gui
     topnumbers = Gtk::Box.new(:vertical,2)
     topnumbers.homogeneous=(TRUE)
     maxlen.downto(0) do |i|
-      @temp<< "                                         "
+      @temp<< "                                       "
       0.upto(@map.getCols-1) do |j|
 
         if top[j][i]!=nil
@@ -93,7 +94,7 @@ class Gui
     ################################CHIFFRES DES COTÉ######################################
     side = @map.getSide()
 
-    sidenumbers = Gtk::Box.new(:vertical,11)
+    sidenumbers = Gtk::Box.new(:vertical,10)
       for tab in side
         maxlen = 7
         tab.length.upto(maxlen)do
@@ -113,21 +114,22 @@ class Gui
     @buttonTab = Array.new{Array.new}
     i=0
     boxinter = Gtk::Box.new(:horizontal,40)
-    grid = Gtk::Box.new(:vertical,1)
+    grid = Gtk::Box.new(:vertical,0)
     grid.set_homogeneous(FALSE)
     0.upto(@map.getRows-1) do |x|
-      row = Gtk::Box.new(:horizontal,1)
+      row = Gtk::Box.new(:horizontal,0)
       row.set_homogeneous(FALSE)
       tabrow = Array.new
       tabPress = Array.new
       0.upto(@map.getCols-1) do |y|
-        button=Gtk::Button.new(:expand => FALSE).set_size_request(15,15)
+        button=Gtk::Button.new(:expand => TRUE).set_size_request(15,15)
+        button.set_relief(Gtk::RELIEF_NONE)
         tabrow.push(button)
         tabPress.push(0)
         button.set_image(Gtk::Image.new(:file =>"images/blanc.png"))
-        button.border_width=(15)
         button.set_always_show_image(TRUE)
-
+        button.child().set_hexpand(true)
+        button.child().set_vexpand(true)
         button.signal_connect("clicked"){onPress(x,y)}
         i+=1
         row.add(button)
@@ -149,7 +151,7 @@ class Gui
     hbox3.add(Gtk::Label.new().set_markup("<span color=\"#33FF00\" >15 secondes     </span>"))
     boxAide.add(hbox3)
     boxAide.name = "boxAide"
-    @provider.load(:data=>"#boxAide {background-image : url(\"images/zoneaide.png\");
+    @provider.load(:data=>"#boxAide {background-image : url(\"zoneaide.png\");
                                       background-repeat:no-repeat;
                                       background-position:100% 100%;
                                     }")
@@ -176,6 +178,7 @@ class Gui
 
     #Boucle
     apply_style(@window, @provider)
+    print @window.size
     Gtk.main
   end
   def onDestroy
@@ -189,13 +192,16 @@ class Gui
     #@buttonTab[x*y+y].image=(@noir)
     if @timePress[x][y]%2 == 0
        @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"images/noir.png"))
-      @buttonTab[x][y].border_width=(0)
-
+       #@buttonTab[x][y].child().set_property('xscale', 1.0)
+       #@buttonTab[x][y].child().set_property('yscale', 1.0)
+       @buttonTab[x][y].set_relief(Gtk::RELIEF_NONE)
        @map.putAt!(x,y,Case.create(1))
    else
     @map.putAt!(x,y,Case.create(0))
     @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"images/blanc.png"))
-    @buttonTab[x][y].border_width=(0)
+    @buttonTab[x][y].set_relief(Gtk::RELIEF_NONE)
+    #@buttonTab[x][y].child().set_property('xscale', 1.0)
+    #@buttonTab[x][y].child().set_property('yscale', 1.0)
    end
     @timePress[x][y]+=1
     print "\nj'ai appuyé à la case #{x},#{y}\n"

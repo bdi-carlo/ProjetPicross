@@ -188,6 +188,11 @@ class Map
 	def accessAt(row,col)
 		return @map[row][col]
 	end
+
+
+  def accessAtRes(row,col)
+    return @res[row][col]
+  end
 ##
 # Modifie la valeur d'une case de la grille par la valeur en paramêtre ,format <b>LIGNE COLONNE</b>
 #
