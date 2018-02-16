@@ -13,7 +13,7 @@ load "Timers.rb"
 class Gui
   def initialize
     Gtk.init
-    @map = Map.create("./grilles/Scenario/Bateau")
+    @map = Map.create("./grilles/10x10/Spirale")
 
     @timer = Timers.new(-1,300){
       @time=@timer.getTime
@@ -33,7 +33,7 @@ class Gui
     @timePress=Array.new{Array.new}
 
     @window = Gtk::Window.new.override_background_color(:normal  , Gdk::RGBA.new())
-    @window.set_size_request(800, 400)
+    @window.set_size_request(970, 700)
     @window.resizable=FALSE
     @window.set_window_position( Gtk::WindowPosition::CENTER_ALWAYS)
     # On set le titre
@@ -115,21 +115,19 @@ class Gui
     i=0
     boxinter = Gtk::Box.new(:horizontal,40)
     grid = Gtk::Box.new(:vertical,0)
-    grid.set_homogeneous(FALSE)
+    grid.set_homogeneous(TRUE)
     0.upto(@map.getRows-1) do |x|
       row = Gtk::Box.new(:horizontal,0)
-      row.set_homogeneous(FALSE)
+      row.set_homogeneous(TRUE)
       tabrow = Array.new
       tabPress = Array.new
       0.upto(@map.getCols-1) do |y|
-        button=Gtk::Button.new(:expand => TRUE).set_size_request(15,15)
+        button=Gtk::Button.new(:expand => FALSE).set_size_request(15,15)
         button.set_relief(Gtk::RELIEF_NONE)
         tabrow.push(button)
         tabPress.push(0)
         button.set_image(Gtk::Image.new(:file =>"images/blanc.png"))
         button.set_always_show_image(TRUE)
-        button.child().set_hexpand(true)
-        button.child().set_vexpand(true)
         button.signal_connect("clicked"){onPress(x,y)}
         i+=1
         row.add(button)
@@ -151,7 +149,7 @@ class Gui
     hbox3.add(Gtk::Label.new().set_markup("<span color=\"#33FF00\" >15 secondes     </span>"))
     boxAide.add(hbox3)
     boxAide.name = "boxAide"
-    @provider.load(:data=>"#boxAide {background-image : url(\"zoneaide.png\");
+    @provider.load(:data=>"#boxAide {background-image : url(\"images/zoneaide.png\");
                                       background-repeat:no-repeat;
                                       background-position:100% 100%;
                                     }")
