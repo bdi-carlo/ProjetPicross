@@ -34,7 +34,7 @@ class JeuCompetitif < Jeu
 		r = Random.new
 		num = r.rand(5) + 1
 		print "#{num}\n"
-		nom = "./#{@difficulte}#{@taille}#{num}.txt"
+		nom = "../grilles/Basic/#{@difficulte}#{@taille}#{num}.txt"
 		map = Map.create(nom)
 		print "Chiffres du dessus :\n"
 		print "#{map.getTop}\n"
