@@ -10,7 +10,7 @@ class Hypothese
 
  	#  *VARIABLES D'INSTANCE*
 	# * grillePrim : Grille originale 
-	# * grillesHypothese : Tableau de grilles suite à l'entrée en hypothese(s) 
+	# * grillesHypothese : Grilles suite à l'entrée en hypothese(s) 
 
 	
 	##

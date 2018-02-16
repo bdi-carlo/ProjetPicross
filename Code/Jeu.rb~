@@ -32,18 +32,6 @@ class Jeu
     #
     #
 
-
-=begin partie methodes hypotheses
-
-	##
-	# Commence hypothese
-	#
-	def hypotheser()
-	
-	end
-
-=end
-
     ##
     # Méthode qui permet au joueur de rentrer son pseudo et le sauvegarder
     #
