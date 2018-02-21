@@ -33,6 +33,7 @@ class Gui
     @timePress=Array.new{Array.new}
 
     @window = Gtk::Window.new.override_background_color(:normal  , Gdk::RGBA.new())
+
     @window.set_size_request(970, 700)
     @window.resizable=FALSE
     @window.set_window_position( Gtk::WindowPosition::CENTER_ALWAYS)
@@ -128,10 +129,20 @@ class Gui
         tabPress.push(0)
         button.set_image(Gtk::Image.new(:file =>"images/blanc.png"))
         button.set_always_show_image(TRUE)
+        button.set_focus(FALSE)
+
+
         button.signal_connect("button_press_event"){
-            onPress(x,y,Gtk.current_event.button)
+
+            onPress(x,y,Gtk.current_event)
         }
+        button.signal_connect("enter"){
+
+            onEnter(x,y,Gtk.current_event)
+        }
+
         i+=1
+
         row.add(button)
       end
       @buttonTab.push(tabrow)
@@ -187,13 +198,19 @@ class Gui
     Gtk.main_quit
   end
 
-  def onPress(x,y,button)
-    print "#{button}\n"
+  def onEnter(x,y,button)
+    Gdk.pointer_ungrab(Gdk::CURRENT_TIME)
+    @buttonTab[x][y].set_focus(TRUE)
+     if button != nil
+       print "#{button.state.button1_mask?}\n"
+     end
     #@buttonTab[x*y+y].image=(@noir)
-    if button != 3
+
+    if button.state.button1_mask?
       if @timePress[x][y]%2 == 0
 
          @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"images/noir.png"))
+
          #@buttonTab[x][y].child().set_property('xscale', 1.0)
          #@buttonTab[x][y].child().set_property('yscale', 1.0)
          @buttonTab[x][y].set_relief(Gtk::RELIEF_NONE)
@@ -213,7 +230,8 @@ class Gui
         puts "gagné temps restant : #{@time}"
         Gtk.main_quit
       end
-    else
+    end
+    if button.state.button3_mask?
       @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"images/croix.png"))
       #@buttonTab[x][y].child().set_property('xscale', 1.0)
       #@buttonTab[x][y].child().set_property('yscale', 1.0)
@@ -223,6 +241,45 @@ class Gui
     end
   end
 
+  def onPress(x,y,button)
+    Gdk.pointer_ungrab(Gdk::CURRENT_TIME)
+    @buttonTab[x][y].set_focus(TRUE)
+
+
+    if button.button==1
+      if @timePress[x][y]%2 == 0
+
+         @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"images/noir.png"))
+
+         #@buttonTab[x][y].child().set_property('xscale', 1.0)
+         #@buttonTab[x][y].child().set_property('yscale', 1.0)
+         @buttonTab[x][y].set_relief(Gtk::RELIEF_NONE)
+         @map.putAt!(x,y,Case.create(1))
+
+     else
+
+        @map.putAt!(x,y,Case.create(0))
+        @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"images/blanc.png"))
+        @buttonTab[x][y].set_relief(Gtk::RELIEF_NONE)
+        #@buttonTab[x][y].child().set_property('xscale', 1.0)
+        #@buttonTab[x][y].child().set_property('yscale', 1.0)
+     end
+      @timePress[x][y]+=1
+      print "\nj'ai appuyé à la case #{x},#{y}\n"
+      if @map.compare
+        puts "gagné temps restant : #{@time}"
+        Gtk.main_quit
+      end
+    end
+    if button.button==3
+      @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"images/croix.png"))
+      #@buttonTab[x][y].child().set_property('xscale', 1.0)
+      #@buttonTab[x][y].child().set_property('yscale', 1.0)
+      @buttonTab[x][y].set_relief(Gtk::RELIEF_NONE)
+      @map.putAt!(x,y,Case.create(2))
+      @timePress[x][y]=0
+    end
+  end
 
 
   def apply_style(widget, provider)
