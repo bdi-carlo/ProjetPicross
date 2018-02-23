@@ -88,12 +88,22 @@ class Gui
 
     Gtk.main
   end
+  ##
+  # Callback de la fermeture de l'appli
   def onDestroy
     puts "Fin de l'application"
     #Quit 'propre'
     Gtk.main_quit
   end
-
+  ##
+  # Callback lors du maintient du bouton
+  #
+  # On teste le bouton actuellement enfoncé et on utilise le ungrab pour changer de bouton
+  #
+  # Param :
+  # * x : Coordonnée du bouton
+  # * y : Coordonnée du bouton
+  # * button : Event qui contient l'appui
   def onEnter(x,y,button)
     Gdk.pointer_ungrab(Gdk::CURRENT_TIME)
     @buttonTab[x][y].set_focus(TRUE)
@@ -127,7 +137,13 @@ class Gui
       @timePress[x][y]=0
     end
   end
-
+  ##
+  # Callback lors de l'appui d'un bouton
+  #
+  # Param :
+  # * x : Coordonnée du bouton
+  # * y : Coordonnée du bouton
+  # * button : Event qui contient l'appui
   def onPress(x,y,button)
     Gdk.pointer_ungrab(Gdk::CURRENT_TIME)
     @buttonTab[x][y].set_focus(TRUE)
@@ -162,6 +178,10 @@ class Gui
     end
   end
 
+  ##
+  # Crée le timer
+  #
+  # Retour : Le timer créé
   def initTimer()
     @timer = Timers.new(-1,300){
       @time=@timer.getTime
@@ -179,6 +199,10 @@ class Gui
     @time = 50
     @timePress=Array.new{Array.new}
   end
+  ##
+  # Crée la zone des chiffres du dessus
+  #
+  # Retour : la zone crée
   def initTop()
     top = @map.getTop()
     maxlen= 5
@@ -212,7 +236,10 @@ class Gui
     wintop.add(topnumbers)
     wintop.add(Gtk::Label.new("     "))
   end
-
+  ##
+  # Boite contenant les boutons
+  #
+  # Retour : la boite crée et initialisée
   def initBoxAide()
     boxAide = Gtk::Box.new(:vertical,100)
     boxAide.add(Gtk::Label.new())
@@ -233,7 +260,10 @@ class Gui
     return boxAide
 
   end
-
+  ##
+  # Crée la grille en format gtk
+  #
+  # Retour : grille de bouton
   def initGrid()
     @buttonTab = Array.new{Array.new}
     i=0
