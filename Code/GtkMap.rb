@@ -16,7 +16,7 @@ class Gui
     @map = Map.create("./grilles/Scenario/Bateau")
     initTimer()
 
-    @window = Gtk::Window.new.override_background_color(:normal  , Gdk::RGBA.new())
+    @window = Gtk::Window.new.override_background_color(:normal,Gdk::RGBA.new(0,0,0,0))
 
     @window.set_size_request(970, 700)
     @window.resizable=FALSE
