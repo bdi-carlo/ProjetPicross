@@ -306,7 +306,7 @@ class Gui
   end
   def apply_style(widget, provider)
     style_context = widget.style_context
-    style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
+    style_context.add_provider(provider, :priority_user)
     return unless widget.respond_to?(:children)
     widget.children.each do |child|
       apply_style(child, provider)
