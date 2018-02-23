@@ -276,7 +276,7 @@ class Gui
       tabrow = Array.new
       tabPress = Array.new
       0.upto(@map.getCols-1) do |y|
-        button=Gtk::Button.new(:expand => FALSE).set_size_request(15,15)
+        button=Gtk::Button.new().set_size_request(15,15)
         button.set_relief(:none)
         tabrow.push(button)
         tabPress.push(0)
