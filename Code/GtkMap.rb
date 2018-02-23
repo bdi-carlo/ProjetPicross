@@ -12,7 +12,7 @@ load "Timers.rb"
 
 class Gui
   def initialize(map,inc,start)
-    Gtk.init
+    #Gtk.init
     @inc=inc
     @start=start
     @map = Map.create(map)
@@ -340,4 +340,4 @@ class Gui
   end
 end
 
-Gui.new("./grilles/Scenario/Bateau",1,0)
+#Gui.new("./grilles/Scenario/Bateau",1,0)
