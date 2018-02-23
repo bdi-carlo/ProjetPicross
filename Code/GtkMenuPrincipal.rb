@@ -32,8 +32,10 @@ class MenuPrincipal
     #Création du boutton JOUER
     bJouer = Gtk::Button.new "JOUER"
     bJouer.signal_connect "clicked" do
+      @window.hide_all
       Gui.new("./grilles/Scenario/Bateau",1,0)
-      onDestroy()
+      @window.show_all
+
     end
     hb1.pack_start(bJouer)
 
@@ -41,7 +43,7 @@ class MenuPrincipal
     bScoreboard = Gtk::Button.new "SCOREBOARD"
     hb1.pack_start(bScoreboard)
     vb.pack_start(hb1)
-    
+
     #Création de la HBox2
     hb2 = Gtk::HBox.new(false, 6)
     #Création du boutton CREDITS
