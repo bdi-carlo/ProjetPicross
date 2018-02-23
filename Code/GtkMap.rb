@@ -20,7 +20,7 @@ class Gui
 
     @window.set_size_request(970, 700)
     @window.resizable=FALSE
-    @window.set_window_position( Gtk::WindowPosition::CENTER_ALWAYS)
+    @window.set_window_position(:center_always)
     # On set le titre
     @window.set_title("Grille")
     # Création du css
