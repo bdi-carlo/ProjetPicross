@@ -1,6 +1,7 @@
 # encoding: UTF-8
 load 'Map.rb'
 load 'Jeu.rb'
+load 'GtkMap.rb'
 ##
 # Auteur  : Groupe 4
 # Fichier : JeuCompetitif.rb
@@ -21,32 +22,21 @@ class JeuCompetitif < Jeu
 
 	private_class_method :new
 
-	def JeuCompetitif.lanceToi()
-		super()
+	def JeuCompetitif.lancerJeu()
+		new()
 	end
 
 	def initialize()
 		super
-		print "oue oue oue \n"
 		print "pseudo : #{@pseudo} \n"
 		print "diff : #{@difficulte} \n"
 		print "taille : #{@taille}\n"
 		r = Random.new
 		num = r.rand(5) + 1
 		print "#{num}\n"
-		nom = "../grilles/Basic/#{@difficulte}#{@taille}#{num}.txt"
-		map = Map.create(nom)
-		print "Chiffres du dessus :\n"
-		print "#{map.getTop}\n"
-		print "Chiffres du coté :\n"
-		print "#{map.getSide}\n"
-		print "Nombre de colonnes :\n"
-		print "#{map.getCols}\n"
-		print "Nombre de lignes :\n"
-		print "#{map.getRows}\n"
-		while(!(map.compare()))
-			map.display()
-		end
+		nom = "./grilles/Basic/#{@difficulte}#{@taille}#{num}"
+		map = Gui.new(nom,1,0)
+
 		enregistreScore()
 	end
 
@@ -59,4 +49,4 @@ class JeuCompetitif < Jeu
 end
 
 
-j = JeuCompetitif.lanceToi()
+j = JeuCompetitif.lancerJeu()

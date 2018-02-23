@@ -3,10 +3,13 @@ begin
  rescue LoadError
 end
 require 'gtk3'
+load "Jeu.rb"
+load "GtkMenuPrincipal.rb"
 
 class MenuPseudo
 
-  def initialize
+  def initialize(game)
+    @jeu=game
 
     puts("Creation de la fenetre")
 
@@ -23,14 +26,28 @@ class MenuPseudo
 
     @window.signal_connect('destroy') {onDestroy}
 
+    #Création d'une vBox
+    vb = Gtk::VBox.new(true, 6)
+
     #Création de la boite d'entrée du pseudo dans un hBox
     hb = Gtk::HBox.new(false, 6)
     hb.pack_start(Gtk::Label.new('Pseudo'), false, true, 6)
     nom = Gtk::Entry.new
     nom.set_text "Entrer votre pseudo"
     hb.pack_start(nom, true, true)
+    vb.pack_start(hb)
 
-    @window.add(hb)
+    #Création du bouton pour confirmer notre Pseudo
+    button = Gtk::Button.new "CONTINUER"
+    button.signal_connect "clicked" do
+      @jeu.pseudo=nom.text
+      puts @jeu.pseudo
+      MenuPrincipal.new
+      onDestroy()
+    end
+    vb.pack_start(button)
+
+    @window.add(vb)
 
     @window.show_all
 
@@ -48,4 +65,4 @@ class MenuPseudo
 
 end
 
-MenuPseudo.new
+MenuPseudo.new( Jeu.new )
