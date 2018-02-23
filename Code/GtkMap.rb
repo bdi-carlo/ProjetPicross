@@ -11,9 +11,11 @@ load "Timers.rb"
 #A placer au départ
 
 class Gui
-  def initialize
+  def initialize(map,inc,start)
     Gtk.init
-    @map = Map.create("./grilles/Scenario/Bateau")
+    @inc=inc
+    @start=start
+    @map = Map.create(map)
     initTimer()
 
     @window = Gtk::Window.new.override_background_color(:normal,Gdk::RGBA.new(0,0,0,0))
@@ -183,7 +185,7 @@ class Gui
   #
   # Retour : Le timer créé
   def initTimer()
-    @timer = Timers.new(-1,300){
+    @timer = Timers.new(@inc,@start){
       @time=@timer.getTime
       if @time > 0
         @temps.set_markup("<span color=\"#33FF00\" weight=\"bold\" size=\"large\" > #{@time} </span>")
@@ -314,4 +316,4 @@ class Gui
   end
 end
 
-Gui.new
+Gui.new("./grilles/Scenario/Bateau",1,0)
