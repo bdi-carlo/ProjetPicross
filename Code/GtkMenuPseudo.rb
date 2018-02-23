@@ -42,6 +42,7 @@ class MenuPseudo
     button.signal_connect "clicked" do
       @jeu.pseudo=nom.text
       puts @jeu.pseudo
+      @window.hide_all
       MenuPrincipal.new
       onDestroy()
     end
