@@ -48,7 +48,7 @@ class Gui
 
     sidenumbers = Gtk::Box.new(:vertical,10)
       for tab in side
-        maxlen = 7
+        maxlen = 7                                                                            # A FAIRE
         tab.length.upto(maxlen)do
           @temp << "   "
         end
@@ -180,6 +180,18 @@ class Gui
     end
   end
 
+  def aide1()
+    puts "Aide 1"
+  end
+
+  def aide2()
+    puts "Aide 2"
+  end
+
+  def aide3()
+    puts "Aide 3"
+  end
+
   ##
   # Crée le timer
   #
@@ -207,7 +219,7 @@ class Gui
   # Retour : la zone crée
   def initTop()
     top = @map.getTop()
-    maxlen= 5
+    maxlen= 5                                                                                         #A MODIFIER
     @temp =[]
     topnumbers = Gtk::Box.new(:vertical,2)
     topnumbers.homogeneous=(TRUE)
@@ -247,13 +259,25 @@ class Gui
     boxAide.add(Gtk::Label.new())
 
     hbox2 = Gtk::Box.new(:horizontal,10)
-    hbox2.add(Gtk::Button.new().set_label("Aide 1").set_size_request(100,10).set_xalign(0.5))
+    aide1 = Gtk::Button.new().set_label("Aide 1").set_size_request(100,10).set_xalign(0.5)
+    aide1.signal_connect("clicked"){aide1()}
+    hbox2.add(aide1)
     hbox2.add(Gtk::Label.new().set_markup("<span color=\"#33FF00\" >10 secondes     </span>"))
+
     boxAide.add(hbox2)
     hbox3 = Gtk::Box.new(:horizontal,10)
-    hbox3.add(Gtk::Button.new().set_label("Aide 2").set_size_request(100,10).set_xalign(0.5))
+    aide2 = Gtk::Button.new().set_label("Aide 2").set_size_request(100,10).set_xalign(0.5)
+    aide2.signal_connect("clicked"){aide2()}
+    hbox3.add(aide2)
     hbox3.add(Gtk::Label.new().set_markup("<span color=\"#33FF00\" >15 secondes     </span>"))
     boxAide.add(hbox3)
+
+    hbox4 = Gtk::Box.new(:horizontal,10)
+    aide3 = Gtk::Button.new().set_label("Aide 3").set_size_request(100,10).set_xalign(0.5)
+    aide3.signal_connect("clicked"){aide3()}
+    hbox4.add(aide3)
+    hbox4.add(Gtk::Label.new().set_markup("<span color=\"#33FF00\" >20 secondes     </span>"))
+    boxAide.add(hbox4)
     boxAide.name = "boxAide"
     @provider.load(:data=>"#boxAide {background-image : url(\"images/zoneaide.png\");
                                       background-repeat:no-repeat;
