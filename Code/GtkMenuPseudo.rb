@@ -17,7 +17,7 @@ class MenuPseudo
 
     #Création de la fenêtre
     @window = Gtk::Window.new("PiCross")
-    @window.set_size_request(970, 700)
+    @window.set_size_request(300, 300)
     @window.resizable=FALSE
     @window.set_window_position(:center_always)
 
@@ -28,6 +28,10 @@ class MenuPseudo
 
     #Création d'une vBox
     vb = Gtk::VBox.new(true, 6)
+
+    #Création du logo
+    logo = Gtk::Image.new :file => 'images/logo.png'
+    vb.pack_start(logo)
 
     #Création de la boite d'entrée du pseudo dans un hBox
     hb = Gtk::HBox.new(false, 6)
