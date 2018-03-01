@@ -1,5 +1,4 @@
-load "Indice.rb"
-load "Map.rb"
+load Map.rb
 
 class IndiceFort < Indice
 

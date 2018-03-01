@@ -1,4 +1,5 @@
 load "Indice.rb"
+load "Map.rb"
 
 class IndiceFaible < Indice
 	@nbMax

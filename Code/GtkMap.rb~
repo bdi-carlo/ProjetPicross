@@ -203,7 +203,7 @@ class Gui
 			#@buttonTab[x][y].child().set_property('yscale', 1.0)
 		end
 		@timePress[x][y]+=1
-		print "\nj'ai appuye a la case #{x},#{y}\n"
+		print "\nj'ai appuye à la case #{x},#{y}\n"
 		if @map.compare
 			puts "gagne temps restant : #{@time}"
 			Gtk.main_quit

@@ -1,5 +1,3 @@
-load "Map.rb"
-
 class Indice
 	@penalites
 	@nbUtilisation

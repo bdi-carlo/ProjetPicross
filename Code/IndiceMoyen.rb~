@@ -51,7 +51,7 @@ end
 	map.display
 
 	ind = IndiceMoyen.new
-	print ind.envoyerIndice.black.to_s+"\n"+"ligne :"+ind.row.to_s+" colonne :"+ind.cols.to_s+"\n"
+	print ind.envoyerIndice.black.to_s+"\n"+"ligne :"+ind.row.to_s+" colonne :"+ind.cols.to_s
 
 
 
