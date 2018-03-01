@@ -33,7 +33,7 @@ class MenuPrincipal
     bJouer = Gtk::Button.new "JOUER"
     bJouer.signal_connect "clicked" do
       @window.hide_all
-      Gui.new("./grilles/Scenario/Bateau",1,0)
+      Gui.new("../grilles/Scenario/Bateau",1,0)
       @window.show_all
 
     end

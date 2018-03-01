@@ -113,7 +113,7 @@ class Gui
     if button.state.button1_mask?
       if @timePress[x][y]%2 == 0
 
-         @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"images/noir.png"))
+         @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/noir.png"))
 
 
          @buttonTab[x][y].set_relief(:none)
@@ -122,7 +122,7 @@ class Gui
      else
 
         @map.putAt!(x,y,Case.create(0))
-        @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"images/blanc.png"))
+        @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/blanc.png"))
         @buttonTab[x][y].set_relief(:none)
 
      end
@@ -133,7 +133,7 @@ class Gui
       end
     end
     if button.state.button3_mask?
-      @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"images/croix.png"))
+      @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/croix.png"))
       @buttonTab[x][y].set_relief(:none)
       @map.putAt!(x,y,Case.create(2))
       @timePress[x][y]=0
@@ -154,7 +154,7 @@ class Gui
     if button.button==1
       if @timePress[x][y]%2 == 0
 
-         @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"images/noir.png"))
+         @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/noir.png"))
 
          @buttonTab[x][y].set_relief(:none)
          @map.putAt!(x,y,Case.create(1))
@@ -162,7 +162,7 @@ class Gui
      else
 
         @map.putAt!(x,y,Case.create(0))
-        @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"images/blanc.png"))
+        @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/blanc.png"))
         @buttonTab[x][y].set_relief(:none)
      end
       @timePress[x][y]+=1
@@ -173,7 +173,7 @@ class Gui
       end
     end
     if button.button==3
-      @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"images/croix.png"))
+      @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/croix.png"))
       @buttonTab[x][y].set_relief(:none)
       @map.putAt!(x,y,Case.create(2))
       @timePress[x][y]=0
@@ -279,7 +279,7 @@ class Gui
     hbox4.add(Gtk::Label.new().set_markup("<span color=\"#33FF00\" >20 secondes     </span>"))
     boxAide.add(hbox4)
     boxAide.name = "boxAide"
-    @provider.load(:data=>"#boxAide {background-image : url(\"images/zoneaide.png\");
+    @provider.load(:data=>"#boxAide {background-image : url(\"../images/zoneaide.png\");
                                       background-repeat:no-repeat;
                                       background-position:100% 100%;
                                     }")
@@ -306,7 +306,7 @@ class Gui
         button.set_relief(:none)
         tabrow.push(button)
         tabPress.push(0)
-        button.set_image(Gtk::Image.new(:file =>"images/blanc.png"))
+        button.set_image(Gtk::Image.new(:file =>"../images/blanc.png"))
         button.set_always_show_image(TRUE)
         button.set_focus(FALSE)
 

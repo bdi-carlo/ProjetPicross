@@ -30,7 +30,7 @@ class MenuPseudo
     vb = Gtk::VBox.new(true, 6)
 
     #Création du logo
-    logo = Gtk::Image.new :file => 'images/logo.png'
+    logo = Gtk::Image.new :file => '../images/logo.png'
     vb.pack_start(logo)
 
     #Création de la boite d'entrée du pseudo dans un hBox
