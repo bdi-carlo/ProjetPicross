@@ -45,6 +45,7 @@ class Score
 		f.each_line do |line|
 			print "#{line}"
 		end
+		print "\n"
 		
 		f.close()
 	end
@@ -58,39 +59,39 @@ class Score
 	def recupHS(unNom)
 
 		tabScores = Array.new()
+		toDel = Array.new()
 
 		# En remplie un tableau avec les scores du fichier
 		f = File.open(@nomFichier, "r")
 		f.each_line do |line|
 			tabScores.push("#{line}")
-			print "test : "+"#{line}"
 		end		
 		f.close()
 
-		i=0
-		# On garde que les lignes correspondants a la grille
-		tabScores.each do |score|
-			
+		# On garde que les lignes correspondants a la grille/nom/difficulte/etc
+		tabScores.each do |score|			
 			if !(score.include?(unNom))
-				tabScores.delete(score)				
+				toDel.push(score)	
 			end
-			print "indice : "+i.to_s+"\n"
-			i+=1
+		end
+		for score in toDel
+			tabScores.delete(score)
 		end
 
-		# On trie le tableau en fonction des score, on l'affiche et on le renvoie
-
-		tabScoresBis = Array.new()
+		## On trie le tableau en fonction des score, on l'affiche et on le renvoie
+		#
+		tabScoresSorted = Array.new()
 		for score in tabScores
-			tabScoresBis.push(score.split(/ /))
+			tabScoresSorted.push(score.split(/ /))
 		end
-		tabScoresBis.sort_by(&:first)
-		print "----- HIGHSCORE de "+unNom+": "+score+"\n"
+
+		t = tabScoresSorted.sort_by(&:first).first
+		scoreRes = t[0]+" "+t[1]+" "+t[2]+" "+t[3]
+		print "----- HIGHSCORE de "+unNom+" -----\n- "+scoreRes+"\n"
 
 
-		#tabScores.sort
-		#print "----- HIGHSCORE de "+unNom+": "+tabScores[0]
-		return tabScores[0]
+		#return scoreRes
+		return tabScoresSorted.sort_by(&:first).first
 
 	end
 
@@ -111,26 +112,25 @@ class Score
 		end		
 		f.close()
 
-		# On garde que les lignes correspondants de la grille
+		# On garde que les lignes correspondants de la grille/nom/difficulte/etc
 		for score in tabScores
 			if !(score.include?(unNom))
 				tabScores.delete(score)
 			end
 		end
 		
-		
 		# WORK IN PROGRESS
-		tabScoresBis = Array.new()
+		tabScoresSorted = Array.new()
 		for score in tabScores
-			tabScoresBis.push(score.split(/ /))
+			tabScoresSorted.push(score.split(/ /))
 		end
 
 		# On affiche les scores et on retourne le tableau
 		print "----- HIGHSCORE(s) de "+unNom+" -----\n"
-		for score in tabScoresBis.sort_by(&:first)
+		for score in tabScoresSorted.sort_by(&:first)
 			print "- "+score[0]+" "+score[1]+" "+score[2]+"\n"
 		end
-		return tabScores
+		return tabScoresSorted.sort_by(&:first)
 
 	end
 	
