@@ -6,7 +6,7 @@ require 'gtk3'
 load "Jeu.rb"
 load "GtkMenuPrincipal.rb"
 
-class MenuPseudo
+class Main
 
   def initialize(game)
     @jeu=game
@@ -22,12 +22,13 @@ class MenuPseudo
     @window.set_window_position(:center_always)
 
     @provider = Gtk::CssProvider.new
-    @window.border_width=10
+    @window.border_width=3
 
     @window.signal_connect('destroy') {onDestroy}
 
     #Création d'une vBox
-    vb = Gtk::VBox.new(true, 6)
+    vb = Gtk::VBox.new(true, 30)
+		vb.set_homogeneous(false)
 
     #Création du logo
     logo = Gtk::Image.new :file => '../images/logo.png'
@@ -44,7 +45,7 @@ class MenuPseudo
     #Création du bouton pour confirmer notre Pseudo
     button = Gtk::Button.new "CONTINUER"
     button.signal_connect "clicked" do
-      @jeu.pseudo=nom.text
+    	@jeu.setPseudo(nom.text)
       puts @jeu.pseudo
       @window.hide_all
       MenuPrincipal.new
@@ -70,4 +71,4 @@ class MenuPseudo
 
 end
 
-MenuPseudo.new( Jeu.new )
+Main.new( Jeu.new )
