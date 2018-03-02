@@ -27,7 +27,8 @@ class Main
     @window.signal_connect('destroy') {onDestroy}
 
     #Création d'une vBox
-    vb = Gtk::VBox.new(true, 6)
+    vb = Gtk::VBox.new(true, 30)
+		vb.set_homogeneous(false)
 
     #Création du logo
     logo = Gtk::Image.new :file => '../images/logo.png'
