@@ -9,7 +9,7 @@ class IndiceFaible < Indice
 		@penalites = 15
 		@indice = nil
 		@orientation = false
-		@map = Map.create("../grilles/Scenario/Bateau")
+		@map = Map.create("../grilles/s  cenario/Bateau")
 		@nbMax = 3
 		@nbUtilisation = 0
 	end

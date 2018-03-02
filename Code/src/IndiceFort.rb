@@ -10,7 +10,7 @@ class IndiceFort < Indice
 	@colonne
 	@ligne
 
-	def initialize(grille,colonne, ligne)
+	def initialize(grille, colonne, ligne)
 		@penalites = 120
 		@map = grille
 		@colonne = colonne
