@@ -1,0 +1,2 @@
+all:
+	ruby GtkMain.rb

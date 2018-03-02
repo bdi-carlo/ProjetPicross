@@ -41,9 +41,8 @@ class MenuPrincipal
     bJouer = Gtk::Button.new(:label => "JOUER", :use_underline => nil, :stock_id => nil)
     bJouer.signal_connect "clicked" do
       @window.hide
-      Gui.new("../grilles/Test2x2",1,0)
+      Gui.new("../grilles/10x10/Neuf",1,0)
       @window.show_all
-
     end
     hb1.pack_start(bJouer, :expand => true, :fill => true)
 
