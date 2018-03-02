@@ -38,7 +38,7 @@ class Main
     hb = Gtk::HBox.new(false, 6)
     hb.pack_start(Gtk::Label.new('Pseudo'), false, true, 6)
     nom = Gtk::Entry.new
-    nom.set_text "Entrer votre pseudo"
+    #nom.set_text "Entrer votre pseudo"
     hb.pack_start(nom, true, true)
     vb.pack_start(hb)
 
@@ -48,7 +48,7 @@ class Main
     	@jeu.setPseudo(nom.text)
       puts @jeu.pseudo
       @window.hide_all
-      MenuPrincipal.new
+      MenuPrincipal.new(@jeu)
       onDestroy()
     end
     vb.pack_start(button)
