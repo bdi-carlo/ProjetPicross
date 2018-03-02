@@ -2,6 +2,7 @@
 load 'Map.rb'
 load 'Jeu.rb'
 load 'GtkMap.rb'
+load 'Score.rb'
 ##
 # Auteur  : Groupe 4
 # Fichier : JeuCompetitif.rb
@@ -28,24 +29,32 @@ class JeuCompetitif < Jeu
 
 	def initialize()
 		super
+		@pseudo="wass"
+		@difficulte=1
+		@taille=10
 		print "pseudo : #{@pseudo} \n"
 		print "diff : #{@difficulte} \n"
 		print "taille : #{@taille}\n"
 		r = Random.new
 		num = r.rand(5) + 1
 		print "#{num}\n"
-		nom = "./grilles/Basic/#{@difficulte}#{@taille}#{num}"
+		nom = "../grilles/basic/#{@difficulte}#{@taille}2.txt"
+		nom_fic="#{@difficulte}#{@taille}#{num}"
 		map = Gui.new(nom,1,0)
-
-		enregistreScore()
-	end
-
-	def enregistreScore()
-		@score = @temps + @penalite + @difficulte
-		if(@score > @highscore)
-			print "YEAH YEAH"
+		time = map.getTime()
+		if(@difficulte==1)
+			diff=100
+		elsif(@difficulte==2)
+				diff=50
+		else
+			diff=10
 		end
+		@score = time + diff
+		score = Score.new(@score,@pseudo,@difficulte,nom_fic)
+		score.rentrerScore()
+
 	end
+
 end
 
 

@@ -3,15 +3,22 @@ load "Map.rb"
 
 class IndiceFaible < Indice
 
+# *VARIABLES D'INSTANCE*
+  # * penalites : Un indice faible correspond à 15s de pénalité
+  # * orientation : Choix entre ligne ou colonne 
+  # * nbUtilisation : Nombre d'utilisation de l'indice
+  # * nbMax :  Un indice faible peut être utilisé au maximum 3 fois
+  
+
 	attr_reader :indice
 
-	def initialize
+	def initialize(grille)
 		@penalites = 15
 		@indice = nil
 		@orientation = false
-		@map = Map.create("../grilles/s  cenario/Bateau")
-		@nbMax = 3
 		@nbUtilisation = 0
+		@nbMax = 3
+		super(grille)
 	end
 
 ##
@@ -21,6 +28,7 @@ class IndiceFaible < Indice
 	def envoyerIndice
 		if @nbUtilisation < @nbMax
 			@nbUtilisation += 1
+			position = 0
 			somme = 0
 			max = 0
 			side = @map.getSide()
@@ -56,16 +64,16 @@ class IndiceFaible < Indice
 			
 			# affiche le plus gros chiffre avec son indice si c'est une ligne 
 			if !@orientation
-				@indice = ("La ligne #{position} possede le plus gros chiffre qui est #{max}\n")
+				@indice = "La ligne #{position} possede le plus gros chiffre qui est #{max}\n"
 			end
 		
 			# affiche le plus gros chiffre avec son indice si c'est une colonne 
 			if @orientation
-				@indice = ("La colonne #{position} possede le plus gros chiffre qui est #{max}\n")
+				@indice = "La colonne #{position} possede le plus gros chiffre qui est #{max}\n"
 			end
 
 		else
-			puts( "Nombre d'utilisation maximum de cet indice atteint." )
+			@indice = "Nombre d'utilisation maximum de cet indice atteint." 
 		end
 		
 		return self
@@ -75,10 +83,11 @@ class IndiceFaible < Indice
 
 end
 
-	
+	map = Map.create("../grilles/Scenario/Bateau")
 	voila = IndiceFaible.new
 	print voila.envoyerIndice.indice
 
+	"../grilles/Scenario/Bateau"
 	
 	
 	

@@ -44,9 +44,9 @@ class Jeu
     ##
     # Méthode qui permet au joueur de rentrer son pseudo et le sauvegarder
     #
-    #def setPseudo()
-     # return "mehmet"
-    #end
+    def setPseudo(unPseudo)
+    	@pseudo = unPseudo
+    end
 
     #def setDifficulte()
     #    return 1

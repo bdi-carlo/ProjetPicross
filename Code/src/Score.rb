@@ -152,4 +152,5 @@ end
 	score.lireScore()
 
 	score.recupHS("Valentin")
-score.afficherHS("Cobra")
+	score.afficherHS("Cobra")
+

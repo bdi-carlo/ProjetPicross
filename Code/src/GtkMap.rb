@@ -8,11 +8,18 @@ require 'gtk3'
 load "Map.rb"
 load "Case.rb"
 load "Timers.rb"
+load'Score.rb'
 #A placer au départ
 
+
+
 class Gui
+  @difficulte
+  attr_accessor :pseudo,:difficulte,:penalite,:score,:highscore,:taille
+
   def initialize(map,inc,start)
     #Gtk.init
+
     @inc=inc
     @start=start
     @map = Map.create(map)
@@ -97,6 +104,17 @@ class Gui
     #Quit 'propre'
     Gtk.main_quit
   end
+
+
+
+
+
+  #########################################################"TEST###############################################################
+  def getTime()
+    return @time
+  end
+
+  #########################################################
   ##
   # Callback lors du maintient du bouton
   #

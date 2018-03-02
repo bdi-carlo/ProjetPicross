@@ -1,21 +1,30 @@
 load Map.rb
+load Indice.rb
 
 class IndiceFort < Indice
 
 ##
 # Indique si la prochaine case colorie est bonne ou non
 #
-	
-	@map
-	@colonne
-	@ligne
 
-	def initialize(grille, colonne, ligne)
+# *VARIABLES D'INSTANCE*
+  # * map :  Représente la grille
+  # * penalites : Un indice fort correspond à 120s de pénalité
+  # * rows : Représente l'abscisse de la case
+  # * cols : Représente l'ordonnée de la case
+  # * nbMax :  Un indice fort ne peut être utilisé qu'une fois
+ 
+
+	@map
+	@col
+	@row
+
+	def initialize(grille,col, row)
 		@penalites = 120
-		@map = grille
-		@colonne = colonne
-		@ligne = ligne
+		@col = col
+		@row = row
 		@nbMax = 1
+		super(grille)
 	end
 	
 
@@ -23,13 +32,20 @@ class IndiceFort < Indice
 # Vérification de la case sur la grille
 # 
 #
-# Retourne vrai si la case sélectionnée est coloriée, faux sinon
+# Vérification dans la grille résultat si la case sélectionnée est coloriée ou non
 #
 	def envoyerIndice()
-		if(@map.accessAtRes(@ligne,@colonne))
-			return true ;
-		else 
-			return false ;
+		if(nbMax != 0) 
+			if(@map.accessAtRes(@row,@col))
+				@indice = "La case se trouvant en (#{@row},#{@col}) est coloriée\n"
+			else
+				@indice = "La case se trouvant en (#{@row},#{@col}) n'est pas coloriée\n"
+			end
+		else
+				@indice = "Nombre d'utilisation maximum de cet indice atteint." 
 		end
+
+		return self
 	end
+
 end
