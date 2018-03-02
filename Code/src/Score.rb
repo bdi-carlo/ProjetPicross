@@ -17,7 +17,7 @@ class Score
 		@pseudo = pseudo
 		@difficulte = difficulte
 		@nomGrille = nomGrille
-		@nomFichier = "../Sauvegardes/Score.txt"
+		@nomFichier = "../sauvegardes/Score.txt"
 	end
 
 
