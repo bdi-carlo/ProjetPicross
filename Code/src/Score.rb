@@ -1,6 +1,4 @@
-
-
-class Score 
+class Score
 
 # Le score du joueur est sauvegardé dans un fichier où sont répertoriés le temps, le pseudo et la difficulté choisie par le joueur
 
@@ -11,42 +9,39 @@ class Score
 	@difficulte
 	@nomGrille
 	@nomFichier
-	
-	def initialize(temps, pseudo, difficulte, nomGrille) 
+
+	def initialize(temps, pseudo, difficulte, nomGrille)
 		@temps = temps
 		@pseudo = pseudo
 		@difficulte = difficulte
 		@nomGrille = nomGrille
-		@nomFichier = "../Sauvegardes/Score.txt"
+		@nomFichier = "../sauvegardes/Score.txt"
 	end
-	
-	
-	# Méthode qui permet de rentrer le score d'un joueur dans un fichier nommé "Score.txt"	
+
+
+	# Méthode qui permet de rentrer le score d'un joueur dans un fichier nommé "Score.txt"
 	def rentrerScore()
 
 =begin
 		f = File.new(@nomFichier,"w")
-
-
 		f.puts("#{@temps} " + "#{@pseudo} " + "#{@difficulte}")
-
 		f.close()
 =end
 
 		f = File.open(@nomFichier, "a+")
 		f.puts("#{@temps} " + "#{@pseudo} " + "#{@difficulte} " + "#{@nomGrille}")
 		f.close()
-		
+
 	end
-	
-	def lireScore() 
+
+	def lireScore()
 
 		f = File.open(@nomFichier, "r")
 		f.each_line do |line|
 			print "#{line}"
 		end
 		print "\n"
-		
+
 		f.close()
 	end
 
@@ -65,13 +60,13 @@ class Score
 		f = File.open(@nomFichier, "r")
 		f.each_line do |line|
 			tabScores.push("#{line}")
-		end		
+		end
 		f.close()
 
 		# On garde que les lignes correspondants a la grille/nom/difficulte/etc
-		tabScores.each do |score|			
+		tabScores.each do |score|
 			if !(score.include?(unNom))
-				toDel.push(score)	
+				toDel.push(score)
 			end
 		end
 		for score in toDel
@@ -101,15 +96,15 @@ class Score
 	# Param : Le nom d'une grille ou d'un pseudo ou d'une difficulte
 	# Retour : Tableau des scores correspondant
 	def afficherHS(unNom)
-		
-		
+
+
 		tabScores = Array.new()
 
 		# En remplie un tableau avec les scores du fichier
 		f = File.open(@nomFichier, "r")
 		f.each_line do |line|
 			tabScores.push("#{line}")
-		end		
+		end
 		f.close()
 
 		# On garde que les lignes correspondants de la grille/nom/difficulte/etc
@@ -118,7 +113,7 @@ class Score
 				tabScores.delete(score)
 			end
 		end
-		
+
 		# WORK IN PROGRESS
 		tabScoresSorted = Array.new()
 		for score in tabScores
@@ -133,23 +128,23 @@ class Score
 		return tabScoresSorted.sort_by(&:first)
 
 	end
-	
+
 end
 
 
-	score = Score.new("30","Arthur", "facile", "Bateau") 
+	score = Score.new("30","Arthur", "facile", "Bateau")
 	score.rentrerScore()
 
-	score = Score.new("50","Valentin", "HARD", "Cobra") 
+	score = Score.new("50","Valentin", "HARD", "Cobra")
 	score.rentrerScore()
 
-	score = Score.new("08","Valentin", "HARD", "Cobra") 
+	score = Score.new("08","Valentin", "HARD", "Cobra")
 	score.rentrerScore()
 
-	score = Score.new("12","Martin", "HARD", "Cobra") 
+	score = Score.new("12","Martin", "HARD", "Cobra")
 	score.rentrerScore()
 
-	score = Score.new("6830","Benoit", "facile", "Test2x2") 
+	score = Score.new("6830","Benoit", "facile", "Test2x2")
 	score.rentrerScore()
 
 
@@ -159,9 +154,3 @@ end
 	score.recupHS("Valentin")
 	score.afficherHS("Cobra")
 
-
-
-
-
-
-		

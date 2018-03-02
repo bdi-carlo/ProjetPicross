@@ -1,24 +1,36 @@
-load "Map.rb"
 
-class IndiceMoyen 
+load "Map.rb"
+load "Indice.rb"
+
+
+##
+# Indique si la prochaine case colorie est bonne ou non
+#
+
+# *VARIABLES D'INSTANCE*
+  # * penalites : Un indice moyen correspond à 30s de pénalité
+  # * rows : Représente l'abscisse de la case
+  # * cols : Représente l'ordonnée de la case
+  # * nbMax :  Un indice moyen peut être utilisé au maximum 2 fois
+
+class IndiceMoyen < Indice
 	
-	attr_reader :black
 	attr_reader :row
 	attr_reader :col
 	
-	def initialize
+
+	def IndiceMoyen.create(grille)
+		new(grille)
+	end
+
+	private_class_method:new	
+
+	def initialize(grille)
+		super(grille)
 		@penalites = 30
-		@map = Map.create("../grilles/Scenario/Bateau")
 		@nbMax = 2
 		@row = 0
 		@col = 0
-		#boolean verifie si la case de la grille resultat est noir ou blanche true = noir false = blanche
-		@black
-	end
-	
-
-	def IndiceMoyen.create
-		new()
 	end
 	
 
@@ -26,28 +38,31 @@ class IndiceMoyen
 		#aleatoire sur toutes les cases 
 		#verifie si la case choisie n'est pas deja remplie sinon recommence(a optimiser)
 		#on prend que les cases à l'etat 0
-		x = TRUE
-		while x == TRUE do
+		x = true
+		while x == true do
 			@row = rand(@map.getRows)
 			@col = rand(@map.getCols)
 			if @map.accessAt(@row,@col).getColor == 0
-				x = FALSE
+				x = false
 				
 				if @map.accessAtRes(@row,@col) == 1
-					@black = TRUE
+					@indice = "La case (#{@row},#{@col}) est coloriée\n"
 				
 				else
-					@black = FALSE
+					@indice = "La case (#{@row},#{@col}) n'est pas coloriée\n"
+				
 				end
 			end
 		end
-		
-		print "Case libre à la ligne #{@row}, colonne #{@col}\n"
+
+		return self 
 			
 	end
 
-		
 end
 
-voila = IndiceMoyen.create
-voila.envoyerIndice
+map = Map.create("../grilles/scenario/Bateau")
+voila = IndiceMoyen.create(map)
+print voila.envoyerIndice.indice
+
+

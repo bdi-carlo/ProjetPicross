@@ -1,5 +1,7 @@
 load "Map.rb"
 
+require "yaml.rb"
+
 class Hypothese
 
 # Ici une Hypothese c'est une grille à partir de laquelle on va faire des hypothèses et un tableau contenant une multitude de grilles hypothétiques. 
@@ -33,12 +35,16 @@ class Hypothese
 	# Creer une hypothese
 	#
 	# Retour : grille sur laquelle le jeu va "travailler"
-	def faireHypothese()
-
+	def faireHypothese()		
+		
 		if @grillesHypothese.empty?
-			@grillesHypothese.push(@grillePrim)
-		else	
-			@grillesHypothese.push(@grillesHypothese.last)
+			newGrille = YAML.load(@grillePrim.to_yaml)
+			print @grillePrim, "\n"
+			@grillesHypothese.push(newGrille)
+			print @grillesHypothese.last, "\n"
+		else
+			newGrille = YAML.load(@grillesHypothese.last.to_yaml)
+			@grillesHypothese.push(newGrille)
 		end
 
 		return @grillesHypothese.last
@@ -61,7 +67,12 @@ class Hypothese
 	#
 	def rejeterHypothese()
 		@grillesHypothese.pop
-		return @grillesHypothese.last
+		
+		if @grillesHypothese.empty?
+			return @grillePrim
+		else	
+			return @grillesHypothese.last
+		end		
 	end
 
 	##
@@ -78,10 +89,52 @@ class Hypothese
 		return @grillesHypothese.count
 	end
 
-
-
 end
 
+
+	map = Map.create("../grilles/Test2x2")
+	hyp = Hypothese.creer(map)
+	
+	
+	print "\n\n-------------------------------------------\n"
+	print "Chiffres du dessus :\n"
+	print "#{map.getTop}\n"
+	print "Chiffres du cote :\n"
+	print "#{map.getSide}\n"
+	print "Nombre de colonnes :\n"
+	print "#{map.getCols}\n"
+	print "Nombre de lignes :\n"
+	print "#{map.getRows}\n"
+	print "Test de compare (erreur) : \n"
+	
+	if map.compare
+	  print "Map Bonne\n"
+	else
+	  print "Map Fausse\n"
+	end
+	print "Correction de la grille :\n"
+	
+	
+	
+	map.putAt!(1,0,Case.create(1))
+	
+	map = hyp.faireHypothese
+	
+		map = hyp.faireHypothese
+		map.putAt!(1,0,Case.create(0))
+		map = hyp.rejeterHypothese
+	
+	map.putAt!(0,1,Case.create(1))
+	
+	map = hyp.validerHypothese
+		
+	if map.compare
+	  print "Map Bonne\n"
+	else
+	  print "Map Fausse\n"
+	end
+	
+	map.display
 
 
 		
