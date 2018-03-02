@@ -11,7 +11,7 @@ class Main
   def initialize(game)
     @jeu=game
 
-    puts("Creation de la fenetre")
+    puts("Creation fenetre Main")
 
     Gtk.init
 
@@ -27,7 +27,7 @@ class Main
     @window.signal_connect('destroy') {onDestroy}
 
     #Création d'une vBox
-    vb = Gtk::VBox.new(true, 30)
+    vb = Gtk::Box.new(:vertical, 30)
 		vb.set_homogeneous(false)
 
     #Création du logo
@@ -35,19 +35,19 @@ class Main
     vb.pack_start(logo)
 
     #Création de la boite d'entrée du pseudo dans un hBox
-    hb = Gtk::HBox.new(false, 6)
-    hb.pack_start(Gtk::Label.new('Pseudo'), false, true, 6)
+    hb = Gtk::Box.new(:horizontal, 6)
+    hb.pack_start(Gtk::Label.new('Pseudo'), :expand => false, :fill => true, :padding => 6)
     nom = Gtk::Entry.new
     #nom.set_text "Entrer votre pseudo"
-    hb.pack_start(nom, true, true)
+    hb.pack_start(nom, :expand => true, :fill => true)
     vb.pack_start(hb)
 
     #Création du bouton pour confirmer notre Pseudo
-    button = Gtk::Button.new "CONTINUER"
+    button = Gtk::Button.new(:label => "CONTINUER", :use_underline => nil, :stock_id => nil)
     button.signal_connect "clicked" do
     	@jeu.setPseudo(nom.text)
-      puts @jeu.pseudo
-      @window.hide_all
+      puts "Pseudo: " + @jeu.pseudo
+      @window.hide
       MenuPrincipal.new(@jeu)
       onDestroy()
     end
