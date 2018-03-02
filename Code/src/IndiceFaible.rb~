@@ -1,17 +1,12 @@
-load "Indice.rb"
-load "Map.rb"
-
 class IndiceFaible < Indice
-
-	attr_reader :indice
+	@nbMax
 
 	def initialize
 		@penalites = 15
 		@indice = nil
 		@orientation = false
-		@map = Map.create("../grilles/Scenario/Bateau")
+		@map = Map.create("scenario_bateau")
 		@nbMax = 3
-		@nbUtilisation = 0
 	end
 
 ##
@@ -23,8 +18,8 @@ class IndiceFaible < Indice
 			@nbUtilisation += 1
 			somme = 0
 			max = 0
-			side = @map.getSide()
-			top = @map.getTop()
+			side = getSide()
+			top = getTop()
 			i = 0
 			j = 0
 
@@ -53,35 +48,25 @@ class IndiceFaible < Indice
 				j+=1
 			end
 		
-			
 			# affiche le plus gros chiffre avec son indice si c'est une ligne 
 			if !@orientation
-				@indice = ("La ligne #{position} possede le plus gros chiffre qui est #{max}\n")
+				@indice = ("La ligne #{position} possede le plus gros chiffre qui est #{max}")
 			end
 		
 			# affiche le plus gros chiffre avec son indice si c'est une colonne 
 			if @orientation
-				@indice = ("La colonne #{position} possede le plus gros chiffre qui est #{max}\n")
+				@indice = ("La colonne #{position} possede le plus gros chiffre qui est #{max}")
 			end
+		end
 
 		else
 			puts( "Nombre d'utilisation maximum de cet indice atteint." )
 		end
 		
-		return self
-		
 	end
 
-
+# getter sur indice chaine de caractere contenant le plus gros chiffre "max" et sa position
+	def getIndice
+		return @indice
+	end
 end
-
-	
-	voila = IndiceFaible.new
-	print voila.envoyerIndice.indice
-
-	
-	
-	
-	
-	
-	
