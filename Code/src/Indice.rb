@@ -20,7 +20,7 @@ class Indice
 	def initialize(grille)
 		@penalites = 0
 		@map = grille
-		@indice =""
+		@indice = ""
 	end		
 	
 	#envoie les penalites a la classe jeu pour les rajoutes au temps total

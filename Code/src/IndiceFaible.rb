@@ -83,8 +83,8 @@ class IndiceFaible < Indice
 
 end
 
-	map = Map.create("../grilles/Scenario/Bateau")
-	voila = IndiceFaible.new
+	map = Map.create("../grilles/scenario/Bateau")
+	voila = IndiceFaible.new(map)
 	print voila.envoyerIndice.indice
 
 	"../grilles/Scenario/Bateau"

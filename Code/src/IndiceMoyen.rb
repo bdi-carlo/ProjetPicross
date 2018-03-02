@@ -13,23 +13,24 @@ load "Indice.rb"
   # * cols : Représente l'ordonnée de la case
   # * nbMax :  Un indice moyen peut être utilisé au maximum 2 fois
 
-class IndiceMoyen 
+class IndiceMoyen < Indice
 	
 	attr_reader :row
 	attr_reader :col
 	
+
+	def IndiceMoyen.create(grille)
+		new(grille)
+	end
+
+	private_class_method:new	
+
 	def initialize(grille)
+		super(grille)
 		@penalites = 30
 		@nbMax = 2
 		@row = 0
 		@col = 0
-		super(grille)
-
-	end
-	
-
-	def IndiceMoyen.create
-		new()
 	end
 	
 
@@ -37,7 +38,7 @@ class IndiceMoyen
 		#aleatoire sur toutes les cases 
 		#verifie si la case choisie n'est pas deja remplie sinon recommence(a optimiser)
 		#on prend que les cases à l'etat 0
-		x = TRUE
+		x = true
 		while x == true do
 			@row = rand(@map.getRows)
 			@col = rand(@map.getCols)
@@ -60,5 +61,8 @@ class IndiceMoyen
 
 end
 
-voila = IndiceMoyen.create
-voila.envoyerIndice
+map = Map.create("../grilles/scenario/Bateau")
+voila = IndiceMoyen.create(map)
+print voila.envoyerIndice.indice
+
+
