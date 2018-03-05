@@ -38,7 +38,7 @@ class JeuCompetitif < Jeu
 		r = Random.new
 		num = r.rand(5) + 1
 		print "#{num}\n"
-		nom = "../grilles/basic/#{@difficulte}#{@taille}2.txt"
+		nom = "../grilles/basic/#{@difficulte}#{@taille}#{num}.txt"
 		nom_fic="#{@difficulte}#{@taille}#{num}"
 		map = Gui.new(nom,1,0)
 		time = map.getTime()
