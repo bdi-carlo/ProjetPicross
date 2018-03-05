@@ -9,6 +9,8 @@ load "Map.rb"
 load "Case.rb"
 load "Timers.rb"
 load'Score.rb'
+load "IndiceFaible.rb"
+load "IndiceMoyen.rb"
 #A placer au départ
 
 
@@ -199,11 +201,36 @@ class Gui
   end
 
   def aide1()
-    puts "Aide 1"
+    indice = IndiceFaible.new(@map)
+    dialog = Gtk::Dialog.new("Aide1",
+                             $main_application_window,
+                             Gtk::Dialog::DESTROY_WITH_PARENT,
+                             [ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
+
+    # Ensure that the dialog box is destroyed when the user responds.
+    dialog.signal_connect('response') { dialog.destroy }
+
+    # Add the message in a label, and show everything we've added to the dialog.
+    dialog.vbox.add(Gtk::Label.new(indice.envoyerIndice.indice))
+    dialog.show_all
+    @timer.add(10)
+
   end
 
   def aide2()
-    puts "Aide 2"
+    indice = IndiceMoyen.create(@map)
+    dialog = Gtk::Dialog.new("Aide2",
+                             $main_application_window,
+                             Gtk::Dialog::DESTROY_WITH_PARENT,
+                             [ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
+
+    # Ensure that the dialog box is destroyed when the user responds.
+    dialog.signal_connect('response') { dialog.destroy }
+
+    # Add the message in a label, and show everything we've added to the dialog.
+    dialog.vbox.add(Gtk::Label.new(indice.envoyerIndice.indice))
+    dialog.show_all
+    @timer.add(15)
   end
 
   def aide3()
