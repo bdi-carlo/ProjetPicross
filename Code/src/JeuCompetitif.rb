@@ -36,10 +36,29 @@ class JeuCompetitif < Jeu
 		print "diff : #{@difficulte} \n"
 		print "taille : #{@taille}\n"
 		r = Random.new
-		num = r.rand(5) + 1
-		print "#{num}\n"
-		nom = "../grilles/basic/#{@difficulte}#{@taille}2.txt"
-		nom_fic="#{@difficulte}#{@taille}#{num}"
+		num = r.rand(2) + 1
+		print "Random : #{num}\n"
+		if(taille == 10)
+			nom = "../grilles/10x10/"
+		elsif(taille == 15)
+			nom = "../grilles/15x15/"
+		else(taille == 20)
+			nom = "../grilles/20x20/"
+		end
+		f = File.open("../grilles/10x10/index", "r")
+		nb=0
+		f.each_line do |line|
+			nb += 1
+			if(nb == num)
+				line = line.chomp
+				nom = nom + "#{line}"		
+				nom_fic = "#{line}"
+				printf "Nom : #{nom}"
+				printf "Fich : #{nom_fic}"
+			end
+		end
+
+		
 		map = Gui.new(nom,1,0)
 		time = map.getTime()
 		if(@difficulte==1)
@@ -52,6 +71,8 @@ class JeuCompetitif < Jeu
 		@score = time + diff
 		score = Score.new(@score,@pseudo,@difficulte,nom_fic)
 		score.rentrerScore()
+
+		f.close()
 
 	end
 
