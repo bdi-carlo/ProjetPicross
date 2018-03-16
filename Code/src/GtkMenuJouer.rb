@@ -29,7 +29,6 @@ class MenuJouer
     vb = Gtk::Box.new(:vertical, 5)
 		vb.set_homogeneous(false)
 
-
     #Création de la HBox1
     hb1 = Gtk::Box.new(:horizontal, 5)
     #Création du boutton Aventure
@@ -52,9 +51,9 @@ class MenuJouer
     bNormal = Gtk::Button.new(:label => "Normal", :use_underline => nil, :stock_id => nil)
     hb2.pack_start(bNormal, :expand => true, :fill => true)
     bNormal.signal_connect "clicked" do
-      @window.hide
+      @window.destroy
       Gui.new("../grilles/10x10/Neuf",1,0)
-      @window.show_all
+      onDestroy()
     end
 
     #Création du boutton Didacticiel
