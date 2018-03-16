@@ -157,7 +157,9 @@ class Gui
                                  [ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
 
         # Ensure that the dialog box is destroyed when the user responds.
-        dialog.signal_connect('response') { @window.destroy }
+        dialog.signal_connect('response') { @window.destroy
+          dialog.destroy
+         }
         res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
 
         dialog.vbox.add(Gtk::Label.new(res))
