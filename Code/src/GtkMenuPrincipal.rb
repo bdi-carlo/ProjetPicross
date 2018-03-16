@@ -4,10 +4,7 @@ begin
 end
 require 'gtk3'
 load "GtkMap.rb"
-<<<<<<< HEAD
 load "GtkMenuJouer.rb"
-=======
->>>>>>> e80331b468b97ed1c46e582126395fae373267ea
 
 class MenuPrincipal
 
@@ -21,11 +18,7 @@ class MenuPrincipal
     #Création de la fenêtre
     @window = Gtk::Window.new("PiCross")
 		@window.override_background_color(:normal,Gdk::RGBA.new(0,0,0,0))
-<<<<<<< HEAD
-    @window.set_size_request(400, 400)
-=======
     @window.set_size_request(300, 300)
->>>>>>> e80331b468b97ed1c46e582126395fae373267ea
     @window.resizable=FALSE
     @window.set_window_position(:center_always)
 
@@ -35,31 +28,19 @@ class MenuPrincipal
     @window.signal_connect('destroy') {onDestroy}
 
     #Création d'une VBox
-<<<<<<< HEAD
-
-    vb = Gtk::Box.new(:vertical, 5)
-		vb.set_homogeneous(false)
-=begin
-=======
     vb = Gtk::Box.new(:vertical, 5)
 		vb.set_homogeneous(false)
 
->>>>>>> e80331b468b97ed1c46e582126395fae373267ea
 		#Création d'un Label
 		message = "Bonjour #{@jeu.pseudo}"
 		messageBienvenue = Gtk::Label.new(message)
 		vb.pack_start(messageBienvenue)
-<<<<<<< HEAD
-=end
-=======
 
->>>>>>> e80331b468b97ed1c46e582126395fae373267ea
     #Création de la HBox1
     hb1 = Gtk::Box.new(:horizontal, 5)
     #Création du boutton JOUER
     bJouer = Gtk::Button.new(:label => "JOUER", :use_underline => nil, :stock_id => nil)
     bJouer.signal_connect "clicked" do
-<<<<<<< HEAD
      @window.hide
      MenuJouer.new()
      @window.show_all
@@ -69,17 +50,6 @@ class MenuPrincipal
     #Création du boutton SCORE
     bScore = Gtk::Button.new(:label => "SCORE", :use_underline => nil, :stock_id => nil)
     hb1.pack_start(bScore, :expand=> true, :fill => true)
-=======
-      @window.hide
-      Gui.new("../grilles/10x10/Neuf",1,0)
-      @window.show_all
-    end
-    hb1.pack_start(bJouer, :expand => true, :fill => true)
-
-    #Création du boutton SCOREBOARD
-    bScoreboard = Gtk::Button.new(:label => "SCOREBOARD", :use_underline => nil, :stock_id => nil)
-    hb1.pack_start(bScoreboard, :expand=> true, :fill => true)
->>>>>>> e80331b468b97ed1c46e582126395fae373267ea
     vb.pack_start(hb1, :expand => true, :fill => true)
 
     #Création de la HBox2
