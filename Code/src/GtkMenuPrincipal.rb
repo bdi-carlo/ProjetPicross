@@ -36,8 +36,6 @@ class MenuPrincipal
 		messageBienvenue = Gtk::Label.new(message)
 		vb.pack_start(messageBienvenue)
 
-    #Création de la HBox1
-    hb1 = Gtk::Box.new(:horizontal, 5)
     #Création du boutton JOUER
     bJouer = Gtk::Button.new(:label => "JOUER", :use_underline => nil, :stock_id => nil)
     bJouer.signal_connect "clicked" do
@@ -45,27 +43,22 @@ class MenuPrincipal
      MenuJouer.new()
      @window.show_all
     end
-    hb1.pack_start(bJouer, :expand => true, :fill => true)
+    vb.pack_start(bJouer, :expand => true, :fill => true)
 
     #Création du boutton SCORE
-    bScore = Gtk::Button.new(:label => "SCORE", :use_underline => nil, :stock_id => nil)
-    hb1.pack_start(bScore, :expand=> true, :fill => true)
-    vb.pack_start(hb1, :expand => true, :fill => true)
+    bScore = Gtk::Button.new(:label => "SCOREBOARD", :use_underline => nil, :stock_id => nil)
+    vb.pack_start(bScore, :expand=> true, :fill => true)
 
-    #Création de la HBox2
-    hb2 = Gtk::Box.new(:horizontal, 5)
     #Création du boutton CREDITS
     bCredits = Gtk::Button.new(:label => "CREDITS", :use_underline => nil, :stock_id => nil)
-    hb2.pack_start(bCredits, :expand => true, :fill => true)
+    vb.pack_start(bCredits, :expand => true, :fill => true)
 
     #Création du boutton QUITTER
     bQuitter = Gtk::Button.new(:label => "QUITTER", :use_underline => nil, :stock_id => nil)
     bQuitter.signal_connect "clicked" do
       onDestroy()
     end
-    hb2.pack_start(bQuitter, :expand => true, :fill => true, :padding => 0)
-
-    vb.pack_start(hb2, :expand => true, :fill => true, :padding => 0)
+    vb.pack_start(bQuitter, :expand => true, :fill => true, :padding => 0)
 
     @window.add(vb)
     @window.show_all
