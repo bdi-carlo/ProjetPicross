@@ -8,7 +8,7 @@ require 'gtk3'
 load "Map.rb"
 load "Case.rb"
 load "Timers.rb"
-load'Score.rb'
+load 'Score.rb'
 load "IndiceFaible.rb"
 load "IndiceMoyen.rb"
 load "IndiceFort.rb"
@@ -48,7 +48,7 @@ class Gui
     @window.add(splitVertical)
 
 
-    splitHorizontal=Gtk::Box.new(:horizontal,5)
+    splitHorizontal=Gtk::Box.new(:horizontal,20)
     splitHorizontal.set_homogeneous(FALSE)
 
     wintop=initTop
@@ -56,16 +56,19 @@ class Gui
     ################################CHIFFRES DES COTÉ######################################
     side = @map.getSide()
 
-    sidenumbers = Gtk::Box.new(:vertical,25)
+    sidenumbers = Gtk::Box.new(:vertical,10)
       #sidenumbers.add(Gtk::Label.new())
       for tab in side
         maxlen = 7                                                                            # A FAIRE
         tab.length.upto(maxlen)do
           @temp << "   "
         end
-
-        0.upto(tab.length()-1) do |i|
-            @temp << " #{tab[i]} "
+        if tab == []
+          @temp << " 0 "
+        else
+          0.upto(tab.length()-1) do |i|
+              @temp << " #{tab[i]} "
+          end
         end
         label = Gtk::Label.new(@temp.join)
         label = label.set_markup("<span color=\"#33FF00\" >#{@temp.join}</span>")
@@ -136,17 +139,19 @@ class Gui
     if button.state.button1_mask?
       if @timePress[x][y]%2 == 0
 
-         @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/noir.png"))
+        @buttonTab[x][y].remove(@buttonTab[x][y].child)
+        @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/noir.png"))
+        @buttonTab[x][y].show_all
 
 
-         @buttonTab[x][y].set_relief(:none)
          @map.putAt!(x,y,Case.create(1))
 
      else
 
         @map.putAt!(x,y,Case.create(0))
-        @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/blanc.png"))
-        @buttonTab[x][y].set_relief(:none)
+        @buttonTab[x][y].remove(@buttonTab[x][y].child)
+        @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/blanc.png"))
+        @buttonTab[x][y].show_all
 
      end
       @timePress[x][y]+=1
@@ -170,8 +175,9 @@ class Gui
       end
     end
     if button.state.button3_mask?
-      @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/croix.png"))
-      @buttonTab[x][y].set_relief(:none)
+      @buttonTab[x][y].remove(@buttonTab[x][y].child)
+      @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/croix.png"))
+      @buttonTab[x][y].show_all
       @map.putAt!(x,y,Case.create(2))
       @timePress[x][y]=0
     end
@@ -191,16 +197,17 @@ class Gui
       if button.button==1
         if @timePress[x][y]%2 == 0
 
-           @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/noir.png"))
-
-           @buttonTab[x][y].set_relief(:none)
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/noir.png"))
+          @buttonTab[x][y].show_all
            @map.putAt!(x,y,Case.create(1))
 
        else
 
           @map.putAt!(x,y,Case.create(0))
-          @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/blanc.png"))
-          @buttonTab[x][y].set_relief(:none)
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child =(Gtk::Image.new(:file =>"../images/blanc.png"))
+          @buttonTab[x][y].show_all
        end
         @timePress[x][y]+=1
 
@@ -220,12 +227,13 @@ class Gui
           dialog.vbox.add(Gtk::Label.new(res))
           dialog.show_all
 
-          
+
         end
       end
       if button.button==3
-        @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/croix.png"))
-        @buttonTab[x][y].set_relief(:none)
+        @buttonTab[x][y].remove(@buttonTab[x][y].child)
+        @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/croix.png"))
+        @buttonTab[x][y].show_all
         @map.putAt!(x,y,Case.create(2))
         @timePress[x][y]=0
       end
@@ -314,13 +322,16 @@ class Gui
     splitHorizontal=Gtk::Box.new(:horizontal,5)
     splitHorizontal.set_homogeneous(FALSE)                                                                                        #A MODIFIER
     @temp =[]
-    topnumbers = Gtk::Box.new(:horizontal,20)
+    topnumbers = Gtk::Box.new(:horizontal,11)
     topnumbers.homogeneous=(TRUE)
 ########################################################################################################
 
       for tab in top
+        tab.length.upto(7) do
+          @temp << "\n"
+        end
         if tab == []
-          @temp << " \n"
+          @temp << "0\n"
         else
           0.upto(tab.length()-1) do |i|
               @temp << "#{tab[i]}\n"
@@ -333,7 +344,7 @@ class Gui
 
       end
       wintop = Gtk::Box.new(:horizontal,100)
-      splitHorizontal.add(Gtk::Label.new(" "*31))
+      splitHorizontal.add(Gtk::Label.new(" "*38))
       splitHorizontal.add(topnumbers)
       wintop.add(splitHorizontal)
       wintop.add(Gtk::Label.new("     "))
@@ -343,7 +354,7 @@ class Gui
   #
   # Retour : la boite crée et initialisée
   def initBoxAide()
-    boxAide = Gtk::Box.new(:vertical,100)
+    boxAide = Gtk::Box.new(:vertical,50)
     boxAide.add(Gtk::Label.new())
 
     hbox2 = Gtk::Box.new(:horizontal,10)
@@ -382,20 +393,19 @@ class Gui
     @buttonTab = Array.new{Array.new}
     i=0
 
-    grid = Gtk::Box.new(:vertical,0)
-    grid.set_homogeneous(TRUE)
+    grid = Gtk::Box.new(:vertical,2)
+    grid.set_homogeneous(FALSE)
     0.upto(@map.getRows-1) do |x|
-      row = Gtk::Box.new(:horizontal,0)
-      row.set_homogeneous(TRUE)
+      row = Gtk::Box.new(:horizontal,2)
+      row.set_homogeneous(FALSE)
       tabrow = Array.new
       tabPress = Array.new
       0.upto(@map.getCols-1) do |y|
-        button=Gtk::Button.new().set_size_request(15,15)
-        button.set_relief(:none)
+        button=Gtk::EventBox.new()
+
         tabrow.push(button)
         tabPress.push(0)
-        button.set_image(Gtk::Image.new(:file =>"../images/blanc.png"))
-        button.set_always_show_image(TRUE)
+        button.add(Gtk::Image.new(:file =>"../images/blanc.png"))
         button.set_focus(FALSE)
 
         #### On connecte les boutons aux fonctions
@@ -403,7 +413,7 @@ class Gui
 
             onPress(x,y,Gtk.current_event)
         }
-        button.signal_connect("enter"){
+        button.signal_connect("enter_notify_event"){
 
             onEnter(x,y,Gtk.current_event)
         }
