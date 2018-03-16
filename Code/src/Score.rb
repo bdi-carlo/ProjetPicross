@@ -131,6 +131,7 @@ class Score
 
 end
 
+=begin
 
 	score = Score.new("30","Arthur", "facile", "Bateau")
 	score.rentrerScore()
@@ -153,4 +154,6 @@ end
 
 	score.recupHS("Valentin")
 	score.afficherHS("Cobra")
+	
+=end
 
