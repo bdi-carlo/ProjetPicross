@@ -56,12 +56,14 @@ class Gui
     ################################CHIFFRES DES COTÉ######################################
     side = @map.getSide()
 
-    sidenumbers = Gtk::Box.new(:vertical,10)
+    sidenumbers = Gtk::Box.new(:vertical,25)
+      #sidenumbers.add(Gtk::Label.new())
       for tab in side
         maxlen = 7                                                                            # A FAIRE
         tab.length.upto(maxlen)do
           @temp << "   "
         end
+
         0.upto(tab.length()-1) do |i|
             @temp << " #{tab[i]} "
         end
@@ -291,36 +293,32 @@ class Gui
   # Retour : la zone crée
   def initTop()
     top = @map.getTop()
-    maxlen= 5                                                                                         #A MODIFIER
+    splitHorizontal=Gtk::Box.new(:horizontal,5)
+    splitHorizontal.set_homogeneous(FALSE)                                                                                        #A MODIFIER
     @temp =[]
-    topnumbers = Gtk::Box.new(:vertical,2)
+    topnumbers = Gtk::Box.new(:horizontal,20)
     topnumbers.homogeneous=(TRUE)
-    # On boucle sur les chiffres du dessus partant du haut et en mettant un blanc si y'a rien
-    maxlen.downto(0) do |i|
-      @temp<< "                                       "
-      0.upto(@map.getCols-1) do |j|
+########################################################################################################
 
-        if top[j][i]!=nil
-          if top[j].reverse[i]<10
-          @temp << " #{top[j].reverse[i]}      "
-          else
-          @temp << " #{top[j].reverse[i]}     "
-          end
+      for tab in top
+        if tab == []
+          @temp << " \n"
         else
-          @temp << "         "
+          0.upto(tab.length()-1) do |i|
+              @temp << "#{tab[i]}\n"
+          end
         end
+        label = Gtk::Label.new(@temp.join)
+        label = label.set_markup("<span color=\"#33FF00\" >#{@temp.join}</span>")
+        @temp.clear
+        topnumbers.add(label)
 
       end
-
-      label = Gtk::Label.new(@temp.join)
-      # Pour écrire en vert
-      label = label.set_markup("<span color=\"#33FF00\" >#{@temp.join}</span>")
-      @temp.clear
-      topnumbers.add(label)
-    end
-    wintop = Gtk::Box.new(:horizontal,100)
-    wintop.add(topnumbers)
-    wintop.add(Gtk::Label.new("     "))
+      wintop = Gtk::Box.new(:horizontal,100)
+      splitHorizontal.add(Gtk::Label.new(" "*31))
+      splitHorizontal.add(topnumbers)
+      wintop.add(splitHorizontal)
+      wintop.add(Gtk::Label.new("     "))
   end
   ##
   # Boite contenant les boutons
