@@ -151,7 +151,18 @@ class Gui
      end
       @timePress[x][y]+=1
       if @map.compare                         #####QUOI FAIRE EN CAS DE VICTOIRE
-        puts "gagné temps restant : #{@time}"
+        dialog = Gtk::Dialog.new("Bravo",
+                                 $main_application_window,
+                                 Gtk::Dialog::DESTROY_WITH_PARENT,
+                                 [ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
+
+        # Ensure that the dialog box is destroyed when the user responds.
+        dialog.signal_connect('response') { @window.destroy }
+        res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
+
+        dialog.vbox.add(Gtk::Label.new(res))
+        dialog.show_all
+
         Gtk.main_quit
       end
     end
@@ -197,11 +208,12 @@ class Gui
                                    [ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
 
           # Ensure that the dialog box is destroyed when the user responds.
-          dialog.signal_connect('response') { dialog.destroy }
+          dialog.signal_connect('response') { @window.destroy }
           res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
 
           dialog.vbox.add(Gtk::Label.new(res))
           dialog.show_all
+
           Gtk.main_quit
         end
       end
