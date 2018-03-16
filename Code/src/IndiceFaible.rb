@@ -74,12 +74,12 @@ class IndiceFaible < Indice
 
 			# affiche le plus gros chiffre avec son indice si c'est une ligne
 			if !@orientation
-				@indice = "La ligne #{position} possede le plus gros chiffre qui est #{max}\n"
+				@indice = "La ligne #{position+1} possede le plus gros chiffre qui est #{max}\n"
 			end
 
 			# affiche le plus gros chiffre avec son indice si c'est une colonne
 			if @orientation
-				@indice = "La colonne #{position} possede le plus gros chiffre qui est #{max}\n"
+				@indice = "La colonne #{position+1} possede le plus gros chiffre qui est #{max}\n"
 			end
 
 		else
@@ -92,9 +92,10 @@ class IndiceFaible < Indice
 
 
 end
-
+=begin
 	map = Map.create("../grilles/scenario/Bateau")
 	voila = IndiceFaible.new(map)
 	print "#{voila.envoyerIndice.indice}\n"
 
 	"../grilles/Scenario/Bateau"
+=end

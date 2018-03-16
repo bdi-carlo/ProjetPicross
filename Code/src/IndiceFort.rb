@@ -1,5 +1,5 @@
-load Map.rb
-load Indice.rb
+load "Map.rb"
+load "Indice.rb"
 
 class IndiceFort < Indice
 
@@ -13,7 +13,7 @@ class IndiceFort < Indice
   # * rows : Représente l'abscisse de la case
   # * cols : Représente l'ordonnée de la case
   # * nbMax :  Un indice fort ne peut être utilisé qu'une fois
- 
+
 
 	@map
 	@col
@@ -26,23 +26,23 @@ class IndiceFort < Indice
 		@nbMax = 1
 		super(grille)
 	end
-	
+
 
 ##
 # Vérification de la case sur la grille
-# 
+#
 #
 # Vérification dans la grille résultat si la case sélectionnée est coloriée ou non
 #
 	def envoyerIndice()
-		if(nbMax != 0) 
-			if(@map.accessAtRes(@row,@col))
-				@indice = "La case se trouvant en (#{@row},#{@col}) est coloriée\n"
+		if(@nbMax != 0)
+			if(@map.accessAtRes(@row,@col)==1)
+				@indice = "La case se trouvant en (#{@row+1},#{@col+1}) est coloriée\n"
 			else
-				@indice = "La case se trouvant en (#{@row},#{@col}) n'est pas coloriée\n"
+				@indice = "La case se trouvant en (#{@row+1},#{@col+1}) n'est pas coloriée\n"
 			end
 		else
-				@indice = "Nombre d'utilisation maximum de cet indice atteint." 
+				@indice = "Nombre d'utilisation maximum de cet indice atteint."
 		end
 
 		return self

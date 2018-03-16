@@ -11,6 +11,7 @@ load "Timers.rb"
 load'Score.rb'
 load "IndiceFaible.rb"
 load "IndiceMoyen.rb"
+load "IndiceFort.rb"
 #A placer au départ
 
 
@@ -26,7 +27,7 @@ class Gui
     @start=start
     @map = Map.create(map)
     initTimer()
-
+    @indiceFortFlag = FALSE
     @window = Gtk::Window.new.override_background_color(:normal,Gdk::RGBA.new(0,0,0,0))
 
     @window.set_size_request(970, 700)
@@ -170,33 +171,48 @@ class Gui
     Gdk.pointer_ungrab(Gdk::CURRENT_TIME)
     @buttonTab[x][y].set_focus(TRUE)
 
+    if @indiceFortFlag == FALSE
+      if button.button==1
+        if @timePress[x][y]%2 == 0
 
-    if button.button==1
-      if @timePress[x][y]%2 == 0
+           @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/noir.png"))
 
-         @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/noir.png"))
+           @buttonTab[x][y].set_relief(:none)
+           @map.putAt!(x,y,Case.create(1))
 
-         @buttonTab[x][y].set_relief(:none)
-         @map.putAt!(x,y,Case.create(1))
+       else
 
-     else
+          @map.putAt!(x,y,Case.create(0))
+          @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/blanc.png"))
+          @buttonTab[x][y].set_relief(:none)
+       end
+        @timePress[x][y]+=1
 
-        @map.putAt!(x,y,Case.create(0))
-        @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/blanc.png"))
-        @buttonTab[x][y].set_relief(:none)
-     end
-      @timePress[x][y]+=1
-
-      if @map.compare
-        puts "gagné temps restant : #{@time}"  #####QUOI FAIRE EN CAS DE VICTOIRE
-        Gtk.main_quit
+        if @map.compare
+          puts "gagné temps restant : #{@time}"  #####QUOI FAIRE EN CAS DE VICTOIRE
+          Gtk.main_quit
+        end
       end
-    end
-    if button.button==3
-      @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/croix.png"))
-      @buttonTab[x][y].set_relief(:none)
-      @map.putAt!(x,y,Case.create(2))
-      @timePress[x][y]=0
+      if button.button==3
+        @buttonTab[x][y].set_image(Gtk::Image.new(:file =>"../images/croix.png"))
+        @buttonTab[x][y].set_relief(:none)
+        @map.putAt!(x,y,Case.create(2))
+        @timePress[x][y]=0
+      end
+    else
+      indice = IndiceFort.new(@map,x,y)
+      @indiceFortFlag = FALSE
+      dialog = Gtk::Dialog.new("Aide3",
+                               $main_application_window,
+                               Gtk::Dialog::DESTROY_WITH_PARENT,
+                               [ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
+
+      # Ensure that the dialog box is destroyed when the user responds.
+      dialog.signal_connect('response') { dialog.destroy }
+
+      # Add the message in a label, and show everything we've added to the dialog.
+      dialog.vbox.add(Gtk::Label.new(indice.envoyerIndice.indice))
+      dialog.show_all
     end
   end
 
@@ -234,7 +250,8 @@ class Gui
   end
 
   def aide3()
-    puts "Aide 3"
+
+    @indiceFortFlag = TRUE
   end
 
   ##
