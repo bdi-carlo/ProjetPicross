@@ -105,7 +105,7 @@ class Gui
   ##
   # Callback de la fermeture de l'appli
   def onDestroy
-    puts "Fin de l'application"
+    puts "Fermeture picross"
     #Quit 'propre'
     Gtk.main_quit
   end
@@ -158,6 +158,7 @@ class Gui
 
         # Ensure that the dialog box is destroyed when the user responds.
         dialog.signal_connect('response') { @window.destroy
+          puts "Fermeture picross sur victoire"
           dialog.destroy
          }
         res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
@@ -165,7 +166,7 @@ class Gui
         dialog.vbox.add(Gtk::Label.new(res))
         dialog.show_all
 
-        Gtk.main_quit
+
       end
     end
     if button.state.button3_mask?
@@ -210,13 +211,16 @@ class Gui
                                    [ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
 
           # Ensure that the dialog box is destroyed when the user responds.
-          dialog.signal_connect('response') { @window.destroy }
+          dialog.signal_connect('response') { @window.destroy
+            puts "Fermeture picross sur victoire"
+            dialog.destroy
+          }
           res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
 
           dialog.vbox.add(Gtk::Label.new(res))
           dialog.show_all
 
-          Gtk.main_quit
+          
         end
       end
       if button.button==3
