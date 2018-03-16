@@ -29,7 +29,10 @@ class MenuJouer
     vb = Gtk::Box.new(:vertical, 5)
     vb.set_homogeneous(false)
 
-    
+		#Création d'un Label
+		l = Gtk::Label.new("Choix du mode")
+		vb.pack_start(l)
+
     #Création du boutton Aventure
     bAventure = Gtk::Button.new(:label => "Aventure", :use_underline => nil, :stock_id => nil)
     vb.pack_start(bAventure, :expand => true, :fill => true)
@@ -51,17 +54,13 @@ class MenuJouer
     bDidacticiel = Gtk::Button.new(:label => "Didacticiel", :use_underline => nil, :stock_id => nil)
     vb.pack_start(bDidacticiel, :expand => true, :fill => true, :padding => 0)
 
-<<<<<<< HEAD
 		#Création du boutton Retour
-    bRetour = Gtk::Button.new(:label => "Retour Menu", :use_underline => nil, :stock_id => nil)
+    bRetour = Gtk::Button.new(:label => "Retour", :use_underline => nil, :stock_id => nil)
     vb.pack_start(bRetour, :expand => true, :fill => true, :padding => 0)
 		bRetour.signal_connect "clicked" do
 			@window.destroy
-			Gui.new("../grilles/10x10/Neuf",1,0)
 			onDestroy()
 		end
-=======
->>>>>>> c77b033313deccfd1d8b3f6cf626f1dcd53ccd81
 
     @window.add(vb)
     @window.show_all

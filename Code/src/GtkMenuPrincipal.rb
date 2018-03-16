@@ -37,7 +37,7 @@ class MenuPrincipal
 		vb.pack_start(messageBienvenue)
 
     #Création du boutton JOUER
-    bJouer = Gtk::Button.new(:label => "JOUER", :use_underline => nil, :stock_id => nil)
+    bJouer = Gtk::Button.new(:label => "Jouer", :use_underline => nil, :stock_id => nil)
     bJouer.signal_connect "clicked" do
      @window.hide
      MenuJouer.new()
@@ -46,15 +46,15 @@ class MenuPrincipal
     vb.pack_start(bJouer, :expand => true, :fill => true)
 
     #Création du boutton SCORE
-    bScore = Gtk::Button.new(:label => "SCOREBOARD", :use_underline => nil, :stock_id => nil)
+    bScore = Gtk::Button.new(:label => "Scoreboard", :use_underline => nil, :stock_id => nil)
     vb.pack_start(bScore, :expand=> true, :fill => true)
 
     #Création du boutton CREDITS
-    bCredits = Gtk::Button.new(:label => "CREDITS", :use_underline => nil, :stock_id => nil)
+    bCredits = Gtk::Button.new(:label => "Credits", :use_underline => nil, :stock_id => nil)
     vb.pack_start(bCredits, :expand => true, :fill => true)
 
     #Création du boutton QUITTER
-    bQuitter = Gtk::Button.new(:label => "QUITTER", :use_underline => nil, :stock_id => nil)
+    bQuitter = Gtk::Button.new(:label => "Quitter", :use_underline => nil, :stock_id => nil)
     bQuitter.signal_connect "clicked" do
       onDestroy()
     end
