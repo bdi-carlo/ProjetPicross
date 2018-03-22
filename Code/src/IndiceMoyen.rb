@@ -40,9 +40,9 @@ class IndiceMoyen < Indice
 		#on prend que les cases à l'etat 0
 		x = true
 		while x == true do
-			@row = rand(@map.getRows)
-			@col = rand(@map.getCols)
-			if @map.accessAt(@row,@col).getColor == 0
+			@row = rand(@map.rows)
+			@col = rand(@map.cols)
+			if @map.accessAt(@row,@col).value == 0
 				x = false
 
 				if @map.accessAtRes(@row,@col) == 1

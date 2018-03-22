@@ -19,7 +19,6 @@ class IndiceFaible < Indice
 		@nbUtilisation = 0
 		@nbMax = 3
 		super(grille)
-
 	end
 
 ##
@@ -32,8 +31,8 @@ class IndiceFaible < Indice
 			position = 0
 			somme = 0
 			max = 0
-			side = @map.getSide()
-			top = @map.getTop()
+			side = @map.side
+			top = @map.top
 			i = 0
 			j = 0
 

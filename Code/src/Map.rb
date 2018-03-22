@@ -16,14 +16,16 @@ class Map
   # * top : Tableau des chiffres du dessus
   # * res : matrice de résultat(pour comparaison)
 
+	attr_reader :map, :top, :side, :cols, :rows
+
   private_class_method :new
 
-############################## CRÉATION ##############################
-##
-# Constructeur de la classe
-#
-# Param :
-# * filename : Nom du fichier de resultat
+	############################## CRÉATION ##############################
+	##
+	# Constructeur de la classe
+	#
+	# Param :
+	# * filename : Nom du fichier de resultat
 	def initialize(filename)
 
     @side = Array.new()
@@ -39,64 +41,19 @@ class Map
     self.empty
 
 	end
-##
-# Création de la Grille
+
+	##
+	# Création de la Grille
   def Map.create(filename)
     new(filename)
   end
 
-#####################################################################
-
-
-
-###################### GETTERS #################################
-##
-# Getter du tableau de case
-#
-# Retourne le tableau
-    def getMap()
-      return @map
-    end
-##
-# Getter de top
-#
-# Retourne @top
-    def getTop
-      return @top
-    end
-##
-# Getter de side
-#
-# Retourne @side
-    def getSide
-      return @side
-    end
-
-##
-# Getter de cols
-#
-# Retourne @cols
-    def getCols
-      return @cols
-    end
-##
-# Getter de rows
-#
-# Retourne @rows
-    def getRows
-      return @rows
-    end
-##############################################################
-
-
-
-
 ################################## REMPLISSAGE DES VARIABLES D'INSTANCE ########################
 
-##
-# Rempli la matrice de case vides
-#
-# Retourne nil
+	##
+	# Rempli la matrice de case vides
+	#
+	# Retourne nil
 	def empty
     # On itère dans la matrice comme en C de 0 à Nb colonne -1 (Faut faire gaffe au -1)
 		0.upto(@rows-1) do |row|
@@ -106,10 +63,11 @@ class Map
 		end
     return nil
 	end
-##
-# Génère la liste de chiffre sur le coté
-#
-# Retourne nil
+
+	##
+	# Génère la liste de chiffre sur le coté
+	#
+	# Retourne nil
   def generateSide
     count = 0
     for row in @res do
@@ -130,11 +88,12 @@ class Map
       @side.push(lign)
     end
     return nil
-  end
-##
-# Génère la liste de chiffre sur le coté
-#
-# Retourne nil
+	end
+
+	##
+	# Génère la liste de chiffre sur le coté
+	#
+	# Retourne nil
   def generateTop
     count = 0
     0.upto(@cols -1) do |num|
@@ -155,10 +114,11 @@ class Map
       @top.push(lign)
     end
   end
-##
-# Importe un fichier au format texte en tableau de resultat
-#
-# Si le fichier n'existe pas ça plante, il faut mettre le chemin relatif
+
+	##
+	# Importe un fichier au format texte en tableau de resultat
+	#
+	# Si le fichier n'existe pas ça plante, il faut mettre le chemin relatif
   def import ()
     fd=File.open(@filename,'r')
     fd.each_line do |x|
@@ -169,12 +129,8 @@ class Map
       @res.push(lign)
     end
   end
+
 ################################################################################################
-
-
-
-
-
 
 ################################### GESTION DES CASES #########################################
 ##
@@ -193,14 +149,15 @@ class Map
   def accessAtRes(row,col)
     return @res[row][col]
   end
-##
-# Modifie la valeur d'une case de la grille par la valeur en paramêtre ,format <b>LIGNE COLONNE</b>
-#
-# Param :
-# * row : Ligne à acceder
-# * col : Colonne à acceder
-# * value : Nouvelle valeur
-# Retourne nil
+
+	##
+	# Modifie la valeur d'une case de la grille par la valeur en paramêtre ,format <b>LIGNE COLONNE</b>
+	#
+	# Param :
+	# * row : Ligne à acceder
+	# * col : Colonne à acceder
+	# * value : Nouvelle valeur
+	# Retourne nil
   def putAt!(row,col,value)
     @map[row][col]=value
     return nil
@@ -208,12 +165,12 @@ class Map
 
 ################################################################################################
 
-##
-# Vérifie que deux grille sont égales
-#
-# Param : Map à comparer (La classe, pas le tableau)
-#
-# Retourne un booléen true si égales, false sinon
+	##
+	# Vérifie que deux grille sont égales
+	#
+	# Param : Map à comparer (La classe, pas le tableau)
+	#
+	# Retourne un booléen true si égales, false sinon
   def compare
     0.upto(@rows-1) do |row|
 			0.upto(@cols-1) do |col|
@@ -225,16 +182,11 @@ class Map
     return TRUE
   end
 
-
-
-
-
-##
-# Affiche la grille
-#
-# Retourne nil
+	##
+	# Affiche la grille
+	#
+	# Retourne nil
   def display
-
     i=0
     print "   "
     0.upto(9) do |x|

@@ -21,7 +21,6 @@ class Credits
 
     @window.signal_connect('destroy') {onDestroy}
 
-
     @window.show_all
 
     Gtk.main

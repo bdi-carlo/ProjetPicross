@@ -1,5 +1,3 @@
-
-
 begin
   require 'rubygems'
  rescue LoadError
@@ -14,11 +12,10 @@ load "IndiceMoyen.rb"
 load "IndiceFort.rb"
 #A placer au départ
 
-
-
 class Gui
+
   @difficulte
-  attr_accessor :pseudo,:difficulte,:penalite,:score,:highscore,:taille
+  attr_accessor :pseudo, :difficulte, :penalite, :score, :highscore, :taille, :time
 
   def initialize(map,inc,start)
     #Gtk.init
@@ -54,7 +51,7 @@ class Gui
     wintop=initTop
     splitVertical.add(wintop)
     ################################CHIFFRES DES COTÉ######################################
-    side = @map.getSide()
+    side = @map.side
 
     sidenumbers = Gtk::Box.new(:vertical,10)
       #sidenumbers.add(Gtk::Label.new())
@@ -118,9 +115,6 @@ class Gui
 
 
   #########################################################"TEST###############################################################
-  def getTime()
-    return @time
-  end
 
   #########################################################
   ##
@@ -182,6 +176,7 @@ class Gui
       @timePress[x][y]=0
     end
   end
+
   ##
   # Callback lors de l'appui d'un bouton
   #
@@ -258,14 +253,14 @@ class Gui
     indice = IndiceFaible.new(@map)
     dialog = Gtk::Dialog.new("Aide1",
                              $main_application_window,
-                             Gtk::Dialog::DESTROY_WITH_PARENT,
-                             [ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
+                             Gtk::DialogFlags::DESTROY_WITH_PARENT,
+                             [ Gtk::Stock::OK, Gtk::ResponseType::NONE ])
 
     # Ensure that the dialog box is destroyed when the user responds.
     dialog.signal_connect('response') { dialog.destroy }
 
     # Add the message in a label, and show everything we've added to the dialog.
-    dialog.vbox.add(Gtk::Label.new(indice.envoyerIndice.indice))
+    dialog.child.add(Gtk::Label.new(indice.envoyerIndice.indice))
     dialog.show_all
     @timer.add(10)
 
@@ -275,14 +270,14 @@ class Gui
     indice = IndiceMoyen.create(@map)
     dialog = Gtk::Dialog.new("Aide2",
                              $main_application_window,
-                             Gtk::Dialog::DESTROY_WITH_PARENT,
-                             [ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
+                             Gtk::DialogFlags::DESTROY_WITH_PARENT,
+                             [ Gtk::Stock::OK, Gtk::ResponseType::NONE ])
 
     # Ensure that the dialog box is destroyed when the user responds.
     dialog.signal_connect('response') { dialog.destroy }
 
     # Add the message in a label, and show everything we've added to the dialog.
-    dialog.vbox.add(Gtk::Label.new(indice.envoyerIndice.indice))
+    dialog.child.add(Gtk::Label.new(indice.envoyerIndice.indice))
     dialog.show_all
     @timer.add(15)
   end
@@ -298,7 +293,7 @@ class Gui
   # Retour : Le timer créé
   def initTimer()
     @timer = Timers.new(@inc,@start){
-      @time=@timer.getTime
+      @time=@timer.time
       if @time > 0
         @temps.set_markup("<span color=\"#33FF00\" weight=\"bold\" size=\"large\" > #{@time} </span>")
       else
@@ -313,12 +308,13 @@ class Gui
     @time = 50
     @timePress=Array.new{Array.new}
   end
+
   ##
   # Crée la zone des chiffres du dessus
   #
   # Retour : la zone crée
   def initTop()
-    top = @map.getTop()
+    top = @map.top()
     splitHorizontal=Gtk::Box.new(:horizontal,5)
     splitHorizontal.set_homogeneous(FALSE)                                                                                        #A MODIFIER
     @temp =[]
@@ -349,6 +345,7 @@ class Gui
       wintop.add(splitHorizontal)
       wintop.add(Gtk::Label.new("     "))
   end
+
   ##
   # Boite contenant les boutons
   #
@@ -385,6 +382,7 @@ class Gui
     return boxAide
 
   end
+
   ##
   # Crée la grille en format gtk
   #
@@ -395,12 +393,12 @@ class Gui
 
     grid = Gtk::Box.new(:vertical,2)
     grid.set_homogeneous(FALSE)
-    0.upto(@map.getRows-1) do |x|
+    0.upto(@map.rows-1) do |x|
       row = Gtk::Box.new(:horizontal,2)
       row.set_homogeneous(FALSE)
       tabrow = Array.new
       tabPress = Array.new
-      0.upto(@map.getCols-1) do |y|
+      0.upto(@map.cols-1) do |y|
         button=Gtk::EventBox.new()
 
         tabrow.push(button)
@@ -428,6 +426,7 @@ class Gui
     end
     return grid
   end
+
   def apply_style(widget, provider)
     style_context = widget.style_context
     style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
