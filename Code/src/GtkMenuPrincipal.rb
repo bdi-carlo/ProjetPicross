@@ -17,7 +17,7 @@ class MenuPrincipal
 
     #Création de la fenêtre
     @window = Gtk::Window.new("PiCross")
-		@window.override_background_color(:normal,Gdk::RGBA.new(0,0,0,0))
+		@window.override_background_color(:normal,Gdk::RGBA.new(255,0,0,0.9))
     @window.set_size_request(300, 300)
     @window.resizable=FALSE
     @window.set_window_position(:center_always)
@@ -37,12 +37,21 @@ class MenuPrincipal
 		vb.pack_start(messageBienvenue)
 
     #Création du boutton JOUER
-    bJouer = Gtk::Button.new(:label => "Jouer", :use_underline => nil, :stock_id => nil)
-    bJouer.signal_connect "clicked" do
-     @window.hide
-     MenuJouer.new()
-     @window.show_all
+    image = Gtk::Image.new(:file => "Jouer.png")
+    bJouer = Gtk::EventBox.new.add(image)
+    bJouer.signal_connect("button_press_event") do
+        @window.hide
+        MenuJouer.new()
+        @window.show_all
     end
+
+
+    bJouer.signal_connect("enter_notify_event"){
+      onEnterJouer(bJouer)
+    }
+    bJouer.signal_connect("leave_notify_event"){
+      onLeaveJouer(bJouer)
+    }
     vb.pack_start(bJouer, :expand => true, :fill => true)
 
     #Création du boutton SCORE
@@ -73,6 +82,18 @@ class MenuPrincipal
     puts "Fin de l'application"
     #Quit 'propre'
     Gtk.main_quit
+  end
+
+  def onEnterJouer(button)
+    button.remove(button.child)
+    button.child = Gtk::Image.new(:file => "JouerTransparent.png")
+    button.show_all
+  end
+
+   def onLeaveJouer(button)
+    button.remove(button.child)
+    button.child = Gtk::Image.new(:file => "Jouer.png")
+    button.show_all
   end
 
 end

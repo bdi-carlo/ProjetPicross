@@ -19,6 +19,7 @@ class MenuJouer
     @window.set_size_request(300, 300)
     @window.resizable=FALSE
     @window.set_window_position(:center_always)
+    
 
     @provider = Gtk::CssProvider.new
     @window.border_width=3
@@ -35,7 +36,10 @@ class MenuJouer
 
     #Création du boutton Aventure
     bAventure = Gtk::Button.new(:label => "Aventure", :use_underline => nil, :stock_id => nil)
+    bAventure.name = "bAventure" 
     vb.pack_start(bAventure, :expand => true, :fill => true)
+    @provider.load(:data=>"#bAventure {background-color : red ;
+                                    }")
 
     #Création du boutton Competition
     bCompetition = Gtk::Button.new(:label => "Competition", :use_underline => nil, :stock_id => nil)
@@ -65,6 +69,7 @@ class MenuJouer
     @window.add(vb)
     @window.show_all
 
+    apply_style(@window, @provider)
     Gtk.main
 
   end
@@ -75,6 +80,15 @@ class MenuJouer
     puts "Fin de l'application"
     #Quit 'propre'
     Gtk.main_quit
+  end
+  
+  def apply_style(widget, provider)
+    style_context = widget.style_context
+    style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
+    return unless widget.respond_to?(:children)
+    widget.children.each do |child|
+      apply_style(child, provider)
+    end
   end
 
 end
