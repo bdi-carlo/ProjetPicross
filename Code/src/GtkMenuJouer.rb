@@ -15,7 +15,7 @@ class MenuJouer
 
     #Création de la fenêtre
     @window = Gtk::Window.new("PiCross")
-		@window.override_background_color(:normal,Gdk::RGBA.new(0,0,0,0))
+		@window.override_background_color(:normal,Gdk::RGBA.new(32,32,32,1))
     @window.set_size_request(300, 300)
     @window.resizable=FALSE
     @window.set_window_position(:center_always)

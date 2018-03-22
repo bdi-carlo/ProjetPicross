@@ -4,7 +4,6 @@ begin
  rescue LoadError
 end
 
-
 load "GtkMap.rb"
 
 def onDestroy
@@ -18,7 +17,8 @@ class GtkMenuDiffTaille
 
   def initialize()
 
-		#Gtk.init
+		Gtk.init
+
 		@window = Gtk::Window.new
 		# Titre de la fenêtre
 		@window.set_title("Bienvenue")
@@ -39,13 +39,11 @@ class GtkMenuDiffTaille
 
 		table = Gtk::Table.new(3,2)
 
-	# Sélection de la difficulté
+		# Sélection de la difficulté
 		lDiff = Gtk::Label.new("Niveau de difficulté:")
 
 		bFacile = Gtk::Button.new(:label =>"Facile", :use_underline => nil, :stock_id => nil)
-
 		bMoyen = Gtk::Button.new(:label =>"Moyen", :use_underline => nil, :stock_id => nil)
-
 		bDifficile = Gtk::Button.new(:label =>"Difficile", :use_underline => nil, :stock_id => nil)
 
 		table.attach(lDiff, 0, 1, 0, 1)
@@ -56,7 +54,6 @@ class GtkMenuDiffTaille
 		vb.add(table)
 
 		#Seconde fenêtre
-
 		vb1 = Gtk::Box.new(:vertical,1)
 
 		table1 = Gtk::Table.new(4,3)
@@ -64,19 +61,12 @@ class GtkMenuDiffTaille
 		lGrille = Gtk::Label.new("Taille de Grille")
 
 		bT5 = Gtk::Button.new(:label =>"5 x 5", :use_underline => nil, :stock_id => nil)
-
 		bT10 = Gtk::Button.new(:label =>"10 x 10", :use_underline => nil, :stock_id => nil)
-
 		bT15 = Gtk::Button.new(:label =>"15 x 15", :use_underline => nil, :stock_id => nil)
-
 		bT20 = Gtk::Button.new(:label =>"20 x 20", :use_underline => nil, :stock_id => nil)
-
 		bT25 = Gtk::Button.new(:label =>"25 x 25", :use_underline => nil, :stock_id => nil)
-
 		bT30 = Gtk::Button.new(:label =>"30 x 30", :use_underline => nil, :stock_id => nil)
-
 		bRetour = Gtk::Button.new(:label =>"Retour")
-
 
 		table1.attach(lGrille, 0, 1, 0, 2)
 		table1.attach(bT5, 1, 2, 0, 1)
@@ -89,7 +79,6 @@ class GtkMenuDiffTaille
 
 		vb1.add(table1)
 
-
 		vp.set_size_request(200, -1)
 		vp.set_position(200)
 		vp.add1(vb)
@@ -100,47 +89,34 @@ class GtkMenuDiffTaille
 		#vb.show_all
 		#vb1.hide
 
-
 		bFacile.signal_connect "clicked" do
 			vp.set_position(175)
-
 			vp.set_position(125)
-
 			vp.set_position(75)
-
 			vb.set_size_request(0,-1)
-
 			vp.set_position(0)
 		end
 
 		bMoyen.signal_connect "clicked" do
 			vp.set_position(175)
-
 			vp.set_position(125)
-
 			vp.set_position(75)
-
 			vb.set_size_request(0,-1)
-
 			vp.set_position(0)
 		end
 
 		bDifficile.signal_connect "clicked" do
 			vp.set_position(175)
-
 			vp.set_position(125)
-
 			vp.set_position(75)
-
 			vb.set_size_request(0,-1)
-
 			vp.set_position(0)
 		end
 
 		bT10.signal_connect "clicked" do
-		      @window.hide
-		      Gui.new("../grilles/10x10/Neuf",1,0)
-		      @window.show_all
+			@window.hide
+			Gui.new("../grilles/10x10/Neuf",1,0)
+			@window.show_all
 		end
 
 		bRetour.signal_connect "clicked" do
@@ -154,7 +130,6 @@ class GtkMenuDiffTaille
 
 		@window.signal_connect "destroy" do
 			onDestroy
-
 		end
 
 		@window.add(vp)

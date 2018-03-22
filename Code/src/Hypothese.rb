@@ -33,9 +33,7 @@ class Hypothese
 
 		if @grillesHypothese.empty?
 			newGrille = YAML.load(@grillePrim.to_yaml)
-			print @grillePrim, "\n"
 			@grillesHypothese.push(newGrille)
-			print @grillesHypothese.last, "\n"
 		else
 			newGrille = YAML.load(@grillesHypothese.last.to_yaml)
 			@grillesHypothese.push(newGrille)
@@ -83,18 +81,19 @@ class Hypothese
 
 end
 
+=begin
 	map = Map.create("../grilles/Test2x2")
 	hyp = Hypothese.creer(map)
 
 	print "\n\n-------------------------------------------\n"
 	print "Chiffres du dessus :\n"
-	print "#{map.getTop}\n"
+	print "#{map.top}\n"
 	print "Chiffres du cote :\n"
-	print "#{map.getSide}\n"
+	print "#{map.side}\n"
 	print "Nombre de colonnes :\n"
-	print "#{map.getCols}\n"
+	print "#{map.cols}\n"
 	print "Nombre de lignes :\n"
-	print "#{map.getRows}\n"
+	print "#{map.rows}\n"
 	print "Test de compare (erreur) : \n"
 
 	if map.compare
@@ -123,3 +122,4 @@ end
 	end
 
 	map.display
+=end
