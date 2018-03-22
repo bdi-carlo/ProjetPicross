@@ -37,7 +37,7 @@ class MenuPrincipal
 		vb.pack_start(messageBienvenue)
 
     #Création du boutton JOUER
-    image = Gtk::Image.new(:file => "Jouer.png")
+    image = Gtk::Image.new(:file => "../images/Jouer.png")
     bJouer = Gtk::EventBox.new.add(image)
     bJouer.signal_connect("button_press_event") do
         @window.hide
@@ -86,13 +86,13 @@ class MenuPrincipal
 
   def onEnterJouer(button)
     button.remove(button.child)
-    button.child = Gtk::Image.new(:file => "JouerTransparent.png")
+    button.child = Gtk::Image.new(:file => "../images/JouerTransparent.png")
     button.show_all
   end
 
    def onLeaveJouer(button)
     button.remove(button.child)
-    button.child = Gtk::Image.new(:file => "Jouer.png")
+    button.child = Gtk::Image.new(:file => "../images/Jouer.png")
     button.show_all
   end
 
