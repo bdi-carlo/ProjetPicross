@@ -14,7 +14,7 @@ require 'facets/timer'
 # l'installation du gem se fait par "gem install facets"
     class Timers
 
-
+			attr_reader :time
 
       def initialize(increment)
           @timers = Timer.new(1) { self.update{yield} }
@@ -26,13 +26,6 @@ require 'facets/timer'
           @timers = Timer.new(1) { self.update{yield} }
           @time = start
           @inc = increment
-      end
-      ##
-      # Getter du temps, c'est ça qu'on affiche ou qu'on traite
-      #
-      # Retour : Le temps actuel
-      def getTime()
-        return @time
       end
 
       ##
@@ -55,6 +48,7 @@ require 'facets/timer'
         @timers.start
         return nil
       end
+
       ##
       # Met le timer en pause
       #
@@ -65,6 +59,7 @@ require 'facets/timer'
         #print "Pause au temps #{@time}\n"
         return nil
       end
+
       ##
       # Relance le timer à la valeur précédente
       #
@@ -73,6 +68,7 @@ require 'facets/timer'
         @timers.start
         return nil
       end
+
       ##
       # Ajoute une montant de temps(en secondes) au timer en cours d'execution
       #

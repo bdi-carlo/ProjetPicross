@@ -45,7 +45,7 @@ class Main
     #Création du bouton pour confirmer notre Pseudo
     button = Gtk::Button.new(:label => "CONTINUER", :use_underline => nil, :stock_id => nil)
     button.signal_connect "clicked" do
-    	@jeu.setPseudo(nom.text)
+    	@jeu.pseudo = nom.text
       puts "Pseudo: " + @jeu.pseudo
       @window.hide
       MenuPrincipal.new(@jeu)

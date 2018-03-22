@@ -7,6 +7,7 @@ load "Map.rb"
 load "Case.rb"
 load "Timers.rb"
 load 'Score.rb'
+load "Hypothese.rb"
 load "IndiceFaible.rb"
 load "IndiceMoyen.rb"
 load "IndiceFort.rb"
@@ -20,9 +21,14 @@ class Gui
   def initialize(map,inc,start)
     #Gtk.init
 
-    @inc=inc
-    @start=start
+		# Tableau pour gerer les couleurs des hypotheses
+		@tabCase = ["../images/noir.png", "../images/violet.png", "../images/bleu.png", "../images/rouge.png"]
+		@nbHypo = 0
+
+    @inc = inc
+    @start = start
     @map = Map.create(map)
+		@hypo = Hypothese.creer(@map)
     initTimer()
     @indiceFortFlag = FALSE
     @window = Gtk::Window.new.override_background_color(:normal,Gdk::RGBA.new(0,0,0,0))
@@ -78,6 +84,7 @@ class Gui
     boxinter = Gtk::Box.new(:horizontal,40)
     boxinter.add(initGrid)
     boxinter.add(initBoxAide)
+		boxinter.add(initBoxHypo)
     splitHorizontal.add(boxinter)
     splitVertical.add(splitHorizontal)
 
@@ -134,7 +141,7 @@ class Gui
       if @timePress[x][y]%2 == 0
 
         @buttonTab[x][y].remove(@buttonTab[x][y].child)
-        @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/noir.png"))
+        @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@nbHypo]))
         @buttonTab[x][y].show_all
 
 
@@ -152,8 +159,8 @@ class Gui
       if @map.compare                         #####QUOI FAIRE EN CAS DE VICTOIRE
         dialog = Gtk::Dialog.new("Bravo",
                                  $main_application_window,
-                                 Gtk::Dialog::DESTROY_WITH_PARENT,
-                                 [ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
+                                 Gtk::DialogFlags::DESTROY_WITH_PARENT,
+                                 [ Gtk::Stock::OK, Gtk::ResponseType::NONE ])
 
         # Ensure that the dialog box is destroyed when the user responds.
         dialog.signal_connect('response') { @window.destroy
@@ -193,7 +200,7 @@ class Gui
         if @timePress[x][y]%2 == 0
 
           @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/noir.png"))
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@nbHypo]))
           @buttonTab[x][y].show_all
            @map.putAt!(x,y,Case.create(1))
 
@@ -201,7 +208,7 @@ class Gui
 
           @map.putAt!(x,y,Case.create(0))
           @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child =(Gtk::Image.new(:file =>"../images/blanc.png"))
+          @buttonTab[x][y].child =(Gtk::Image.new(:file => "../images/blanc.png"))
           @buttonTab[x][y].show_all
        end
         @timePress[x][y]+=1
@@ -318,7 +325,7 @@ class Gui
     splitHorizontal=Gtk::Box.new(:horizontal,5)
     splitHorizontal.set_homogeneous(FALSE)                                                                                        #A MODIFIER
     @temp =[]
-    topnumbers = Gtk::Box.new(:horizontal,11)
+    topnumbers = Gtk::Box.new(:horizontal,14)
     topnumbers.homogeneous=(TRUE)
 ########################################################################################################
 
@@ -375,11 +382,52 @@ class Gui
     hbox4.add(Gtk::Label.new().set_markup("<span color=\"#33FF00\" >20 secondes     </span>"))
     boxAide.add(hbox4)
     boxAide.name = "boxAide"
-    @provider.load(:data=>"#boxAide {background-image : url(\"../images/zoneaide.png\");
-                                      background-repeat:no-repeat;
-                                      background-position:100% 100%;
-                                    }")
+
     return boxAide
+
+  end
+
+	##
+  # Boite contenant les boutons
+  #
+  # Retour : la boite crée et initialisée
+  def initBoxHypo()
+    boxHypo = Gtk::Box.new(:vertical,50)
+    boxHypo.add(Gtk::Label.new())
+
+    hbox2 = Gtk::Box.new(:horizontal,10)
+    bFaire = Gtk::Button.new().set_label("Faire hypothese").set_size_request(100,10).set_xalign(0.5)
+    bFaire.signal_connect("clicked"){
+			if @nbHypo < 3
+				@nbHypo += 1
+				@map = @hypo.faireHypothese()
+			end
+		}
+    hbox2.add(bFaire)
+		boxHypo.add(hbox2)
+
+    hbox3 = Gtk::Box.new(:horizontal,10)
+    bValider = Gtk::Button.new().set_label("Valier hypothese").set_size_request(100,10).set_xalign(0.5)
+    bValider.signal_connect("clicked"){
+			@nbHypo -= 1
+			@map = @hypo.validerHypothese()
+
+		}
+    hbox3.add(bValider)
+    boxHypo.add(hbox3)
+
+    hbox4 = Gtk::Box.new(:horizontal,10)
+    bRejeter = Gtk::Button.new().set_label("Rejeter hypothese").set_size_request(100,10).set_xalign(0.5)
+    bRejeter.signal_connect("clicked"){
+			@nbHypo -= 1
+			@map = @hypo.rejeterHypothese()
+		}
+    hbox4.add(bRejeter)
+    boxHypo.add(hbox4)
+
+    boxHypo.name = "boxHypo"
+
+    return boxHypo
 
   end
 

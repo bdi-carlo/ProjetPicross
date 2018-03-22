@@ -16,9 +16,6 @@ class Jeu
     # Constructeur qui rappelle que l'on ne peut pas instancier cette classe
     #
 
-
-
-
     def initialize()
         #@difficulte = setDifficulte()
         #@taille = setTaille()
@@ -40,20 +37,5 @@ class Jeu
 	end
 
 =end
-
-    ##
-    # Méthode qui permet au joueur de rentrer son pseudo et le sauvegarder
-    #
-    def setPseudo(unPseudo)
-    	@pseudo = unPseudo
-    end
-
-    #def setDifficulte()
-    #    return 1
-    #end
-
-    #def setTaille()
-     # return 18
-    #end
 
 end
