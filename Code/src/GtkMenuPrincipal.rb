@@ -8,92 +8,149 @@ load "GtkMenuJouer.rb"
 
 class MenuPrincipal
 
-  def initialize(game)
-		@jeu=game
+	  def initialize(game)
+			@jeu = game
 
-    puts("Creation fenetre Menu Principal")
+	    puts("Creation fenetre Main")
 
-    #Gtk.init
+	    #Création de la fenêtre
+	    @window = Gtk::Window.new("Picross")
+	    #@window.set_size_request(300, 300)
+	    @window.resizable=FALSE
+	    @window.set_window_position(:center_always)
 
-    #Création de la fenêtre
-    @window = Gtk::Window.new("PiCross")
-		@window.override_background_color(:normal,Gdk::RGBA.new(255,0,0,0.9))
-    @window.set_size_request(300, 300)
-    @window.resizable=FALSE
-    @window.set_window_position(:center_always)
+	    @window.signal_connect('destroy') {onDestroy}
 
-    @provider = Gtk::CssProvider.new
-    @window.border_width=3
+			grid = Gtk::Grid.new
+			hb = Gtk::Box.new(:horizontal, 10)
+			vb = Gtk::Box.new(:vertical, 20)
 
-    @window.signal_connect('destroy') {onDestroy}
+			#Label de bordure
+			hb.add(Gtk::Label.new(""))
 
-    #Création d'une VBox
-    vb = Gtk::Box.new(:vertical, 5)
-		vb.set_homogeneous(false)
+			#Label de bordure
+			vb.add(Gtk::Label.new(@jeu.pseudo + "\n\n\n\n\n\n\n\n\n"))
 
-		#Création d'un Label
-		message = "Bonjour #{@jeu.pseudo}"
-		messageBienvenue = Gtk::Label.new(message)
-		vb.pack_start(messageBienvenue)
+			#Création du bouton NEW PARTIE
+			iNew = Gtk::Image.new(:file => "../images/new.png")
+	    @bNew = Gtk::EventBox.new.add(iNew)
+			@bNew.signal_connect("enter_notify_event"){
+				onEnter(@bNew)
+			}
+			@bNew.signal_connect("leave_notify_event"){
+				onLeave(@bNew)
+			}
+			#Lorsque l'on clique sur le bouton
+			@bNew.signal_connect("button_press_event") do
+	        @window.hide
+	        MenuJouer.new()
+	        @window.show_all
+	    end
+			vb.add(@bNew)
 
-    #Création du boutton JOUER
-    image = Gtk::Image.new(:file => "../images/Jouer.png")
-    bJouer = Gtk::EventBox.new.add(image)
-    bJouer.signal_connect("button_press_event") do
-        @window.hide
-        MenuJouer.new()
-        @window.show_all
-    end
+			#Création du boutton CHARGER
+			iCharger = Gtk::Image.new(:file => "../images/charger.png")
+	    @bCharger = Gtk::EventBox.new.add(iCharger)
+			@bCharger.signal_connect("enter_notify_event"){
+				onEnter(@bCharger)
+			}
+			@bCharger.signal_connect("leave_notify_event"){
+				onLeave(@bCharger)
+			}
+			vb.add(@bCharger)
 
+			#Création du boutton SCOREBOARD
+			iScore = Gtk::Image.new(:file => "../images/scoreboard.png")
+	    @bScore = Gtk::EventBox.new.add(iScore)
+			@bScore.signal_connect("enter_notify_event"){
+				onEnter(@bScore)
+			}
+			@bScore.signal_connect("leave_notify_event"){
+				onLeave(@bScore)
+			}
+			vb.add(@bScore)
 
-    bJouer.signal_connect("enter_notify_event"){
-      onEnterJouer(bJouer)
-    }
-    bJouer.signal_connect("leave_notify_event"){
-      onLeaveJouer(bJouer)
-    }
-    vb.pack_start(bJouer, :expand => true, :fill => true)
+	    #Création du boutton CREDITS
+			iCredits = Gtk::Image.new(:file => "../images/credits.png")
+	    @bCredits = Gtk::EventBox.new.add(iCredits)
+			@bCredits.signal_connect("enter_notify_event"){
+				onEnter(@bCredits)
+			}
+			@bCredits.signal_connect("leave_notify_event"){
+				onLeave(@bCredits)
+			}
+			vb.add(@bCredits)
 
-    #Création du boutton SCORE
-    bScore = Gtk::Button.new(:label => "Scoreboard", :use_underline => nil, :stock_id => nil)
-    vb.pack_start(bScore, :expand=> true, :fill => true)
+	    #Création du boutton QUITTER
+			iQuitter = Gtk::Image.new(:file => "../images/quitter.png")
+	    @bQuitter = Gtk::EventBox.new.add(iQuitter)
+			@bQuitter.signal_connect("enter_notify_event"){
+				onEnter(@bQuitter)
+			}
+			@bQuitter.signal_connect("leave_notify_event"){
+				onLeave(@bQuitter)
+			}
+			@bQuitter.signal_connect("button_press_event") do
+				onDestroy()
+			end
+			vb.add(@bQuitter)
 
-    #Création du boutton CREDITS
-    bCredits = Gtk::Button.new(:label => "Credits", :use_underline => nil, :stock_id => nil)
-    vb.pack_start(bCredits, :expand => true, :fill => true)
+			hb.add(vb)
 
-    #Création du boutton QUITTER
-    bQuitter = Gtk::Button.new(:label => "Quitter", :use_underline => nil, :stock_id => nil)
-    bQuitter.signal_connect "clicked" do
-      onDestroy()
-    end
-    vb.pack_start(bQuitter, :expand => true, :fill => true, :padding => 0)
+			#Label d'espacement
+			hb.add(Gtk::Label.new(""))
 
-    @window.add(vb)
-    @window.show_all
+			grid.attach(hb,0,0,1,1)
 
-    Gtk.main
+			image = Gtk::Image.new(:file => "../images/wallpaper1.jpg")
+			grid.attach(image,0,0,1,1)
 
-  end
+	    @window.add(grid)
 
-  ##
-  # Callback de la fermeture de l'appli
-  def onDestroy
-    puts "Fin de l'application"
-    #Quit 'propre'
-    Gtk.main_quit
-  end
+	    @window.show_all
 
-  def onEnterJouer(button)
-    button.remove(button.child)
-    button.child = Gtk::Image.new(:file => "../images/JouerTransparent.png")
-    button.show_all
-  end
+	    Gtk.main
 
-   def onLeaveJouer(button)
-    button.remove(button.child)
-    button.child = Gtk::Image.new(:file => "../images/Jouer.png")
-    button.show_all
-  end
+	  end
+
+		def onEnter(button)
+			if button == @bNew
+				button.remove(button.child)
+				button.child = Gtk::Image.new(:file => "../images/JouerTransparent.png")
+				button.show_all
+			elsif button == @bCharger
+
+			elsif button == @bScore
+
+			elsif button == @bCredits
+
+			else button == @bQuitter
+
+			end
+		end
+
+		def onLeave(button)
+			if button == @bNew
+				button.remove(button.child)
+				button.child = Gtk::Image.new(:file => "../images/new.png")
+				button.show_all
+			elsif button == @bCharger
+
+			elsif button == @bScore
+
+			elsif button == @bCredits
+
+			else button == @bQuitter
+
+			end
+		end
+
+	  ##
+	  # Callback de la fermeture de l'appli
+	  def onDestroy
+	    puts "Fin de l'application"
+	    #Quit 'propre'
+	    Gtk.main_quit
+	  end
 
 end
