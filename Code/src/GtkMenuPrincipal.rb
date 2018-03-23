@@ -29,7 +29,16 @@ class MenuPrincipal
 			hb.add(Gtk::Label.new(""))
 
 			#Label de bordure
-			vb.add(Gtk::Label.new(@jeu.pseudo + "\n\n\n\n\n\n\n\n\n"))
+			vb.add(Gtk::Label.new("\n"))
+
+			#Label du pseudo
+			lPseudo = Gtk::Label.new
+			lPseudo.set_markup("<big><i><big><b><span foreground='white'>#{@jeu.pseudo}</span></b></big></i></big>")
+			#lPseudo.wrap = true
+			vb.add(lPseudo)
+
+			#Label d'espacement
+			vb.add(Gtk::Label.new("\n\n\n"))
 
 			#Création du bouton NEW PARTIE
 			iNew = Gtk::Image.new(:file => "../images/boutons/new.png")
