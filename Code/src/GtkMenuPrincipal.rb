@@ -9,7 +9,7 @@ load "GtkMenuJouer.rb"
 class MenuPrincipal
 
     def initialize(game)
-		@jeu = game
+			@jeu = game
 
 	    puts("Creation fenetre Main")
 
@@ -52,7 +52,7 @@ class MenuPrincipal
 			#Lorsque l'on clique sur le bouton
 			@bNew.signal_connect("button_press_event") do
 	        @window.hide
-	        MenuJouer.new()
+	        MenuJouer.new(@jeu)
 	        @window.show_all
 	    end
 			vb.add(@bNew)

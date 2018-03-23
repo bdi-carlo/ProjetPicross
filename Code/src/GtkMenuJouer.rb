@@ -7,88 +7,178 @@ load "GtkMap.rb"
 
 class MenuJouer
 
-  def initialize()
+  def initialize(game)
+		@jeu = game
 
     puts("Creation fenetre Jouer")
 
-    #Gtk.init
+		#Création de la fenêtre
+		@window = Gtk::Window.new("Picross")
+		#@window.set_size_request(300, 300)
+		@window.resizable=FALSE
+		@window.set_window_position(:center_always)
 
-    #Création de la fenêtre
-    @window = Gtk::Window.new("PiCross")
-		@window.override_background_color(:normal,Gdk::RGBA.new(32,32,32,1))
-    @window.set_size_request(300, 300)
-    @window.resizable=FALSE
-    @window.set_window_position(:center_always)
-    
+		@window.signal_connect('destroy') {onDestroy}
 
-    @provider = Gtk::CssProvider.new
-    @window.border_width=3
+		grid = Gtk::Grid.new
+		hb = Gtk::Box.new(:horizontal, 10)
+		vb = Gtk::Box.new(:vertical, 20)
 
-    @window.signal_connect('destroy') {onDestroy}
+		#Label de bordure
+		hb.add(Gtk::Label.new(""))
 
-    #Création d'une VBox
-    vb = Gtk::Box.new(:vertical, 5)
-    vb.set_homogeneous(false)
+		#Label de bordure
+		vb.add(Gtk::Label.new("\n"))
 
-		#Création d'un Label
-		l = Gtk::Label.new("Choix du mode")
-		vb.pack_start(l)
+		#Label du pseudo
+		lPseudo = Gtk::Label.new
+		lPseudo.set_markup("<big><i><big><b><span foreground='white'>#{@jeu.pseudo}</span></b></big></i></big>")
+		#lPseudo.wrap = true
+		vb.add(lPseudo)
 
-    #Création du boutton Aventure
-    bAventure = Gtk::Button.new(:label => "Aventure", :use_underline => nil, :stock_id => nil)
-    bAventure.name = "bAventure" 
-    vb.pack_start(bAventure, :expand => true, :fill => true)
-    @provider.load(:data=>"#bAventure {background-color : red ;
-                                    }")
+		#Label d'espacement
+		vb.add(Gtk::Label.new("\n\n\n"))
 
-    #Création du boutton Competition
-    bCompetition = Gtk::Button.new(:label => "Competition", :use_underline => nil, :stock_id => nil)
-    vb.pack_start(bCompetition, :expand => true, :fill => true)
+		#Création du bouton AVENTURE
+		iAventure = Gtk::Image.new(:file => "../images/boutons/aventure.png")
+				@bAventure = Gtk::EventBox.new.add(iAventure)
+		@bAventure.signal_connect("enter_notify_event"){
+			onEnter(@bAventure)
+		}
+		@bAventure.signal_connect("leave_notify_event"){
+			onLeave(@bAventure)
+		}
+		#Lorsque l'on clique sur le bouton
+		@bAventure.signal_connect("button_press_event") do
 
-    #Création du boutton Normal
-    bNormal = Gtk::Button.new(:label => "Normal", :use_underline => nil, :stock_id => nil)
-    vb.pack_start(bNormal, :expand => true, :fill => true)
-    bNormal.signal_connect "clicked" do
-      @window.destroy
+		end
+		vb.add(@bAventure)
+
+		#Création du boutton COMPETITION
+		iCompetition = Gtk::Image.new(:file => "../images/boutons/competition.png")
+		@bCompetition = Gtk::EventBox.new.add(iCompetition)
+		@bCompetition.signal_connect("enter_notify_event"){
+			onEnter(@bCompetition)
+		}
+		@bCompetition.signal_connect("leave_notify_event"){
+			onLeave(@bCompetition)
+		}
+		vb.add(@bCompetition)
+
+		#Création du boutton NORMAL
+		iNormal = Gtk::Image.new(:file => "../images/boutons/normal.png")
+		@bNormal = Gtk::EventBox.new.add(iNormal)
+		@bNormal.signal_connect("enter_notify_event"){
+			onEnter(@bNormal)
+		}
+		@bNormal.signal_connect("leave_notify_event"){
+			onLeave(@bNormal)
+		}
+		@bNormal.signal_connect("button_press_event") do
+			@window.destroy
       Gui.new("../grilles/10x10/Neuf",1,0)
       onDestroy()
-    end
+		end
+		vb.add(@bNormal)
 
-    #Création du boutton Didacticiel
-    bDidacticiel = Gtk::Button.new(:label => "Didacticiel", :use_underline => nil, :stock_id => nil)
-    vb.pack_start(bDidacticiel, :expand => true, :fill => true, :padding => 0)
+		#Création du boutton DIDACTICIEL
+		iDidacticiel = Gtk::Image.new(:file => "../images/boutons/didacticiel.png")
+		@bDidacticiel = Gtk::EventBox.new.add(iDidacticiel)
+		@bDidacticiel.signal_connect("enter_notify_event"){
+			onEnter(@bDidacticiel)
+		}
+		@bDidacticiel.signal_connect("leave_notify_event"){
+			onLeave(@bDidacticiel)
+		}
+		vb.add(@bDidacticiel)
 
-		#Création du boutton Retour
-    bRetour = Gtk::Button.new(:label => "Retour", :use_underline => nil, :stock_id => nil)
-    vb.pack_start(bRetour, :expand => true, :fill => true, :padding => 0)
-		bRetour.signal_connect "clicked" do
+		#Création du boutton RETOUR
+		iRetour = Gtk::Image.new(:file => "../images/boutons/retour.png")
+		@bRetour = Gtk::EventBox.new.add(iRetour)
+		@bRetour.signal_connect("enter_notify_event"){
+			onEnter(@bRetour)
+		}
+		@bRetour.signal_connect("leave_notify_event"){
+			onLeave(@bRetour)
+		}
+		@bRetour.signal_connect("button_press_event") do
 			@window.destroy
 			onDestroy()
 		end
+		vb.add(@bRetour)
 
-    @window.add(vb)
-    @window.show_all
+		hb.add(vb)
 
-    apply_style(@window, @provider)
-    Gtk.main
+		#Label d'espacement
+		hb.add(Gtk::Label.new(""))
 
-  end
+		grid.attach(hb,0,0,1,1)
 
-  ##
-  # Callback de la fermeture de l'appli
-  def onDestroy
-    puts "Fin de l'application"
-    #Quit 'propre'
-    Gtk.main_quit
-  end
-  
-  def apply_style(widget, provider)
-    style_context = widget.style_context
-    style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
-    return unless widget.respond_to?(:children)
-    widget.children.each do |child|
-      apply_style(child, provider)
-    end
-  end
+		image = Gtk::Image.new(:file => "../images/wallpaper.jpg")
+		grid.attach(image,0,0,1,1)
+
+		@window.add(grid)
+
+		@window.show_all
+
+		Gtk.main
+
+	end
+
+	def onEnter(button)
+		if button == @bAventure
+			button.remove(button.child)
+			button.child = Gtk::Image.new(:file => "../images/boutons/aventure.png")
+			button.show_all
+		elsif button == @bCompetition
+			button.remove(button.child)
+			button.child = Gtk::Image.new(:file => "../images/boutons/competition.png")
+			button.show_all
+		elsif button == @bNormal
+			button.remove(button.child)
+			button.child = Gtk::Image.new(:file => "../images/boutons/normal.png")
+			button.show_all
+		elsif button == @bDidacticiel
+			button.remove(button.child)
+			button.child = Gtk::Image.new(:file => "../images/boutons/didacticiel.png")
+			button.show_all
+		else button == @bRetour
+			button.remove(button.child)
+			button.child = Gtk::Image.new(:file => "../images/boutons/retourOver.png")
+			button.show_all
+		end
+	end
+
+	def onLeave(button)
+		if button == @bAventure
+			button.remove(button.child)
+			button.child = Gtk::Image.new(:file => "../images/boutons/aventure.png")
+			button.show_all
+		elsif button == @bCompetition
+			button.remove(button.child)
+			button.child = Gtk::Image.new(:file => "../images/boutons/competition.png")
+			button.show_all
+		elsif button == @bNormal
+			button.remove(button.child)
+			button.child = Gtk::Image.new(:file => "../images/boutons/normal.png")
+			button.show_all
+		elsif button == @bDidacticiel
+			button.remove(button.child)
+			button.child = Gtk::Image.new(:file => "../images/boutons/didacticiel.png")
+			button.show_all
+		else button == @bRetour
+			button.remove(button.child)
+			button.child = Gtk::Image.new(:file => "../images/boutons/quitter.png")
+			button.show_all
+		end
+	end
+
+	##
+	# Callback de la fermeture de l'appli
+	def onDestroy
+		puts "Fin de l'application"
+		#Quit 'propre'
+		Gtk.main_quit
+	end
 
 end
