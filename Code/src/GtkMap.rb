@@ -151,7 +151,7 @@ class Gui
 
         @map.putAt!(x,y,Case.create(0))
         @buttonTab[x][y].remove(@buttonTab[x][y].child)
-        @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/blanc.png"))
+        @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/blanc.png"))
         @buttonTab[x][y].show_all
 
      end
@@ -208,7 +208,7 @@ class Gui
 
           @map.putAt!(x,y,Case.create(0))
           @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child =(Gtk::Image.new(:file => "../images/blanc.png"))
+          @buttonTab[x][y].child =(Gtk::Image.new(:file => "../images/cases/blanc.png"))
           @buttonTab[x][y].show_all
        end
         @timePress[x][y]+=1
@@ -419,8 +419,10 @@ class Gui
     hbox4 = Gtk::Box.new(:horizontal,10)
     bRejeter = Gtk::Button.new().set_label("Rejeter hypothese").set_size_request(100,10).set_xalign(0.5)
     bRejeter.signal_connect("clicked"){
-			@nbHypo -= 1
-			@map = @hypo.rejeterHypothese()
+			if @nbHypo > 0
+				@nbHypo -= 1
+				@map = @hypo.rejeterHypothese()
+			end
 		}
     hbox4.add(bRejeter)
     boxHypo.add(hbox4)
@@ -451,7 +453,7 @@ class Gui
 
         tabrow.push(button)
         tabPress.push(0)
-        button.add(Gtk::Image.new(:file =>"../images/blanc.png"))
+        button.add(Gtk::Image.new(:file =>"../images/cases/blanc.png"))
         button.set_focus(FALSE)
 
         #### On connecte les boutons aux fonctions
