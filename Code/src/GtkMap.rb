@@ -22,7 +22,7 @@ class Gui
     #Gtk.init
 
 		# Tableau pour gerer les couleurs des hypotheses
-		@tabCase = ["../images/noir.png", "../images/violet.png", "../images/bleu.png", "../images/rouge.png"]
+		@tabCase = ["../images/cases/noir.png", "../images/cases/violet.png", "../images/cases/bleu.png", "../images/cases/rouge.png"]
 		@nbHypo = 0
 
     @inc = inc
