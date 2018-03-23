@@ -45,11 +45,17 @@ class Main
     #Création du bouton pour confirmer notre Pseudo
     button = Gtk::Button.new(:label => "CONTINUER", :use_underline => nil, :stock_id => nil)
     button.signal_connect "clicked" do
-    	@jeu.pseudo = nom.text
-      puts "Pseudo: " + @jeu.pseudo
-      @window.hide
-      MenuPrincipal.new(@jeu)
-      onDestroy()
+      if(nom.text == "") 
+       
+      #Insérer une boîte de dialogue 
+      
+    	else 
+        @jeu.pseudo = nom.text
+        puts "Pseudo: " + @jeu.pseudo
+        @window.hide
+        MenuPrincipal.new(@jeu)
+        onDestroy()
+      end
     end
     vb.pack_start(button)
 
