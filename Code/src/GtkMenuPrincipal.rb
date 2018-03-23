@@ -116,16 +116,24 @@ class MenuPrincipal
 		def onEnter(button)
 			if button == @bNew
 				button.remove(button.child)
-				button.child = Gtk::Image.new(:file => "../images/JouerTransparent.png")
+				button.child = Gtk::Image.new(:file => "../images/newOver.png")
 				button.show_all
 			elsif button == @bCharger
-
+				button.remove(button.child)
+				button.child = Gtk::Image.new(:file => "../images/chargerOver.png")
+				button.show_all
 			elsif button == @bScore
-
+				button.remove(button.child)
+				button.child = Gtk::Image.new(:file => "../images/scoreboardOver.png")
+				button.show_all
 			elsif button == @bCredits
-
+				button.remove(button.child)
+				button.child = Gtk::Image.new(:file => "../images/creditsOver.png")
+				button.show_all
 			else button == @bQuitter
-
+				button.remove(button.child)
+				button.child = Gtk::Image.new(:file => "../images/quitterOver.png")
+				button.show_all
 			end
 		end
 
@@ -135,13 +143,21 @@ class MenuPrincipal
 				button.child = Gtk::Image.new(:file => "../images/new.png")
 				button.show_all
 			elsif button == @bCharger
-
+				button.remove(button.child)
+				button.child = Gtk::Image.new(:file => "../images/charger.png")
+				button.show_all
 			elsif button == @bScore
-
+				button.remove(button.child)
+				button.child = Gtk::Image.new(:file => "../images/scoreboard.png")
+				button.show_all
 			elsif button == @bCredits
-
+				button.remove(button.child)
+				button.child = Gtk::Image.new(:file => "../images/credits.png")
+				button.show_all
 			else button == @bQuitter
-
+				button.remove(button.child)
+				button.child = Gtk::Image.new(:file => "../images/quitter.png")
+				button.show_all
 			end
 		end
 
