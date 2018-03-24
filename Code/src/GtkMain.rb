@@ -45,11 +45,9 @@ class Main
     #Création du bouton pour confirmer notre Pseudo
     button = Gtk::Button.new(:label => "CONTINUER", :use_underline => nil, :stock_id => nil)
     button.signal_connect "clicked" do
-      if(nom.text == "") 
-       
-      #Insérer une boîte de dialogue 
-      
-    	else 
+      if(nom.text == "")
+				dialogBox("Veuillez rentrer un pseudo avant de jouer!")
+    	else
         @jeu.pseudo = nom.text
         puts "Pseudo: " + @jeu.pseudo
         @window.hide
@@ -66,6 +64,22 @@ class Main
     Gtk.main
 
   end
+
+	#Affiche une boite de dialogue avec un message
+	def dialogBox( message )
+		dialog = Gtk::Dialog.new("Alerte",
+                             $main_application_window,
+                             Gtk::Dialog::DESTROY_WITH_PARENT,
+                             [ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
+		dialog.set_window_position(:center_always)
+
+    # Ensure that the dialog box is destroyed when the user responds.
+    dialog.signal_connect('response') { dialog.destroy }
+
+    # Add the message in a label, and show everything we've added to the dialog.
+    dialog.vbox.add(Gtk::Label.new( "\n" + message + "\n" ))
+    dialog.show_all
+	end
 
   ##
   # Callback de la fermeture de l'appli
