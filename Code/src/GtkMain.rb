@@ -17,30 +17,24 @@ class Main
 
     #Création de la fenêtre
     @window = Gtk::Window.new("PiCross")
-    @window.set_size_request(300, 300)
+    #@window.set_size_request(300, 300)
     @window.resizable=FALSE
     @window.set_window_position(:center_always)
 
-    @provider = Gtk::CssProvider.new
-    @window.border_width=3
-
     @window.signal_connect('destroy') {onDestroy}
 
-    #Création d'une vBox
-    vb = Gtk::Box.new(:vertical, 30)
-		vb.set_homogeneous(false)
+		grid = Gtk::Grid.new
+		vb = Gtk::Box.new(:vertical, 20)
 
-    #Création du logo
-    logo = Gtk::Image.new :file => '../images/logo.png'
-    vb.pack_start(logo)
+		#Label de bordure haut
+		vb.add(Gtk::Label.new("\n\n\n\n\n\n\n\n\n\n\n\n"))
 
     #Création de la boite d'entrée du pseudo dans un hBox
     hb = Gtk::Box.new(:horizontal, 6)
     hb.pack_start(Gtk::Label.new('Pseudo'), :expand => false, :fill => true, :padding => 6)
     nom = Gtk::Entry.new
-    #nom.set_text "Entrer votre pseudo"
-    hb.pack_start(nom, :expand => true, :fill => true)
-    vb.pack_start(hb)
+    hb.add(nom, :expand => true, :fill => true)
+		vb.add(hb)
 
     #Création du bouton pour confirmer notre Pseudo
     button = Gtk::Button.new(:label => "CONTINUER", :use_underline => nil, :stock_id => nil)
@@ -55,9 +49,15 @@ class Main
         onDestroy()
       end
     end
-    vb.pack_start(button)
+		vb.add(button)
 
-    @window.add(vb)
+    grid.attach(vb,0,0,1,1)
+
+		#Wallpaper
+		image = Gtk::Image.new(:file => "../images/wallpaper.jpg")
+		grid.attach(image,0,0,1,1)
+
+		@window.add(grid)
 
     @window.show_all
 

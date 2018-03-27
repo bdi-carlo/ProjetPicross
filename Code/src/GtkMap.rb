@@ -153,7 +153,7 @@ class Gui
 
          @map.putAt!(x,y,Case.create(1))
          @map.accessAt(x,y).color=@nbHypo
-         print "Color sur le enter #{@map.accessAt(x,y).color}\n"
+         #print "Color sur le enter #{@map.accessAt(x,y).color}\n"
      else
 
         @map.putAt!(x,y,Case.create(0))
@@ -211,7 +211,7 @@ class Gui
           @buttonTab[x][y].show_all
            @map.putAt!(x,y,Case.create(1))
            @map.accessAt(x,y).color=@nbHypo
-           print "Color sur le press #{@map.accessAt(x,y).color}\n"
+           #print "Color sur le press #{@map.accessAt(x,y).color}\n"
 
        else
 
@@ -507,7 +507,7 @@ class Gui
   def actuMap()
     0.upto(@map.rows-1) do |x|
       0.upto(@map.cols-1) do |y|
-        print("value =#{@map.accessAt(x,y).value}\n")
+        #print("value =#{@map.accessAt(x,y).value}\n")
         if (@map.accessAt(x,y).value == 1)
           print "color =#{@map.accessAt(x,y).color}\n"
           if @map.accessAt(x,y).color != nil
@@ -519,7 +519,7 @@ class Gui
               print "path = #{@tabCase[@map.accessAt(x,y).color]}\n"
               @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@map.accessAt(x,y).color]))
               @buttonTab[x][y].show_all
-            
+
           else
             @buttonTab[x][y].remove(@buttonTab[x][y].child)
             @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blanc.png" ))

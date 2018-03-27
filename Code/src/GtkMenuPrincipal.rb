@@ -11,7 +11,7 @@ class MenuPrincipal
     def initialize(game)
 			@jeu = game
 
-	    puts("Creation fenetre Main")
+	    puts("Creation fenetre Menu Principal")
 
 	    #Création de la fenêtre
 	    @window = Gtk::Window.new("Picross")
@@ -25,10 +25,10 @@ class MenuPrincipal
 			hb = Gtk::Box.new(:horizontal, 10)
 			vb = Gtk::Box.new(:vertical, 20)
 
-			#Label de bordure
+			#Label de bordure gauche
 			hb.add(Gtk::Label.new(""))
 
-			#Label de bordure
+			#Label de bordure haut
 			vb.add(Gtk::Label.new("\n"))
 
 			#Label du pseudo
@@ -111,6 +111,7 @@ class MenuPrincipal
 
 			grid.attach(hb,0,0,1,1)
 
+			#Wallpaper
 			image = Gtk::Image.new(:file => "../images/wallpaper.jpg")
 			grid.attach(image,0,0,1,1)
 
