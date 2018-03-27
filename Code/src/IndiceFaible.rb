@@ -44,7 +44,7 @@ class IndiceFaible < Indice
         if somme == nil
           somme = 0
         end
-        print "#{somme}\n"
+        
 				if somme > max
 					max = somme
 					position = i

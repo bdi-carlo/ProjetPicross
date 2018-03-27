@@ -58,11 +58,16 @@ class Gui
     splitVertical.add(wintop)
     ################################CHIFFRES DES COTÉ######################################
     side = @map.side
-
+    maxlen = 0
+    for tab in side
+      if tab.length > maxlen
+        maxlen = tab.length
+      end
+    end
     sidenumbers = Gtk::Box.new(:vertical,10)
       #sidenumbers.add(Gtk::Label.new())
       for tab in side
-        maxlen = 7                                                                            # A FAIRE
+                                                                                   # A FAIRE
         tab.length.upto(maxlen)do
           @temp << "   "
         end
@@ -142,11 +147,13 @@ class Gui
 
         @buttonTab[x][y].remove(@buttonTab[x][y].child)
         @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@nbHypo]))
+
         @buttonTab[x][y].show_all
 
 
          @map.putAt!(x,y,Case.create(1))
-
+         @map.accessAt(x,y).color=@nbHypo
+         print "Color sur le enter #{@map.accessAt(x,y).color}\n"
      else
 
         @map.putAt!(x,y,Case.create(0))
@@ -203,6 +210,8 @@ class Gui
           @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@nbHypo]))
           @buttonTab[x][y].show_all
            @map.putAt!(x,y,Case.create(1))
+           @map.accessAt(x,y).color=@nbHypo
+           print "Color sur le press #{@map.accessAt(x,y).color}\n"
 
        else
 
@@ -322,15 +331,22 @@ class Gui
   # Retour : la zone crée
   def initTop()
     top = @map.top()
+    maxlen = 0;
+
+    for tab in top
+      if tab.length > maxlen
+        maxlen = tab.length
+      end
+    end
     splitHorizontal=Gtk::Box.new(:horizontal,5)
     splitHorizontal.set_homogeneous(FALSE)                                                                                        #A MODIFIER
     @temp =[]
-    topnumbers = Gtk::Box.new(:horizontal,14)
+    topnumbers = Gtk::Box.new(:horizontal,18)
     topnumbers.homogeneous=(TRUE)
 ########################################################################################################
 
       for tab in top
-        tab.length.upto(7) do
+        tab.length.upto(maxlen) do
           @temp << "\n"
         end
         if tab == []
@@ -347,7 +363,7 @@ class Gui
 
       end
       wintop = Gtk::Box.new(:horizontal,100)
-      splitHorizontal.add(Gtk::Label.new(" "*38))
+      splitHorizontal.add(Gtk::Label.new(" "*28))
       splitHorizontal.add(topnumbers)
       wintop.add(splitHorizontal)
       wintop.add(Gtk::Label.new("     "))
@@ -411,7 +427,7 @@ class Gui
     bValider.signal_connect("clicked"){
 			@nbHypo -= 1
 			@map = @hypo.validerHypothese()
-
+      actuMap()
 		}
     hbox3.add(bValider)
     boxHypo.add(hbox3)
@@ -422,6 +438,7 @@ class Gui
 			if @nbHypo > 0
 				@nbHypo -= 1
 				@map = @hypo.rejeterHypothese()
+        actuMap()
 			end
 		}
     hbox4.add(bRejeter)
@@ -454,6 +471,7 @@ class Gui
         tabrow.push(button)
         tabPress.push(0)
         button.add(Gtk::Image.new(:file =>"../images/cases/blanc.png"))
+
         button.set_focus(FALSE)
 
         #### On connecte les boutons aux fonctions
@@ -485,6 +503,48 @@ class Gui
       apply_style(child, provider)
     end
   end
+
+  def actuMap()
+    0.upto(@map.rows-1) do |x|
+      0.upto(@map.cols-1) do |y|
+        print("value =#{@map.accessAt(x,y).value}\n")
+        if (@map.accessAt(x,y).value == 1)
+          print "color =#{@map.accessAt(x,y).color}\n"
+          if @map.accessAt(x,y).color != nil
+            if (@map.accessAt(x,y).color == @nbHypo + 1)
+              @timePress[x][y] = 1
+              @map.accessAt(x,y).color =0
+            end
+              @buttonTab[x][y].remove(@buttonTab[x][y].child)
+              print "path = #{@tabCase[@map.accessAt(x,y).color]}\n"
+              @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@map.accessAt(x,y).color]))
+              @buttonTab[x][y].show_all
+            
+          else
+            @buttonTab[x][y].remove(@buttonTab[x][y].child)
+            @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blanc.png" ))
+            @timePress[x][y] = 0
+            @buttonTab[x][y].show_all
+          end
+        elsif @map.accessAt(x,y).value == 2
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/croix.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+
+        else
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blanc.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+
+        end
+
+      end
+
+    end
+  end
+
 end
 
 #Gui.new("./grilles/Scenario/Bateau",1,0)

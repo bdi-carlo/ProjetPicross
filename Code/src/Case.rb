@@ -6,6 +6,7 @@ class Case
   # valeur d'une case: 0 = blanc, 1 = noir, 2 = barré
 	@value
 	attr_accessor :value
+	attr_accessor :color
 
 	def initialize(val)
 		@value = val
@@ -33,7 +34,7 @@ class Case
     end
   end
   def
-		
+
   ##
   # redéfinition de l'affichage
 	def to_s
