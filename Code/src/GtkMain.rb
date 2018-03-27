@@ -24,21 +24,26 @@ class Main
     @window.signal_connect('destroy') {onDestroy}
 
 		grid = Gtk::Grid.new
+		hb = Gtk::Box.new(:horizontal, 10)
 		vb = Gtk::Box.new(:vertical, 20)
+
+		#Label de bordure gauche
+		hb.add(Gtk::Label.new(""))
 
 		#Label de bordure haut
 		vb.add(Gtk::Label.new("\n\n\n\n\n\n\n\n\n\n\n\n"))
 
     #Création de la boite d'entrée du pseudo dans un hBox
-    hb = Gtk::Box.new(:horizontal, 6)
-    hb.pack_start(Gtk::Label.new('Pseudo'), :expand => false, :fill => true, :padding => 6)
+    hbPseudo = Gtk::Box.new(:horizontal, 6)
+    hbPseudo.pack_start(Gtk::Label.new('Pseudo'), :expand => false, :fill => false, :padding => 6)
     nom = Gtk::Entry.new
-    hb.add(nom, :expand => true, :fill => true)
-		vb.add(hb)
+    hbPseudo.add(nom, :expand => false, :fill => false)
+		vb.add(hbPseudo)
 
     #Création du bouton pour confirmer notre Pseudo
-    button = Gtk::Button.new(:label => "CONTINUER", :use_underline => nil, :stock_id => nil)
-    button.signal_connect "clicked" do
+    iButton = Gtk::Image.new(:file => "../images/boutons/jouer.png")
+		@button = Gtk::EventBox.new.add(iButton)
+    @button.signal_connect("button_press_event") do
       if(nom.text == "")
 				dialogBox("Veuillez rentrer un pseudo avant de jouer!")
     	else
@@ -49,9 +54,14 @@ class Main
         onDestroy()
       end
     end
-		vb.add(button)
+		vb.add(@button)
 
-    grid.attach(vb,0,0,1,1)
+		hb.add(vb)
+
+		#Label d'espacement
+		hb.add(Gtk::Label.new(""))
+
+    grid.attach(hb,0,0,1,1)
 
 		#Wallpaper
 		image = Gtk::Image.new(:file => "../images/wallpaper.jpg")
