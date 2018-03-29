@@ -23,6 +23,7 @@ class Gui
 
 		# Tableau pour gerer les couleurs des hypotheses
 		@tabCase = ["../images/cases/noir.png", "../images/cases/violet.png", "../images/cases/bleu.png", "../images/cases/rouge.png"]
+    @tabCaseOver = ["../images/cases/noirOver.png", "../images/cases/violetOver.png", "../images/cases/bleuOver.png", "../images/cases/rougeOver.png"]
 		@nbHypo = 0
 
     @inc = inc
@@ -154,14 +155,14 @@ class Gui
          @map.putAt!(x,y,Case.create(1))
          @map.accessAt(x,y).color=@nbHypo
          #print "Color sur le enter #{@map.accessAt(x,y).color}\n"
-     else
+      else
 
         @map.putAt!(x,y,Case.create(0))
         @buttonTab[x][y].remove(@buttonTab[x][y].child)
         @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/blanc.png"))
         @buttonTab[x][y].show_all
 
-     end
+      end
       @timePress[x][y]+=1
       if @map.compare                         #####QUOI FAIRE EN CAS DE VICTOIRE
         dialog = Gtk::Dialog.new("Bravo",
@@ -181,15 +182,44 @@ class Gui
 
 
       end
-    end
-    if button.state.button3_mask?
+    elsif button.state.button3_mask?
       @buttonTab[x][y].remove(@buttonTab[x][y].child)
-      @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/croix.png"))
+      @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/croix.png"))
       @buttonTab[x][y].show_all
       @map.putAt!(x,y,Case.create(2))
       @timePress[x][y]=0
+    
+    #MouseOver : changement des images au survol de la case
+
+    else
+      if (@map.accessAt(x,y).value == 0)
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/blancOver.png"))
+          @buttonTab[x][y].show_all
+
+
+      elsif (@map.accessAt(x,y).value == 1)
+        #  print "color =#{@map.accessAt(x,y).color}\n"
+          if @map.accessAt(x,y).color != nil
+            if (@map.accessAt(x,y).color == @nbHypo + 1)
+              @timePress[x][y] = 1
+              @map.accessAt(x,y).color = @nbHypo
+            end
+              @buttonTab[x][y].remove(@buttonTab[x][y].child)
+              #print "path = #{@tabCase[@map.accessAt(x,y).color]}\n"
+              @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCaseOver[@map.accessAt(x,y).color]))
+              @buttonTab[x][y].show_all
+          end
+
+      elsif(@map.accessAt(x,y).value == 2)
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/croixOver.png"))
+          @buttonTab[x][y].show_all
+      end
+
     end
   end
+
 
   ##
   # Callback lors de l'appui d'un bouton
@@ -243,10 +273,10 @@ class Gui
       end
       if button.button==3
         @buttonTab[x][y].remove(@buttonTab[x][y].child)
-        @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/croix.png"))
+        @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/croix.png"))
         @buttonTab[x][y].show_all
         @map.putAt!(x,y,Case.create(2))
-        @timePress[x][y]=0
+        @timePress[x][y]= 0
       end
     else
       indice = IndiceFort.new(@map,x,y)
@@ -482,6 +512,10 @@ class Gui
         button.signal_connect("enter_notify_event"){
 
             onEnter(x,y,Gtk.current_event)
+        }
+
+        button.signal_connect("leave_notify_event"){
+          actuMap()
         }
 
         i+=1
