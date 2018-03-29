@@ -4,6 +4,7 @@ begin
 end
 require 'gtk3'
 require "date"
+require 'yaml'
 
 load "GtkMap.rb"
 
@@ -78,9 +79,40 @@ class MenuCharger
 	# Param : identificateurs d'une partie
 	# Retour : La grille chargée
 	def charger(nomSave)
-		# Deserialisation et retourne la grille
-		obj = Marshal.load(File.open("../sauvegardes/"+nomSave))
-		return obj
+		# Deserialisation et lance le chargement
+		current = ""
+    nbOcc=0
+  	fic = File.open(nomSave)
+    fic.each_line { |ligne|
+	    if ligne[0,3]=="***" then
+	      case nbOcc
+	        when 0
+	          $map = YAML.load(current)
+	        when 1
+	          $hypo = YAML.load(current)
+	        when 2
+	          $pseudo = current
+	        when 3
+	          $inc = current.to_i
+	        when 4
+	          $start = current.to_i
+	        when 5
+	          $cheminMap = current
+	        when 6
+	          $nbHypo = current.to_i
+				end
+	    	nbOcc+=1;
+	     	current = ""
+	    else
+	    	current+=ligne.to_s
+			end
+		}
+
+		print $nbHypo
+
+		@window.destroy
+		Gui.new(1, $pseudo, $cheminMap, $inc, $start, $map, $hypo, $nbHypo)
+		onDestroy()
 	end
 
 	##

@@ -36,7 +36,7 @@ class Gui
 			@nbHypo = 0
 			@map = Map.create(cheminMap)
 			@hypo = Hypothese.creer(@map)
-		else
+		elsif charge == 1
 			@nbHypo = nbHypo
 			@map = map
 			@hypo = hypo
@@ -626,11 +626,12 @@ class Gui
 		monFichier.write(@start)
 		monFichier.write("\n***\n")
 		monFichier.write(@cheminMap)
+		monFichier.write("\n***\n")
+		monFichier.write(@nbHypo)
+		monFichier.write("\n***\n")
 
 		# Fermeture du fichier
 		monFichier.close
 	end
 
 end
-
-#Gui.new("./grilles/Scenario/Bateau",1,0)
