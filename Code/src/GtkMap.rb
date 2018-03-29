@@ -623,7 +623,7 @@ class Gui
 		monFichier.write("\n***\n")
 		monFichier.write(@inc)
 		monFichier.write("\n***\n")
-		monFichier.write(@start)
+		monFichier.write(@time)
 		monFichier.write("\n***\n")
 		monFichier.write(@cheminMap)
 		monFichier.write("\n***\n")

@@ -52,7 +52,7 @@ class MenuCharger
 
 		}
 		@bJouer.signal_connect("button_press_event") do
-			charger("../sauvegardes/test_Neuf")
+			charger("../sauvegardes/"+@jeu.pseudo+"_Neuf")
 		end
 		vb.add(@bJouer)
 
