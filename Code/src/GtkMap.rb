@@ -509,14 +509,14 @@ class Gui
       0.upto(@map.cols-1) do |y|
         #print("value =#{@map.accessAt(x,y).value}\n")
         if (@map.accessAt(x,y).value == 1)
-          print "color =#{@map.accessAt(x,y).color}\n"
+        #  print "color =#{@map.accessAt(x,y).color}\n"
           if @map.accessAt(x,y).color != nil
             if (@map.accessAt(x,y).color == @nbHypo + 1)
               @timePress[x][y] = 1
-              @map.accessAt(x,y).color =0
+              @map.accessAt(x,y).color = @nbHypo
             end
               @buttonTab[x][y].remove(@buttonTab[x][y].child)
-              print "path = #{@tabCase[@map.accessAt(x,y).color]}\n"
+              #print "path = #{@tabCase[@map.accessAt(x,y).color]}\n"
               @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@map.accessAt(x,y).color]))
               @buttonTab[x][y].show_all
 
