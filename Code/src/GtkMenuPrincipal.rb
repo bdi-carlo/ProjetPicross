@@ -5,6 +5,7 @@ end
 require 'gtk3'
 load "GtkMap.rb"
 load "GtkMenuJouer.rb"
+load "GtkMenuCharger.rb"
 
 class MenuPrincipal
 
@@ -66,6 +67,11 @@ class MenuPrincipal
 			@bCharger.signal_connect("leave_notify_event"){
 				onLeave(@bCharger)
 			}
+			@bCharger.signal_connect("button_press_event") do
+	        @window.hide
+	        MenuCharger.new(@jeu)
+	        @window.show_all
+	    end
 			vb.add(@bCharger)
 
 			#Création du boutton SCOREBOARD

@@ -10,24 +10,6 @@ class Save
 	# * nomSave : nom de la sauvegarde
 	# * grille : grille objet de la sauvegarde
 
-=begin
-
-	##
-	# Constructeur de la classe ( sujet à modifications )
-	#
-	def Save.creer(unNom, uneGrille)
-		new(unNom, uneGrille)
-	end
-
-	private_class_method:new
-
-	def initialize(unNom, uneGrille)
-		@nomSave = "Sauvegardes/"+unNom
-		@grille = uneGrille
-	end
-=end
-
-
 	##
 	# -
 	#
@@ -48,12 +30,12 @@ class Save
 
 		@grille=uneGrille
 		@nomSave=unNom
-			
+
 		# Serialisation de la grille
 		grilleS = @grille.to_yaml()
 
 		# Ecriture de la grille dans le fichier
-		monFichier = File.open(@nomSave, "w")
+		monFichier = File.open("../sauvegardes/"+@nomSave, "w")
 		monFichier.write(grilleS)
 		monFichier.close
 	end
@@ -62,11 +44,11 @@ class Save
 	# Sauvegarde la partie
 	#
 	# Param : identificateurs d'une partie
-	def sauvegarder(uneGrille)
+	def sauvegarders(uneGrille)
 
 		@grille=uneGrille
 		@nomSave=genNomSave()
-			
+
 		# Serialisation de la grille
 		grilleS = @grille.to_yaml()
 
@@ -75,22 +57,6 @@ class Save
 		monFichier.write(grilleS)
 		monFichier.close
 	end
-
-
-	##
-	# Charge la partie
-	#
-	# Param : identificateurs d'une partie 
-	# Retour : La grille chargée
-	def charger(nomSave)
-		
-		@nomSave=nomSave
-
-		# Deserialisation et retourne la grille
-		@grille = YAML.load(File.open(@nomSave))
-		return @grille
-	end
-
 
 	##
 	# Affiche la sauvegarde
@@ -130,22 +96,3 @@ end
 	print "\n"
 
 =end
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	

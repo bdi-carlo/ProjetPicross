@@ -50,8 +50,8 @@ class Main
         @jeu.pseudo = nom.text
         puts "Pseudo: " + @jeu.pseudo
         @window.hide
+				onDestroy()
         MenuPrincipal.new(@jeu)
-        onDestroy()
       end
     end
 		vb.add(@button)

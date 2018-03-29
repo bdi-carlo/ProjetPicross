@@ -3,6 +3,9 @@ begin
  rescue LoadError
 end
 require 'gtk3'
+require "date"
+require "yaml"
+
 load "Map.rb"
 load "Case.rb"
 load "Timers.rb"
@@ -16,21 +19,56 @@ load "IndiceFort.rb"
 class Gui
 
   @difficulte
-  attr_accessor :pseudo, :difficulte, :penalite, :score, :highscore, :taille, :time
 
-  def initialize(map,inc,start)
-    #Gtk.init
+  attr_accessor :pseudo, :difficulte, :penalite, :score, :highscore, :taille, :time, :nomMap
 
+	# Initialize en cas de nouvelle partie
+  def initialize( charge, pseudo, cheminMap, inc, start, map, hypo, nbHypo )
 		# Tableau pour gerer les couleurs des hypotheses
 		@tabCase = ["../images/cases/noir.png", "../images/cases/violet.png", "../images/cases/bleu.png", "../images/cases/rouge.png"]
-		@nbHypo = 0
+		@inc = inc
+		@start = start
+		@cheminMap = cheminMap
+		@pseudo = pseudo
 
-    @inc = inc
-    @start = start
-    @map = Map.create(map)
-		@hypo = Hypothese.creer(@map)
-    initTimer()
-    @indiceFortFlag = FALSE
+		if charge == 0 then
+			@nbHypo = 0
+			@map = Map.create(cheminMap)
+			@hypo = Hypothese.creer(@map)
+		else
+			@nbHypo = nbHypo
+			@map = map
+			@hypo = hypo
+		end
+
+		initTimer()
+		lancerGrille()
+  end
+
+	##
+	# Méthode qui permet de récupérer le nom de la map grâce au chemin de la grille
+	def recupNom( unString )
+		res = ""
+		unString.reverse.each_char{ |x|
+			if x == '/'
+				return res.reverse
+			else
+				res << x
+			end
+		}
+		return res.reverse
+	end
+
+  ##
+  # Callback de la fermeture de l'appli
+  def onDestroy
+    puts "Fermeture picross"
+    sauvegarder(@pseudo+"_"+recupNom(@cheminMap), self)
+    Gtk.main_quit
+  end
+
+	def lancerGrille()
+		@indiceFortFlag = FALSE
     @window = Gtk::Window.new.override_background_color(:normal,Gdk::RGBA.new(0,0,0,0))
 
     @window.set_size_request(970, 700)
@@ -113,18 +151,7 @@ class Gui
     apply_style(@window, @provider)
 
     Gtk.main
-  end
-  ##
-  # Callback de la fermeture de l'appli
-  def onDestroy
-    puts "Fermeture picross"
-    #Quit 'propre'
-    Gtk.main_quit
-  end
-
-
-
-
+	end
 
   #########################################################"TEST###############################################################
 
@@ -476,11 +503,9 @@ class Gui
 
         #### On connecte les boutons aux fonctions
         button.signal_connect("button_press_event"){
-
             onPress(x,y,Gtk.current_event)
         }
         button.signal_connect("enter_notify_event"){
-
             onEnter(x,y,Gtk.current_event)
         }
 
@@ -544,6 +569,33 @@ class Gui
 
     end
   end
+
+	##
+	# Sauvegarde la partie
+	#
+	# Param : identificateurs d'une partie
+	def sauvegarder(unNom, uneGrille)
+		# Serialisation des différentes classes
+		map = @map.to_yaml()
+		hypo = @hypo.to_yaml()
+
+		# Ecriture dans le fichier
+		monFichier = File.open("../sauvegardes/"+unNom, "w")
+		monFichier.write(map)
+		monFichier.write("***\n")
+		monFichier.write(hypo)
+		monFichier.write("***\n")
+		monFichier.write(@pseudo)
+		monFichier.write("\n***\n")
+		monFichier.write(@inc)
+		monFichier.write("\n***\n")
+		monFichier.write(@start)
+		monFichier.write("\n***\n")
+		monFichier.write(@cheminMap)
+
+		# Fermeture du fichier
+		monFichier.close
+	end
 
 end
 
