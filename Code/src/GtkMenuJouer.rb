@@ -4,6 +4,7 @@ begin
 end
 require 'gtk3'
 load "GtkMap.rb"
+load "Aventure.rb"
 
 class MenuJouer
 
@@ -50,7 +51,9 @@ class MenuJouer
 		}
 		#Lorsque l'on clique sur le bouton
 		@bAventure.signal_connect("button_press_event") do
-
+			@window.destroy
+      Aventure.new(@jeu.pseudo)
+      onDestroy()
 		end
 		vb.add(@bAventure)
 

@@ -64,7 +64,7 @@ class Gui
   # Callback de la fermeture de l'appli
   def onDestroy
     puts "Fermeture picross"
-    sauvegarder(@pseudo+"_"+recupNom(@cheminMap), self)
+    #sauvegarder(@pseudo+"_"+recupNom(@cheminMap), self)
     Gtk.main_quit
   end
 
