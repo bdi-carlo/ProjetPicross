@@ -263,8 +263,7 @@ map:
     value: 1
     color: 0
   - !ruby/object:Case
-    value: 1
-    color: 0
+    value: 0
   - !ruby/object:Case
     value: 1
     color: 0
@@ -626,8 +625,7 @@ grillePrim: !ruby/object:Map
       value: 1
       color: 0
     - !ruby/object:Case
-      value: 1
-      color: 0
+      value: 0
     - !ruby/object:Case
       value: 1
       color: 0
@@ -724,11 +722,11 @@ grillePrim: !ruby/object:Map
       value: 0
 grillesHypothese: []
 ***
-test
+gzg
 ***
 1
 ***
-7
+13
 ***
 ../grilles/10x10/Neuf
 ***

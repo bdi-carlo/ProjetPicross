@@ -229,6 +229,7 @@ class Gui
 
         # Ensure that the dialog box is destroyed when the user responds.
         dialog.signal_connect('response') {
+					supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
 					Gtk.main_quit
           puts "Fermeture picross sur victoire"
           dialog.destroy
@@ -313,18 +314,19 @@ class Gui
         if @map.compare
           dialog = Gtk::Dialog.new("Bravo",
                                    $main_application_window,
-                                   Gtk::Dialog::DESTROY_WITH_PARENT,
-                                   [ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
+                                   Gtk::DialogFlags::DESTROY_WITH_PARENT,
+                                   [ Gtk::Stock::OK, Gtk::ResponseType::NONE ])
 
           # Ensure that the dialog box is destroyed when the user responds.
           dialog.signal_connect('response') {
+						supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
 						Gtk.main_quit
 						puts "Fermeture picross sur victoire"
             dialog.destroy
           }
           res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
 
-          dialog.vbox.add(Gtk::Label.new(res))
+          dialog.child.add(Gtk::Label.new(res))
           dialog.show_all
 
 
@@ -664,6 +666,15 @@ class Gui
 
     end
   end
+
+	##
+	# Supprimer un fichier de sauvegarde
+	#
+	# Param : le nom du fichier
+	def supprimerFichier(unNom)
+		puts "../sauvegardes/#{unNom}"
+		File.delete("../sauvegardes/#{unNom}")
+	end
 
 	##
 	# Sauvegarde la partie
