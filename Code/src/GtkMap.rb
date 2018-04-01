@@ -140,7 +140,7 @@ class Gui
           end
         end
         label = Gtk::Label.new(@temp.join)
-        label = label.set_markup("<span color=\"#33FF00\" >#{@temp.join}</span>")
+        label = label.set_markup("<span foreground='white' >#{@temp.join}</span>")
         @temp.clear
         sidenumbers.add(label)
       end
@@ -168,7 +168,7 @@ class Gui
 		grid.attach(vb,0,0,1,1)
 
 		#Wallpaper
-		image = Gtk::Image.new(:file => "../images/wallpaper.jpg")
+		image = Gtk::Image.new(:file => "../images/wallpaperInGame.jpg")
 		grid.attach(image,0,0,1,1)
 
     #Démarage de l'affichage (Bien marquer show_all et pas show)
@@ -178,7 +178,7 @@ class Gui
     @window.signal_connect('destroy') {onDestroy}
 
     #Boucle
-    apply_style(@window, @provider)
+    #apply_style(@window, @provider)
 
     Gtk.main
 	end
@@ -220,14 +220,16 @@ class Gui
 
       end
       @timePress[x][y]+=1
-      if @map.compare                         #####QUOI FAIRE EN CAS DE VICTOIRE
+      if @map.compare                      #####QUOI FAIRE EN CAS DE VICTOIRE
+				@timer.pause
         dialog = Gtk::Dialog.new("Bravo",
                                  $main_application_window,
                                  Gtk::DialogFlags::DESTROY_WITH_PARENT,
                                  [ Gtk::Stock::OK, Gtk::ResponseType::NONE ])
 
         # Ensure that the dialog box is destroyed when the user responds.
-        dialog.signal_connect('response') { @window.destroy
+        dialog.signal_connect('response') {
+					Gtk.main_quit
           puts "Fermeture picross sur victoire"
           dialog.destroy
          }
@@ -315,8 +317,9 @@ class Gui
                                    [ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
 
           # Ensure that the dialog box is destroyed when the user responds.
-          dialog.signal_connect('response') { @window.destroy
-            puts "Fermeture picross sur victoire"
+          dialog.signal_connect('response') {
+						Gtk.main_quit
+						puts "Fermeture picross sur victoire"
             dialog.destroy
           }
           res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
@@ -397,9 +400,9 @@ class Gui
     @timer = Timers.new(@inc,@start){
       @time=@timer.time
       if @time > 0
-        @temps.set_markup("<span color=\"#33FF00\" weight=\"bold\" size=\"large\" > #{@time} </span>")
+        @temps.set_markup("<span foreground='white' weight=\"bold\" size=\"large\" > #{@time} </span>")
       else
-        @temps.set_markup("<span color=\"#33FF00\" weight=\"bold\" size=\"large\" > Time's up </span>")
+        @temps.set_markup("<span foreground='white' weight=\"bold\" size=\"large\" > Time's up </span>")
         puts "Perdu" #############QUOI FAIRE EN CAS DE DEFAITE
         @timer.stop
         Gtk.main_quit
@@ -443,7 +446,7 @@ class Gui
           end
         end
         label = Gtk::Label.new(@temp.join)
-        label = label.set_markup("<span color=\"#33FF00\" >#{@temp.join}</span>")
+        label = label.set_markup("<span foreground='white' >#{@temp.join}</span>")
         @temp.clear
         topnumbers.add(label)
 
@@ -460,30 +463,59 @@ class Gui
   #
   # Retour : la boite crée et initialisée
   def initBoxAide()
-    boxAide = Gtk::Box.new(:vertical,50)
+    boxAide = Gtk::Box.new(:vertical,30)
     boxAide.add(Gtk::Label.new())
 
-    hbox2 = Gtk::Box.new(:horizontal,10)
-    aide1 = Gtk::Button.new().set_label("Aide 1").set_size_request(100,10).set_xalign(0.5)
-    aide1.signal_connect("clicked"){aide1()}
-    hbox2.add(aide1)
-    hbox2.add(Gtk::Label.new().set_markup("<span color=\"#33FF00\" >10 secondes     </span>"))
+		iAide1 = Gtk::Image.new(:file => "../images/boutons/aide1.png")
+		@bAide1 = Gtk::EventBox.new.add(iAide1)
+		@bAide1.signal_connect("enter_notify_event"){
+			@bAide1.remove(@bAide1.child)
+			@bAide1.child = Gtk::Image.new(:file => "../images/boutons/aide1Over.png")
+			@bAide1.show_all
+		}
+		@bAide1.signal_connect("leave_notify_event"){
+			@bAide1.remove(@bAide1.child)
+			@bAide1.child = Gtk::Image.new(:file => "../images/boutons/aide1.png")
+			@bAide1.show_all
+		}
+    @bAide1.signal_connect("button_press_event") do
+      aide1()
+    end
+    boxAide.add(@bAide1)
 
-    boxAide.add(hbox2)
-    hbox3 = Gtk::Box.new(:horizontal,10)
-    aide2 = Gtk::Button.new().set_label("Aide 2").set_size_request(100,10).set_xalign(0.5)
-    aide2.signal_connect("clicked"){aide2()}
-    hbox3.add(aide2)
-    hbox3.add(Gtk::Label.new().set_markup("<span color=\"#33FF00\" >15 secondes     </span>"))
-    boxAide.add(hbox3)
+		iAide2 = Gtk::Image.new(:file => "../images/boutons/aide2.png")
+		@bAide2 = Gtk::EventBox.new.add(iAide2)
+		@bAide2.signal_connect("enter_notify_event"){
+			@bAide2.remove(@bAide2.child)
+			@bAide2.child = Gtk::Image.new(:file => "../images/boutons/aide2Over.png")
+			@bAide2.show_all
+		}
+		@bAide2.signal_connect("leave_notify_event"){
+			@bAide2.remove(@bAide2.child)
+			@bAide2.child = Gtk::Image.new(:file => "../images/boutons/aide2.png")
+			@bAide2.show_all
+		}
+    @bAide2.signal_connect("button_press_event") do
+      aide2()
+    end
+    boxAide.add(@bAide2)
 
-    hbox4 = Gtk::Box.new(:horizontal,10)
-    aide3 = Gtk::Button.new().set_label("Aide 3").set_size_request(100,10).set_xalign(0.5)
-    aide3.signal_connect("clicked"){aide3()}
-    hbox4.add(aide3)
-    hbox4.add(Gtk::Label.new().set_markup("<span color=\"#33FF00\" >20 secondes     </span>"))
-    boxAide.add(hbox4)
-    boxAide.name = "boxAide"
+		iAide3 = Gtk::Image.new(:file => "../images/boutons/aide3.png")
+		@bAide3 = Gtk::EventBox.new.add(iAide3)
+		@bAide3.signal_connect("enter_notify_event"){
+			@bAide3.remove(@bAide3.child)
+			@bAide3.child = Gtk::Image.new(:file => "../images/boutons/aide3Over.png")
+			@bAide3.show_all
+		}
+		@bAide3.signal_connect("leave_notify_event"){
+			@bAide3.remove(@bAide3.child)
+			@bAide3.child = Gtk::Image.new(:file => "../images/boutons/aide3.png")
+			@bAide3.show_all
+		}
+    @bAide3.signal_connect("button_press_event") do
+      aide3()
+    end
+    boxAide.add(@bAide3)
 
     return boxAide
 
@@ -583,14 +615,14 @@ class Gui
     return grid
   end
 
-  def apply_style(widget, provider)
+=begin  def apply_style(widget, provider)
     style_context = widget.style_context
     style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
     return unless widget.respond_to?(:children)
     widget.children.each do |child|
       apply_style(child, provider)
     end
-  end
+=end
 
   def actuMap()
     0.upto(@map.rows-1) do |x|
