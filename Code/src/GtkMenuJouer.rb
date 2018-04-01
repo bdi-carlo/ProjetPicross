@@ -26,7 +26,7 @@ class MenuJouer
 		vb = Gtk::Box.new(:vertical, 20)
 
 		#Label de bordure
-		hb.add(Gtk::Label.new(""))
+		hb.add(Gtk::Label.new(" "))
 
 		#Label de bordure
 		vb.add(Gtk::Label.new("\n"))
@@ -113,7 +113,14 @@ class MenuJouer
 		hb.add(vb)
 
 		#Label d'espacement
-		hb.add(Gtk::Label.new(""))
+		hb.add(Gtk::Label.new("\t\t\t\t\t\t\t"))
+
+		#Partie droite
+		vb2 = Gtk::Box.new(:vertical,0)
+		vb2.add(Gtk::Label.new("\n\n\n\n\n\n\n\n\n\n\n\n\n\n"))
+		@iIllustrative = Gtk::Image.new(:file => "../images/illustrations/nothing.png")
+		vb2.add(@iIllustrative)
+		hb.add(vb2)
 
 		grid.attach(hb,0,0,1,1)
 
@@ -128,26 +135,35 @@ class MenuJouer
 
 	end
 
+	def putNothing()
+		@iIllustrative.set_from_file("../images/illustrations/nothing.png")
+	end
+
 	def onEnter(button)
 		if button == @bAventure
 			button.remove(button.child)
 			button.child = Gtk::Image.new(:file => "../images/boutons/aventureOver.png")
+			@iIllustrative.set_from_file("../images/illustrations/aventure.png")
 			button.show_all
 		elsif button == @bCompetition
 			button.remove(button.child)
 			button.child = Gtk::Image.new(:file => "../images/boutons/competitionOver.png")
+			@iIllustrative.set_from_file("../images/illustrations/competition.png")
 			button.show_all
 		elsif button == @bNormal
 			button.remove(button.child)
 			button.child = Gtk::Image.new(:file => "../images/boutons/normalOver.png")
+			@iIllustrative.set_from_file("../images/illustrations/normal.png")
 			button.show_all
 		elsif button == @bDidacticiel
 			button.remove(button.child)
 			button.child = Gtk::Image.new(:file => "../images/boutons/didacticielOver.png")
+			@iIllustrative.set_from_file("../images/illustrations/apprendre.png")
 			button.show_all
 		else button == @bRetour
 			button.remove(button.child)
 			button.child = Gtk::Image.new(:file => "../images/boutons/retourOver.png")
+			@iIllustrative.set_from_file("../images/illustrations/retour.png")
 			button.show_all
 		end
 	end
@@ -156,22 +172,27 @@ class MenuJouer
 		if button == @bAventure
 			button.remove(button.child)
 			button.child = Gtk::Image.new(:file => "../images/boutons/aventure.png")
+			putNothing
 			button.show_all
 		elsif button == @bCompetition
 			button.remove(button.child)
 			button.child = Gtk::Image.new(:file => "../images/boutons/competition.png")
+			putNothing
 			button.show_all
 		elsif button == @bNormal
 			button.remove(button.child)
 			button.child = Gtk::Image.new(:file => "../images/boutons/normal.png")
+			putNothing
 			button.show_all
 		elsif button == @bDidacticiel
 			button.remove(button.child)
 			button.child = Gtk::Image.new(:file => "../images/boutons/didacticiel.png")
+			putNothing
 			button.show_all
 		else button == @bRetour
 			button.remove(button.child)
 			button.child = Gtk::Image.new(:file => "../images/boutons/retour.png")
+			putNothing
 			button.show_all
 		end
 	end

@@ -69,7 +69,7 @@ class Main
 		hb.add(vb)
 
 		#Label d'espacement
-		hb.add(Gtk::Label.new(""))
+		hb.add(Gtk::Label.new(" "))
 
     grid.attach(hb,0,0,1,1)
 

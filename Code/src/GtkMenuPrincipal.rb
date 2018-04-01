@@ -27,7 +27,7 @@ class MenuPrincipal
 			vb = Gtk::Box.new(:vertical, 20)
 
 			#Label de bordure gauche
-			hb.add(Gtk::Label.new(""))
+			hb.add(Gtk::Label.new(" "))
 
 			#Label de bordure haut
 			vb.add(Gtk::Label.new("\n"))
