@@ -235,7 +235,7 @@ class Gui
          }
         res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
 
-        dialog.vbox.add(Gtk::Label.new(res))
+        dialog.child.add(Gtk::Label.new(res))
         dialog.show_all
 
 
