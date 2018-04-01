@@ -10,7 +10,8 @@ class ScenarioUI
 
   end
   def execImage(img)
-    @window = Gtk::Window.new
+    @window = img[1]
+
     @window.set_size_request(970, 700)
     @window.resizable=FALSE
     @window.set_window_position(:center_always)
@@ -18,16 +19,18 @@ class ScenarioUI
     @window.set_title("Picross")
     @window.border_width=10
     @window.signal_connect('destroy') {onDestroy}
-    event=Gtk::EventBox.new()
-    event.child = (Gtk::Image.new(:file =>img))
-    event.show_all
+    if @window.child.child != nil
+      @window.child.remove(@window.child.child)
+    end
+    @window.child.child = (Gtk::Image.new(:file =>img[0]))
+    @window.child.show_all
 
-    event.signal_connect("button_press_event"){
+    @window.child.signal_connect("button_press_event"){
         print "clicked\n"
-        @window.destroy
+        @window.hide
         Gtk.main_quit
     }
-    @window.add(event)
+
     @window.show_all
     Gtk.main
   end
@@ -37,7 +40,7 @@ class ScenarioUI
     Gtk.main_quit
   end
   def execPic(pic)
-    
+
     Gui.new(0,pic[0],pic[1],pic[2],pic[3],nil,nil,nil)
   end
 
