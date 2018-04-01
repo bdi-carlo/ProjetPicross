@@ -64,37 +64,59 @@ class Gui
   # Callback de la fermeture de l'appli
   def onDestroy
     puts "Fermeture picross"
-    sauvegarder(@pseudo+"_"+recupNom(@cheminMap))
+		save?()
     Gtk.main_quit
   end
 
+	def save?()
+		dialog = Gtk::Dialog.new("Sauvegarde?",
+                             $main_application_window,
+                             Gtk::DialogFlags::MODAL | Gtk::DialogFlags::DESTROY_WITH_PARENT,
+                             [ Gtk::Stock::YES, Gtk::ResponseType::NONE ],
+													 	 [ Gtk::Stock::NO, Gtk::ResponseType::NONE ])
+		dialog.set_window_position(:center_always)
+
+    # Ensure that the dialog box is destroyed when the user responds.
+
+    # Add the message in a label, and show everything we've added to the dialog.
+    dialog.child.add(Gtk::Label.new( "\nVoulez-vous enregistrer votre partie en cours?\n" ))
+
+		dialog.show_all
+
+		dialog.signal_connect('response') {
+			sauvegarder( @pseudo+"_"+recupNom(@cheminMap) )
+			dialog.destroy
+		}
+
+	end
+
 	def lancerGrille()
 		@indiceFortFlag = FALSE
-    @window = Gtk::Window.new.override_background_color(:normal,Gdk::RGBA.new(0,0,0,0))
 
-    @window.set_size_request(970, 700)
+		#Création de la fenêtre
+		@window = Gtk::Window.new("PiCross")
+
     @window.resizable=FALSE
     @window.set_window_position(:center_always)
-    # On set le titre
-    @window.set_title("Grille")
     # Création du css
-    @provider = Gtk::CssProvider.new
-    @window.border_width=10
+    #@provider = Gtk::CssProvider.new
+    #@window.border_width=10
     #Le 10 donne une marge pas mal, c'est proportionel à la taille de la fenetre
 
-    ## GESTION DE LA GRILLE
-    #On crée 2 lignes de composants de taille identique (true)
-    splitVertical=Gtk::Box.new(:vertical, 0)
-    splitVertical.set_homogeneous(FALSE)
+		grid = Gtk::Grid.new
+		hb = Gtk::Box.new(:horizontal, 10)
+		vb = Gtk::Box.new(:vertical, 20)
 
-    @window.add(splitVertical)
+    @window.add(grid)
 
+		#Label de bordure haut
+		vb.add(Gtk::Label.new("\n"))
 
     splitHorizontal=Gtk::Box.new(:horizontal,20)
     splitHorizontal.set_homogeneous(FALSE)
 
     wintop=initTop
-    splitVertical.add(wintop)
+    vb.add(wintop)
     ################################CHIFFRES DES COTÉ######################################
     side = @map.side
     maxlen = 0
@@ -130,7 +152,7 @@ class Gui
     boxinter.add(initBoxAide)
 		boxinter.add(initBoxHypo)
     splitHorizontal.add(boxinter)
-    splitVertical.add(splitHorizontal)
+    vb.add(splitHorizontal)
 
 
     @timer.start
@@ -141,7 +163,14 @@ class Gui
     boxLabel.add(@temps)
     boxLabel.add(Gtk::Label.new)
     boxLabel.add(Gtk::Label.new)
-    splitVertical.add(boxLabel)
+    vb.add(boxLabel)
+
+		grid.attach(vb,0,0,1,1)
+
+		#Wallpaper
+		image = Gtk::Image.new(:file => "../images/wallpaper.jpg")
+		grid.attach(image,0,0,1,1)
+
     #Démarage de l'affichage (Bien marquer show_all et pas show)
     @window.show_all
 

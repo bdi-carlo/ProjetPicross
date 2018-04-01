@@ -131,19 +131,19 @@ class MenuJouer
 	def onEnter(button)
 		if button == @bAventure
 			button.remove(button.child)
-			button.child = Gtk::Image.new(:file => "../images/boutons/aventure.png")
+			button.child = Gtk::Image.new(:file => "../images/boutons/aventureOver.png")
 			button.show_all
 		elsif button == @bCompetition
 			button.remove(button.child)
-			button.child = Gtk::Image.new(:file => "../images/boutons/competition.png")
+			button.child = Gtk::Image.new(:file => "../images/boutons/competitionOver.png")
 			button.show_all
 		elsif button == @bNormal
 			button.remove(button.child)
-			button.child = Gtk::Image.new(:file => "../images/boutons/normal.png")
+			button.child = Gtk::Image.new(:file => "../images/boutons/normalOver.png")
 			button.show_all
 		elsif button == @bDidacticiel
 			button.remove(button.child)
-			button.child = Gtk::Image.new(:file => "../images/boutons/didacticiel.png")
+			button.child = Gtk::Image.new(:file => "../images/boutons/didacticielOver.png")
 			button.show_all
 		else button == @bRetour
 			button.remove(button.child)
@@ -171,7 +171,7 @@ class MenuJouer
 			button.show_all
 		else button == @bRetour
 			button.remove(button.child)
-			button.child = Gtk::Image.new(:file => "../images/boutons/quitter.png")
+			button.child = Gtk::Image.new(:file => "../images/boutons/retour.png")
 			button.show_all
 		end
 	end

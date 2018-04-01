@@ -35,7 +35,7 @@ class Main
 
     #Création de la boite d'entrée du pseudo dans un hBox
     hbPseudo = Gtk::Box.new(:horizontal, 6)
-    hbPseudo.pack_start(Gtk::Label.new('Pseudo'), :expand => false, :fill => false, :padding => 6)
+    hbPseudo.pack_start(Gtk::Label.new.set_markup("<span foreground='white'>Pseudo</span>"), :expand => false, :fill => false, :padding => 6)
     nom = Gtk::Entry.new
     hbPseudo.add(nom, :expand => false, :fill => false)
 		vb.add(hbPseudo)
@@ -43,6 +43,16 @@ class Main
     #Création du bouton pour confirmer notre Pseudo
     iButton = Gtk::Image.new(:file => "../images/boutons/jouer.png")
 		@button = Gtk::EventBox.new.add(iButton)
+		@button.signal_connect("enter_notify_event"){
+			@button.remove(@button.child)
+			@button.child = Gtk::Image.new(:file => "../images/boutons/jouerOver.png")
+			@button.show_all
+		}
+		@button.signal_connect("leave_notify_event"){
+			@button.remove(@button.child)
+			@button.child = Gtk::Image.new(:file => "../images/boutons/jouer.png")
+			@button.show_all
+		}
     @button.signal_connect("button_press_event") do
       if(nom.text == "")
 				dialogBox("Veuillez rentrer un pseudo avant de jouer!")
@@ -79,15 +89,15 @@ class Main
 	def dialogBox( message )
 		dialog = Gtk::Dialog.new("Alerte",
                              $main_application_window,
-                             Gtk::Dialog::DESTROY_WITH_PARENT,
-                             [ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
+                             :destroy_with_parent,
+                             [ Gtk::Stock::OK, :none ])
 		dialog.set_window_position(:center_always)
 
     # Ensure that the dialog box is destroyed when the user responds.
     dialog.signal_connect('response') { dialog.destroy }
 
     # Add the message in a label, and show everything we've added to the dialog.
-    dialog.vbox.add(Gtk::Label.new( "\n" + message + "\n" ))
+    dialog.child.add(Gtk::Label.new( "\n" + message + "\n" ))
     dialog.show_all
 	end
 
