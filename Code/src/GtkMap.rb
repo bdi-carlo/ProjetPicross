@@ -64,7 +64,7 @@ class Gui
   # Callback de la fermeture de l'appli
   def onDestroy
     puts "Fermeture picross"
-    #sauvegarder(@pseudo+"_"+recupNom(@cheminMap), self)
+    sauvegarder(@pseudo+"_"+recupNom(@cheminMap))
     Gtk.main_quit
   end
 
@@ -608,7 +608,7 @@ class Gui
 	# Sauvegarde la partie
 	#
 	# Param : identificateurs d'une partie
-	def sauvegarder(unNom, uneGrille)
+	def sauvegarder(unNom)
 		# Serialisation des différentes classes
 		map = @map.to_yaml()
 		hypo = @hypo.to_yaml()

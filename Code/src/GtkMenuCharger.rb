@@ -91,13 +91,13 @@ class MenuCharger
 	        when 1
 	          $hypo = YAML.load(current)
 	        when 2
-	          $pseudo = current
+	          $pseudo = current.strip
 	        when 3
 	          $inc = current.to_i
 	        when 4
 	          $start = current.to_i
 	        when 5
-	          $cheminMap = current
+	          $cheminMap = current.strip
 	        when 6
 	          $nbHypo = current.to_i
 				end
