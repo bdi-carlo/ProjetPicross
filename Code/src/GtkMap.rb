@@ -672,8 +672,9 @@ class Gui
 	#
 	# Param : le nom du fichier
 	def supprimerFichier(unNom)
-		puts "../sauvegardes/#{unNom}"
-		File.delete("../sauvegardes/#{unNom}")
+		if File.exist?("../sauvegardes/#{unNom}") then
+			File.delete("../sauvegardes/#{unNom}")
+		end
 	end
 
 	##
