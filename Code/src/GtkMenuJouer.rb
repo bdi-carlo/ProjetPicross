@@ -200,7 +200,7 @@ class MenuJouer
 	##
 	# Callback de la fermeture de l'appli
 	def onDestroy
-		puts "Fin de l'application"
+		puts "Fermeture fenetre jouer"
 		#Quit 'propre'
 		Gtk.main_quit
 	end
