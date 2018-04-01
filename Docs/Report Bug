@@ -1,0 +1,8 @@
+------------------------------------------------------------------------
+Mode Aventure - Fermer un picross - Non à la sauvegarde
+
+GtkMap.rb:690:in `initialize': Aucun fichier ou dossier de ce type @ rb_sysopen - ../sauvegardes/Azamor_Pont
+------------------------------------------------------------------------
+Mode Aventure - Qr Vent 
+
+Image plantée, elle est pas assez grande.

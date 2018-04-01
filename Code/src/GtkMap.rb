@@ -115,21 +115,22 @@ class Gui
     splitHorizontal=Gtk::Box.new(:horizontal,20)
     splitHorizontal.set_homogeneous(FALSE)
 
-    wintop=initTop
-    vb.add(wintop)
+
     ################################CHIFFRES DES COTÉ######################################
+    @temp=[]
     side = @map.side
-    maxlen = 0
+    @maxlens = 0
     for tab in side
-      if tab.length > maxlen
-        maxlen = tab.length
+      if tab.length > @maxlens
+        @maxlens = tab.length
       end
+
     end
     sidenumbers = Gtk::Box.new(:vertical,10)
       #sidenumbers.add(Gtk::Label.new())
       for tab in side
                                                                                    # A FAIRE
-        tab.length.upto(maxlen)do
+        tab.length.upto(@maxlens)do
           @temp << "   "
         end
         if tab == []
@@ -138,6 +139,7 @@ class Gui
           0.upto(tab.length()-1) do |i|
               @temp << " #{tab[i]} "
           end
+          @temp << " "
         end
         label = Gtk::Label.new(@temp.join)
         label = label.set_markup("<span foreground='white' >#{@temp.join}</span>")
@@ -148,6 +150,8 @@ class Gui
 
     ################################CREATION DE LA GRILLE##################################
     boxinter = Gtk::Box.new(:horizontal,40)
+    wintop=initTop
+    vb.add(wintop)
     boxinter.add(initGrid)
     boxinter.add(initBoxAide)
 		boxinter.add(initBoxHypo)
@@ -432,7 +436,7 @@ class Gui
     splitHorizontal=Gtk::Box.new(:horizontal,5)
     splitHorizontal.set_homogeneous(FALSE)                                                                                        #A MODIFIER
     @temp =[]
-    topnumbers = Gtk::Box.new(:horizontal,18)
+    topnumbers = Gtk::Box.new(:horizontal,12)
     topnumbers.homogeneous=(TRUE)
 ########################################################################################################
 
@@ -441,10 +445,14 @@ class Gui
           @temp << "\n"
         end
         if tab == []
-          @temp << "0\n"
+          @temp[maxlen]="0"
         else
           0.upto(tab.length()-1) do |i|
-              @temp << "#{tab[i]}\n"
+              if tab[i]<10
+                @temp << "#{tab[i]}   \n"
+              else
+                @temp << "#{tab[i]}\n"
+              end
           end
         end
         label = Gtk::Label.new(@temp.join)
@@ -454,10 +462,11 @@ class Gui
 
       end
       wintop = Gtk::Box.new(:horizontal,100)
-      splitHorizontal.add(Gtk::Label.new(" "*28))
+      print "#{@maxlens}"
+      splitHorizontal.add(Gtk::Label.new("___"*(@maxlens+1)))
       splitHorizontal.add(topnumbers)
       wintop.add(splitHorizontal)
-      wintop.add(Gtk::Label.new("     "))
+      #wintop.add(Gtk::Label.new("   "*@maxlens))
   end
 
   ##
@@ -579,10 +588,10 @@ class Gui
     i=0
 
     grid = Gtk::Box.new(:vertical,2)
-    grid.set_homogeneous(FALSE)
+    grid.set_homogeneous(TRUE)
     0.upto(@map.rows-1) do |x|
       row = Gtk::Box.new(:horizontal,2)
-      row.set_homogeneous(FALSE)
+      row.set_homogeneous(TRUE)
       tabrow = Array.new
       tabPress = Array.new
       0.upto(@map.cols-1) do |y|
