@@ -41,7 +41,7 @@ class MenuCharger < Menu
 		vb.add(Gtk::Label.new("\n\n\n"))
 
 		#Récupération de la liste des sauvegardes concercant le pseudo du joueur
-		vb.add(Gtk::Label.new.set_markup("<big><big><span >Liste de vos sauvegardes</span></big></big>"))
+		vb.add(Gtk::Label.new.set_markup("<big><big><span >Liste de vos sauvegardes#{"\n\n"}</span></big></big>"))
 		allSaves = Dir.entries("../sauvegardes")
 		allSaves.delete(".")
 		allSaves.delete("..")

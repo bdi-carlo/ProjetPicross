@@ -7,6 +7,7 @@ require 'gtk3'
 load "GtkMap.rb"
 load "Aventure.rb"
 load "Menu.rb"
+load "GtkMenuChoixGrille.rb"
 
 class MenuJouer < Menu
 
@@ -65,6 +66,11 @@ class MenuJouer < Menu
 		@bCompetition.signal_connect("leave_notify_event"){
 			onLeave(@bCompetition)
 		}
+		@bCompetition.signal_connect("button_press_event") do
+			@window.destroy
+      MenuChoixGrille.new(@jeu)
+      onDestroy()
+		end
 		vb.add(@bCompetition)
 
 		#Création du boutton NORMAL

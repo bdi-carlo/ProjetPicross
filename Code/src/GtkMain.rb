@@ -97,14 +97,6 @@ class Main < Menu
     dialog.show_all
 	end
 
-  ##
-  # Callback de la fermeture de l'appli
-  def onDestroy
-    puts "Fin de l'application"
-    #Quit 'propre'
-    Gtk.main_quit
-  end
-
 end
 
 Main.new( Jeu.new )
