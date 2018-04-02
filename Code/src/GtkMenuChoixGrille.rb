@@ -31,29 +31,45 @@ class MenuChoixGrille < Menu
 		#Label du pseudo
 		lPseudo = Gtk::Label.new
 		lPseudo.set_markup("<big><i><big><b><span foreground='white'>#{@jeu.pseudo}</span></b></big></i></big>")
-		#lPseudo.wrap = true
 		vb.add(lPseudo)
 
 		#Label d'espacement
 		vb.add(Gtk::Label.new("\n\n\n"))
 
-		##A FAIRE
-		vb.add(Gtk::Label.new("test"))
-		mb = Gtk::MenuBar.new
+		#Radio buttons
+		hb2 = Gtk::Box.new(:horizontal, 10)
+		vb2 = Gtk::Box.new(:vertical, 5)
+		@facile = Gtk::RadioButton.new(:label => "Niveau Facile")
+    @moyen = Gtk::RadioButton.new(:member => @facile, :label => "Niveau Moyen")
+    @difficile = Gtk::RadioButton.new(:member => @facile, :label => "Niveau Difficile")
+		vb2.add(@facile).add(@moyen).add(@difficile)
+		vb3 = Gtk::Box.new(:vertical, 5)
+		@cinq = Gtk::RadioButton.new(:label => "5 X 5")
+    @dix = Gtk::RadioButton.new(:member => @cinq, :label => "10 X 10")
+    @quinze = Gtk::RadioButton.new(:member => @cinq, :label => "15 X 15")
+		@vingt = Gtk::RadioButton.new(:member => @cinq, :label => "20 X 20")
+		vb3.add(@cinq).add(@dix).add(@quinze).add(@vingt)
 
-    filemenu = Gtk::Menu.new
-    filem = Gtk::MenuItem.new "File"
-    filem.set_submenu(filemenu)
+		hb2.add(vb2).add(vb3)
+		vb.add(hb2)
 
-    exit = Gtk::MenuItem.new "Exit"
-    exit.signal_connect "activate" do
-        Gtk.main_quit
-    end
+		#Création du bouton CONFIRMER
+		iConfirmer = Gtk::Image.new(:file => "../images/boutons/confirmer.png")
+		@bConfirmer = Gtk::EventBox.new.add(iConfirmer)
+		@bConfirmer.signal_connect("enter_notify_event"){
+			@bConfirmer.remove(@bConfirmer.child)
+			@bConfirmer.child = Gtk::Image.new(:file => "../images/boutons/confirmerOver.png")
+			@bConfirmer.show_all
+		}
+		@bConfirmer.signal_connect("leave_notify_event"){
+			@bConfirmer.remove(@bConfirmer.child)
+			@bConfirmer.child = Gtk::Image.new(:file => "../images/boutons/confirmer.png")
+			@bConfirmer.show_all
+		}
+		@bConfirmer.signal_connect("button_press_event") do
 
-    filemenu.append(exit)
-    mb.append(filem)
-
-    vb.add(mb)
+		end
+		vb.add(@bConfirmer)
 
 		hb.add(vb)
 
