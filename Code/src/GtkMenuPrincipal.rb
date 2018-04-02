@@ -7,20 +7,17 @@ load "GtkMap.rb"
 load "GtkMenuJouer.rb"
 load "GtkMenuCharger.rb"
 
-class MenuPrincipal
+class MenuPrincipal < Menu
 
   def initialize(game)
-		@jeu = game
+		super(game)
+		lancerFenetre()
+  end
 
-    puts("Creation fenetre Menu Principal")
+	def lancerFenetre()
+		puts("Creation fenetre Menu Principal")
 
-    #Création de la fenêtre
-    @window = Gtk::Window.new("Picross")
-    #@window.set_size_request(300, 300)
-    @window.resizable=FALSE
-    @window.set_window_position(:center_always)
-
-    @window.signal_connect('destroy') {onDestroy}
+    @window = creerWindow()
 
 		grid = Gtk::Grid.new
 		hb = Gtk::Box.new(:horizontal, 10)
@@ -35,7 +32,6 @@ class MenuPrincipal
 		#Label du pseudo
 		lPseudo = Gtk::Label.new
 		lPseudo.set_markup("<big><i><big><b><span foreground='white'>#{@jeu.pseudo}</span></b></big></i></big>")
-		#lPseudo.wrap = true
 		vb.add(lPseudo)
 
 		#Label d'espacement
@@ -43,7 +39,7 @@ class MenuPrincipal
 
 		#Création du bouton NEW PARTIE
 		iNew = Gtk::Image.new(:file => "../images/boutons/new.png")
-        @bNew = Gtk::EventBox.new.add(iNew)
+    @bNew = Gtk::EventBox.new.add(iNew)
 		@bNew.signal_connect("enter_notify_event"){
 			onEnter(@bNew)
 		}
@@ -133,8 +129,7 @@ class MenuPrincipal
     @window.show_all
 
     Gtk.main
-
-  end
+	end
 
 	def putNothing()
 		@iIllustrative.set_from_file("../images/illustrations/nothing.png")
@@ -197,13 +192,5 @@ class MenuPrincipal
 			button.show_all
 		end
 	end
-
-  ##
-  # Callback de la fermeture de l'appli
-  def onDestroy
-    puts "Fin de l'application"
-    #Quit 'propre'
-    Gtk.main_quit
-  end
 
 end

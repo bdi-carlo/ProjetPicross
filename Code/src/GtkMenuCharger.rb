@@ -7,21 +7,19 @@ require "date"
 require 'yaml'
 
 load "GtkMap.rb"
+load "Menu.rb"
 
-class MenuCharger
+class MenuCharger < Menu
 
   def initialize(game)
-		@jeu = game
+		super(game)
+		lancerFenetre()
+	end
 
-    puts("Creation fenetre Charger")
+	def lancerFenetre()
+		puts("Creation fenetre Charger")
 
-		#Création de la fenêtre
-		@window = Gtk::Window.new("Picross")
-		#@window.set_size_request(300, 300)
-		@window.resizable=FALSE
-		@window.set_window_position(:center_always)
-
-		@window.signal_connect('destroy') {onDestroy}
+		@window = creerWindow()
 
 		grid = Gtk::Grid.new
 		hb = Gtk::Box.new(:horizontal, 10)
@@ -57,25 +55,30 @@ class MenuCharger
 		}
 		if indice == false
 			vb.add(Gtk::Label.new.set_markup("<big><span >Aucune sauvegarde disponible</span></big>"))
+
+		else
+			#Création entrer pour mettre le nom de la save désirée
+			@save = Gtk::Entry.new
+			vb.add(@save)
+
+			#Création du bouton JOUER
+			iJouer = Gtk::Image.new(:file => "../images/boutons/jouer.png")
+			@bJouer = Gtk::EventBox.new.add(iJouer)
+			@bJouer.signal_connect("enter_notify_event"){
+				@bJouer.remove(@bJouer.child)
+				@bJouer.child = Gtk::Image.new(:file => "../images/boutons/jouerOver.png")
+				@bJouer.show_all
+			}
+			@bJouer.signal_connect("leave_notify_event"){
+				@bJouer.remove(@bJouer.child)
+				@bJouer.child = Gtk::Image.new(:file => "../images/boutons/jouer.png")
+				@bJouer.show_all
+			}
+			@bJouer.signal_connect("button_press_event") do
+				charger("../sauvegardes/"+@jeu.pseudo+"_"+@save.text)
+			end
+			vb.add(@bJouer)
 		end
-
-		#Création entrer pour mettre le nom de la save désirée
-		@save = Gtk::Entry.new
-		vb.add(@save)
-
-		#Création du bouton JOUER
-		iJouer = Gtk::Image.new(:file => "../images/boutons/jouer.png")
-		@bJouer = Gtk::EventBox.new.add(iJouer)
-		@bJouer.signal_connect("enter_notify_event"){
-
-		}
-		@bJouer.signal_connect("leave_notify_event"){
-
-		}
-		@bJouer.signal_connect("button_press_event") do
-			charger("../sauvegardes/"+@jeu.pseudo+"_"+@save.text)
-		end
-		vb.add(@bJouer)
 
 		#Création du boutton RETOUR
 		iRetour = Gtk::Image.new(:file => "../images/boutons/retour.png")
@@ -152,16 +155,20 @@ class MenuCharger
 			@window.destroy
 			Gui.new(1, $pseudo, $cheminMap, $inc, $start, $map, $hypo, $nbHypo)
 			onDestroy()
+		else
+			dialog = Gtk::Dialog.new("Erreur chargement",
+	                             $main_application_window,
+	                             Gtk::DialogFlags::DESTROY_WITH_PARENT,
+	                             [ Gtk::Stock::OK, Gtk::ResponseType::NONE ])
+
+	    # Ensure that the dialog box is destroyed when the user responds.
+	    dialog.signal_connect('response') { dialog.destroy }
+
+	    # Add the message in a label, and show everything we've added to the dialog.
+	    dialog.child.add(Gtk::Label.new("Nom de sauvegarde erroné"))
+	    dialog.show_all
 		end
 
-	end
-
-	##
-	# Callback de la fermeture de l'appli
-	def onDestroy
-		puts "Fin de l'application"
-		#Quit 'propre'
-		Gtk.main_quit
 	end
 
 end

@@ -3,23 +3,22 @@ begin
  rescue LoadError
 end
 require 'gtk3'
+
 load "GtkMap.rb"
 load "Aventure.rb"
+load "Menu.rb"
 
-class MenuJouer
+class MenuJouer < Menu
 
   def initialize(game)
-		@jeu = game
+		super(game)
+		lancerFenetre()
+	end
 
+	def lancerFenetre()
     puts("Creation fenetre Jouer")
 
-		#Création de la fenêtre
-		@window = Gtk::Window.new("Picross")
-		#@window.set_size_request(300, 300)
-		@window.resizable=FALSE
-		@window.set_window_position(:center_always)
-
-		@window.signal_connect('destroy') {onDestroy}
+		@window = creerWindow()
 
 		grid = Gtk::Grid.new
 		hb = Gtk::Box.new(:horizontal, 10)
@@ -132,7 +131,6 @@ class MenuJouer
 		@window.show_all
 
 		Gtk.main
-
 	end
 
 	def putNothing()
@@ -195,14 +193,6 @@ class MenuJouer
 			putNothing
 			button.show_all
 		end
-	end
-
-	##
-	# Callback de la fermeture de l'appli
-	def onDestroy
-		puts "Fermeture fenetre jouer"
-		#Quit 'propre'
-		Gtk.main_quit
 	end
 
 end

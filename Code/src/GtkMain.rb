@@ -6,22 +6,19 @@ require 'gtk3'
 load "Jeu.rb"
 load "GtkMenuPrincipal.rb"
 
-class Main
+class Main < Menu
 
   def initialize(game)
-    @jeu=game
+    super(game)
+		lancerFenetre()
+  end
 
-    puts("Creation fenetre Main")
+	def lancerFenetre()
+		puts("Creation fenetre Main")
 
     Gtk.init
 
-    #Création de la fenêtre
-    @window = Gtk::Window.new("PiCross")
-    #@window.set_size_request(300, 300)
-    @window.resizable=FALSE
-    @window.set_window_position(:center_always)
-
-    @window.signal_connect('destroy') {onDestroy}
+    @window = creerWindow()
 
 		grid = Gtk::Grid.new
 		hb = Gtk::Box.new(:horizontal, 10)
@@ -82,8 +79,7 @@ class Main
     @window.show_all
 
     Gtk.main
-
-  end
+	end
 
 	#Affiche une boite de dialogue avec un message
 	def dialogBox( message )
