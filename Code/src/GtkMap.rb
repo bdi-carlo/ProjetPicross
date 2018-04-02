@@ -344,7 +344,7 @@ class Gui
         @timePress[x][y]= 0
       end
     else
-      indice = IndiceFort.new(@map,x,y)
+      indice = IndiceFort.create(@map,x,y)
       @indiceFortFlag = FALSE
       dialog = Gtk::Dialog.new("Aide3",
                                $main_application_window,
@@ -361,7 +361,7 @@ class Gui
   end
 
   def aide1()
-    indice = IndiceFaible.new(@map)
+    indice = IndiceFaible.create(@map)
     dialog = Gtk::Dialog.new("Aide1",
                              $main_application_window,
                              Gtk::DialogFlags::DESTROY_WITH_PARENT,
@@ -373,7 +373,7 @@ class Gui
     # Add the message in a label, and show everything we've added to the dialog.
     dialog.child.add(Gtk::Label.new(indice.envoyerIndice.indice))
     dialog.show_all
-    @timer.add(10)
+    @timer.add(15)
 
   end
 
@@ -390,12 +390,13 @@ class Gui
     # Add the message in a label, and show everything we've added to the dialog.
     dialog.child.add(Gtk::Label.new(indice.envoyerIndice.indice))
     dialog.show_all
-    @timer.add(15)
+    @timer.add(30)
   end
 
   def aide3()
 
     @indiceFortFlag = TRUE
+    @timer.add(120)
   end
 
   ##

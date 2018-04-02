@@ -12,6 +12,12 @@ class IndiceFaible < Indice
 
 	attr_reader :indice
 
+	def IndiceFaible.create(grille)
+		new(grille)
+	end
+
+	private_class_method:new
+
 	def initialize(grille)
 		@penalites = 15
 		@indice = nil
@@ -93,7 +99,7 @@ class IndiceFaible < Indice
 end
 =begin
 	map = Map.create("../grilles/scenario/Bateau")
-	voila = IndiceFaible.new(map)
+	voila = IndiceFaible.create(map)
 	print "#{voila.envoyerIndice.indice}\n"
 
 	"../grilles/Scenario/Bateau"

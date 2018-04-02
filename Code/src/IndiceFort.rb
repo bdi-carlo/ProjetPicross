@@ -19,7 +19,13 @@ class IndiceFort < Indice
 	@col
 	@row
 
-	def initialize(grille,col, row)
+	def IndiceFort.create(grille,row,col)
+		new(grille,row,col)
+	end
+
+	private_class_method:new
+
+	def initialize(grille,row, col)
 		@penalites = 120
 		@col = col
 		@row = row
