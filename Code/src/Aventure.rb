@@ -14,6 +14,7 @@ class Aventure
     window.border_width=10
     window.signal_connect('destroy') {onDestroy}
     cmd = ScenarioCmd.new(scenar)
+    
     cmd.use_cmd(:img,["../images/scenario/Scenario1_1_1.png",window])
     cmd.use_cmd(:img,["../images/scenario/Scenario1_1_2.png",window])
     cmd.use_cmd(:pic,[pseudo,"../grilles/scenario/Pont",1,0])

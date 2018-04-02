@@ -436,7 +436,7 @@ class Gui
     splitHorizontal=Gtk::Box.new(:horizontal,5)
     splitHorizontal.set_homogeneous(FALSE)                                                                                        #A MODIFIER
     @temp =[]
-    topnumbers = Gtk::Box.new(:horizontal,12)
+    topnumbers = Gtk::Box.new(:horizontal,8)
     topnumbers.homogeneous=(TRUE)
 ########################################################################################################
 
@@ -449,7 +449,7 @@ class Gui
         else
           0.upto(tab.length()-1) do |i|
               if tab[i]<10
-                @temp << "#{tab[i]}   \n"
+                @temp << "#{tab[i]}    \n"
               else
                 @temp << "#{tab[i]}\n"
               end
@@ -463,7 +463,7 @@ class Gui
       end
       wintop = Gtk::Box.new(:horizontal,100)
       print "#{@maxlens}"
-      splitHorizontal.add(Gtk::Label.new("___"*(@maxlens+1)))
+      splitHorizontal.add(Gtk::Label.new("__"*(@maxlens+2)))
       splitHorizontal.add(topnumbers)
       wintop.add(splitHorizontal)
       #wintop.add(Gtk::Label.new("   "*@maxlens))
