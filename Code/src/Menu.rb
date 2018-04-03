@@ -6,8 +6,8 @@ require 'gtk3'
 
 class Menu
 
-	def initialize(game)
-		@jeu = game
+	def initialize(pseudo)
+		@pseudo = pseudo
 	end
 
 	def lancerFenetre()
@@ -39,6 +39,7 @@ class Menu
 	def onDestroy
 		puts "Fermeture fenetre"
 		#Quit 'propre'
+		@window.destroy
 		Gtk.main_quit
 	end
 

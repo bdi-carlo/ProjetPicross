@@ -8,8 +8,8 @@ load "GtkMap.rb"
 
 class MenuChoixGrille < Menu
 
-  def initialize(game, indiceTypeJeu)
-		super(game)
+  def initialize(pseudo, indiceTypeJeu)
+		super(pseudo)
 		@indiceTypeJeu = indiceTypeJeu
 		@vListe = nil
 		@flagListe = false
@@ -35,7 +35,7 @@ class MenuChoixGrille < Menu
 
 		#Label du pseudo
 		lPseudo = Gtk::Label.new
-		lPseudo.set_markup("<big><i><big><b><span foreground='white'>#{@jeu.pseudo}</span></b></big></i></big>")
+		lPseudo.set_markup("<big><i><big><b><span foreground='white'>#{@pseudo}</span></b></big></i></big>")
 		@vb.add(lPseudo)
 
 		#Label d'espacement
@@ -96,8 +96,8 @@ class MenuChoixGrille < Menu
 			@bRetour.show_all
 		}
 		@bRetour.signal_connect("button_press_event") do
-			@window.destroy
 			onDestroy()
+			MenuJouer.new(@pseudo)
 		end
 		@vb.add(@bRetour)
 
@@ -186,9 +186,9 @@ class MenuChoixGrille < Menu
 				event.signal_connect("button_press_event") do
 					#0 = normal
 					if @indiceTypeJeu == 0
-						Gui.new(0, @jeu.pseudo, unRepertoire+"/"+elt, 1, 0, nil, nil, nil)
+						Gui.new(0, @pseudo, unRepertoire+"/"+elt, 1, 0, nil, nil, nil)
 					elsif @indiceTypeJeu == 1
-						Gui.new(0, @jeu.pseudo, unRepertoire+"/"+elt, 1, 0, nil, nil, nil)
+						Gui.new(0, @pseudo, unRepertoire+"/"+elt, 1, 0, nil, nil, nil)
 					end
 				end
 				vb.add(event)

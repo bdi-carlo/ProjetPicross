@@ -3,13 +3,12 @@ begin
  rescue LoadError
 end
 require 'gtk3'
-load "Jeu.rb"
 load "GtkMenuPrincipal.rb"
 
 class Main < Menu
 
-  def initialize(game)
-    super(game)
+  def initialize(pseudo)
+    super(pseudo)
 		lancerFenetre()
   end
 
@@ -54,11 +53,10 @@ class Main < Menu
       if(nom.text == "")
 				dialogBox("Veuillez rentrer un pseudo avant de jouer!")
     	else
-        @jeu.pseudo = nom.text
-        puts "Pseudo: " + @jeu.pseudo
-        @window.hide
+        @pseudo = nom.text
+        puts "Pseudo: " + @pseudo
 				onDestroy()
-        MenuPrincipal.new(@jeu)
+        MenuPrincipal.new(@pseudo)
       end
     end
 		vb.add(@button)
@@ -99,4 +97,4 @@ class Main < Menu
 
 end
 
-Main.new( Jeu.new )
+Main.new("")

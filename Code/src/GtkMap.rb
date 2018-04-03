@@ -66,6 +66,7 @@ class Gui
     puts "Fermeture picross"
 		save?()
     Gtk.main_quit
+		MenuPrincipal.new(@pseudo)
   end
 
 	def save?()
@@ -229,9 +230,11 @@ class Gui
         # Ensure that the dialog box is destroyed when the user responds.
         dialog.signal_connect('response') {
           supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
-          Gtk.main_quit
+					dialog.destroy
+					MenuPrincipal.new(@pseudo)
+          @window.destroy
+					Gtk.main_quit
           puts "Fermeture picross sur victoire"
-          dialog.destroy
          }
         res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
 
@@ -325,6 +328,7 @@ class Gui
         @timePress[x][y]+=1
 
         if @map.compare
+					@timer.pause
           dialog = Gtk::Dialog.new("Bravo",
                                    $main_application_window,
                                    Gtk::DialogFlags::DESTROY_WITH_PARENT,
@@ -333,7 +337,8 @@ class Gui
           # Ensure that the dialog box is destroyed when the user responds.
           dialog.signal_connect('response') {
 						supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
-						Gtk.main_quit
+						onDestroy()
+						MenuPrincipal.new(@jeu)
 						puts "Fermeture picross sur victoire"
             dialog.destroy
           }
