@@ -176,6 +176,7 @@ class MenuChoixGrille < Menu
 		allGrids.delete(".")
 		allGrids.delete("..")
 		allGrids.delete("index")
+		allGrids.delete(".gitkeep")
 		if allGrids.length == 0
 			vb.add(Gtk::Label.new.set_markup("<big><b><span foreground='white'>Pas de grille disponible</span></b></big>"))
 		else
