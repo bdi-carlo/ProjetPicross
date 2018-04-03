@@ -188,6 +188,8 @@ class Gui
     # Quand la fenetre est détruite il faut quitter
     @window.signal_connect('destroy') {onDestroy}
 
+		actuMap()
+
     Gtk.main
 	end
 

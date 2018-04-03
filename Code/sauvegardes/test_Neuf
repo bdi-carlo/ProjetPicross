@@ -210,7 +210,8 @@ map:
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
-    value: 0
+    value: 1
+    color: 0
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
@@ -230,7 +231,8 @@ map:
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
-    value: 0
+    value: 1
+    color: 0
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
@@ -250,29 +252,11 @@ map:
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
-    value: 0
+    value: 1
+    color: 0
   - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-- - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
+    value: 1
+    color: 0
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
@@ -290,7 +274,34 @@ map:
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
+    value: 1
+    color: 0
+  - !ruby/object:Case
+    value: 1
+    color: 0
+  - !ruby/object:Case
     value: 0
+  - !ruby/object:Case
+    value: 0
+- - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 1
+    color: 0
+  - !ruby/object:Case
+    value: 1
+    color: 0
+  - !ruby/object:Case
+    value: 1
+    color: 0
+  - !ruby/object:Case
+    value: 1
+    color: 0
+  - !ruby/object:Case
+    value: 1
+    color: 0
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
@@ -551,7 +562,8 @@ grillePrim: !ruby/object:Map
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
-      value: 0
+      value: 1
+      color: 0
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
@@ -571,7 +583,8 @@ grillePrim: !ruby/object:Map
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
-      value: 0
+      value: 1
+      color: 0
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
@@ -591,29 +604,11 @@ grillePrim: !ruby/object:Map
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
-      value: 0
+      value: 1
+      color: 0
     - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-  - - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
+      value: 1
+      color: 0
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
@@ -631,7 +626,34 @@ grillePrim: !ruby/object:Map
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
       value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
@@ -680,11 +702,11 @@ grillePrim: !ruby/object:Map
       value: 0
 grillesHypothese: []
 ***
-h
+test
 ***
 1
 ***
-17
+2
 ***
 ../grilles/facile/10x10/Neuf
 ***
