@@ -55,29 +55,35 @@ class MenuCharger < Menu
 		}
 		if indice == false
 			vb.add(Gtk::Label.new.set_markup("<big><span foreground='white'>Aucune sauvegarde disponible</span></big>"))
+		end
+		hb.add(vb)
 
-		else
+		hb.add(Gtk::Label.new("\t\t\t\t\t"))
+
+		vb2 = Gtk::Box.new(:vertical, 20)
+		vb2.add(Gtk::Label.new("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"))
+		if indice == true
 			#Création entrer pour mettre le nom de la save désirée
 			@save = Gtk::Entry.new.set_text("Entrer le nom de la sauvegarde")
-			vb.add(@save)
+			vb2.add(@save)
 
-			#Création du bouton JOUER
-			iJouer = Gtk::Image.new(:file => "../images/boutons/jouer.png")
-			@bJouer = Gtk::EventBox.new.add(iJouer)
-			@bJouer.signal_connect("enter_notify_event"){
-				@bJouer.remove(@bJouer.child)
-				@bJouer.child = Gtk::Image.new(:file => "../images/boutons/jouerOver.png")
-				@bJouer.show_all
+			#Création du bouton CHARGER
+			iCharger = Gtk::Image.new(:file => "../images/boutons/charger.png")
+			@bCharger = Gtk::EventBox.new.add(iCharger)
+			@bCharger.signal_connect("enter_notify_event"){
+				@bCharger.remove(@bCharger.child)
+				@bCharger.child = Gtk::Image.new(:file => "../images/boutons/chargerOver.png")
+				@bCharger.show_all
 			}
-			@bJouer.signal_connect("leave_notify_event"){
-				@bJouer.remove(@bJouer.child)
-				@bJouer.child = Gtk::Image.new(:file => "../images/boutons/jouer.png")
-				@bJouer.show_all
+			@bCharger.signal_connect("leave_notify_event"){
+				@bCharger.remove(@bCharger.child)
+				@bCharger.child = Gtk::Image.new(:file => "../images/boutons/charger.png")
+				@bCharger.show_all
 			}
-			@bJouer.signal_connect("button_press_event") do
+			@bCharger.signal_connect("button_press_event") do
 				charger("../sauvegardes/"+@pseudo+"_"+@save.text)
 			end
-			vb.add(@bJouer)
+			vb2.add(@bCharger)
 		end
 
 		#Création du boutton RETOUR
@@ -97,9 +103,9 @@ class MenuCharger < Menu
 			onDestroy()
 			MenuPrincipal.new(@pseudo)
 		end
-		vb.add(@bRetour)
+		vb2.add(@bRetour)
 
-		hb.add(vb)
+		hb.add(vb2)
 
 		#Label d'espacement
 		hb.add(Gtk::Label.new(""))
