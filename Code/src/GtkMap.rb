@@ -42,6 +42,13 @@ class Gui
 			@hypo = hypo
 		end
 
+		@tabFaireHypo = ["../images/boutons/hypo/faireNoir.png","../images/boutons/hypo/faireViolet.png","../images/boutons/hypo/faireBleu.png","../images/boutons/hypo/faireRouge.png"]
+		@tabFaireHypoOver = ["../images/boutons/hypo/faireNoirOver.png","../images/boutons/hypo/faireVioletOver.png","../images/boutons/hypo/faireBleuOver.png","../images/boutons/hypo/faireRougeOver.png"]
+		@tabValiderHypo = ["../images/boutons/hypo/validerNoir.png","../images/boutons/hypo/validerViolet.png","../images/boutons/hypo/validerBleu.png","../images/boutons/hypo/validerRouge.png"]
+		@tabValiderHypoOver = ["../images/boutons/hypo/validerNoirOver.png","../images/boutons/hypo/validerVioletOver.png","../images/boutons/hypo/validerBleuOver.png","../images/boutons/hypo/validerRougeOver.png"]
+		@tabRejeterHypo = ["../images/boutons/hypo/rejeterNoir.png","../images/boutons/hypo/rejeterViolet.png","../images/boutons/hypo/rejeterBleu.png","../images/boutons/hypo/rejeterRouge.png"]
+		@tabRejeterHypoOver = ["../images/boutons/hypo/rejeterNoirOver.png","../images/boutons/hypo/rejeterVioletOver.png","../images/boutons/hypo/rejeterBleuOver.png","../images/boutons/hypo/rejeterRougeOver.png"]
+
 		initTimer()
 		lancerGrille()
   end
@@ -65,7 +72,6 @@ class Gui
   def onDestroy()
 
 		if @save_flag == true
-
 			save?()
 		end
 
@@ -623,49 +629,95 @@ class Gui
   #
   # Retour : la boite crée et initialisée
   def initBoxHypo()
-    boxHypo = Gtk::Box.new(:vertical,50)
+    boxHypo = Gtk::Box.new(:vertical,30)
     boxHypo.add(Gtk::Label.new())
 
-    hbox2 = Gtk::Box.new(:horizontal,10)
-    bFaire = Gtk::Button.new().set_label("Faire hypothese").set_size_request(100,10).set_xalign(0.5)
-    bFaire.signal_connect("clicked"){
+		#Création du boutton Faire hypothese
+		iFaireHypo = Gtk::Image.new(:file => @tabFaireHypo[@nbHypo])
+		@bFaireHypo = Gtk::EventBox.new.add(iFaireHypo)
+		@bFaireHypo.signal_connect("enter_notify_event"){
+			@bFaireHypo.remove(@bFaireHypo.child)
+			@bFaireHypo.child = Gtk::Image.new(:file => @tabFaireHypoOver[@nbHypo])
+			@bFaireHypo.show_all
+		}
+		@bFaireHypo.signal_connect("leave_notify_event"){
+			@bFaireHypo.remove(@bFaireHypo.child)
+			@bFaireHypo.child = Gtk::Image.new(:file => @tabFaireHypo[@nbHypo])
+			@bFaireHypo.show_all
+		}
+		@bFaireHypo.signal_connect("button_press_event") do
 			if @nbHypo < 3
 				@nbHypo += 1
+				changeBoutonHypo()
 				@map = @hypo.faireHypothese()
 			end
-		}
-    hbox2.add(bFaire)
-		boxHypo.add(hbox2)
+		end
+		boxHypo.add(@bFaireHypo)
 
-    hbox3 = Gtk::Box.new(:horizontal,10)
-    bValider = Gtk::Button.new().set_label("Valider hypothese").set_size_request(100,10).set_xalign(0.5)
-    bValider.signal_connect("clicked"){
+		#Création du boutton Valider hypothese
+		iValiderHypo = Gtk::Image.new(:file => @tabValiderHypo[@nbHypo])
+		@bValiderHypo = Gtk::EventBox.new.add(iValiderHypo)
+		@bValiderHypo.signal_connect("enter_notify_event"){
+			@bValiderHypo.remove(@bValiderHypo.child)
+			@bValiderHypo.child = Gtk::Image.new(:file => @tabValiderHypoOver[@nbHypo])
+			@bValiderHypo.show_all
+		}
+		@bValiderHypo.signal_connect("leave_notify_event"){
+			@bValiderHypo.remove(@bValiderHypo.child)
+			@bValiderHypo.child = Gtk::Image.new(:file => @tabValiderHypo[@nbHypo])
+			@bValiderHypo.show_all
+		}
+		@bValiderHypo.signal_connect("button_press_event") do
 			if @nbHypo > 0
 				@nbHypo -= 1
+				changeBoutonHypo()
 				@map = @hypo.validerHypothese()
 	      actuMap()
 			end
-		}
-    hbox3.add(bValider)
-    boxHypo.add(hbox3)
+		end
+		boxHypo.add(@bValiderHypo)
 
-    hbox4 = Gtk::Box.new(:horizontal,10)
-    bRejeter = Gtk::Button.new().set_label("Rejeter hypothese").set_size_request(100,10).set_xalign(0.5)
-    bRejeter.signal_connect("clicked"){
+		#Création du boutton Rejeter hypothese
+		iRejeterHypo = Gtk::Image.new(:file => @tabRejeterHypo[@nbHypo])
+		@bRejeterHypo = Gtk::EventBox.new.add(iRejeterHypo)
+		@bRejeterHypo.signal_connect("enter_notify_event"){
+			@bRejeterHypo.remove(@bRejeterHypo.child)
+			@bRejeterHypo.child = Gtk::Image.new(:file => @tabRejeterHypoOver[@nbHypo])
+			@bRejeterHypo.show_all
+		}
+		@bRejeterHypo.signal_connect("leave_notify_event"){
+			@bRejeterHypo.remove(@bRejeterHypo.child)
+			@bRejeterHypo.child = Gtk::Image.new(:file => @tabRejeterHypo[@nbHypo])
+			@bRejeterHypo.show_all
+		}
+		@bRejeterHypo.signal_connect("button_press_event") do
 			if @nbHypo > 0
 				@nbHypo -= 1
+				changeBoutonHypo()
 				@map = @hypo.rejeterHypothese()
         actuMap()
 			end
-		}
-    hbox4.add(bRejeter)
-    boxHypo.add(hbox4)
+		end
+    boxHypo.add(@bRejeterHypo)
 
     boxHypo.name = "boxHypo"
 
     return boxHypo
-
   end
+
+	def changeBoutonHypo()
+		@bFaireHypo.remove(@bFaireHypo.child)
+		@bFaireHypo.child = Gtk::Image.new(:file => @tabFaireHypo[@nbHypo])
+		@bFaireHypo.show_all
+
+		@bValiderHypo.remove(@bValiderHypo.child)
+		@bValiderHypo.child = Gtk::Image.new(:file => @tabValiderHypo[@nbHypo])
+		@bValiderHypo.show_all
+
+		@bRejeterHypo.remove(@bRejeterHypo.child)
+		@bRejeterHypo.child = Gtk::Image.new(:file => @tabRejeterHypo[@nbHypo])
+		@bRejeterHypo.show_all
+	end
 
   ##
   # Crée la grille en format gtk
