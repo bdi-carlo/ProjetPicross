@@ -8,9 +8,11 @@ load "GtkMap.rb"
 
 class MenuChoixGrille < Menu
 
-  def initialize(game)
+  def initialize(game, indiceTypeJeu)
 		super(game)
+		@indiceTypeJeu = indiceTypeJeu
 		@vListe = nil
+		@flagListe = false
 		lancerFenetre()
 	end
 
@@ -18,6 +20,8 @@ class MenuChoixGrille < Menu
 		puts("Creation fenetre Choix Grille")
 
 		@window = creerWindow()
+
+		appliqueProvider(@window)
 
 		grid = Gtk::Grid.new
 		@hb = Gtk::Box.new(:horizontal, 10)
@@ -35,20 +39,29 @@ class MenuChoixGrille < Menu
 		@vb.add(lPseudo)
 
 		#Label d'espacement
-		@vb.add(Gtk::Label.new("\n\n\n"))
+		@vb.add(Gtk::Label.new("\n"))
+
+		@vb.add(Gtk::Label.new.set_markup("<big><big><span foreground='black'>Choix type de grille#{"\n\n"}</span></big></big>"))
 
 		#Radio buttons
 		@hb2 = Gtk::Box.new(:horizontal, 10)
 		@vb2 = Gtk::Box.new(:vertical, 5)
 		@facile = Gtk::RadioButton.new(:label => "Niveau Facile")
+		@facile.child.set_markup("<span foreground='white'>Niveau Facile</span>")
     @moyen = Gtk::RadioButton.new(:member => @facile, :label => "Niveau Moyen")
+		@moyen.child.set_markup("<span foreground='white'>Niveau Moyen</span>")
     @difficile = Gtk::RadioButton.new(:member => @facile, :label => "Niveau Difficile")
+		@difficile.child.set_markup("<span foreground='white'>Niveau Difficile</span>")
 		@vb2.add(@facile).add(@moyen).add(@difficile)
 		@vb3 = Gtk::Box.new(:vertical, 5)
 		@cinq = Gtk::RadioButton.new(:label => "5 X 5")
+		@cinq.child.set_markup("<span foreground='white'>5 X 5</span>")
     @dix = Gtk::RadioButton.new(:member => @cinq, :label => "10 X 10")
+		@dix.child.set_markup("<span foreground='white'>10 X 10</span>")
     @quinze = Gtk::RadioButton.new(:member => @cinq, :label => "15 X 15")
+		@quinze.child.set_markup("<span foreground='white'>15 X 15</span>")
 		@vingt = Gtk::RadioButton.new(:member => @cinq, :label => "20 X 20")
+		@vingt.child.set_markup("<span foreground='white'>20 X 20</span>")
 		@vb3.add(@cinq).add(@dix).add(@quinze).add(@vingt)
 
 		@hb2.add(@vb2).add(@vb3)
@@ -67,23 +80,76 @@ class MenuChoixGrille < Menu
 			@bConfirmer.child = Gtk::Image.new(:file => "../images/boutons/confirmer.png")
 			@bConfirmer.show_all
 		}
+		@vb.add(@bConfirmer)
+
+		#Création du boutton RETOUR
+		iRetour = Gtk::Image.new(:file => "../images/boutons/retour.png")
+		@bRetour = Gtk::EventBox.new.add(iRetour)
+		@bRetour.signal_connect("enter_notify_event"){
+			@bRetour.remove(@bRetour.child)
+			@bRetour.child = Gtk::Image.new(:file => "../images/boutons/retourOver.png")
+			@bRetour.show_all
+		}
+		@bRetour.signal_connect("leave_notify_event"){
+			@bRetour.remove(@bRetour.child)
+			@bRetour.child = Gtk::Image.new(:file => "../images/boutons/retour.png")
+			@bRetour.show_all
+		}
+		@bRetour.signal_connect("button_press_event") do
+			@window.destroy
+			onDestroy()
+		end
+		@vb.add(@bRetour)
+
 		@bConfirmer.signal_connect("button_press_event") do
 			#Récupération de la liste des grilles suivant le choix
 			if @facile.active?
+				if @cinq.active?
+					afficheListeFichier("../grilles/facile/5x5")
+				end
 				if @dix.active?
-					puts "test"
-					@vListe = vListeFichier("../grilles/facile/10x10")
+					afficheListeFichier("../grilles/facile/10x10")
+				end
+				if @quinze.active?
+					afficheListeFichier("../grilles/facile/15x15")
+				end
+				if @vingt.active?
+					afficheListeFichier("../grilles/facile/20x20")
+				end
+			end
+			if @moyen.active?
+				if @cinq.active?
+					afficheListeFichier("../grilles/moyen/5x5")
+				end
+				if @dix.active?
+					afficheListeFichier("../grilles/moyen/10x10")
+				end
+				if @quinze.active?
+					afficheListeFichier("../grilles/moyen/15x15")
+				end
+				if @vingt.active?
+					afficheListeFichier("../grilles/moyen/20x20")
+				end
+			end
+			if @difficile.active?
+				if @cinq.active?
+					afficheListeFichier("../grilles/difficile/5x5")
+				end
+				if @dix.active?
+					afficheListeFichier("../grilles/difficile/10x10")
+				end
+				if @quinze.active?
+					afficheListeFichier("../grilles/difficile/15x15")
+				end
+				if @vingt.active?
+					afficheListeFichier("../grilles/difficile/20x20")
 				end
 			end
 		end
 
-		@vb.add(@bConfirmer)
-		if @vListe != nil
-			puts "pas nil"
-			@vb.add(@vListe)
-		end
-
 		@hb.add(@vb)
+
+		@hb.add(Gtk::Label.new("\t\t\t\t\t\t\t\t"))
 
 		grid.attach(@hb,0,0,1,1)
 
@@ -100,17 +166,36 @@ class MenuChoixGrille < Menu
 	##
 	#Méthode qui retourne une vbox contenant la liste des fichiers d'un répertoire
 	#Param : le répertoire
-	def vListeFichier( unRepertoire )
+	def afficheListeFichier( unRepertoire )
+		if @flagListe
+			@hb.remove(@hb.children.last)
+		end
 		vb = Gtk::Box.new(:vertical, 5)
-		vb.add(Gtk::Label.new.set_markup("<big><big><span foreground='black'>Liste des grilles#{"\n\n"}</span></big></big>"))
+		vb.add(Gtk::Label.new.set_markup("<big><big><span foreground='black'>#{"\n\n\n\n\n\n\n\n\n\n"}Liste des grilles#{"\n"}</span></big></big>"))
 		allGrids = Dir.entries(unRepertoire)
 		allGrids.delete(".")
 		allGrids.delete("..")
-		allGrids.each{ |elt|
-			puts elt
-			vb.add(Gtk::Label.new.set_markup("<span foreground='white'>#{elt}</span>"))
-		}
-		return vb
+		allGrids.delete("index")
+		if allGrids.length == 0
+			vb.add(Gtk::Label.new.set_markup("<big><b><span foreground='white'>Pas de grille disponible</span></b></big>"))
+		else
+			allGrids.each{ |elt|
+				lab = Gtk::Label.new.set_markup("<big><b><span foreground='white'>#{elt}</span></b></big>")
+				event = Gtk::EventBox.new.add(lab)
+				event.signal_connect("button_press_event") do
+					#0 = normal
+					if @indiceTypeJeu == 0
+						Gui.new(0, @jeu.pseudo, unRepertoire+"/"+elt, 1, 0, nil, nil, nil)
+					elsif @indiceTypeJeu == 1
+						Gui.new(0, @jeu.pseudo, unRepertoire+"/"+elt, 1, 0, nil, nil, nil)
+					end
+				end
+				vb.add(event)
+			}
+		end
+		@flagListe = true
+		@hb.add(vb)
+		@window.show_all
 	end
 
 end

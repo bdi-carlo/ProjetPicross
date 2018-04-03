@@ -68,7 +68,7 @@ class MenuJouer < Menu
 		}
 		@bCompetition.signal_connect("button_press_event") do
 			@window.destroy
-      MenuChoixGrille.new(@jeu)
+      MenuChoixGrille.new(@jeu,1)
       onDestroy()
 		end
 		vb.add(@bCompetition)
@@ -84,7 +84,7 @@ class MenuJouer < Menu
 		}
 		@bNormal.signal_connect("button_press_event") do
 			@window.destroy
-      Gui.new(0, @jeu.pseudo, "../grilles/facile/10x10/Neuf", 1, 0, nil, nil, nil)
+      MenuChoixGrille.new(@jeu,0)
       onDestroy()
 		end
 		vb.add(@bNormal)

@@ -72,8 +72,8 @@ class Gui
 		dialog = Gtk::Dialog.new("Sauvegarde?",
                              $main_application_window,
                              Gtk::DialogFlags::MODAL | Gtk::DialogFlags::DESTROY_WITH_PARENT,
-                             [ Gtk::Stock::YES, Gtk::ResponseType::NONE ],
-													 	 [ Gtk::Stock::NO, Gtk::ResponseType::NONE ])
+                             [ Gtk::Stock::YES, Gtk::ResponseType::ACCEPT ],
+													 	 [ Gtk::Stock::NO, Gtk::ResponseType::REJECT ])
 		dialog.set_window_position(:center_always)
 
     # Ensure that the dialog box is destroyed when the user responds.
@@ -83,8 +83,10 @@ class Gui
 
 		dialog.show_all
 
-		dialog.signal_connect('response') {
-			sauvegarder( @pseudo+"_"+recupNom(@cheminMap) )
+		dialog.signal_connect('response') { |dial,rep|
+			if rep == -3
+				sauvegarder( @pseudo+"_"+recupNom(@cheminMap) )
+			end
 			dialog.destroy
 		}
 
@@ -98,10 +100,6 @@ class Gui
 
     @window.resizable=FALSE
     @window.set_window_position(:center_always)
-    # Création du css
-    #@provider = Gtk::CssProvider.new
-    #@window.border_width=10
-    #Le 10 donne une marge pas mal, c'est proportionel à la taille de la fenetre
 
 		grid = Gtk::Grid.new
 		hb = Gtk::Box.new(:horizontal, 10)
@@ -180,9 +178,6 @@ class Gui
 
     # Quand la fenetre est détruite il faut quitter
     @window.signal_connect('destroy') {onDestroy}
-
-    #Boucle
-    #apply_style(@window, @provider)
 
     Gtk.main
 	end
@@ -628,15 +623,6 @@ class Gui
     end
     return grid
   end
-
-=begin  def apply_style(widget, provider)
-    style_context = widget.style_context
-    style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
-    return unless widget.respond_to?(:children)
-    widget.children.each do |child|
-      apply_style(child, provider)
-    end
-=end
 
   def actuMap()
     0.upto(@map.rows-1) do |x|
