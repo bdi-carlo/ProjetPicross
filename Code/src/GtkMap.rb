@@ -63,7 +63,7 @@ class Gui
   ##
   # Callback de la fermeture de l'appli
   def onDestroy()
-  
+
 		if @save_flag == true
 
 			save?()
@@ -243,7 +243,7 @@ class Gui
           dialog.destroy
           @save_flag = false;
           puts "Attention !"
-					onDestroy()
+					@window.destroy
 
 
          }
@@ -351,7 +351,7 @@ class Gui
 						puts "Fermeture picross sur victoire"
             dialog.destroy
             @save_flag = false
-						onDestroy()
+						@window.destroy
           }
           res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
 
