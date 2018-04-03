@@ -263,7 +263,7 @@ class Gui
           @buttonTab[x][y].remove(@buttonTab[x][y].child)
           @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/blancOver5_5.png"))
           @buttonTab[x][y].show_all
-        elsif(x != 4 && y != 4) 
+        elsif(x != 4 && y != 4)
           @buttonTab[x][y].remove(@buttonTab[x][y].child)
           @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/blancOver.png"))
           @buttonTab[x][y].show_all
@@ -378,16 +378,53 @@ class Gui
   end
 
   def onLeave(x,y,button)
-    @buttonTab[x][y].remove(@buttonTab[x][y].child)
-    #print "path = #{@tabCase[@map.accessAt(x,y).color]}\n"
-    if @map.accessAt(x,y).value == 1
-      @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@map.accessAt(x,y).color]))
-    elsif @map.accessAt(x,y).value == 0
-      @buttonTab[x][y].child =(Gtk::Image.new(:file => "../images/cases/blanc.png"))
+    if (@map.accessAt(x,y).value == 1)
+    #  print "color =#{@map.accessAt(x,y).color}\n"
+      if @map.accessAt(x,y).color != nil
+        if (@map.accessAt(x,y).color == @nbHypo + 1)
+          @timePress[x][y] = 1
+          @map.accessAt(x,y).color = @nbHypo
+        end
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          #print "path = #{@tabCase[@map.accessAt(x,y).color]}\n"
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@map.accessAt(x,y).color]))
+          @buttonTab[x][y].show_all
+
+      else
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blanc.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+      end
+    elsif @map.accessAt(x,y).value == 2
+      @buttonTab[x][y].remove(@buttonTab[x][y].child)
+      @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/croix.png" ))
+      @timePress[x][y] = 0
+      @buttonTab[x][y].show_all
+
     else
-      @buttonTab[x][y].child =(Gtk::Image.new(:file => "../images/cases/croix.png"))
+     if(x == 4 && y != 4)
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+      elsif(x != 4 && y == 4)
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5verticale.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+      elsif(x == 4 && y == 4)
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5_5.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+      else
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blanc.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+      end
     end
-    @buttonTab[x][y].show_all
   end
 
   def aide1()
@@ -654,7 +691,7 @@ class Gui
         }
 
         button.signal_connect("leave_notify_event"){
-            actuMap()
+            onLeave(x,y,Gtk.current_event)
         }
 
         i+=1
