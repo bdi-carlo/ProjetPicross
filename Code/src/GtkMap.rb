@@ -62,9 +62,12 @@ class Gui
 
   ##
   # Callback de la fermeture de l'appli
-  def onDestroy
+  def onDestroy(indice)
     puts "Fermeture picross"
-		save?()
+		if indice == 1
+			save?()
+		end
+		@window.destroy
     Gtk.main_quit
 		MenuPrincipal.new(@pseudo)
   end
@@ -89,7 +92,6 @@ class Gui
 				sauvegarder( @pseudo+"_"+recupNom(@cheminMap) )
 			end
 			dialog.destroy
-      Gtk.main_quit
 		}
 
 	end
@@ -179,7 +181,7 @@ class Gui
     @window.show_all
 
     # Quand la fenetre est détruite il faut quitter
-    @window.signal_connect('destroy') {onDestroy}
+    @window.signal_connect('destroy') {onDestroy(1)}
 
     Gtk.main
 	end
@@ -230,12 +232,10 @@ class Gui
 
         # Ensure that the dialog box is destroyed when the user responds.
         dialog.signal_connect('response') {
-          supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
+					supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
+					puts "Fermeture picross sur victoire"
 					dialog.destroy
-					MenuPrincipal.new(@pseudo)
-          @window.destroy
-					Gtk.main_quit
-          puts "Fermeture picross sur victoire"
+					onDestroy(0)
          }
         res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
 
@@ -338,10 +338,9 @@ class Gui
           # Ensure that the dialog box is destroyed when the user responds.
           dialog.signal_connect('response') {
 						supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
-						onDestroy()
-						MenuPrincipal.new(@jeu)
 						puts "Fermeture picross sur victoire"
             dialog.destroy
+						onDestroy(0)
           }
           res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
 

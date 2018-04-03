@@ -51,8 +51,8 @@ class MenuJouer < Menu
 		}
 		#Lorsque l'on clique sur le bouton
 		@bAventure.signal_connect("button_press_event") do
-      Aventure.new(@pseudo)
 			onDestroy()
+      Aventure.new(@pseudo)
 		end
 		vb.add(@bAventure)
 
@@ -66,8 +66,8 @@ class MenuJouer < Menu
 			onLeave(@bCompetition)
 		}
 		@bCompetition.signal_connect("button_press_event") do
-      MenuChoixGrille.new(@pseudo,1)
 			onDestroy()
+      MenuChoixGrille.new(@pseudo,1)
 		end
 		vb.add(@bCompetition)
 
@@ -81,8 +81,8 @@ class MenuJouer < Menu
 			onLeave(@bNormal)
 		}
 		@bNormal.signal_connect("button_press_event") do
-      MenuChoixGrille.new(@pseudo,0)
 			onDestroy()
+			MenuChoixGrille.new(@pseudo,0)
 		end
 		vb.add(@bNormal)
 
@@ -107,8 +107,8 @@ class MenuJouer < Menu
 			onLeave(@bRetour)
 		}
 		@bRetour.signal_connect("button_press_event") do
-			MenuPrincipal.new(@pseudo)
 			onDestroy()
+			MenuPrincipal.new(@pseudo)
 		end
 		vb.add(@bRetour)
 

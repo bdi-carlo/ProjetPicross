@@ -186,8 +186,10 @@ class MenuChoixGrille < Menu
 				event.signal_connect("button_press_event") do
 					#0 = normal
 					if @indiceTypeJeu == 0
+						onDestroy()
 						Gui.new(0, @pseudo, unRepertoire+"/"+elt, 1, 0, nil, nil, nil)
 					elsif @indiceTypeJeu == 1
+						onDestroy()
 						Gui.new(0, @pseudo, unRepertoire+"/"+elt, 1, 0, nil, nil, nil)
 					end
 				end

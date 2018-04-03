@@ -94,8 +94,8 @@ class MenuCharger < Menu
 			@bRetour.show_all
 		}
 		@bRetour.signal_connect("button_press_event") do
-			MenuPrincipal.new(@pseudo)
 			onDestroy()
+			MenuPrincipal.new(@pseudo)
 		end
 		vb.add(@bRetour)
 
