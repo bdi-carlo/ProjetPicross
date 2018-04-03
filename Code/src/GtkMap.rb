@@ -332,11 +332,19 @@ class Gui
         end
       end
       if button.button==3
-        @buttonTab[x][y].remove(@buttonTab[x][y].child)
-        @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/croix.png"))
-        @buttonTab[x][y].show_all
-        @map.putAt!(x,y,Case.create(2))
-        @timePress[x][y]= 0
+				if @map.accessAt(x,y).value != 2
+	        @buttonTab[x][y].remove(@buttonTab[x][y].child)
+	        @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/croix.png"))
+	        @buttonTab[x][y].show_all
+	        @map.putAt!(x,y,Case.create(2))
+	        @timePress[x][y]= 0
+				else
+					@buttonTab[x][y].remove(@buttonTab[x][y].child)
+				 	@buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/blanc.png"))
+				 	@buttonTab[x][y].show_all
+				 	@map.putAt!(x,y,Case.create(0))
+				 	@timePress[x][y]= 0
+			 end
       end
     else
       indice = IndiceFort.create(@map,x,y)
