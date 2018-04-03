@@ -1,0 +1,680 @@
+--- !ruby/object:Map
+side:
+- []
+- []
+- []
+- - 10
+- - 10
+- - 4
+  - 4
+- - 3
+  - 3
+- - 2
+  - 2
+- - 1
+  - 1
+- - 1
+  - 1
+top:
+- - 7
+- - 5
+- - 4
+- - 3
+- - 2
+- - 2
+- - 3
+- - 4
+- - 5
+- - 7
+res:
+- - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+- - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+- - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+- - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+- - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+- - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+- - 1
+  - 1
+  - 1
+  - 0
+  - 0
+  - 0
+  - 0
+  - 1
+  - 1
+  - 1
+- - 1
+  - 1
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 1
+  - 1
+- - 1
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 1
+- - 1
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 1
+filename: "../grilles/scenario/Pont"
+rows: 10
+cols: 10
+map:
+- - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+- - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+- - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+- - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+- - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+- - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+- - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+- - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+- - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+- - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+***
+--- !ruby/object:Hypothese
+grillePrim: !ruby/object:Map
+  side:
+  - []
+  - []
+  - []
+  - - 10
+  - - 10
+  - - 4
+    - 4
+  - - 3
+    - 3
+  - - 2
+    - 2
+  - - 1
+    - 1
+  - - 1
+    - 1
+  top:
+  - - 7
+  - - 5
+  - - 4
+  - - 3
+  - - 2
+  - - 2
+  - - 3
+  - - 4
+  - - 5
+  - - 7
+  res:
+  - - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+  - - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+  - - 1
+    - 1
+    - 1
+    - 1
+    - 0
+    - 0
+    - 1
+    - 1
+    - 1
+    - 1
+  - - 1
+    - 1
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 1
+    - 1
+  - - 1
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 1
+  - - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+  - - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+  filename: "../grilles/scenario/Pont"
+  rows: 10
+  cols: 10
+  map:
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+grillesHypothese: []
+***
+sqd
+***
+1
+***
+4
+***
+../grilles/scenario/Pont
+***
+0
+***
