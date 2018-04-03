@@ -89,6 +89,7 @@ class Gui
 				sauvegarder( @pseudo+"_"+recupNom(@cheminMap) )
 			end
 			dialog.destroy
+      Gtk.main_quit
 		}
 
 	end
