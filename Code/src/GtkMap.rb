@@ -31,7 +31,7 @@ class Gui
 		@start = start
 		@cheminMap = cheminMap
 		@pseudo = pseudo
-
+    @save_flag=true
 		if charge == 0 then
 			@nbHypo = 0
 			@map = Map.create(cheminMap)
@@ -62,13 +62,17 @@ class Gui
 
   ##
   # Callback de la fermeture de l'appli
-  def onDestroy(indice)
-    puts "Fermeture picross"
-		if indice == 1
+  def onDestroy()
+  
+		if @save_flag == true
+
 			save?()
 		end
-		@window.destroy
+
     Gtk.main_quit
+    puts "Ah bon ?"
+    @window.destroy
+    puts "-----------Fais iech"
 		MenuPrincipal.new(@pseudo)
   end
 
@@ -91,6 +95,7 @@ class Gui
 			if rep == -3
 				sauvegarder( @pseudo+"_"+recupNom(@cheminMap) )
 			end
+      puts "dialog destroy"
 			dialog.destroy
 		}
 
@@ -181,7 +186,7 @@ class Gui
     @window.show_all
 
     # Quand la fenetre est détruite il faut quitter
-    @window.signal_connect('destroy') {onDestroy(1)}
+    @window.signal_connect('destroy') {onDestroy}
 
     Gtk.main
 	end
@@ -228,14 +233,19 @@ class Gui
         dialog = Gtk::Dialog.new("Bravo",
                                  $main_application_window,
                                  Gtk::DialogFlags::DESTROY_WITH_PARENT,
-                                 [ Gtk::Stock::OK, Gtk::ResponseType::NONE ])
+                                 [ Gtk::Stock::OK, Gtk::ResponseType::ACCEPT ])
 
         # Ensure that the dialog box is destroyed when the user responds.
-        dialog.signal_connect('response') {
+        dialog.signal_connect('response') { |elt,rep|
+          puts (rep)
 					supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
 					puts "Fermeture picross sur victoire"
-					dialog.destroy
-					onDestroy(0)
+          dialog.destroy
+          @save_flag = false;
+          puts "Attention !"
+					onDestroy()
+
+
          }
         res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
 
@@ -340,7 +350,8 @@ class Gui
 						supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
 						puts "Fermeture picross sur victoire"
             dialog.destroy
-						onDestroy(0)
+            @save_flag = false
+						onDestroy()
           }
           res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
 
