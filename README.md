@@ -2,5 +2,7 @@
 # ProjetPicross
 
 To launch the game do this command in a terminal:
+
 cd Code/src
+
 make
