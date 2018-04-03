@@ -9,8 +9,8 @@ load "GtkMenuCharger.rb"
 
 class MenuPrincipal < Menu
 
-  def initialize(game)
-		super(game)
+  def initialize(pseudo)
+		super(pseudo)
 		lancerFenetre()
   end
 
@@ -31,7 +31,7 @@ class MenuPrincipal < Menu
 
 		#Label du pseudo
 		lPseudo = Gtk::Label.new
-		lPseudo.set_markup("<big><i><big><b><span foreground='white'>#{@jeu.pseudo}</span></b></big></i></big>")
+		lPseudo.set_markup("<big><i><big><b><span foreground='white'>#{@pseudo}</span></b></big></i></big>")
 		vb.add(lPseudo)
 
 		#Label d'espacement
@@ -48,9 +48,8 @@ class MenuPrincipal < Menu
 		}
 		#Lorsque l'on clique sur le bouton
 		@bNew.signal_connect("button_press_event") do
-        @window.hide
-        MenuJouer.new(@jeu)
-        @window.show_all
+				onDestroy()
+        MenuJouer.new(@pseudo)
     end
 		vb.add(@bNew)
 
@@ -64,9 +63,8 @@ class MenuPrincipal < Menu
 			onLeave(@bCharger)
 		}
 		@bCharger.signal_connect("button_press_event") do
-        @window.hide
-        MenuCharger.new(@jeu)
-        @window.show_all
+				onDestroy()
+				MenuCharger.new(@pseudo)
     end
 		vb.add(@bCharger)
 

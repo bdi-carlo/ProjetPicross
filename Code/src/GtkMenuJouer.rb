@@ -11,8 +11,8 @@ load "GtkMenuChoixGrille.rb"
 
 class MenuJouer < Menu
 
-  def initialize(game)
-		super(game)
+  def initialize(pseudo)
+		super(pseudo)
 		lancerFenetre()
 	end
 
@@ -33,7 +33,7 @@ class MenuJouer < Menu
 
 		#Label du pseudo
 		lPseudo = Gtk::Label.new
-		lPseudo.set_markup("<big><i><big><b><span foreground='white'>#{@jeu.pseudo}</span></b></big></i></big>")
+		lPseudo.set_markup("<big><i><big><b><span foreground='white'>#{@pseudo}</span></b></big></i></big>")
 		#lPseudo.wrap = true
 		vb.add(lPseudo)
 
@@ -51,9 +51,8 @@ class MenuJouer < Menu
 		}
 		#Lorsque l'on clique sur le bouton
 		@bAventure.signal_connect("button_press_event") do
-			@window.destroy
-      Aventure.new(@jeu.pseudo)
-      onDestroy()
+      Aventure.new(@pseudo)
+			onDestroy()
 		end
 		vb.add(@bAventure)
 
@@ -67,9 +66,8 @@ class MenuJouer < Menu
 			onLeave(@bCompetition)
 		}
 		@bCompetition.signal_connect("button_press_event") do
-			@window.destroy
-      MenuChoixGrille.new(@jeu,1)
-      onDestroy()
+      MenuChoixGrille.new(@pseudo,1)
+			onDestroy()
 		end
 		vb.add(@bCompetition)
 
@@ -83,9 +81,8 @@ class MenuJouer < Menu
 			onLeave(@bNormal)
 		}
 		@bNormal.signal_connect("button_press_event") do
-			@window.destroy
-      MenuChoixGrille.new(@jeu,0)
-      onDestroy()
+      MenuChoixGrille.new(@pseudo,0)
+			onDestroy()
 		end
 		vb.add(@bNormal)
 
@@ -110,7 +107,7 @@ class MenuJouer < Menu
 			onLeave(@bRetour)
 		}
 		@bRetour.signal_connect("button_press_event") do
-			@window.destroy
+			MenuPrincipal.new(@pseudo)
 			onDestroy()
 		end
 		vb.add(@bRetour)

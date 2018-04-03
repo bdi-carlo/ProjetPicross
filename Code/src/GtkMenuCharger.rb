@@ -11,8 +11,8 @@ load "Menu.rb"
 
 class MenuCharger < Menu
 
-  def initialize(game)
-		super(game)
+  def initialize(pseudo)
+		super(pseudo)
 		lancerFenetre()
 	end
 
@@ -33,7 +33,7 @@ class MenuCharger < Menu
 
 		#Label du pseudo
 		lPseudo = Gtk::Label.new
-		lPseudo.set_markup("<big><i><big><b><span foreground='white'>#{@jeu.pseudo}</span></b></big></i></big>")
+		lPseudo.set_markup("<big><i><big><b><span foreground='white'>#{@pseudo}</span></b></big></i></big>")
 		#lPseudo.wrap = true
 		vb.add(lPseudo)
 
@@ -48,7 +48,7 @@ class MenuCharger < Menu
 		indice = false
 		allSaves.each{ |elt|
 			tmp = elt.split('_')
-			if tmp[0] == @jeu.pseudo
+			if tmp[0] == @pseudo
 				indice = true
 				vb.add(Gtk::Label.new.set_markup("<span foreground='white'>#{tmp[1]}</span>"))
 			end
@@ -75,7 +75,7 @@ class MenuCharger < Menu
 				@bJouer.show_all
 			}
 			@bJouer.signal_connect("button_press_event") do
-				charger("../sauvegardes/"+@jeu.pseudo+"_"+@save.text)
+				charger("../sauvegardes/"+@pseudo+"_"+@save.text)
 			end
 			vb.add(@bJouer)
 		end
@@ -94,7 +94,7 @@ class MenuCharger < Menu
 			@bRetour.show_all
 		}
 		@bRetour.signal_connect("button_press_event") do
-			@window.destroy
+			MenuPrincipal.new(@pseudo)
 			onDestroy()
 		end
 		vb.add(@bRetour)
