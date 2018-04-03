@@ -680,11 +680,11 @@ grillePrim: !ruby/object:Map
       value: 0
 grillesHypothese: []
 ***
-test
+t
 ***
 1
 ***
-3
+91
 ***
 ../grilles/10x10/Neuf
 ***

@@ -84,7 +84,7 @@ class MenuJouer < Menu
 		}
 		@bNormal.signal_connect("button_press_event") do
 			@window.destroy
-      Gui.new(0, @jeu.pseudo, "../grilles/10x10/Neuf", 1, 0, nil, nil, nil)
+      Gui.new(0, @jeu.pseudo, "../grilles/facile/10x10/Neuf", 1, 0, nil, nil, nil)
       onDestroy()
 		end
 		vb.add(@bNormal)

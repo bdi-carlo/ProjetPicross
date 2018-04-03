@@ -29,7 +29,7 @@ class MenuCharger < Menu
 		hb.add(Gtk::Label.new(" "))
 
 		#Label de bordure
-		vb.add(Gtk::Label.new("\n"))
+		vb.add(Gtk::Label.new(""))
 
 		#Label du pseudo
 		lPseudo = Gtk::Label.new
@@ -38,10 +38,10 @@ class MenuCharger < Menu
 		vb.add(lPseudo)
 
 		#Label d'espacement
-		vb.add(Gtk::Label.new("\n\n\n"))
+		vb.add(Gtk::Label.new("\n"))
 
 		#Récupération de la liste des sauvegardes concercant le pseudo du joueur
-		vb.add(Gtk::Label.new.set_markup("<big><big><span >Liste de vos sauvegardes#{"\n\n"}</span></big></big>"))
+		vb.add(Gtk::Label.new.set_markup("<big><big><span foreground='black'>Liste de vos sauvegardes#{"\n\n"}</span></big></big>"))
 		allSaves = Dir.entries("../sauvegardes")
 		allSaves.delete(".")
 		allSaves.delete("..")
@@ -54,11 +54,11 @@ class MenuCharger < Menu
 			end
 		}
 		if indice == false
-			vb.add(Gtk::Label.new.set_markup("<big><span >Aucune sauvegarde disponible</span></big>"))
+			vb.add(Gtk::Label.new.set_markup("<big><span foreground='white'>Aucune sauvegarde disponible</span></big>"))
 
 		else
 			#Création entrer pour mettre le nom de la save désirée
-			@save = Gtk::Entry.new
+			@save = Gtk::Entry.new.set_text("Entrer le nom de la sauvegarde")
 			vb.add(@save)
 
 			#Création du bouton JOUER
