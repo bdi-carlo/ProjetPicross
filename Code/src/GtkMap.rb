@@ -355,6 +355,19 @@ class Gui
     end
   end
 
+  def onLeave(x,y,button)
+    @buttonTab[x][y].remove(@buttonTab[x][y].child)
+    #print "path = #{@tabCase[@map.accessAt(x,y).color]}\n"
+    if @map.accessAt(x,y).value == 1
+      @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@map.accessAt(x,y).color]))
+    elsif @map.accessAt(x,y).value == 0
+      @buttonTab[x][y].child =(Gtk::Image.new(:file => "../images/cases/blanc.png"))
+    else
+      @buttonTab[x][y].child =(Gtk::Image.new(:file => "../images/cases/croix.png"))
+    end
+    @buttonTab[x][y].show_all
+  end
+
   def aide1()
     indice = IndiceFaible.create(@map)
     dialog = Gtk::Dialog.new("Aide1",
@@ -548,7 +561,7 @@ class Gui
 		boxHypo.add(hbox2)
 
     hbox3 = Gtk::Box.new(:horizontal,10)
-    bValider = Gtk::Button.new().set_label("Valier hypothese").set_size_request(100,10).set_xalign(0.5)
+    bValider = Gtk::Button.new().set_label("Valider hypothese").set_size_request(100,10).set_xalign(0.5)
     bValider.signal_connect("clicked"){
 			if @nbHypo > 0
 				@nbHypo -= 1
@@ -610,7 +623,7 @@ class Gui
         }
 
         button.signal_connect("leave_notify_event"){
-          actuMap()
+            onLeave(x,y,Gtk.current_event)
         }
 
         i+=1

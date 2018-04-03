@@ -38,7 +38,7 @@ class GtkScoreboard
     hb = Gtk::Box.new(:horizontal, 40)
     button = Gtk::Button.new(:label => "  Facile  ", :use_underline => nil, :stock_id => nil)
     button.signal_connect "clicked" do
-      @jeu.setDifficulte(EASY)
+      @jeu.difficulte=("EASY")
       @window.hide
       GtkScoreBoarddiff.new(@jeu)
       onDestroy()
@@ -51,7 +51,7 @@ class GtkScoreboard
       hb2 = Gtk::Box.new(:horizontal, 40)
     button2 = Gtk::Button.new(:label => " Moyen ", :use_underline => nil, :stock_id => nil)
     button.signal_connect "clicked" do
-      @jeu.setDifficulte(NORMAL)
+      @jeu.difficulte=("NORMAL")
       @window.hide
       GtkScoreBoarddiff.new(@jeu)
       onDestroy()
@@ -64,7 +64,7 @@ class GtkScoreboard
       hb3 = Gtk::Box.new(:horizontal, 40)
       button3 = Gtk::Button.new(:label => "Difficile", :use_underline => nil, :stock_id => nil)
       button.signal_connect "clicked" do
-      @jeu.setDifficulte(HARD)
+      @jeu.difficulte=("HARD")
       @window.hide
       GtkScoreBoarddiff.new(@jeu)
       onDestroy()
