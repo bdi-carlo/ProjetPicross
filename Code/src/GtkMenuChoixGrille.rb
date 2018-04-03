@@ -85,8 +85,6 @@ class MenuChoixGrille < Menu
 
 		@hb.add(@vb)
 
-
-
 		grid.attach(@hb,0,0,1,1)
 
 		image = Gtk::Image.new(:file => "../images/wallpaper.jpg")

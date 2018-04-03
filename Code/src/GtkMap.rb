@@ -555,9 +555,11 @@ class Gui
     hbox3 = Gtk::Box.new(:horizontal,10)
     bValider = Gtk::Button.new().set_label("Valier hypothese").set_size_request(100,10).set_xalign(0.5)
     bValider.signal_connect("clicked"){
-			@nbHypo -= 1
-			@map = @hypo.validerHypothese()
-      actuMap()
+			if @nbHypo > 0
+				@nbHypo -= 1
+				@map = @hypo.validerHypothese()
+	      actuMap()
+			end
 		}
     hbox3.add(bValider)
     boxHypo.add(hbox3)
