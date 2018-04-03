@@ -26,14 +26,6 @@ class Menu
 		return window
 	end
 
-	def appliqueProvider(window)
-		@provider = Gtk::CssProvider.new
-		@provider.load :data => '.window{
-			color: #FFFFFF;
-		}'
-		apply_style(window, @provider)
-	end
-
 	##
 	# Callback de la fermeture de l'appli
 	def onDestroy
@@ -42,15 +34,6 @@ class Menu
 		#Quit 'propre'
 		@window.destroy
 		Gtk.main_quit
-	end
-
-	def apply_style(widget, provider)
-	    style_context = widget.style_context
-	    style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
-	    return unless widget.respond_to?(:children)
-	    widget.children.each do |child|
-	      apply_style(child, provider)
-			end
 	end
 
 end

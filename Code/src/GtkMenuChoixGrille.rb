@@ -13,6 +13,8 @@ class MenuChoixGrille < Menu
 		@indiceTypeJeu = indiceTypeJeu
 		@vListe = nil
 		@flagListe = false
+		@cursorPointer = Gdk::Cursor.new("pointer")
+		@cursorDefault = Gdk::Cursor.new("default")
 		lancerFenetre()
 	end
 
@@ -20,8 +22,6 @@ class MenuChoixGrille < Menu
 		puts("Creation fenetre Choix Grille")
 
 		@window = creerWindow()
-
-		appliqueProvider(@window)
 
 		grid = Gtk::Grid.new
 		@hb = Gtk::Box.new(:horizontal, 10)
@@ -183,6 +183,12 @@ class MenuChoixGrille < Menu
 			allGrids.each{ |elt|
 				lab = Gtk::Label.new.set_markup("<big><b><span foreground='white'>#{elt}</span></b></big>")
 				event = Gtk::EventBox.new.add(lab)
+				event.signal_connect("enter_notify_event"){
+					@window.window.set_cursor(@cursorPointer)
+				}
+				event.signal_connect("leave_notify_event"){
+					@window.window.set_cursor(@cursorDefault)
+				}
 				event.signal_connect("button_press_event") do
 					#0 = normal
 					if @indiceTypeJeu == 0
