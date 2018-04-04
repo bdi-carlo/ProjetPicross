@@ -36,10 +36,10 @@ class Menu
 	##
 	# Callback de la fermeture de l'appli
 	def onDestroy
-		puts "Fermeture fenetre"
-    puts "destroy menu"
+		#puts "Fermeture fenetre"
+    #puts "destroy menu"
 		#Quit 'propre'
-		@window.destroy
+		# @window.destroy JAMAIS SINON CA PLANTE
 		Gtk.main_quit
 	end
 

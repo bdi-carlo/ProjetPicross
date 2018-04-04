@@ -1,6 +1,7 @@
 load "ImgCmd.rb"
 load "PicCmd.rb"
-load "AskCmd.rb"
+
+# Commande du scénario
 class Instruction
   attr_reader :command
 

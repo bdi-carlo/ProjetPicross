@@ -183,7 +183,7 @@ class Map
   end
 
 	##
-	# Affiche la grille
+	# Affiche la grille dans le terminal
 	#
 	# Retourne nil
   def display
@@ -212,31 +212,3 @@ class Map
 
 
 end #Fin de Classe
-
-=begin
-	map = Map.create("./grilles/Test2x2")
-	print "Chiffres du dessus :\n"
-	print "#{map.getTop}\n"
-	print "Chiffres du cote :\n"
-	print "#{map.getSide}\n"
-	print "Nombre de colonnes :\n"
-	print "#{map.getCols}\n"
-	print "Nombre de lignes :\n"
-	print "#{map.getRows}\n"
-	print "Test de compare (erreur) : \n"
-	if map.compare
-	  print "Map Bonne\n"
-	else
-	  print "Map Fausse\n"
-	end
-	print "Correction de la grille :\n"
-	map.putAt!(1,0,Case.create(1))
-	map.putAt!(0,1,Case.create(1))
-	#map.putAt!(0,0,Case.create(1))
-	if map.compare
-	  print "Map Bonne\n"
-	else
-	  print "Map Fausse\n"
-	end
-	map.display
-=end

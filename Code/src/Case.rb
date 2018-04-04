@@ -4,6 +4,7 @@
 class Case
 
   # valeur d'une case: 0 = blanc, 1 = noir, 2 = barré
+	# Couleur d'une case : indice du tableau dans GtkMap
 	@value
 	attr_accessor :value
 	attr_accessor :color
@@ -36,7 +37,7 @@ class Case
   def
 
   ##
-  # redéfinition de l'affichage
+  # redéfinition de l'affichage terminal pour les tests
 	def to_s
 		if @value==0
       return " "

@@ -1,16 +1,16 @@
 load "ImgCmd.rb"
 load "PicCmd.rb"
-load "AskCmd.rb"
-load "Instruction.rb"
-class ScenarioCmd
 
+load "Instruction.rb"
+##
+# Classe permettant de faire fonctionner le pattern commande
+class ScenarioCmd
 
   def initialize(scenario)
     @scenar = scenario
     @buttons = {
       img: Instruction.new(ImgCmd.new(scenario)),
       pic: Instruction.new(PicCmd.new(scenario)),
-      ask: Instruction.new(AskCmd.new(scenario))
     }
   end
 
