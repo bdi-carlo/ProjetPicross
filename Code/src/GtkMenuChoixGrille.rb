@@ -188,14 +188,8 @@ class MenuChoixGrille < Menu
 					@window.window.set_cursor(@cursorDefault)
 				}
 				event.signal_connect("button_press_event") do
-					#0 = normal
-					if @indiceTypeJeu == 0
-						onDestroy()
-						Gui.new(0, @pseudo, unRepertoire+"/"+elt, 1, 0, nil, nil, nil)
-					elsif @indiceTypeJeu == 1
-						onDestroy()
-						Gui.new(0, @pseudo, unRepertoire+"/"+elt, 1, 0, nil, nil, nil)
-					end
+					#0 = normal, 1 = compet, 2 = aventure
+					Gui.new(@indiceTypeJeu, @pseudo, unRepertoire+"/"+elt, 1, 0, nil, nil, nil)
 				end
 				vb.add(event)
 			}
