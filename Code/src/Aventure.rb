@@ -1,7 +1,12 @@
 load "Scenario.rb"
 load "ScenarioCmd.rb"
 require 'gtk3'
+#Invocateur du Scénario
 class Aventure
+  ##
+  # Initialise la fonction
+  #
+  # Param : Pseudo du joueur
   def initialize(pseudo)
     scenar = ScenarioUI.new
     @window = Gtk::Window.new()
@@ -14,7 +19,7 @@ class Aventure
     @window.border_width=10
     @window.signal_connect('destroy') {onDestroy}
     cmd = ScenarioCmd.new(scenar)
-
+    # :img pour une image :pic pour un picross
     cmd.use_cmd(:img,["../images/scenario/Scenario1_1_1.png",@window])
     cmd.use_cmd(:img,["../images/scenario/Scenario1_1_2.png",@window])
     cmd.use_cmd(:pic,[pseudo,"../grilles/scenario/Pont",1,0])

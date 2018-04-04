@@ -2,8 +2,9 @@ load "ImgCmd.rb"
 load "PicCmd.rb"
 load "AskCmd.rb"
 load "Instruction.rb"
+##
+# Classe permettant de faire fonctionner le pattern commande
 class ScenarioCmd
-
 
   def initialize(scenario)
     @scenar = scenario

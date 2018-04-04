@@ -1,3 +1,5 @@
+# Classe dont on pourrait avoir besoin pour une commande supplémentaire
+=begin
 class AskCmd
   attr_reader :scenario
 
@@ -10,3 +12,4 @@ class AskCmd
     @scenario.execAsk(param);
   end
 end
+=end

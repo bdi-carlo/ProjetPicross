@@ -56,7 +56,7 @@ require 'facets/timer'
       def pause
         @timers.stop
         @time +=@inc
-        #print "Pause au temps #{@time}\n"
+      
         return nil
       end
 
@@ -81,25 +81,4 @@ require 'facets/timer'
         self.resume
         return nil
       end
-
     end
-#Exemple (y'a pas le =begin et =end) :
-
-=begin
-time = Timers.new(1){print "#{time.getTime}\n"}          # Crée un nouveau timer qui affiche le temps toutes les secondes
-time.start                                               # Démarre le timer
-0.upto(15) do
-  print "a\n"                                            # Affiche 15 chiffres
-  sleep 1
-end
-time.pause                                               # Passe en pause
-0.upto(15) do
-  print "a\n"                                            # Refait 15 itération sans chiffres
-  sleep 1
-end
-time.resume                                              # Relance le timer
-0.upto(15) do
-  print "a\n"                                            # Fait 15 itérations avec chiffres.
-  sleep 1
-end
-=end
