@@ -42,6 +42,7 @@ class ScenarioUI
   def execPic(pic)
 
     Gui.new(0,pic[0],pic[1],pic[2],pic[3],nil,nil,nil)
+    Gtk.main_quit
   end
 
 end
