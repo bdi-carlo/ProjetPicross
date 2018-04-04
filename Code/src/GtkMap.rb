@@ -123,7 +123,7 @@ class Gui
     @window.add(grid)
 
 		#Label de bordure haut
-		vb.add(Gtk::Label.new("\n"))
+		vb.add(Gtk::Label.new(""))
 
     splitHorizontal=Gtk::Box.new(:horizontal,20)
     splitHorizontal.set_homogeneous(FALSE)
@@ -168,6 +168,7 @@ class Gui
     boxinter.add(initGrid)
     boxinter.add(initBoxAide)
 		boxinter.add(initBoxHypo)
+		boxinter.add(initBoxBoutons)
     splitHorizontal.add(boxinter)
     vb.add(splitHorizontal)
 
@@ -185,7 +186,12 @@ class Gui
 		grid.attach(vb,0,0,1,1)
 
 		#Wallpaper
-		image = Gtk::Image.new(:file => "../images/wallpaperInGame.jpg")
+		puts @map.cols
+		if @map.cols > 11
+			image = Gtk::Image.new(:file => "../images/wallpaperInGameGrand.jpg")
+		else
+			image = Gtk::Image.new(:file => "../images/wallpaperInGamePetit.jpg")
+		end
 		grid.attach(image,0,0,1,1)
 
     #Démarage de l'affichage (Bien marquer show_all et pas show)
@@ -700,8 +706,6 @@ class Gui
 		end
     boxHypo.add(@bRejeterHypo)
 
-    boxHypo.name = "boxHypo"
-
     return boxHypo
   end
 
@@ -717,6 +721,53 @@ class Gui
 		@bRejeterHypo.remove(@bRejeterHypo.child)
 		@bRejeterHypo.child = Gtk::Image.new(:file => @tabRejeterHypo[@nbHypo])
 		@bRejeterHypo.show_all
+	end
+
+	##
+  # Crée une box contenant certains boutons
+  #
+  # Retour : vertical box
+	def initBoxBoutons()
+		boxBoutons = Gtk::Box.new(:vertical,30)
+    boxBoutons.add(Gtk::Label.new())
+
+		#Création du boutton RESET
+		iReset = Gtk::Image.new(:file => "../images/boutons/reset.png")
+		@bReset = Gtk::EventBox.new.add(iReset)
+		@bReset.signal_connect("enter_notify_event"){
+			@bReset.remove(@bReset.child)
+			@bReset.child = Gtk::Image.new(:file => "../images/boutons/resetOver.png")
+			@bReset.show_all
+		}
+		@bReset.signal_connect("leave_notify_event"){
+			@bReset.remove(@bReset.child)
+			@bReset.child = Gtk::Image.new(:file => "../images/boutons/reset.png")
+			@bReset.show_all
+		}
+		@bReset.signal_connect("button_press_event") do
+			@map = Map.create(@cheminMap)
+			@nbHypo = 0
+      actuMap()
+		end
+    boxBoutons.add(@bReset)
+
+		#Création du boutton HOME
+		iHome = Gtk::Image.new(:file => "../images/boutons/home.png")
+		@bHome = Gtk::EventBox.new.add(iHome)
+		@bHome.signal_connect("enter_notify_event"){
+			@bHome.remove(@bHome.child)
+			@bHome.child = Gtk::Image.new(:file => "../images/boutons/homeOver.png")
+			@bHome.show_all
+		}
+		@bHome.signal_connect("leave_notify_event"){
+			@bHome.remove(@bHome.child)
+			@bHome.child = Gtk::Image.new(:file => "../images/boutons/home.png")
+			@bHome.show_all
+		}
+		@bHome.signal_connect("button_press_event") do
+			@window.destroy
+		end
+    boxBoutons.add(@bHome)
 	end
 
   ##

@@ -210,8 +210,7 @@ map:
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
-    value: 1
-    color: 0
+    value: 0
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
@@ -231,8 +230,7 @@ map:
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
-    value: 1
-    color: 0
+    value: 0
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
@@ -252,11 +250,9 @@ map:
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
-    value: 1
-    color: 0
+    value: 0
   - !ruby/object:Case
-    value: 1
-    color: 0
+    value: 0
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
@@ -274,11 +270,9 @@ map:
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
-    value: 1
-    color: 0
+    value: 0
   - !ruby/object:Case
-    value: 1
-    color: 0
+    value: 0
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
@@ -288,20 +282,15 @@ map:
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
-    value: 1
-    color: 0
+    value: 0
   - !ruby/object:Case
-    value: 1
-    color: 0
+    value: 0
   - !ruby/object:Case
-    value: 1
-    color: 0
+    value: 0
   - !ruby/object:Case
-    value: 1
-    color: 0
+    value: 0
   - !ruby/object:Case
-    value: 1
-    color: 0
+    value: 0
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
@@ -706,7 +695,7 @@ test
 ***
 1
 ***
-2
+18
 ***
 ../grilles/facile/10x10/Neuf
 ***
