@@ -740,6 +740,7 @@ class Gui
 			@map = Map.create(@cheminMap)
 			@nbHypo = 0
       actuMap()
+			changeBoutonHypo()
 		end
     boxBoutons.add(@bReset)
 
