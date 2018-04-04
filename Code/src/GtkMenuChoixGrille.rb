@@ -13,8 +13,6 @@ class MenuChoixGrille < Menu
 		@indiceTypeJeu = indiceTypeJeu
 		@vListe = nil
 		@flagListe = false
-		@cursorPointer = Gdk::Cursor.new("pointer")
-		@cursorDefault = Gdk::Cursor.new("default")
 		lancerFenetre()
 	end
 

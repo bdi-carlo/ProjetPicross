@@ -4,14 +4,21 @@ begin
 end
 require 'gtk3'
 
+load "CursorPointer.rb"
+load "CursorDefault.rb"
+
 class Menu
 
+	@@init = false
+
 	def initialize(pseudo)
+		if @@init == false
+			Gtk.init
+			@@init = true
+		end
 		@pseudo = pseudo
-	end
-
-	def lancerFenetre()
-
+		@cursorPointer = CursorPointer.getInstance()
+		@cursorDefault = CursorDefault.getInstance()
 	end
 
 	def creerWindow()
