@@ -76,9 +76,7 @@ class Gui
 		end
 
     Gtk.main_quit
-    puts "Ah bon ?"
     @window.destroy
-    puts "-----------Fais iech"
 		MenuPrincipal.new(@pseudo)
   end
 
@@ -101,7 +99,6 @@ class Gui
 			if rep == -3
 				sauvegarder( @pseudo+"_"+recupNom(@cheminMap) )
 			end
-      puts "dialog destroy"
 			dialog.destroy
 		}
 
@@ -186,7 +183,6 @@ class Gui
 		grid.attach(vb,0,0,1,1)
 
 		#Wallpaper
-		puts @map.cols
 		if @map.cols > 11
 			image = Gtk::Image.new(:file => "../images/wallpaperInGameGrand.jpg")
 		else
@@ -251,12 +247,9 @@ class Gui
 
         # Ensure that the dialog box is destroyed when the user responds.
         dialog.signal_connect('response') { |elt,rep|
-          puts (rep)
 					supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
-					puts "Fermeture picross sur victoire"
           dialog.destroy
           @save_flag = false;
-          puts "Attention !"
 					@window.destroy
 
 
@@ -362,7 +355,6 @@ class Gui
           # Ensure that the dialog box is destroyed when the user responds.
           dialog.signal_connect('response') {
 						supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
-						puts "Fermeture picross sur victoire"
             dialog.destroy
             @save_flag = false
 						@window.destroy

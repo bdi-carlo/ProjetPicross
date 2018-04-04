@@ -46,11 +46,24 @@ class MenuCharger < Menu
 		allSaves.delete(".")
 		allSaves.delete("..")
 		indice = false
+		nb=0
 		allSaves.each{ |elt|
 			tmp = elt.split('_')
 			if tmp[0] == @pseudo
 				indice = true
-				vb.add(Gtk::Label.new.set_markup("<span foreground='white'>#{tmp[1]}</span>"))
+				nb += 1
+				lab = (Gtk::Label.new.set_markup("<span foreground='white'>Save #{nb.to_s+" - "+tmp[1]}</span>"))
+				event = Gtk::EventBox.new.add(lab)
+				event.signal_connect("enter_notify_event"){
+					@window.window.set_cursor(@cursorPointer)
+				}
+				event.signal_connect("leave_notify_event"){
+					@window.window.set_cursor(@cursorDefault)
+				}
+				event.signal_connect("button_press_event") do
+					charger("../sauvegardes/"+@pseudo+"_"+tmp[1])
+				end
+				vb.add(event)
 			end
 		}
 		if indice == false
@@ -60,33 +73,9 @@ class MenuCharger < Menu
 
 		hb.add(Gtk::Label.new("\t\t\t\t\t"))
 
-		vb2 = Gtk::Box.new(:vertical, 20)
-		vb2.add(Gtk::Label.new("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"))
-		if indice == true
-			#Création entrer pour mettre le nom de la save désirée
-			@save = Gtk::Entry.new.set_text("Entrer le nom de la sauvegarde")
-			vb2.add(@save)
-
-			#Création du bouton CHARGER
-			iCharger = Gtk::Image.new(:file => "../images/boutons/charger.png")
-			@bCharger = Gtk::EventBox.new.add(iCharger)
-			@bCharger.signal_connect("enter_notify_event"){
-				@bCharger.remove(@bCharger.child)
-				@bCharger.child = Gtk::Image.new(:file => "../images/boutons/chargerOver.png")
-				@bCharger.show_all
-			}
-			@bCharger.signal_connect("leave_notify_event"){
-				@bCharger.remove(@bCharger.child)
-				@bCharger.child = Gtk::Image.new(:file => "../images/boutons/charger.png")
-				@bCharger.show_all
-			}
-			@bCharger.signal_connect("button_press_event") do
-				charger("../sauvegardes/"+@pseudo+"_"+@save.text)
-			end
-			vb2.add(@bCharger)
-		end
-
 		#Création du boutton RETOUR
+		vb2 = Gtk::Box.new(:vertical,0)
+		vb2.add(Gtk::Label.new("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"))
 		iRetour = Gtk::Image.new(:file => "../images/boutons/retour.png")
 		@bRetour = Gtk::EventBox.new.add(iRetour)
 		@bRetour.signal_connect("enter_notify_event"){
@@ -104,6 +93,7 @@ class MenuCharger < Menu
 			MenuPrincipal.new(@pseudo)
 		end
 		vb2.add(@bRetour)
+		vb2.add(Gtk::Label.new("\n"))
 
 		hb.add(vb2)
 
