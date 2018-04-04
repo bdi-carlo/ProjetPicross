@@ -6,7 +6,7 @@ require 'gtk3'
 load "GtkMap.rb"
 load "GtkMenuJouer.rb"
 load "GtkMenuCharger.rb"
-
+load "GtkCredits.rb"
 class MenuPrincipal < Menu
 
   def initialize(pseudo)
@@ -84,6 +84,9 @@ class MenuPrincipal < Menu
     @bCredits = Gtk::EventBox.new.add(iCredits)
 		@bCredits.signal_connect("enter_notify_event"){
 			onEnter(@bCredits)
+		}
+    @bCredits.signal_connect("button_press_event"){
+			Credits.new()
 		}
 		@bCredits.signal_connect("leave_notify_event"){
 			onLeave(@bCredits)

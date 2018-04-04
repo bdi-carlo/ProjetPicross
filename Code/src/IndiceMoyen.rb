@@ -46,10 +46,10 @@ class IndiceMoyen < Indice
 				x = false
 
 				if @map.accessAtRes(@row,@col) == 1
-					@indice = "La case (#{@row+1},#{@col+1}) est coloriée\n"
+					@indice = "#{@row+1}-#{@col+1}-1"
 
 				else
-					@indice = "La case (#{@row+1},#{@col+1}) n'est pas coloriée\n"
+					@indice = "#{@row+1}-#{@col+1}-0"
 
 				end
 			end
