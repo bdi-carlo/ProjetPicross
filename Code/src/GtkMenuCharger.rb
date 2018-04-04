@@ -61,7 +61,7 @@ class MenuCharger < Menu
 		hb.add(Gtk::Label.new("\t\t\t\t\t"))
 
 		vb2 = Gtk::Box.new(:vertical, 20)
-		vb2.add(Gtk::Label.new("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"))
+		vb2.add(Gtk::Label.new("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"))
 		if indice == true
 			#Création entrer pour mettre le nom de la save désirée
 			@save = Gtk::Entry.new.set_text("Entrer le nom de la sauvegarde")

@@ -15,8 +15,6 @@ class Main < Menu
 	def lancerFenetre()
 		puts("Creation fenetre Main")
 
-    Gtk.init
-
     @window = creerWindow()
 
 		grid = Gtk::Grid.new

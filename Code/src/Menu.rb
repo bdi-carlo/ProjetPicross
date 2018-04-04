@@ -4,14 +4,21 @@ begin
 end
 require 'gtk3'
 
+load "CursorPointer.rb"
+load "CursorDefault.rb"
+
 class Menu
 
+	@@init = false
+
 	def initialize(pseudo)
+		if @@init == false
+			Gtk.init
+			@@init = true
+		end
 		@pseudo = pseudo
-	end
-
-	def lancerFenetre()
-
+		@cursorPointer = CursorPointer.getInstance()
+		@cursorDefault = CursorDefault.getInstance()
 	end
 
 	def creerWindow()
@@ -26,14 +33,6 @@ class Menu
 		return window
 	end
 
-	def appliqueProvider(window)
-		@provider = Gtk::CssProvider.new
-		@provider.load :data => '.window{
-			color: #FFFFFF;
-		}'
-		apply_style(window, @provider)
-	end
-
 	##
 	# Callback de la fermeture de l'appli
 	def onDestroy
@@ -42,15 +41,6 @@ class Menu
 		#Quit 'propre'
 		@window.destroy
 		Gtk.main_quit
-	end
-
-	def apply_style(widget, provider)
-	    style_context = widget.style_context
-	    style_context.add_provider(provider, Gtk::StyleProvider::PRIORITY_USER)
-	    return unless widget.respond_to?(:children)
-	    widget.children.each do |child|
-	      apply_style(child, provider)
-			end
 	end
 
 end
