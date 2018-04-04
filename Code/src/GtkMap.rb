@@ -468,18 +468,47 @@ class Gui
 
   def aide2()
     indice = IndiceMoyen.create(@map)
-    dialog = Gtk::Dialog.new("Aide2",
-                             $main_application_window,
-                             Gtk::DialogFlags::DESTROY_WITH_PARENT,
-                             [ Gtk::Stock::OK, Gtk::ResponseType::NONE ])
+    res = indice.envoyerIndice.indice.split("-")
 
-    # Ensure that the dialog box is destroyed when the user responds.
-    dialog.signal_connect('response') { dialog.destroy }
+    x=res[0].to_i
+    y=res[1].to_i
+    puts "Res de 2 #{res[2]}"
+    if res[2]=="0"
+      @map.putAt!(x,y,Case.create(2))
+      puts "Case blanche"
+      @buttonTab[x][y].remove(@buttonTab[x][y].child)
+      @buttonTab[x][y].child =(Gtk::Image.new(:file => "../images/cases/croix.png"))
+    else
+      @map.putAt!(x,y,Case.create(1))
+      @map.accessAt(x,y).color=1;
+      @buttonTab[x][y].remove(@buttonTab[x][y].child)
+      @buttonTab[x][y].child =(Gtk::Image.new(:file => "../images/cases/noir.png"))
 
-    # Add the message in a label, and show everything we've added to the dialog.
-    dialog.child.add(Gtk::Label.new(indice.envoyerIndice.indice))
-    dialog.show_all
-    @timer.add(30)
+    end
+    @timePress[x][y]+=1
+    @buttonTab[x][y].show_all
+    @timer.add(60)
+    if @map.compare
+      @timer.pause
+      dialog = Gtk::Dialog.new("Bravo",
+                               $main_application_window,
+                               Gtk::DialogFlags::DESTROY_WITH_PARENT,
+                               [ Gtk::Stock::OK, Gtk::ResponseType::NONE ])
+
+      # Ensure that the dialog box is destroyed when the user responds.
+      dialog.signal_connect('response') {
+        supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
+        dialog.destroy
+        @save_flag = false
+        @window.destroy
+      }
+      res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
+
+      dialog.child.add(Gtk::Label.new(res))
+      dialog.show_all
+
+
+    end
   end
 
   def aide3()

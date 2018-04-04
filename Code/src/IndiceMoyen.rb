@@ -46,10 +46,10 @@ class IndiceMoyen < Indice
 				x = false
 
 				if @map.accessAtRes(@row,@col) == 1
-					@indice = "#{@row+1}-#{@col+1}-1"
+					@indice = "#{@row}-#{@col}-1"
 
 				else
-					@indice = "#{@row+1}-#{@col+1}-0"
+					@indice = "#{@row}-#{@col}-0"
 
 				end
 			end
