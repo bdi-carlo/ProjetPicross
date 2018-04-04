@@ -272,23 +272,7 @@ class Gui
 
     else
       if (@map.accessAt(x,y).value == 0)
-        if(x == 4 && y != 4)
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/blancOver5h.png"))
-          @buttonTab[x][y].show_all
-        elsif(x != 4 && y == 4)
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/blancOver5v.png"))
-          @buttonTab[x][y].show_all
-        elsif(x == 4 && y == 4)
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/blancOver5_5.png"))
-          @buttonTab[x][y].show_all
-        elsif(x != 4 && y != 4)
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/blancOver.png"))
-          @buttonTab[x][y].show_all
-        end
+        ajoutLimitationOver(x,y)
 
 
       elsif (@map.accessAt(x,y).value == 1)
@@ -425,27 +409,7 @@ class Gui
       @buttonTab[x][y].show_all
 
     else
-     if(x == 4 && y != 4)
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
-      elsif(x != 4 && y == 4)
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5verticale.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
-      elsif(x == 4 && y == 4)
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5_5.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
-      else
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blanc.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
-      end
+      ajoutLimitation(x,y)
     end
   end
 
@@ -813,11 +777,11 @@ class Gui
         tabrow.push(button)
         tabPress.push(0)
 
-       if(x == 4 && y != 4)
+       if(x%4 == 0 && y%4 != 0)
           button.add(Gtk::Image.new(:file =>"../images/cases/blancCase5.png"))
-        elsif(x != 4 && y == 4)
+        elsif(x%4 != 0 && y%4 == 0)
           button.add(Gtk::Image.new(:file =>"../images/cases/blancCase5verticale.png"))
-        elsif(x == 4 && y == 4)
+        elsif(x%4 == 0 && y%4 == 0)
           button.add(Gtk::Image.new(:file =>"../images/cases/blancCase5_5.png"))
         else
           button.add(Gtk::Image.new(:file =>"../images/cases/blanc.png"))
@@ -869,28 +833,7 @@ class Gui
               @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blanc.png" ))
               @timePress[x][y] = 0
               @buttonTab[x][y].show_all
-=begin             if(x == 4 && y != 4)
-              @buttonTab[x][y].remove(@buttonTab[x][y].child)
-              @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5.png" ))
-              @timePress[x][y] = 0
-              @buttonTab[x][y].show_all
-             elsif(x != 4 && y == 4)
-              @buttonTab[x][y].remove(@buttonTab[x][y].child)
-              @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5verticale.png" ))
-              @timePress[x][y] = 0
-              @buttonTab[x][y].show_all
-             elsif(x == 4 && y == 4)
-              @buttonTab[x][y].remove(@buttonTab[x][y].child)
-              @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5_5.png" ))
-              @timePress[x][y] = 0
-              @buttonTab[x][y].show_all
-             else
-              @buttonTab[x][y].remove(@buttonTab[x][y].child)
-              @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blanc.png" ))
-              @timePress[x][y] = 0
-              @buttonTab[x][y].show_all
-             end
-=end
+
           end
         elsif @map.accessAt(x,y).value == 2
           @buttonTab[x][y].remove(@buttonTab[x][y].child)
@@ -899,27 +842,7 @@ class Gui
           @buttonTab[x][y].show_all
 
         else
-         if(x == 4 && y != 4)
-              @buttonTab[x][y].remove(@buttonTab[x][y].child)
-              @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5.png" ))
-              @timePress[x][y] = 0
-              @buttonTab[x][y].show_all
-          elsif(x != 4 && y == 4)
-              @buttonTab[x][y].remove(@buttonTab[x][y].child)
-              @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5verticale.png" ))
-              @timePress[x][y] = 0
-              @buttonTab[x][y].show_all
-          elsif(x == 4 && y == 4)
-              @buttonTab[x][y].remove(@buttonTab[x][y].child)
-              @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5_5.png" ))
-              @timePress[x][y] = 0
-              @buttonTab[x][y].show_all
-          else
-              @buttonTab[x][y].remove(@buttonTab[x][y].child)
-              @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blanc.png" ))
-              @timePress[x][y] = 0
-              @buttonTab[x][y].show_all
-          end
+         ajoutLimitation(x,y)
 
         end
 
@@ -967,5 +890,77 @@ class Gui
 		# Fermeture du fichier
 		monFichier.close
 	end
+
+
+  def ajoutLimitation(x,y)
+    if((x+1)%5 == 0 && (y+1)%5 != 0 && (x != @map.rows - 1))
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+    elsif((x+1)%5 != 0 && (y+1)%5 == 0  && (y != @map.cols - 1))
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5verticale.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+    elsif((x+1)%5 == 0 && (y+1)%5 == 0 && (x != @map.rows - 1) && (y != @map.cols - 1))
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5_5.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+    elsif(x == @map.rows - 1 && (y+1)%5 == 0 && y != @map.cols - 1)
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5verticale.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+    elsif(y == @map.cols - 1 && (x+1)%5 == 0 && x != @map.rows - 1)
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+    else
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blanc.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+    end
+  end
+
+
+
+
+def ajoutLimitationOver(x,y)
+    if((x+1)%5 == 0 && (y+1)%5 != 0 && (x != @map.rows - 1))
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancOver5h.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+    elsif((x+1)%5 != 0 && (y+1)%5 == 0  && (y != @map.cols - 1))
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancOver5v.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+    elsif((x+1)%5 == 0 && (y+1)%5 == 0 && (x != @map.rows - 1) && (y != @map.cols - 1))
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancOver5_5.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+    elsif(x == @map.rows - 1 && (y+1)%5 == 0 && y != @map.cols - 1)
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancOver5v.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+    elsif(y == @map.cols - 1 && (x+1)%5 == 0 && x != @map.rows - 1)
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancOver5h.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+    else
+          @buttonTab[x][y].remove(@buttonTab[x][y].child)
+          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancOver.png" ))
+          @timePress[x][y] = 0
+          @buttonTab[x][y].show_all
+    end
+  end
 
 end
