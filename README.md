@@ -2,6 +2,14 @@
 
 # ProjetPicross
 
+## Gems
+
+* facets
+* timer
+* gtk3
+
+## Launching
+
 To launch the game do this command in a terminal:
 
 cd Code/src
