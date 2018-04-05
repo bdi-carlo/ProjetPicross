@@ -149,7 +149,7 @@ class MenuCharger < Menu
 			}
 
 			@window.destroy
-			Gui.new(1, $pseudo, $cheminMap, $inc, $start, $map, $hypo, $nbHypo)
+			Gui.new(0,1, $pseudo, $cheminMap, $inc, $start, $map, $hypo, $nbHypo)
 			onDestroy()
 		else
 			dialog = Gtk::Dialog.new("Erreur chargement",

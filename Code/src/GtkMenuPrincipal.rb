@@ -7,6 +7,8 @@ load "GtkMap.rb"
 load "GtkMenuJouer.rb"
 load "GtkMenuCharger.rb"
 load "GtkCredits.rb"
+load "GtkScoreboardBenj.rb"
+
 class MenuPrincipal < Menu
 
   def initialize(pseudo)
@@ -77,6 +79,10 @@ class MenuPrincipal < Menu
 		@bScore.signal_connect("leave_notify_event"){
 			onLeave(@bScore)
 		}
+		@bScore.signal_connect("button_press_event") do
+				onDestroy()
+				Scoreboard.new(@pseudo)
+    end
 		vb.add(@bScore)
 
     #Création du boutton CREDITS

@@ -23,7 +23,7 @@ class Gui
   attr_accessor :pseudo, :difficulte, :penalite, :score, :highscore, :taille, :time, :nomMap
 
 	# Initialize en cas de nouvelle partie
-  def initialize( charge, pseudo, cheminMap, inc, start, map, hypo, nbHypo )
+  def initialize( indiceTypeJeu, charge, pseudo, cheminMap, inc, start, map, hypo, nbHypo )
 		# Tableau pour gerer les couleurs des hypotheses
 		@tabCase = ["../images/cases/noir.png", "../images/cases/violet.png", "../images/cases/bleu.png", "../images/cases/rouge.png"]
 		@tabCaseOver = ["../images/cases/noirOver.png", "../images/cases/violetOver.png", "../images/cases/bleuOver.png", "../images/cases/rougeOver.png"]
@@ -32,6 +32,7 @@ class Gui
 		@cheminMap = cheminMap
 		@pseudo = pseudo
     @save_flag=true
+		@indiceTypeJeu = indiceTypeJeu
 		if charge == 0 then
 			@nbHypo = 0
 			@map = Map.create(cheminMap)
@@ -70,16 +71,50 @@ class Gui
   ##
   # Callback de la fermeture de l'appli
   def onDestroy()
-
-		if @save_flag == true
+		if @save_flag == true && @indiceTypeJeu == 0
 			save?()
 		end
 
+		puts surQuitter?()
+
+
     Gtk.main_quit
     @window.destroy
-		MenuPrincipal.new(@pseudo)
+
+		if @indiceTypeJeu != 2
+			MenuPrincipal.new(@pseudo)
+		end
   end
 
+	##
+	#Méthode qui demande à l'utilisateur si il est sur de vouloir quitter ou non
+	def surQuitter?()
+		quitter = false
+		dialog = Gtk::Dialog.new("Quitter?",
+                             $main_application_window,
+                             Gtk::DialogFlags::MODAL | Gtk::DialogFlags::DESTROY_WITH_PARENT,
+                             [ Gtk::Stock::YES, Gtk::ResponseType::ACCEPT ],
+													 	 [ Gtk::Stock::NO, Gtk::ResponseType::REJECT ])
+		dialog.set_window_position(:center_always)
+
+    # Ensure that the dialog box is destroyed when the user responds.
+
+    # Add the message in a label, and show everything we've added to the dialog.
+    dialog.child.add(Gtk::Label.new( "\nVoulez-vous vraiment quitter, car pas de sauvegarde en mode compétitif\n" ))
+
+		dialog.show_all
+
+		dialog.signal_connect('response') { |dial,rep|
+			if rep == -3
+				quitter = true
+			end
+		}
+		dialog.destroy
+		return quitter
+	end
+
+	##
+	#Méthode qui demande à l'utilisateur de sauvegarder ou non
 	def save?()
 		dialog = Gtk::Dialog.new("Sauvegarde?",
                              $main_application_window,
@@ -101,7 +136,6 @@ class Gui
 			end
 			dialog.destroy
 		}
-
 	end
 
 	def lancerGrille()
@@ -239,26 +273,7 @@ class Gui
       end
       @timePress[x][y]+=1
       if @map.compare                      #####QUOI FAIRE EN CAS DE VICTOIRE
-        @timer.pause
-        dialog = Gtk::Dialog.new("Bravo",
-                                 $main_application_window,
-                                 Gtk::DialogFlags::DESTROY_WITH_PARENT,
-                                 [ Gtk::Stock::OK, Gtk::ResponseType::ACCEPT ])
-
-        # Ensure that the dialog box is destroyed when the user responds.
-        dialog.signal_connect('response') { |elt,rep|
-					supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
-          dialog.destroy
-          @save_flag = false;
-					@window.destroy
-
-
-         }
-        res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
-
-        dialog.child.add(Gtk::Label.new(res))
-        dialog.show_all
-
+				victoire()
 
       end
     elsif button.state.button3_mask?
@@ -297,6 +312,91 @@ class Gui
     end
   end
 
+	##
+	#Méthode qui aplique ce qu'il y a faire lors de la victoire
+	def victoire()
+		@timer.pause
+		dialog = Gtk::Dialog.new("Bravo",
+														 $main_application_window,
+														 Gtk::DialogFlags::DESTROY_WITH_PARENT,
+														 [ Gtk::Stock::OK, Gtk::ResponseType::ACCEPT ])
+
+		if @indiceTypeJeu == 1 then
+			enregistreScore()
+		end
+
+		# Ensure that the dialog box is destroyed when the user responds.
+		dialog.signal_connect('response') { |elt,rep|
+			if @indiceTypeJeu != 1
+				supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
+			end
+			dialog.destroy
+			@save_flag = false;
+			@window.destroy
+		 }
+		res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
+
+		dialog.child.add(Gtk::Label.new(res))
+		dialog.show_all
+	end
+
+	##
+	#Enregistre le score de la victoire dans le top 10 du scoreboard
+	def enregistreScore()
+		chemin = "../scoreboard/"+@cheminMap.split("/")[2]
+		monFichier = File.open(chemin)
+		#Récupération des scores déjà exists
+		allScores = []
+		monFichier.each_line{ |ligne|
+			allScores.push(ligne.to_s)
+		}
+		#Suppression de ce qu'il y a dedans
+		monFichier = File.open(chemin, "w")
+		File.truncate(chemin,0)
+		#Réecriture de tous les scores triés dans le fichier
+		if allScores.length == 0
+			monFichier.write(@pseudo+"-"+recupNom(@cheminMap)+"-"+@time.to_s+"\n")
+		else
+			allScores.push(@pseudo+"-"+recupNom(@cheminMap)+"-"+@time.to_s+"\n")
+			allScores = triScore(allScores)
+			allScores = coupeTabMaxElt(allScores,10)
+			allScores.each{ |ligne|
+				monFichier.write(ligne)
+			}
+		end
+		monFichier.close
+	end
+
+	##
+	#Méthode de tri bulle pour trier le tableau dans l'ordre croissant en fonction des scores
+	def triScore(unTab)
+		trier = false
+		taille = unTab.length
+		while !trier do
+			trier = true
+			i=0
+			while i < taille-1 do
+				if unTab[i].split("-")[2].to_i > unTab[i+1].split("-")[2].to_i
+					temp = unTab[i]
+					unTab[i] = unTab[i+1]
+					unTab[i+1] = temp
+					trier = false
+				end
+				i+=1
+			end
+			taille-=1
+		end
+		return unTab
+	end
+
+	##
+	#Méthode qui coupe un tableau à partir du nombre maximum d'élement souhaité
+	def coupeTabMaxElt(unTab,unMax)
+		while unTab.length > unMax do
+			unTab.pop
+		end
+		return unTab
+	end
 
   ##
   # Callback lors de l'appui d'un bouton
@@ -330,24 +430,7 @@ class Gui
         @timePress[x][y]+=1
 
         if @map.compare
-					@timer.pause
-          dialog = Gtk::Dialog.new("Bravo",
-                                   $main_application_window,
-                                   Gtk::DialogFlags::DESTROY_WITH_PARENT,
-                                   [ Gtk::Stock::OK, Gtk::ResponseType::NONE ])
-
-          # Ensure that the dialog box is destroyed when the user responds.
-          dialog.signal_connect('response') {
-						supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
-            dialog.destroy
-            @save_flag = false
-						@window.destroy
-          }
-          res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
-
-          dialog.child.add(Gtk::Label.new(res))
-          dialog.show_all
-
+					victoire()
 
         end
       end
@@ -453,25 +536,7 @@ class Gui
     @buttonTab[x][y].show_all
     @timer.add(60)
     if @map.compare
-      @timer.pause
-      dialog = Gtk::Dialog.new("Bravo",
-                               $main_application_window,
-                               Gtk::DialogFlags::DESTROY_WITH_PARENT,
-                               [ Gtk::Stock::OK, Gtk::ResponseType::NONE ])
-
-      # Ensure that the dialog box is destroyed when the user responds.
-      dialog.signal_connect('response') {
-        supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
-        dialog.destroy
-        @save_flag = false
-        @window.destroy
-      }
-      res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
-
-      dialog.child.add(Gtk::Label.new(res))
-      dialog.show_all
-
-
+      victoire()
     end
   end
 
@@ -777,15 +842,7 @@ class Gui
         tabrow.push(button)
         tabPress.push(0)
 
-       if(x%4 == 0 && y%4 != 0)
-          button.add(Gtk::Image.new(:file =>"../images/cases/blancCase5.png"))
-        elsif(x%4 != 0 && y%4 == 0)
-          button.add(Gtk::Image.new(:file =>"../images/cases/blancCase5verticale.png"))
-        elsif(x%4 == 0 && y%4 == 0)
-          button.add(Gtk::Image.new(:file =>"../images/cases/blancCase5_5.png"))
-        else
-          button.add(Gtk::Image.new(:file =>"../images/cases/blanc.png"))
-        end
+        button.add(Gtk::Image.new(:file =>"../images/cases/blanc.png"))
 
         button.set_focus(FALSE)
 
