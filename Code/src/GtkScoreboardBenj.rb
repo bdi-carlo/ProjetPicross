@@ -134,13 +134,24 @@ class Scoreboard < Menu
 			pos=1
 			allScores.each{ |elt|
 				tmp = elt.split("-")
-				vb.add(Gtk::Label.new.set_markup("<big><b><span foreground='white'>#{pos.to_s + " - " + tmp[0] + "\t\t" + tmp[1] + "\t\t" + tmp[2] + "s"}</span></b></big>"))
+				temps = conversion(tmp[2])
+				vb.add(Gtk::Label.new.set_markup("<big><b><span foreground='white'>#{pos.to_s + " - " + tmp[0] + "\t\t" + tmp[1] + "\t\t" + temps}</span></b></big>"))
 				pos+=1
 			}
 		end
 		@flagScore = true
 		@hb.add(vb)
 		@window.show_all
+	end
+
+	##
+	#Convertie les secondes en minutes et retourne une chaine de caractere
+	def conversion(unTemps)
+		sec = unTemps.to_i
+		min = sec/60
+		sec = sec%60
+		res = min.to_s + "min " + sec.to_s + "s"
+		return res
 	end
 
 end
