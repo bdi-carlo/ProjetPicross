@@ -1,9 +1,8 @@
 load 'Map.rb'
-load 'Jeu.rb'
 load 'GtkMap.rb'
 
 
-public class Didacticiel 
+class Didacticiel 
 
 	@temps		#temps par partie qui va permettre de donner un score
 	#@taille
@@ -22,9 +21,9 @@ public class Didacticiel
 				#etape 5: terminer la grille
 	attr_accessor :pseudo,:score,:chaine,:etape,:message1,:message2,:message3
 
-	def Didacticiel.lancerJeu()
-		new()
-	end
+	#def Didacticiel.lancerJeu()
+	#	new()
+	#end
 	
 	def initialize()
 		@message = "bienvenue dans le didacticiel #{@pseudo}"
@@ -42,12 +41,12 @@ public class Didacticiel
 	def changerMessage()
 		#definir le nombre d'etape 
 		if(@etape == 1)
-			#determine quel case et si on le guide sur laquel on lui fait cliquer
+			#determine quel case et si on le guide sur laquel on lui fait cliquer ?
 			@message = "cliquer sur une case pour la noircir"
 			@etape += 1
 
 		elsif(@etape == 2)	
-			#determine quel case et si on le guide sur laquel on lui fait cliquer
+			#determine quel case et si on le guide sur laquel on lui fait cliquer ?
 			@message = "clique droit sur une case pour indiquer qu'elle ne doit pas etre noircie"
 			@etape += 1
 

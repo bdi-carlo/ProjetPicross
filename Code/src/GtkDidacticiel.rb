@@ -1,5 +1,22 @@
+begin
+  require 'rubygems'
+ rescue LoadError
+end
+require 'gtk3'
+require "date"
+load 'GtkMap.rb'
+
+
 class GtkDidacticiel < GtkMap
 
+	#@verifcase
+	#@verifcroix
+	#@verifhypo
+	#@verifaide
+
+	attr_accessor :verifcase,:verifcroix,:verifhypo,:verifaide
+	
+	
   def initialize()
 	super(charge, pseudo, cheminMap, inc, start, map, hypo, nbHypo)
 
@@ -8,29 +25,34 @@ class GtkDidacticiel < GtkMap
 	@verifhypo  = 0
 	@verifaide = 0
 
-	map = Gui.new("./didacticiel",1,0)
+	map = Gui.new("./grilles/didacticiel/grilleE.rb",1,0)
 
-	boxMessage1 = Gtk::Box.new(:vertical,100)
-
+	Didacticiel()
+	initDialogue()
+	affichemessage()
 	
-	initBoxDialogue();
   end
 	
   def affichemessage 
-	#actualise les messages dans didacticiel
+	#actualise le texte de la variable message
 	changerMessage()
-	#changer message dans les boxs
+	initDialogue()
+	
   end
 
-  def initBoxDialogue()
+  def initDialogue()
+  	##### création de la boite de dialogue ou va etre affiché les instructions
 	dialogue = Gtk::Dialog.new("message",$main_application_window, Gtk::Dialog::DESTROY_WITH_PARENT,[ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
 	dialogue.set_window_position(:center_always)
 	dialogue.child.add(Gtk::Label.new( "\n"+@message+"\n" ))
 
+	dialog.signal_connect('response') { dialog.destroy }
+	##### LE MESSAGE A AFFICHER
+	res = "#{@message}"  
+
+    dialog.child.add(Gtk::Label.new(res))
 	dialogue.show_all
-	dialogue.signal_connect(){
-		dialogue.destroy
-	}
+
 	
   end
 
