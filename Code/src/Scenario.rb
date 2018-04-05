@@ -15,35 +15,30 @@ class ScenarioUI
   # Param: Tableau contenant en 0 le lien d'un image et en 1 l'instance de la fenetre
   def execImage(img)
     @window = img[1]
+    if !img[2]
 
-    @window.set_size_request(970, 700)
-    @window.resizable=FALSE
-    @window.set_window_position(:center_always)
-    # On set le titre
-    @window.set_title("Picross")
-    @window.border_width=10
-    @window.signal_connect('destroy') {onDestroy}
-    if @window.child.child != nil
-      @window.child.remove(@window.child.child)
-    end
-    @window.child.child = (Gtk::Image.new(:file =>img[0]))
-    @window.child.show_all
+      if @window.child.children[0].child != nil
+        @window.child.children[0].remove(@window.child.children[0].child)
+      end
+      @window.child.children[0].child = (Gtk::Image.new(:file =>img[0]))
+      @window.child.children[0].child.show_all
 
-    @window.child.signal_connect("button_press_event"){
-        print "clicked\n"
-        @window.hide
-        Gtk.main_quit
-    }
+      @window.child.children[0].signal_connect("button_press_event"){
+          print "clicked\n"
+          @window.hide
+          Gtk.main_quit
+      }
 
-    @window.show_all
-    Gtk.main
+      @window.show_all
+      Gtk.main
+
+  else
+    Gtk.main_quit
+  end
   end
   ##
   # On detruit la fenetre
-  def onDestroy
-    #Quit 'propre'
-    Gtk.main_quit
-  end
+
   ##
   # Execute un Picross
   #
@@ -57,7 +52,9 @@ class ScenarioUI
   # * nbHypo
   def execPic(pic)
 
-    Gui.new(2,0,pic[0],pic[1],pic[2],pic[3],nil,nil,nil)
+    if !pic[4]
+      Gui.new(2,0,pic[0],pic[1],pic[2],pic[3],nil,nil,nil)
+    end
     Gtk.main_quit
   end
 
