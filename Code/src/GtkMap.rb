@@ -33,6 +33,7 @@ class Gui
 		@pseudo = pseudo
     @save_flag=true
 		@indiceTypeJeu = indiceTypeJeu
+		@flagHypo=false
 		if charge == 0 then
 			@nbHypo = 0
 			@map = Map.create(cheminMap)
@@ -149,16 +150,15 @@ class Gui
 
 		grid = Gtk::Grid.new
 		hb = Gtk::Box.new(:horizontal, 10)
-		vb = Gtk::Box.new(:vertical, 20)
+		@vb = Gtk::Box.new(:vertical, 20)
 
     @window.add(grid)
 
 		#Label de bordure haut
-		vb.add(Gtk::Label.new(""))
+		@vb.add(Gtk::Label.new(""))
 
     splitHorizontal=Gtk::Box.new(:horizontal,20)
     splitHorizontal.set_homogeneous(FALSE)
-
 
     ################################CHIFFRES DES COTÉ######################################
     @temp=[]
@@ -195,13 +195,13 @@ class Gui
     ################################CREATION DE LA GRILLE##################################
     boxinter = Gtk::Box.new(:horizontal,40)
     wintop=initTop
-    vb.add(wintop)
+    @vb.add(wintop)
     boxinter.add(initGrid)
     boxinter.add(initBoxAide)
 		boxinter.add(initBoxHypo)
 		boxinter.add(initBoxBoutons)
     splitHorizontal.add(boxinter)
-    vb.add(splitHorizontal)
+    @vb.add(splitHorizontal)
 
 
     @timer.start
@@ -212,9 +212,9 @@ class Gui
     boxLabel.add(@temps)
     boxLabel.add(Gtk::Label.new)
     boxLabel.add(Gtk::Label.new)
-    vb.add(boxLabel)
+    @vb.add(boxLabel)
 
-		grid.attach(vb,0,0,1,1)
+		grid.attach(@vb,0,0,1,1)
 
 		#Wallpaper
 		if @map.cols > 11
@@ -631,45 +631,57 @@ class Gui
 			@bAide1.remove(@bAide1.child)
 			@bAide1.child = Gtk::Image.new(:file => "../images/boutons/aide1Over.png")
 			@bAide1.show_all
+			@vb.add(Gtk::Label.new.set_markup("<span foreground='white'>Aide qui vous indique la colonne qui a le plus gros chiffre</span>"))
+			@window.show_all
 		}
 		@bAide1.signal_connect("leave_notify_event"){
 			@bAide1.remove(@bAide1.child)
 			@bAide1.child = Gtk::Image.new(:file => "../images/boutons/aide1.png")
 			@bAide1.show_all
+			@vb.remove(@vb.children.last)
+			@window.show_all
 		}
     @bAide1.signal_connect("button_press_event") do
       aide1()
     end
     boxAide.add(@bAide1)
 
-		iAide2 = Gtk::Image.new(:file => "../images/boutons/aide2.png")
+		iAide2 = Gtk::Image.new(:file => "../images/boutons/aide120.png")
 		@bAide2 = Gtk::EventBox.new.add(iAide2)
 		@bAide2.signal_connect("enter_notify_event"){
 			@bAide2.remove(@bAide2.child)
-			@bAide2.child = Gtk::Image.new(:file => "../images/boutons/aide2Over.png")
+			@bAide2.child = Gtk::Image.new(:file => "../images/boutons/aide120Over.png")
 			@bAide2.show_all
+			@vb.add(Gtk::Label.new.set_markup("<span foreground='white'>Aide qui vous revele une case au hasard</span>"))
+			@window.show_all
 		}
 		@bAide2.signal_connect("leave_notify_event"){
 			@bAide2.remove(@bAide2.child)
-			@bAide2.child = Gtk::Image.new(:file => "../images/boutons/aide2.png")
+			@bAide2.child = Gtk::Image.new(:file => "../images/boutons/aide120.png")
 			@bAide2.show_all
+			@vb.remove(@vb.children.last)
+			@window.show_all
 		}
     @bAide2.signal_connect("button_press_event") do
       aide2()
     end
     boxAide.add(@bAide2)
 
-		iAide3 = Gtk::Image.new(:file => "../images/boutons/aide3.png")
+		iAide3 = Gtk::Image.new(:file => "../images/boutons/aide120.png")
 		@bAide3 = Gtk::EventBox.new.add(iAide3)
 		@bAide3.signal_connect("enter_notify_event"){
 			@bAide3.remove(@bAide3.child)
-			@bAide3.child = Gtk::Image.new(:file => "../images/boutons/aide3Over.png")
+			@bAide3.child = Gtk::Image.new(:file => "../images/boutons/aide120Over.png")
 			@bAide3.show_all
+			@vb.add(Gtk::Label.new.set_markup("<span foreground='white'>Aide vous permettant d'appuyer sur une case et savoir si elle est coloriee ou non</span>"))
+			@window.show_all
 		}
 		@bAide3.signal_connect("leave_notify_event"){
 			@bAide3.remove(@bAide3.child)
-			@bAide3.child = Gtk::Image.new(:file => "../images/boutons/aide3.png")
+			@bAide3.child = Gtk::Image.new(:file => "../images/boutons/aide120.png")
 			@bAide3.show_all
+			@vb.remove(@vb.children.last)
+			@window.show_all
 		}
     @bAide3.signal_connect("button_press_event") do
       aide3()
@@ -759,6 +771,8 @@ class Gui
     return boxHypo
   end
 
+	##
+	# Méthode qui change les boutons d'hypothese en fonction du n° d'hypothese
 	def changeBoutonHypo()
 		@bFaireHypo.remove(@bFaireHypo.child)
 		@bFaireHypo.child = Gtk::Image.new(:file => @tabFaireHypo[@nbHypo])

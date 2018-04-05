@@ -143,7 +143,7 @@ class Aventure
     cmd.use_cmd(:img,["../images/scenario/Scenario3_3_14.png",@window,@destroy_everything])
     if !@destroy_everything
       viderSave()
-      
+
       MenuPrincipal.new(@pseudo)
     end
 
