@@ -48,9 +48,7 @@ class Main < Menu
 			@button.show_all
 		}
     @button.signal_connect("button_press_event") do
-      if(nom.text == "")
-				dialogBox("Veuillez rentrer un pseudo avant de jouer!")
-    	else
+      if verifPseudo(nom.text) > 0
         @pseudo = nom.text
         puts "Pseudo: " + @pseudo
 				onDestroy()
@@ -75,6 +73,18 @@ class Main < Menu
     @window.show_all
 
     Gtk.main
+	end
+
+	def verifPseudo(unPseudo)
+		if unPseudo == ""
+			dialogBox("Veuillez rentrer un pseudo avant de jouer!")
+			return -1
+		elsif unPseudo.length > 10 || unPseudo.include?("-") || unPseudo.include?("*") || unPseudo.include?("\'") || unPseudo.include?("\"")
+			dialogBox("Le pseudo doit avoir une taille maximum de 10 caracteres et pas de caracteres speciaux!")
+			return -1
+		else
+			return 1
+		end
 	end
 
 	#Affiche une boite de dialogue avec un message
