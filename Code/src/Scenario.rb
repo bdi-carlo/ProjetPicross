@@ -54,6 +54,7 @@ class ScenarioUI
 
     if !pic[4]
       Gui.new(2,0,pic[0],pic[1],pic[2],pic[3],nil,nil,nil)
+      @window.hide
     end
     Gtk.main_quit
   end

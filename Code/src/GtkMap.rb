@@ -84,7 +84,10 @@ class Gui
 
 		if @indiceTypeJeu != 2
 			MenuPrincipal.new(@pseudo)
+    else
+      Gtk.main_quit
 		end
+
   end
 
 	##

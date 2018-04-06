@@ -75,6 +75,7 @@ class Aventure
                         cmd.use_cmd(:pic,[pseudo,"../grilles/scenario/Echelle",1,0,@destroy_everything])
                         @start = 2
                       end
+                      
                       cmd.use_cmd(:img,["../images/scenario/Scenario1_2_2.png",@window,@destroy_everything])
                       cmd.use_cmd(:img,["../images/scenario/Scenario1_2_3.png",@window,@destroy_everything])
                       cmd.use_cmd(:img,["../images/scenario/Scenario1_3_1.png",@window,@destroy_everything])
@@ -143,7 +144,6 @@ class Aventure
     cmd.use_cmd(:img,["../images/scenario/Scenario3_3_14.png",@window,@destroy_everything])
     if !@destroy_everything
       viderSave()
-
       MenuPrincipal.new(@pseudo)
     end
 
