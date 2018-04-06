@@ -75,25 +75,21 @@ class Gui
 		if @save_flag == true && @indiceTypeJeu == 0
 			save?()
 		end
-
-		# puts surQuitter?()
-
-
-    Gtk.main_quit
-    @window.destroy
-
-		if @indiceTypeJeu != 2
-			MenuPrincipal.new(@pseudo)
-    else
+    puts @indiceTypeJeu
       Gtk.main_quit
-		end
+      @window.destroy
+
+  		if @indiceTypeJeu != 2
+  			MenuPrincipal.new(@pseudo)
+      else
+        Gtk.main_quit
+      end
 
   end
 
 	##
 	#Méthode qui demande à l'utilisateur si il est sur de vouloir quitter ou non
 	def surQuitter?()
-		quitter = false
 		dialog = Gtk::Dialog.new("Quitter?",
                              $main_application_window,
                              Gtk::DialogFlags::MODAL | Gtk::DialogFlags::DESTROY_WITH_PARENT,
@@ -110,11 +106,16 @@ class Gui
 
 		dialog.signal_connect('response') { |dial,rep|
 			if rep == -3
-				quitter = true
-			end
+        dialog.destroy
+        @window.hide        
+        Gtk.main_quit
+        MenuPrincipal.new(@pseudo)
+      else
+        dialog.destroy
+
+      end
 		}
-		dialog.destroy
-		return quitter
+
 	end
 
 	##
@@ -231,7 +232,9 @@ class Gui
     @window.show_all
 
     # Quand la fenetre est détruite il faut quitter
-    @window.signal_connect('destroy') {onDestroy}
+    @window.signal_connect('destroy') {
+        onDestroy()
+    }
 
 		actuMap()
 
@@ -797,7 +800,11 @@ class Gui
 			changeImage(@bHome,"../images/boutons/home.png")
 		}
 		@bHome.signal_connect("button_press_event") do
-			@window.destroy
+      if @indiceTypeJeu == 1
+        surQuitter?()
+      else
+        @window.destroy
+      end
 		end
     boxBoutons.add(@bHome)
 	end
