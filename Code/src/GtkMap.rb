@@ -334,7 +334,7 @@ class Gui
 			@save_flag = false;
 			@window.destroy
 		 }
-		res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
+		res = "Bravo, vous avez fait un temps de #{@time/60}min et #{@time%60} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
 
 		dialog.child.add(Gtk::Label.new(res))
 		dialog.show_all

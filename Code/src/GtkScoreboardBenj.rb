@@ -131,13 +131,23 @@ class Scoreboard < Menu
 		if allScores.length == 0
 			vb.add(Gtk::Label.new.set_markup("<big><b><span foreground='white'>Personne n'a enregistre de score</span></b></big>"))
 		else
+			hScore = Gtk::Box.new(:horizontal, 5)
+			vPos = Gtk::Box.new(:vertical, 5)
+			vPseudo = Gtk::Box.new(:vertical, 5)
+			vMap = Gtk::Box.new(:vertical, 5)
+			vTemps = Gtk::Box.new(:vertical, 5)
 			pos=1
 			allScores.each{ |elt|
 				tmp = elt.split("-")
 				temps = conversion(tmp[2])
-				vb.add(Gtk::Label.new.set_markup("<big><b><span foreground='white'>#{pos.to_s + " - " + tmp[0] + "\t\t" + tmp[1] + "\t\t" + temps}</span></b></big>"))
+				vPos.add(Gtk::Label.new.set_markup("<big><b><span foreground='white'>#{pos.to_s + " - "}</span></b></big>"))
+				vPseudo.add(Gtk::Label.new.set_markup("<big><b><span foreground='white'>#{tmp[0]+"\t"}</span></b></big>"))
+				vMap.add(Gtk::Label.new.set_markup("<big><b><span foreground='white'>#{tmp[1]+"\t"}</span></b></big>"))
+				vTemps.add(Gtk::Label.new.set_markup("<big><b><span foreground='white'>#{temps}</span></b></big>"))
 				pos+=1
 			}
+			hScore.add(vPos).add(vPseudo).add(vMap).add(vTemps)
+			vb.add(hScore)
 		end
 		@flagScore = true
 		@hb.add(vb)
