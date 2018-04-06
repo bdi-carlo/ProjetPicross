@@ -1,1 +1,3 @@
-puts "12".to_i
+(5..0).each do |i|
+   puts "Value of local variable is #{i}"
+end
