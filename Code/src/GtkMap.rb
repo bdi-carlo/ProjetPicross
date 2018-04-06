@@ -253,33 +253,21 @@ class Gui
 
     if button.state.button1_mask?
       if @timePress[x][y]%2 == 0
-
-        @buttonTab[x][y].remove(@buttonTab[x][y].child)
-        @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@nbHypo]))
-
-        @buttonTab[x][y].show_all
-
+        changeImage(@buttonTab[x][y],@tabCase[@nbHypo])
 
          @map.putAt!(x,y,Case.create(1))
          @map.accessAt(x,y).color=@nbHypo
          #print "Color sur le enter #{@map.accessAt(x,y).color}\n"
       else
-
         @map.putAt!(x,y,Case.create(0))
-        @buttonTab[x][y].remove(@buttonTab[x][y].child)
-        @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/blanc.png"))
-        @buttonTab[x][y].show_all
-
+      	changeImage(@buttonTab[x][y],"../images/cases/blanc.png")
       end
       @timePress[x][y]+=1
       if @map.compare                      #####QUOI FAIRE EN CAS DE VICTOIRE
 				victoire()
-
       end
     elsif button.state.button3_mask?
-      @buttonTab[x][y].remove(@buttonTab[x][y].child)
-      @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/croix.png"))
-      @buttonTab[x][y].show_all
+      changeImage(@buttonTab[x][y],"../images/cases/croix.png")
       @map.putAt!(x,y,Case.create(2))
       @timePress[x][y]=0
 
@@ -288,8 +276,7 @@ class Gui
     else
       if (@map.accessAt(x,y).value == 0)
         ajoutLimitationOver(x,y)
-
-
+				
       elsif (@map.accessAt(x,y).value == 1)
         #  print "color =#{@map.accessAt(x,y).color}\n"
           if @map.accessAt(x,y).color != nil
