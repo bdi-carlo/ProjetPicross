@@ -217,7 +217,7 @@ class Gui
 		grid.attach(@vb,0,0,1,1)
 
 		#Wallpaper
-		if @map.cols > 11
+		if @map.rows > 11
 			image = Gtk::Image.new(:file => "../images/wallpaperInGameGrand.jpg")
 		else
 			image = Gtk::Image.new(:file => "../images/wallpaperInGamePetit.jpg")
@@ -255,9 +255,9 @@ class Gui
       if @timePress[x][y]%2 == 0
         changeImage(@buttonTab[x][y],@tabCase[@nbHypo])
 
-         @map.putAt!(x,y,Case.create(1))
-         @map.accessAt(x,y).color=@nbHypo
-         #print "Color sur le enter #{@map.accessAt(x,y).color}\n"
+       @map.putAt!(x,y,Case.create(1))
+       @map.accessAt(x,y).color=@nbHypo
+       #print "Color sur le enter #{@map.accessAt(x,y).color}\n"
       else
         @map.putAt!(x,y,Case.create(0))
       	changeImage(@buttonTab[x][y],"../images/cases/blanc.png")
@@ -276,7 +276,20 @@ class Gui
     else
       if (@map.accessAt(x,y).value == 0)
         ajoutLimitationOver(x,y)
-				
+				i=x-1
+				while i >= 0 do
+					if(@map.accessAt(i,y).value == 0)
+						ajoutLimitationOver(i,y)
+					end
+					i-=1
+				end
+				i=y-1
+				while i >= 0 do
+					if(@map.accessAt(x,i).value == 0)
+						ajoutLimitationOver(x,i)
+					end
+					i-=1
+				end
       elsif (@map.accessAt(x,y).value == 1)
         #  print "color =#{@map.accessAt(x,y).color}\n"
           if @map.accessAt(x,y).color != nil
@@ -285,6 +298,20 @@ class Gui
               @map.accessAt(x,y).color = @nbHypo
             end
               changeImage(@buttonTab[x][y],@tabCaseOver[@map.accessAt(x,y).color])
+							i=x-1
+							while i >= 0 do
+								if(@map.accessAt(i,y).value == 0)
+									ajoutLimitationOver(i,y)
+								end
+								i-=1
+							end
+							i=y-1
+							while i >= 0 do
+								if(@map.accessAt(x,i).value == 0)
+									ajoutLimitationOver(x,i)
+								end
+								i-=1
+							end
           end
 
       elsif(@map.accessAt(x,y).value == 2)
@@ -444,16 +471,44 @@ class Gui
           @timePress[x][y] = 1
           @map.accessAt(x,y).color = @nbHypo
         end
-          changeImage(@buttonTab[x][y],@tabCase[@map.accessAt(x,y).color])
+				i=x-1
+				while i >= 0 do
+					if(@map.accessAt(i,y).value == 0)
+						ajoutLimitation(i,y)
+					end
+					i-=1
+				end
+				i=y-1
+				while i >= 0 do
+					if(@map.accessAt(x,i).value == 0)
+						ajoutLimitation(x,i)
+					end
+					i-=1
+				end
+        changeImage(@buttonTab[x][y],@tabCase[@map.accessAt(x,y).color])
       else
-          changeImage(@buttonTab[x][y],"../images/cases/blanc.png" )
-          @timePress[x][y] = 0
+        changeImage(@buttonTab[x][y],"../images/cases/blanc.png" )
+        @timePress[x][y] = 0
       end
     elsif @map.accessAt(x,y).value == 2
       changeImage(@buttonTab[x][y],"../images/cases/croix.png" )
       @timePress[x][y] = 0
     else
       ajoutLimitation(x,y)
+			i=x-1
+			while i >= 0 do
+				if(@map.accessAt(i,y).value == 0)
+					ajoutLimitation(i,y)
+				end
+				i-=1
+			end
+			i=y-1
+			while i >= 0 do
+				if(@map.accessAt(x,i).value == 0)
+					ajoutLimitation(x,i)
+				end
+				i-=1
+			end
     end
   end
 
