@@ -241,7 +241,7 @@ class Gui
   ##
   # Callback lors du maintient du bouton
   #
-  # On teste le bouton actuellement enfoncé et on utilise le ungrab pour changer de bouton
+  # On teste le bouton actuellement enfoncé et on utilise le ungrab pour change de bouton
   #
   # Param :
   # * x : Coordonnée du bouton
@@ -297,16 +297,11 @@ class Gui
               @timePress[x][y] = 1
               @map.accessAt(x,y).color = @nbHypo
             end
-              @buttonTab[x][y].remove(@buttonTab[x][y].child)
-              #print "path = #{@tabCase[@map.accessAt(x,y).color]}\n"
-              @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCaseOver[@map.accessAt(x,y).color]))
-              @buttonTab[x][y].show_all
+              changeImage(@buttonTab[x][y],@tabCaseOver[@map.accessAt(x,y).color])
           end
 
       elsif(@map.accessAt(x,y).value == 2)
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/croixOver.png"))
-          @buttonTab[x][y].show_all
+          changeImage(@buttonTab[x][y],"../images/cases/croixOver.png")
       end
 
     end
@@ -412,39 +407,27 @@ class Gui
     if @indiceFortFlag == FALSE
       if button.button==1
         if @timePress[x][y]%2 == 0
-
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@nbHypo]))
-          @buttonTab[x][y].show_all
-           @map.putAt!(x,y,Case.create(1))
-           @map.accessAt(x,y).color=@nbHypo
-           #print "Color sur le press #{@map.accessAt(x,y).color}\n"
-
-       else
-
+          changeImage(@buttonTab[x][y],@tabCase[@nbHypo])
+          @map.putAt!(x,y,Case.create(1))
+          @map.accessAt(x,y).color=@nbHypo
+          #print "Color sur le press #{@map.accessAt(x,y).color}\n"
+       	else
           @map.putAt!(x,y,Case.create(0))
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child =(Gtk::Image.new(:file => "../images/cases/blanc.png"))
-          @buttonTab[x][y].show_all
-       end
+          changeImage(@buttonTab[x][y],"../images/cases/blanc.png")
+       	end
         @timePress[x][y]+=1
 
         if @map.compare
 					victoire()
-
         end
       end
       if button.button==3
 				if @map.accessAt(x,y).value != 2
-	        @buttonTab[x][y].remove(@buttonTab[x][y].child)
-	        @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/croix.png"))
-	        @buttonTab[x][y].show_all
+	        changeImage(@buttonTab[x][y],"../images/cases/croix.png")
 	        @map.putAt!(x,y,Case.create(2))
 	        @timePress[x][y]= 0
 				else
-					@buttonTab[x][y].remove(@buttonTab[x][y].child)
-				 	@buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/blanc.png"))
-				 	@buttonTab[x][y].show_all
+					changeImage(@buttonTab[x][y],"../images/cases/blanc.png")
 				 	@map.putAt!(x,y,Case.create(0))
 				 	@timePress[x][y]= 0
 			 end
@@ -474,23 +457,14 @@ class Gui
           @timePress[x][y] = 1
           @map.accessAt(x,y).color = @nbHypo
         end
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          #print "path = #{@tabCase[@map.accessAt(x,y).color]}\n"
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@map.accessAt(x,y).color]))
-          @buttonTab[x][y].show_all
-
+          changeImage(@buttonTab[x][y],@tabCase[@map.accessAt(x,y).color])
       else
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blanc.png" ))
+          changeImage(@buttonTab[x][y],"../images/cases/blanc.png" )
           @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
       end
     elsif @map.accessAt(x,y).value == 2
-      @buttonTab[x][y].remove(@buttonTab[x][y].child)
-      @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/croix.png" ))
+      changeImage(@buttonTab[x][y],"../images/cases/croix.png" )
       @timePress[x][y] = 0
-      @buttonTab[x][y].show_all
-
     else
       ajoutLimitation(x,y)
     end
@@ -523,17 +497,13 @@ class Gui
     if res[2]=="0"
       @map.putAt!(x,y,Case.create(2))
       puts "Case blanche"
-      @buttonTab[x][y].remove(@buttonTab[x][y].child)
-      @buttonTab[x][y].child =(Gtk::Image.new(:file => "../images/cases/croix.png"))
+      changeImage(@buttonTab[x][y],"../images/cases/croix.png")
     else
       @map.putAt!(x,y,Case.create(1))
       @map.accessAt(x,y).color=1;
-      @buttonTab[x][y].remove(@buttonTab[x][y].child)
-      @buttonTab[x][y].child =(Gtk::Image.new(:file => "../images/cases/noir.png"))
-
+      changeImage(@buttonTab[x][y],"../images/cases/noir.png")
     end
     @timePress[x][y]+=1
-    @buttonTab[x][y].show_all
     @timer.add(60)
     if @map.compare
       victoire()
@@ -628,16 +598,12 @@ class Gui
 		iAide1 = Gtk::Image.new(:file => "../images/boutons/aide1.png")
 		@bAide1 = Gtk::EventBox.new.add(iAide1)
 		@bAide1.signal_connect("enter_notify_event"){
-			@bAide1.remove(@bAide1.child)
-			@bAide1.child = Gtk::Image.new(:file => "../images/boutons/aide1Over.png")
-			@bAide1.show_all
+			changeImage(@bAide1,"../images/boutons/aide1Over.png")
 			@vb.add(Gtk::Label.new.set_markup("<span foreground='white'>Aide qui vous indique la colonne qui a le plus gros chiffre</span>"))
 			@window.show_all
 		}
 		@bAide1.signal_connect("leave_notify_event"){
-			@bAide1.remove(@bAide1.child)
-			@bAide1.child = Gtk::Image.new(:file => "../images/boutons/aide1.png")
-			@bAide1.show_all
+			changeImage(@bAide1,"../images/boutons/aide1.png")
 			@vb.remove(@vb.children.last)
 			@window.show_all
 		}
@@ -649,16 +615,12 @@ class Gui
 		iAide2 = Gtk::Image.new(:file => "../images/boutons/aide120.png")
 		@bAide2 = Gtk::EventBox.new.add(iAide2)
 		@bAide2.signal_connect("enter_notify_event"){
-			@bAide2.remove(@bAide2.child)
-			@bAide2.child = Gtk::Image.new(:file => "../images/boutons/aide120Over.png")
-			@bAide2.show_all
+			changeImage(@bAide2,"../images/boutons/aide120Over.png")
 			@vb.add(Gtk::Label.new.set_markup("<span foreground='white'>Aide qui vous revele une case au hasard</span>"))
 			@window.show_all
 		}
 		@bAide2.signal_connect("leave_notify_event"){
-			@bAide2.remove(@bAide2.child)
-			@bAide2.child = Gtk::Image.new(:file => "../images/boutons/aide120.png")
-			@bAide2.show_all
+			changeImage(@bAide2,"../images/boutons/aide120.png")
 			@vb.remove(@vb.children.last)
 			@window.show_all
 		}
@@ -670,16 +632,12 @@ class Gui
 		iAide3 = Gtk::Image.new(:file => "../images/boutons/aide120.png")
 		@bAide3 = Gtk::EventBox.new.add(iAide3)
 		@bAide3.signal_connect("enter_notify_event"){
-			@bAide3.remove(@bAide3.child)
-			@bAide3.child = Gtk::Image.new(:file => "../images/boutons/aide120Over.png")
-			@bAide3.show_all
+			changeImage(@bAide3,"../images/boutons/aide120Over.png")
 			@vb.add(Gtk::Label.new.set_markup("<span foreground='white'>Aide vous permettant d'appuyer sur une case et savoir si elle est coloriee ou non</span>"))
 			@window.show_all
 		}
 		@bAide3.signal_connect("leave_notify_event"){
-			@bAide3.remove(@bAide3.child)
-			@bAide3.child = Gtk::Image.new(:file => "../images/boutons/aide120.png")
-			@bAide3.show_all
+			changeImage(@bAide3,"../images/boutons/aide120.png")
 			@vb.remove(@vb.children.last)
 			@window.show_all
 		}
@@ -704,14 +662,10 @@ class Gui
 		iFaireHypo = Gtk::Image.new(:file => @tabFaireHypo[@nbHypo])
 		@bFaireHypo = Gtk::EventBox.new.add(iFaireHypo)
 		@bFaireHypo.signal_connect("enter_notify_event"){
-			@bFaireHypo.remove(@bFaireHypo.child)
-			@bFaireHypo.child = Gtk::Image.new(:file => @tabFaireHypoOver[@nbHypo])
-			@bFaireHypo.show_all
+			changeImage(@bFaireHypo,@tabFaireHypoOver[@nbHypo])
 		}
 		@bFaireHypo.signal_connect("leave_notify_event"){
-			@bFaireHypo.remove(@bFaireHypo.child)
-			@bFaireHypo.child = Gtk::Image.new(:file => @tabFaireHypo[@nbHypo])
-			@bFaireHypo.show_all
+			changeImage(@bFaireHypo,@tabFaireHypo[@nbHypo])
 		}
 		@bFaireHypo.signal_connect("button_press_event") do
 			if @nbHypo < 3
@@ -726,14 +680,10 @@ class Gui
 		iValiderHypo = Gtk::Image.new(:file => @tabValiderHypo[@nbHypo])
 		@bValiderHypo = Gtk::EventBox.new.add(iValiderHypo)
 		@bValiderHypo.signal_connect("enter_notify_event"){
-			@bValiderHypo.remove(@bValiderHypo.child)
-			@bValiderHypo.child = Gtk::Image.new(:file => @tabValiderHypoOver[@nbHypo])
-			@bValiderHypo.show_all
+			changeImage(@bValiderHypo,@tabValiderHypoOver[@nbHypo])
 		}
 		@bValiderHypo.signal_connect("leave_notify_event"){
-			@bValiderHypo.remove(@bValiderHypo.child)
-			@bValiderHypo.child = Gtk::Image.new(:file => @tabValiderHypo[@nbHypo])
-			@bValiderHypo.show_all
+			changeImage(@bValiderHypo,@tabValiderHypo[@nbHypo])
 		}
 		@bValiderHypo.signal_connect("button_press_event") do
 			if @nbHypo > 0
@@ -749,14 +699,10 @@ class Gui
 		iRejeterHypo = Gtk::Image.new(:file => @tabRejeterHypo[@nbHypo])
 		@bRejeterHypo = Gtk::EventBox.new.add(iRejeterHypo)
 		@bRejeterHypo.signal_connect("enter_notify_event"){
-			@bRejeterHypo.remove(@bRejeterHypo.child)
-			@bRejeterHypo.child = Gtk::Image.new(:file => @tabRejeterHypoOver[@nbHypo])
-			@bRejeterHypo.show_all
+			changeImage(@bRejeterHypo,@tabRejeterHypoOver[@nbHypo])
 		}
 		@bRejeterHypo.signal_connect("leave_notify_event"){
-			@bRejeterHypo.remove(@bRejeterHypo.child)
-			@bRejeterHypo.child = Gtk::Image.new(:file => @tabRejeterHypo[@nbHypo])
-			@bRejeterHypo.show_all
+			changeImage(@bRejeterHypo,@tabRejeterHypo[@nbHypo])
 		}
 		@bRejeterHypo.signal_connect("button_press_event") do
 			if @nbHypo > 0
@@ -774,17 +720,11 @@ class Gui
 	##
 	# Méthode qui change les boutons d'hypothese en fonction du n° d'hypothese
 	def changeBoutonHypo()
-		@bFaireHypo.remove(@bFaireHypo.child)
-		@bFaireHypo.child = Gtk::Image.new(:file => @tabFaireHypo[@nbHypo])
-		@bFaireHypo.show_all
+		changeImage(@bFaireHypo,@tabFaireHypo[@nbHypo])
 
-		@bValiderHypo.remove(@bValiderHypo.child)
-		@bValiderHypo.child = Gtk::Image.new(:file => @tabValiderHypo[@nbHypo])
-		@bValiderHypo.show_all
+		changeImage(@bValiderHypo,@tabValiderHypo[@nbHypo])
 
-		@bRejeterHypo.remove(@bRejeterHypo.child)
-		@bRejeterHypo.child = Gtk::Image.new(:file => @tabRejeterHypo[@nbHypo])
-		@bRejeterHypo.show_all
+		changeImage(@bRejeterHypo,@tabRejeterHypo[@nbHypo])
 	end
 
 	##
@@ -799,14 +739,10 @@ class Gui
 		iReset = Gtk::Image.new(:file => "../images/boutons/reset.png")
 		@bReset = Gtk::EventBox.new.add(iReset)
 		@bReset.signal_connect("enter_notify_event"){
-			@bReset.remove(@bReset.child)
-			@bReset.child = Gtk::Image.new(:file => "../images/boutons/resetOver.png")
-			@bReset.show_all
+			changeImage(@bReset,"../images/boutons/resetOver.png")
 		}
 		@bReset.signal_connect("leave_notify_event"){
-			@bReset.remove(@bReset.child)
-			@bReset.child = Gtk::Image.new(:file => "../images/boutons/reset.png")
-			@bReset.show_all
+			changeImage(@bReset,"../images/boutons/reset.png")
 		}
 		@bReset.signal_connect("button_press_event") do
 			@map = Map.create(@cheminMap)
@@ -820,14 +756,10 @@ class Gui
 		iHome = Gtk::Image.new(:file => "../images/boutons/home.png")
 		@bHome = Gtk::EventBox.new.add(iHome)
 		@bHome.signal_connect("enter_notify_event"){
-			@bHome.remove(@bHome.child)
-			@bHome.child = Gtk::Image.new(:file => "../images/boutons/homeOver.png")
-			@bHome.show_all
+			changeImage(@bHome,"../images/boutons/homeOver.png")
 		}
 		@bHome.signal_connect("leave_notify_event"){
-			@bHome.remove(@bHome.child)
-			@bHome.child = Gtk::Image.new(:file => "../images/boutons/home.png")
-			@bHome.show_all
+			changeImage(@bHome,"../images/boutons/home.png")
 		}
 		@bHome.signal_connect("button_press_event") do
 			@window.destroy
@@ -894,23 +826,14 @@ class Gui
               @timePress[x][y] = 1
               @map.accessAt(x,y).color = @nbHypo
             end
-              @buttonTab[x][y].remove(@buttonTab[x][y].child)
-              #print "path = #{@tabCase[@map.accessAt(x,y).color]}\n"
-              @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@map.accessAt(x,y).color]))
-              @buttonTab[x][y].show_all
-
+              changeImage(@buttonTab[x][y],@tabCase[@map.accessAt(x,y).color])
           else
-              @buttonTab[x][y].remove(@buttonTab[x][y].child)
-              @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blanc.png" ))
+              changeImage(@buttonTab[x][y],"../images/cases/blanc.png" )
               @timePress[x][y] = 0
-              @buttonTab[x][y].show_all
-
           end
         elsif @map.accessAt(x,y).value == 2
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/croix.png" ))
+          changeImage(@buttonTab[x][y],"../images/cases/croix.png" )
           @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
 
         else
          ajoutLimitation(x,y)
@@ -962,76 +885,56 @@ class Gui
 		monFichier.close
 	end
 
+	##
+	# Change l'image d'un bouton
+	def changeImage(unBouton,file)
+		unBouton.remove(unBouton.child)
+		unBouton.child = (Gtk::Image.new(:file => file ))
+		unBouton.show_all
+	end
 
   def ajoutLimitation(x,y)
-    if((x+1)%5 == 0 && (y+1)%5 != 0 && (x != @map.rows - 1))
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
+  	if((x+1)%5 == 0 && (y+1)%5 != 0 && (x != @map.rows - 1))
+			changeImage(@buttonTab[x][y],"../images/cases/blancCase5.png")
+      @timePress[x][y] = 0
     elsif((x+1)%5 != 0 && (y+1)%5 == 0  && (y != @map.cols - 1))
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5verticale.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
+      changeImage(@buttonTab[x][y],"../images/cases/blancCase5verticale.png" )
+      @timePress[x][y] = 0
     elsif((x+1)%5 == 0 && (y+1)%5 == 0 && (x != @map.rows - 1) && (y != @map.cols - 1))
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5_5.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
+      changeImage(@buttonTab[x][y],"../images/cases/blancCase5_5.png" )
+      @timePress[x][y] = 0
     elsif(x == @map.rows - 1 && (y+1)%5 == 0 && y != @map.cols - 1)
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5verticale.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
+    changeImage(@buttonTab[x][y],"../images/cases/blancCase5verticale.png" )
+      @timePress[x][y] = 0
     elsif(y == @map.cols - 1 && (x+1)%5 == 0 && x != @map.rows - 1)
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancCase5.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
+      changeImage(@buttonTab[x][y],"../images/cases/blancCase5.png" )
+      @timePress[x][y] = 0
     else
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blanc.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
+      changeImage(@buttonTab[x][y],"../images/cases/blanc.png" )
+  @timePress[x][y] = 0
     end
   end
 
-
-
-
-def ajoutLimitationOver(x,y)
-    if((x+1)%5 == 0 && (y+1)%5 != 0 && (x != @map.rows - 1))
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancOver5h.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
-    elsif((x+1)%5 != 0 && (y+1)%5 == 0  && (y != @map.cols - 1))
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancOver5v.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
-    elsif((x+1)%5 == 0 && (y+1)%5 == 0 && (x != @map.rows - 1) && (y != @map.cols - 1))
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancOver5_5.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
-    elsif(x == @map.rows - 1 && (y+1)%5 == 0 && y != @map.cols - 1)
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancOver5v.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
-    elsif(y == @map.cols - 1 && (x+1)%5 == 0 && x != @map.rows - 1)
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancOver5h.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
-    else
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => "../images/cases/blancOver.png" ))
-          @timePress[x][y] = 0
-          @buttonTab[x][y].show_all
-    end
-  end
+	def ajoutLimitationOver(x,y)
+	  if((x+1)%5 == 0 && (y+1)%5 != 0 && (x != @map.rows - 1))
+	    changeImage(@buttonTab[x][y],"../images/cases/blancOver5h.png" )
+	    @timePress[x][y] = 0
+	  elsif((x+1)%5 != 0 && (y+1)%5 == 0  && (y != @map.cols - 1))
+	    changeImage(@buttonTab[x][y],"../images/cases/blancOver5v.png" )
+	    @timePress[x][y] = 0
+	  elsif((x+1)%5 == 0 && (y+1)%5 == 0 && (x != @map.rows - 1) && (y != @map.cols - 1))
+	    changeImage(@buttonTab[x][y],"../images/cases/blancOver5_5.png" )
+	    @timePress[x][y] = 0
+	  elsif(x == @map.rows - 1 && (y+1)%5 == 0 && y != @map.cols - 1)
+	    changeImage(@buttonTab[x][y],"../images/cases/blancOver5v.png" )
+	    @timePress[x][y] = 0
+	  elsif(y == @map.cols - 1 && (x+1)%5 == 0 && x != @map.rows - 1)
+	    changeImage(@buttonTab[x][y],"../images/cases/blancOver5h.png" )
+	    @timePress[x][y] = 0
+	  else
+	    changeImage(@buttonTab[x][y],"../images/cases/blancOver.png" )
+	    @timePress[x][y] = 0
+	  end
+	end
 
 end
