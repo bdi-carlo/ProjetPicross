@@ -276,20 +276,7 @@ class Gui
     else
       if (@map.accessAt(x,y).value == 0)
         ajoutLimitationOver(x,y)
-				i=x-1
-				while i >= 0 do
-					if(@map.accessAt(i,y).value == 0)
-						ajoutLimitationOver(i,y)
-					end
-					i-=1
-				end
-				i=y-1
-				while i >= 0 do
-					if(@map.accessAt(x,i).value == 0)
-						ajoutLimitationOver(x,i)
-					end
-					i-=1
-				end
+				surlignageLigneColonne(1,x,y)
       elsif (@map.accessAt(x,y).value == 1)
         #  print "color =#{@map.accessAt(x,y).color}\n"
           if @map.accessAt(x,y).color != nil
@@ -298,24 +285,12 @@ class Gui
               @map.accessAt(x,y).color = @nbHypo
             end
               changeImage(@buttonTab[x][y],@tabCaseOver[@map.accessAt(x,y).color])
-							i=x-1
-							while i >= 0 do
-								if(@map.accessAt(i,y).value == 0)
-									ajoutLimitationOver(i,y)
-								end
-								i-=1
-							end
-							i=y-1
-							while i >= 0 do
-								if(@map.accessAt(x,i).value == 0)
-									ajoutLimitationOver(x,i)
-								end
-								i-=1
-							end
+							surlignageLigneColonne(1,x,y)
           end
 
       elsif(@map.accessAt(x,y).value == 2)
           changeImage(@buttonTab[x][y],"../images/cases/croixOver.png")
+					surlignageLigneColonne(1,x,y)
       end
 
     end
@@ -471,30 +446,24 @@ class Gui
           @timePress[x][y] = 1
           @map.accessAt(x,y).color = @nbHypo
         end
-				i=x-1
-				while i >= 0 do
-					if(@map.accessAt(i,y).value == 0)
-						ajoutLimitation(i,y)
-					end
-					i-=1
-				end
-				i=y-1
-				while i >= 0 do
-					if(@map.accessAt(x,i).value == 0)
-						ajoutLimitation(x,i)
-					end
-					i-=1
-				end
+				surlignageLigneColonne(0,x,y)
         changeImage(@buttonTab[x][y],@tabCase[@map.accessAt(x,y).color])
       else
         changeImage(@buttonTab[x][y],"../images/cases/blanc.png" )
         @timePress[x][y] = 0
       end
     elsif @map.accessAt(x,y).value == 2
+			surlignageLigneColonne(0,x,y)
       changeImage(@buttonTab[x][y],"../images/cases/croix.png" )
       @timePress[x][y] = 0
     else
       ajoutLimitation(x,y)
+			surlignageLigneColonne(0,x,y)
+    end
+  end
+
+	def surlignageLigneColonne(indice,x,y)
+		if indice == 0
 			i=x-1
 			while i >= 0 do
 				if(@map.accessAt(i,y).value == 0)
@@ -509,8 +478,23 @@ class Gui
 				end
 				i-=1
 			end
-    end
-  end
+		else
+			i=x-1
+			while i >= 0 do
+				if(@map.accessAt(i,y).value == 0)
+					ajoutLimitationOver(i,y)
+				end
+				i-=1
+			end
+			i=y-1
+			while i >= 0 do
+				if(@map.accessAt(x,i).value == 0)
+					ajoutLimitationOver(x,i)
+				end
+				i-=1
+			end
+		end
+	end
 
   def aide1()
     indice = IndiceFaible.create(@map)
