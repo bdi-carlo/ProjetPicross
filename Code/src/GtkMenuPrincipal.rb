@@ -50,7 +50,8 @@ class MenuPrincipal < Menu
 		}
 		#Lorsque l'on clique sur le bouton
 		@bNew.signal_connect("button_press_event") do
-				onDestroy()
+        @window.hide
+        onDestroy()
         MenuJouer.new(@pseudo)
     end
 		vb.add(@bNew)
@@ -65,7 +66,8 @@ class MenuPrincipal < Menu
 			onLeave(@bCharger)
 		}
 		@bCharger.signal_connect("button_press_event") do
-				onDestroy()
+        @window.hide
+        onDestroy()
 				MenuCharger.new(@pseudo)
     end
 		vb.add(@bCharger)
@@ -80,7 +82,8 @@ class MenuPrincipal < Menu
 			onLeave(@bScore)
 		}
 		@bScore.signal_connect("button_press_event") do
-				onDestroy()
+        @window.hide
+        onDestroy()
 				Scoreboard.new(@pseudo)
     end
 		vb.add(@bScore)

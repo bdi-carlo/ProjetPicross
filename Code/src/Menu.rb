@@ -23,19 +23,20 @@ class Menu
 
 	def creerWindow()
 		#Création de la fenêtre
-    window = Gtk::Window.new("PiCross")
+    @window = Gtk::Window.new("PiCross")
     #@window.set_size_request(300, 300)
-    window.resizable=FALSE
-    window.set_window_position(:center_always)
+    @window.resizable=FALSE
+    @window.set_window_position(:center_always)
 
-  	window.signal_connect('destroy') {onDestroy}
+  	@window.signal_connect('destroy') {onDestroy}
 
-		return window
+		return @window
 	end
 
 	##
 	# Callback de la fermeture de l'appli
 	def onDestroy
+    @window.hide
 		#puts "Fermeture fenetre"
     #puts "destroy menu"
 		#Quit 'propre'

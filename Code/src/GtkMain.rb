@@ -51,6 +51,7 @@ class Main < Menu
       if verifPseudo(nom.text) > 0
         @pseudo = nom.text
         puts "Pseudo: " + @pseudo
+        @window.hide
 				onDestroy()
         MenuPrincipal.new(@pseudo)
       end

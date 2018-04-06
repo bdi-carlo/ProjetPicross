@@ -51,7 +51,7 @@ class MenuJouer < Menu
 		}
 		#Lorsque l'on clique sur le bouton
 		@bAventure.signal_connect("button_press_event") do
-			
+
       @window.destroy
       Aventure.new(@pseudo)
 		end
