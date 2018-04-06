@@ -76,7 +76,7 @@ class Gui
 			save?()
 		end
 
-		puts surQuitter?()
+		# puts surQuitter?()
 
 
     Gtk.main_quit
@@ -279,7 +279,7 @@ class Gui
     else
       if (@map.accessAt(x,y).value == 0)
         ajoutLimitationOver(x,y)
-				
+
       elsif (@map.accessAt(x,y).value == 1)
         #  print "color =#{@map.accessAt(x,y).color}\n"
           if @map.accessAt(x,y).color != nil
@@ -316,8 +316,14 @@ class Gui
 				supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
 			end
 			dialog.destroy
-			@save_flag = false;
-			@window.destroy
+			@save_flag = false
+      if @indiceTypeJeu == 2
+			     Gtk.main_quit
+           
+      else
+        @window.destroy
+
+      end
 		 }
 		res = "Bravo, vous avez fait un temps de #{@time/60}min et #{@time%60} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
 
