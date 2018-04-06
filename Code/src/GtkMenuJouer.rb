@@ -8,6 +8,7 @@ load "GtkMap.rb"
 load "Aventure.rb"
 load "Menu.rb"
 load "GtkMenuChoixGrille.rb"
+load "GtkDidacticiel.rb"
 
 class MenuJouer < Menu
 
@@ -68,7 +69,7 @@ class MenuJouer < Menu
 		}
 		@bCompetition.signal_connect("button_press_event") do
 			onDestroy()
-      MenuChoixGrille.new(@pseudo,1)
+      			MenuChoixGrille.new(@pseudo,1)
 		end
 		vb.add(@bCompetition)
 
@@ -96,6 +97,12 @@ class MenuJouer < Menu
 		@bDidacticiel.signal_connect("leave_notify_event"){
 			onLeave(@bDidacticiel)
 		}
+		@bDidacticiel.signal_connect("button_press_event") do
+			onDestroy()
+			#indiceTypeJeu, charge, pseudo, cheminMap, inc, start, map, hypo, nbHypo
+			GtkDidacticiel.new(nil, 0, @pseudo, "../grilles/facile/10x10/Neuf", 1, 0, nil, nil, nil)	
+			
+		end
 		vb.add(@bDidacticiel)
 
 		#Création du boutton RETOUR

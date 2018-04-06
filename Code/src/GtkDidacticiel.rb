@@ -5,9 +5,10 @@ end
 require 'gtk3'
 require "date"
 load 'GtkMap.rb'
+load 'Didacticiel.rb'
 
 
-class GtkDidacticiel < GtkMap
+class GtkDidacticiel < Gui
 
 	#@verifcase
 	#@verifcroix
@@ -17,41 +18,39 @@ class GtkDidacticiel < GtkMap
 	attr_accessor :verifcase,:verifcroix,:verifhypo,:verifaide
 	
 	
-  def initialize()
-	super(charge, pseudo, cheminMap, inc, start, map, hypo, nbHypo)
-
+  def initialize(indiceTypeJeu, charge, pseudo, cheminMap, inc, start, map, hypo, nbHypo)
+	
 	@verifcase = 0
 	@verifcroix = 0
 	@verifhypo  = 0
 	@verifaide = 0
-
-	map = Gui.new("./grilles/didacticiel/grilleE.rb",1,0)
-
-	Didacticiel()
+	puts "Coucou"
+	@dida = Didacticiel.new()
 	initDialogue()
+	@dida.etape += 1
 	affichemessage()
-	
+	super(indiceTypeJeu, charge, pseudo, cheminMap, inc, start, map, hypo, nbHypo)
   end
 	
   def affichemessage 
 	#actualise le texte de la variable message
-	changerMessage()
+	@dida.changerMessage()
 	initDialogue()
 	
   end
 
   def initDialogue()
   	##### création de la boite de dialogue ou va etre affiché les instructions
-	dialogue = Gtk::Dialog.new("message",$main_application_window, Gtk::Dialog::DESTROY_WITH_PARENT,[ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
-	dialogue.set_window_position(:center_always)
-	dialogue.child.add(Gtk::Label.new( "\n"+@message+"\n" ))
+	dialog = Gtk::Dialog.new("message",$main_application_window, Gtk::Dialog::DESTROY_WITH_PARENT,[ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
+	dialog.set_window_position(:center_always)
+	#dialogue.child.add(Gtk::Label.new( "\n"+@message+"\n" ))
 
 	dialog.signal_connect('response') { dialog.destroy }
 	##### LE MESSAGE A AFFICHER
-	res = "#{@message}"  
+	res = @dida.message
 
-    dialog.child.add(Gtk::Label.new(res))
-	dialogue.show_all
+   	dialog.child.add(Gtk::Label.new(res))
+	dialog.show_all
 
 	
   end
@@ -62,65 +61,30 @@ class GtkDidacticiel < GtkMap
 
     if button.state.button1_mask?
       if @timePress[x][y]%2 == 0
+        changeImage(@buttonTab[x][y],@tabCase[@nbHypo])
 
-        @buttonTab[x][y].remove(@buttonTab[x][y].child)
-        @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@nbHypo]))
+       @map.putAt!(x,y,Case.create(1))
 ############################################################################################
-		if(@etape == 1 && @verifcase == 0)
+		if(@dida.etape == 1 && @verifcase == 0)
 			@verifcase += 1
 			#etape du didacticiel
-			@etape += 1
+			@dida.etape += 1
 			affichemessage()
 		end
 ############################################################################################
-        @buttonTab[x][y].show_all
-		
 
-        @map.putAt!(x,y,Case.create(1))
-        @map.accessAt(x,y).color=@nbHypo
-        #print "Color sur le enter #{@map.accessAt(x,y).color}\n"
+       @map.accessAt(x,y).color=@nbHypo
+       #print "Color sur le enter #{@map.accessAt(x,y).color}\n"
       else
-
         @map.putAt!(x,y,Case.create(0))
-        @buttonTab[x][y].remove(@buttonTab[x][y].child)
-        @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/blanc.png"))
-        @buttonTab[x][y].show_all
-
+      	changeImage(@buttonTab[x][y],"../images/cases/blanc.png")
       end
       @timePress[x][y]+=1
       if @map.compare                      #####QUOI FAIRE EN CAS DE VICTOIRE
-				@timer.pause
-        dialog = Gtk::Dialog.new("Bravo",
-                                 $main_application_window,
-                                 Gtk::DialogFlags::DESTROY_WITH_PARENT,
-                                 [ Gtk::Stock::OK, Gtk::ResponseType::NONE ])
-
-        # Ensure that the dialog box is destroyed when the user responds.
-        dialog.signal_connect('response') {
-					supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
-					Gtk.main_quit
-          puts "Fermeture picross sur victoire"
-          dialog.destroy
-         }
-        res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
-
-        dialog.child.add(Gtk::Label.new(res))
-        dialog.show_all
-
-
+				victoire()
       end
     elsif button.state.button3_mask?
-      @buttonTab[x][y].remove(@buttonTab[x][y].child)
-      @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/croix.png"))
-############################################################################################	  
-	  if(@etape == 2 && @verifcroix == 0)
-			@verifcroix += 1
-			#etape du didacticiel
-			@etape += 1
-			affichemessage()
-	  end
-############################################################################################
-      @buttonTab[x][y].show_all
+      changeImage(@buttonTab[x][y],"../images/cases/croix.png")
       @map.putAt!(x,y,Case.create(2))
       @timePress[x][y]=0
 
@@ -128,11 +92,8 @@ class GtkDidacticiel < GtkMap
 
     else
       if (@map.accessAt(x,y).value == 0)
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/blancOver.png"))
-          @buttonTab[x][y].show_all
-
-
+        ajoutLimitationOver(x,y)
+	surlignageLigneColonne(1,x,y)
       elsif (@map.accessAt(x,y).value == 1)
         #  print "color =#{@map.accessAt(x,y).color}\n"
           if @map.accessAt(x,y).color != nil
@@ -140,16 +101,13 @@ class GtkDidacticiel < GtkMap
               @timePress[x][y] = 1
               @map.accessAt(x,y).color = @nbHypo
             end
-              @buttonTab[x][y].remove(@buttonTab[x][y].child)
-              #print "path = #{@tabCase[@map.accessAt(x,y).color]}\n"
-              @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCaseOver[@map.accessAt(x,y).color]))
-              @buttonTab[x][y].show_all
+              changeImage(@buttonTab[x][y],@tabCaseOver[@map.accessAt(x,y).color])
+							surlignageLigneColonne(1,x,y)
           end
 
       elsif(@map.accessAt(x,y).value == 2)
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/croixOver.png"))
-          @buttonTab[x][y].show_all
+          changeImage(@buttonTab[x][y],"../images/cases/croixOver.png")
+					surlignageLigneColonne(1,x,y)
       end
 
     end
@@ -163,57 +121,38 @@ class GtkDidacticiel < GtkMap
   # * x : Coordonnée du bouton
   # * y : Coordonnée du bouton
   # * button : Event qui contient l'appui
-  def onPress(x,y,button)
+ def onPress(x,y,button)
     Gdk.pointer_ungrab(Gdk::CURRENT_TIME)
     @buttonTab[x][y].set_focus(TRUE)
 
     if @indiceFortFlag == FALSE
       if button.button==1
         if @timePress[x][y]%2 == 0
-
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child = (Gtk::Image.new(:file => @tabCase[@nbHypo]))
-          @buttonTab[x][y].show_all
-           @map.putAt!(x,y,Case.create(1))
-           @map.accessAt(x,y).color=@nbHypo
-           #print "Color sur le press #{@map.accessAt(x,y).color}\n"
-
-       else
-
+          changeImage(@buttonTab[x][y],@tabCase[@nbHypo])
+          @map.putAt!(x,y,Case.create(1))
+	  
+          @map.accessAt(x,y).color=@nbHypo
+          #print "Color sur le press #{@map.accessAt(x,y).color}\n"
+       	else
           @map.putAt!(x,y,Case.create(0))
-          @buttonTab[x][y].remove(@buttonTab[x][y].child)
-          @buttonTab[x][y].child =(Gtk::Image.new(:file => "../images/cases/blanc.png"))
-          @buttonTab[x][y].show_all
-       end
+          changeImage(@buttonTab[x][y],"../images/cases/blanc.png")
+       	end
         @timePress[x][y]+=1
 
         if @map.compare
-          dialog = Gtk::Dialog.new("Bravo",
-                                   $main_application_window,
-                                   Gtk::DialogFlags::DESTROY_WITH_PARENT,
-                                   [ Gtk::Stock::OK, Gtk::ResponseType::NONE ])
-
-          # Ensure that the dialog box is destroyed when the user responds.
-          dialog.signal_connect('response') {
-						supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
-						Gtk.main_quit
-						puts "Fermeture picross sur victoire"
-            dialog.destroy
-          }
-          res = "Bravo, vous avez fait un temps de #{@time} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
-
-          dialog.child.add(Gtk::Label.new(res))
-          dialog.show_all
-
-
+					victoire()
         end
       end
       if button.button==3
-        @buttonTab[x][y].remove(@buttonTab[x][y].child)
-        @buttonTab[x][y].child = (Gtk::Image.new(:file =>"../images/cases/croix.png"))
-        @buttonTab[x][y].show_all
-        @map.putAt!(x,y,Case.create(2))
-        @timePress[x][y]= 0
+				if @map.accessAt(x,y).value != 2
+	        changeImage(@buttonTab[x][y],"../images/cases/croix.png")
+	        @map.putAt!(x,y,Case.create(2))
+	        @timePress[x][y]= 0
+				else
+					changeImage(@buttonTab[x][y],"../images/cases/blanc.png")
+				 	@map.putAt!(x,y,Case.create(0))
+				 	@timePress[x][y]= 0
+			 end
       end
     else
       indice = IndiceFort.create(@map,x,y)
@@ -232,7 +171,7 @@ class GtkDidacticiel < GtkMap
     end
   end
 
-  def initBoxHypo()
+   def initBoxHypo()
     boxHypo = Gtk::Box.new(:vertical,30)
     boxHypo.add(Gtk::Label.new())
 
@@ -240,25 +179,13 @@ class GtkDidacticiel < GtkMap
 		iFaireHypo = Gtk::Image.new(:file => @tabFaireHypo[@nbHypo])
 		@bFaireHypo = Gtk::EventBox.new.add(iFaireHypo)
 		@bFaireHypo.signal_connect("enter_notify_event"){
-			@bFaireHypo.remove(@bFaireHypo.child)
-			@bFaireHypo.child = Gtk::Image.new(:file => @tabFaireHypoOver[@nbHypo])
-			@bFaireHypo.show_all
+			changeImage(@bFaireHypo,@tabFaireHypoOver[@nbHypo])
 		}
 		@bFaireHypo.signal_connect("leave_notify_event"){
-			@bFaireHypo.remove(@bFaireHypo.child)
-			@bFaireHypo.child = Gtk::Image.new(:file => @tabFaireHypo[@nbHypo])
-			@bFaireHypo.show_all
+			changeImage(@bFaireHypo,@tabFaireHypo[@nbHypo])
 		}
 		@bFaireHypo.signal_connect("button_press_event") do
 			if @nbHypo < 3
-############################################################################################
-				if(@etape == 4 && @verifhypo == 0)
-					@verifhypo += 1
-					#etape du didacticiel
-					@etape += 1
-					affichemessage()
-				end
-############################################################################################
 				@nbHypo += 1
 				changeBoutonHypo()
 				@map = @hypo.faireHypothese()
@@ -270,14 +197,10 @@ class GtkDidacticiel < GtkMap
 		iValiderHypo = Gtk::Image.new(:file => @tabValiderHypo[@nbHypo])
 		@bValiderHypo = Gtk::EventBox.new.add(iValiderHypo)
 		@bValiderHypo.signal_connect("enter_notify_event"){
-			@bValiderHypo.remove(@bValiderHypo.child)
-			@bValiderHypo.child = Gtk::Image.new(:file => @tabValiderHypoOver[@nbHypo])
-			@bValiderHypo.show_all
+			changeImage(@bValiderHypo,@tabValiderHypoOver[@nbHypo])
 		}
 		@bValiderHypo.signal_connect("leave_notify_event"){
-			@bValiderHypo.remove(@bValiderHypo.child)
-			@bValiderHypo.child = Gtk::Image.new(:file => @tabValiderHypo[@nbHypo])
-			@bValiderHypo.show_all
+			changeImage(@bValiderHypo,@tabValiderHypo[@nbHypo])
 		}
 		@bValiderHypo.signal_connect("button_press_event") do
 			if @nbHypo > 0
@@ -293,14 +216,10 @@ class GtkDidacticiel < GtkMap
 		iRejeterHypo = Gtk::Image.new(:file => @tabRejeterHypo[@nbHypo])
 		@bRejeterHypo = Gtk::EventBox.new.add(iRejeterHypo)
 		@bRejeterHypo.signal_connect("enter_notify_event"){
-			@bRejeterHypo.remove(@bRejeterHypo.child)
-			@bRejeterHypo.child = Gtk::Image.new(:file => @tabRejeterHypoOver[@nbHypo])
-			@bRejeterHypo.show_all
+			changeImage(@bRejeterHypo,@tabRejeterHypoOver[@nbHypo])
 		}
 		@bRejeterHypo.signal_connect("leave_notify_event"){
-			@bRejeterHypo.remove(@bRejeterHypo.child)
-			@bRejeterHypo.child = Gtk::Image.new(:file => @tabRejeterHypo[@nbHypo])
-			@bRejeterHypo.show_all
+			changeImage(@bRejeterHypo,@tabRejeterHypo[@nbHypo])
 		}
 		@bRejeterHypo.signal_connect("button_press_event") do
 			if @nbHypo > 0
@@ -322,77 +241,50 @@ class GtkDidacticiel < GtkMap
 		iAide1 = Gtk::Image.new(:file => "../images/boutons/aide1.png")
 		@bAide1 = Gtk::EventBox.new.add(iAide1)
 		@bAide1.signal_connect("enter_notify_event"){
-			@bAide1.remove(@bAide1.child)
-			@bAide1.child = Gtk::Image.new(:file => "../images/boutons/aide1Over.png")
-			@bAide1.show_all
+			changeImage(@bAide1,"../images/boutons/aide1Over.png")
+			@vb.add(Gtk::Label.new.set_markup("<span foreground='white'>Aide qui vous indique la colonne qui a le plus gros chiffre</span>"))
+			@window.show_all
 		}
 		@bAide1.signal_connect("leave_notify_event"){
-			@bAide1.remove(@bAide1.child)
-			@bAide1.child = Gtk::Image.new(:file => "../images/boutons/aide1.png")
-			@bAide1.show_all
+			changeImage(@bAide1,"../images/boutons/aide1.png")
+			@vb.remove(@vb.children.last)
+			@window.show_all
 		}
     @bAide1.signal_connect("button_press_event") do
-############################################################################################
-		if(@etape == 3 && @verifaide == 0)
-				@verifaide += 1
-				#etape du didacticiel
-				@etape += 1
-				affichemessage()
-
-		end
-############################################################################################
-    	aide1()
+      aide1()
     end
     boxAide.add(@bAide1)
 
-		iAide2 = Gtk::Image.new(:file => "../images/boutons/aide2.png")
+		iAide2 = Gtk::Image.new(:file => "../images/boutons/aide120.png")
 		@bAide2 = Gtk::EventBox.new.add(iAide2)
 		@bAide2.signal_connect("enter_notify_event"){
-			@bAide2.remove(@bAide2.child)
-			@bAide2.child = Gtk::Image.new(:file => "../images/boutons/aide2Over.png")
-			@bAide2.show_all
+			changeImage(@bAide2,"../images/boutons/aide120Over.png")
+			@vb.add(Gtk::Label.new.set_markup("<span foreground='white'>Aide qui vous revele une case au hasard</span>"))
+			@window.show_all
 		}
 		@bAide2.signal_connect("leave_notify_event"){
-			@bAide2.remove(@bAide2.child)
-			@bAide2.child = Gtk::Image.new(:file => "../images/boutons/aide2.png")
-			@bAide2.show_all
+			changeImage(@bAide2,"../images/boutons/aide120.png")
+			@vb.remove(@vb.children.last)
+			@window.show_all
 		}
     @bAide2.signal_connect("button_press_event") do
-############################################################################################
-		if(@etape == 3 && @verifaide == 0)
-				@verifaide += 1
-				#etape du didacticiel
-				@etape += 1
-				affichemessage()
-
-		end
-############################################################################################	
       aide2()
     end
     boxAide.add(@bAide2)
 
-		iAide3 = Gtk::Image.new(:file => "../images/boutons/aide3.png")
+		iAide3 = Gtk::Image.new(:file => "../images/boutons/aide120.png")
 		@bAide3 = Gtk::EventBox.new.add(iAide3)
 		@bAide3.signal_connect("enter_notify_event"){
-			@bAide3.remove(@bAide3.child)
-			@bAide3.child = Gtk::Image.new(:file => "../images/boutons/aide3Over.png")
-			@bAide3.show_all
+			changeImage(@bAide3,"../images/boutons/aide120Over.png")
+			@vb.add(Gtk::Label.new.set_markup("<span foreground='white'>Aide vous permettant d'appuyer sur une case et savoir si elle est coloriee ou non</span>"))
+			@window.show_all
 		}
 		@bAide3.signal_connect("leave_notify_event"){
-			@bAide3.remove(@bAide3.child)
-			@bAide3.child = Gtk::Image.new(:file => "../images/boutons/aide3.png")
-			@bAide3.show_all
+			changeImage(@bAide3,"../images/boutons/aide120.png")
+			@vb.remove(@vb.children.last)
+			@window.show_all
 		}
     @bAide3.signal_connect("button_press_event") do
-############################################################################################
-		if(@etape == 3 && @verifaide == 0)
-				@verifaide += 1
-				#etape du didacticiel
-				@etape += 1
-				affichemessage()
-
-		end
-############################################################################################
       aide3()
     end
     boxAide.add(@bAide3)

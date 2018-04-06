@@ -4,7 +4,7 @@ load 'GtkMap.rb'
 
 class Didacticiel 
 
-	@temps		#temps par partie qui va permettre de donner un score
+	#@temps		#temps par partie qui va permettre de donner un score
 	#@taille
 	#@pseudo 	#pseudo du joueur
 	#@difficulte	#difficulte de la partie choisie au lancement du jeu
@@ -19,7 +19,7 @@ class Didacticiel
 				#etape 3: se servir du système d'indice,
 				#etape 4: se servir du système d'hypothèse
 				#etape 5: terminer la grille
-	attr_accessor :pseudo,:score,:chaine,:etape,:message1,:message2,:message3
+	attr_accessor :etape,:message
 
 	#def Didacticiel.lancerJeu()
 	#	new()
@@ -30,7 +30,7 @@ class Didacticiel
 		#en attente du dossier final
 		#nom = "./grilles/didacticiel/sonnom"
 		#map = Gui.new(nom,0,0)
-		@etape = 1
+		@etape = 0
 	end
 		
 	##
@@ -57,7 +57,7 @@ class Didacticiel
 
 		elsif(@etape == 4)	
 			#plusieurs hypothèse ?
-			@message = "les boutons d'hypotheses permet de sauvegarder une position et d'y revenir "
+			@message = "les boutons d'hypotheses permettent de sauvegarder une position et d'y revenir "
 			@etape += 1
 
 		elsif(@etape == 5)	
