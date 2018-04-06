@@ -76,7 +76,7 @@ class Gui
 			save?()
 		end
 
-		puts surQuitter?()
+		# puts surQuitter?()
 
 
     Gtk.main_quit
@@ -84,7 +84,10 @@ class Gui
 
 		if @indiceTypeJeu != 2
 			MenuPrincipal.new(@pseudo)
+    else
+      Gtk.main_quit
 		end
+
   end
 
 	##
@@ -315,8 +318,14 @@ class Gui
 				supprimerFichier( @pseudo+"_"+recupNom(@cheminMap) )
 			end
 			dialog.destroy
-			@save_flag = false;
-			@window.destroy
+			@save_flag = false
+      if @indiceTypeJeu == 2
+			     Gtk.main_quit
+
+      else
+        @window.destroy
+
+      end
 		 }
 		res = "Bravo, vous avez fait un temps de #{@time/60}min et #{@time%60} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
 
