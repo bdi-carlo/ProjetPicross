@@ -1,1 +1,5 @@
-puts "unPseudo".include?("-") || "un*Pse-udo".include?("*")
+require 'rbconfig'
+
+@os = RbConfig::CONFIG['host_os']
+
+puts @os.downcase

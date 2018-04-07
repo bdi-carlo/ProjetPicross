@@ -3,6 +3,7 @@ begin
  rescue LoadError
 end
 require 'gtk3'
+require 'rbconfig'
 load "GtkMenuPrincipal.rb"
 
 class Main < Menu
@@ -73,6 +74,12 @@ class Main < Menu
 
     @window.show_all
 
+    @os = RbConfig::CONFIG['host_os']
+
+    if !@os.downcase.include?('linux')
+      dialogBox("Votre systeme d'exploitation est "+@os+". Vous risquez d\'avoir des problemes de compatibilite!")
+    end
+    
     Gtk.main
 	end
 
