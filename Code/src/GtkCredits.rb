@@ -25,8 +25,8 @@ class Credits < Menu
     - Ouassim Messagier#{"\n"}
     - Samed Oktay#{"\n"}
     - Valentin Lion#{"\n"}
-    - Moi#{"\n"}
-    git du projet => <a href = 'https://github.com/bdi-carlo/ProjetPicross'>https://github.com/bdi-carlo/ProjetPicross</a>
+    - Martin Lebourdais#{"\n"}
+    Git du projet => <a href = 'https://github.com/bdi-carlo/ProjetPicross'>https://github.com/bdi-carlo/ProjetPicross</a>
 </span>"))
     #Création du boutton HOME
 		iHome = Gtk::Image.new(:file => "../images/boutons/home.png")

@@ -52,15 +52,13 @@ class MenuChoixGrille < Menu
 		@difficile.child.set_markup("<span foreground='white'>Niveau Difficile</span>")
 		@vb2.add(@facile).add(@moyen).add(@difficile)
 		@vb3 = Gtk::Box.new(:vertical, 5)
-		@cinq = Gtk::RadioButton.new(:label => "5 X 5")
-		@cinq.child.set_markup("<span foreground='white'>5 X 5</span>")
-    @dix = Gtk::RadioButton.new(:member => @cinq, :label => "10 X 10")
+    @dix = Gtk::RadioButton.new(:label => "10 X 10")
 		@dix.child.set_markup("<span foreground='white'>10 X 10</span>")
-    @quinze = Gtk::RadioButton.new(:member => @cinq, :label => "15 X 15")
+    @quinze = Gtk::RadioButton.new(:member => @dix, :label => "15 X 15")
 		@quinze.child.set_markup("<span foreground='white'>15 X 15</span>")
-		@vingt = Gtk::RadioButton.new(:member => @cinq, :label => "20 X 20")
+		@vingt = Gtk::RadioButton.new(:member => @dix, :label => "20 X 20")
 		@vingt.child.set_markup("<span foreground='white'>20 X 20</span>")
-		@vb3.add(@cinq).add(@dix).add(@quinze).add(@vingt)
+		@vb3.add(@dix).add(@quinze).add(@vingt)
 
 		@hb2.add(@vb2).add(@vb3)
 		@vb.add(@hb2)
@@ -102,9 +100,6 @@ class MenuChoixGrille < Menu
 		@bConfirmer.signal_connect("button_press_event") do
 			#Récupération de la liste des grilles suivant le choix
 			if @facile.active?
-				if @cinq.active?
-					afficheListeFichier("../grilles/facile/5x5")
-				end
 				if @dix.active?
 					afficheListeFichier("../grilles/facile/10x10")
 				end
@@ -116,9 +111,6 @@ class MenuChoixGrille < Menu
 				end
 			end
 			if @moyen.active?
-				if @cinq.active?
-					afficheListeFichier("../grilles/moyen/5x5")
-				end
 				if @dix.active?
 					afficheListeFichier("../grilles/moyen/10x10")
 				end
@@ -130,9 +122,6 @@ class MenuChoixGrille < Menu
 				end
 			end
 			if @difficile.active?
-				if @cinq.active?
-					afficheListeFichier("../grilles/difficile/5x5")
-				end
 				if @dix.active?
 					afficheListeFichier("../grilles/difficile/10x10")
 				end
