@@ -28,9 +28,8 @@ class IndiceFaible < Indice
 	end
 
 ##
-# renvoie indice chaine de caractere contenant le plus gros chiffre "max" et sa position
+# Renvoie indice chaine de caractere contenant le plus gros chiffre "max" et sa position
 #
-
 	def envoyerIndice
 		if @nbUtilisation < @nbMax
 			@nbUtilisation += 1
@@ -50,7 +49,7 @@ class IndiceFaible < Indice
         if somme == nil
           somme = 0
         end
-        
+
 				if somme > max
 					max = somme
 					position = i
@@ -97,10 +96,3 @@ class IndiceFaible < Indice
 
 
 end
-=begin
-	map = Map.create("../grilles/scenario/Bateau")
-	voila = IndiceFaible.create(map)
-	print "#{voila.envoyerIndice.indice}\n"
-
-	"../grilles/Scenario/Bateau"
-=end

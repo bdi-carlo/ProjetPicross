@@ -16,7 +16,8 @@ class MenuJouer < Menu
 		super(pseudo)
 		lancerFenetre()
 	end
-
+  ##
+  # Crée le menu en GTK
 	def lancerFenetre()
     puts("Creation fenetre Jouer")
 
@@ -100,8 +101,8 @@ class MenuJouer < Menu
 		@bDidacticiel.signal_connect("button_press_event") do
 			onDestroy()
 			#indiceTypeJeu, charge, pseudo, cheminMap, inc, start, map, hypo, nbHypo
-			GtkDidacticiel.new(nil, 0, @pseudo, "../grilles/facile/10x10/Neuf", 1, 0, nil, nil, nil)	
-			
+			GtkDidacticiel.new(nil, 0, @pseudo, "../grilles/facile/10x10/Neuf", 1, 0, nil, nil, nil)
+
 		end
 		vb.add(@bDidacticiel)
 
@@ -143,11 +144,15 @@ class MenuJouer < Menu
 
 		Gtk.main
 	end
-
+  ##
+  # Remplace l'image par du vide
 	def putNothing()
 		@iIllustrative.set_from_file("../images/illustrations/nothing.png")
 	end
-
+  ##
+  # MouseOver des boutons
+  #
+  # Param : Bouton concerné
 	def onEnter(button)
 		if button == @bAventure
 			button.remove(button.child)
@@ -176,7 +181,10 @@ class MenuJouer < Menu
 			button.show_all
 		end
 	end
-
+  ##
+  # MouseLeave des boutons
+  #
+  # Param : Bouton concerné
 	def onLeave(button)
 		if button == @bAventure
 			button.remove(button.child)

@@ -16,10 +16,10 @@ class GtkDidacticiel < Gui
 	#@verifaide
 
 	attr_accessor :verifcase,:verifcroix,:verifhypo,:verifaide
-	
-	
+
+
   def initialize(indiceTypeJeu, charge, pseudo, cheminMap, inc, start, map, hypo, nbHypo)
-	
+
 	@verifcase = 0
 	@verifcroix = 0
 	@verifhypo  = 0
@@ -31,16 +31,18 @@ class GtkDidacticiel < Gui
 	affichemessage()
 	super(indiceTypeJeu, charge, pseudo, cheminMap, inc, start, map, hypo, nbHypo)
   end
-	
-  def affichemessage 
-	#actualise le texte de la variable message
+	##
+  # Actualise le texte de la variable message
+  def affichemessage
+
 	@dida.changerMessage()
 	initDialogue()
-	
-  end
 
+  end
+  ##
+  # Création de la boite de dialogue ou va etre affiché les instructions
   def initDialogue()
-  	##### création de la boite de dialogue ou va etre affiché les instructions
+
 	dialog = Gtk::Dialog.new("message",$main_application_window, Gtk::Dialog::DESTROY_WITH_PARENT,[ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
 	dialog.set_window_position(:center_always)
 	#dialogue.child.add(Gtk::Label.new( "\n"+@message+"\n" ))
@@ -52,9 +54,10 @@ class GtkDidacticiel < Gui
    	dialog.child.add(Gtk::Label.new(res))
 	dialog.show_all
 
-	
-  end
 
+  end
+  ##
+  # MouseOver pour la grille 
   def onEnter(x,y,button)
     Gdk.pointer_ungrab(Gdk::CURRENT_TIME)
     @buttonTab[x][y].set_focus(TRUE)
@@ -130,7 +133,7 @@ class GtkDidacticiel < Gui
         if @timePress[x][y]%2 == 0
           changeImage(@buttonTab[x][y],@tabCase[@nbHypo])
           @map.putAt!(x,y,Case.create(1))
-	  
+
           @map.accessAt(x,y).color=@nbHypo
           #print "Color sur le press #{@map.accessAt(x,y).color}\n"
        	else
@@ -293,5 +296,5 @@ class GtkDidacticiel < Gui
 
   end
 
-  
+
 end

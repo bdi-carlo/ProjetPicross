@@ -9,6 +9,8 @@ require 'yaml'
 load "GtkMap.rb"
 load "Menu.rb"
 
+##
+# Menu qui affiche le scoreboard
 class Scoreboard < Menu
 
   def initialize(pseudo)
@@ -16,7 +18,8 @@ class Scoreboard < Menu
 		lancerFenetre()
 		@flagScore = false
 	end
-
+  ##
+  # Crée le menu Gtk
 	def lancerFenetre()
 		puts("Creation fenetre Charger")
 

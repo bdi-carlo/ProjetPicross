@@ -15,7 +15,8 @@ class MenuChoixGrille < Menu
 		@flagListe = false
 		lancerFenetre()
 	end
-
+  ##
+  # Crée le menu en Gtk
 	def lancerFenetre()
 		puts("Creation fenetre Choix Grille")
 
@@ -151,8 +152,9 @@ class MenuChoixGrille < Menu
 	end
 
 	##
-	#Méthode qui retourne une vbox contenant la liste des fichiers d'un répertoire
-	#Param : le répertoire
+	# Méthode qui retourne une vbox contenant la liste des fichiers d'un répertoire
+  #
+	# Param : le répertoire
 	def afficheListeFichier( unRepertoire )
 		if @flagListe
 			@hb.remove(@hb.children.last)

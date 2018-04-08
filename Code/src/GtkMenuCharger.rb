@@ -15,7 +15,8 @@ class MenuCharger < Menu
 		super(pseudo)
 		lancerFenetre()
 	end
-
+  ##
+  # Crée le menu Gtk
 	def lancerFenetre()
 		puts("Creation fenetre Charger")
 

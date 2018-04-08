@@ -33,7 +33,8 @@ class IndiceMoyen < Indice
 		@col = 0
 	end
 
-
+	##
+	# Envoye la chaine correspondant à l'état de la case.
 	def envoyerIndice
 		#aleatoire sur toutes les cases
 		#verifie si la case choisie n'est pas deja remplie sinon recommence(a optimiser)
@@ -60,8 +61,3 @@ class IndiceMoyen < Indice
 	end
 
 end
-=begin
-map = Map.create("../grilles/scenario/Bateau")
-voila = IndiceMoyen.create(map)
-print voila.envoyerIndice.indice
-=end

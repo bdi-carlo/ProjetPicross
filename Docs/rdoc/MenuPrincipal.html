@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class MenuPrincipal - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="Menu.html">Menu</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-lancerFenetre">#lancerFenetre</a>
+    
+    <li ><a href="#method-i-onEnter">#onEnter</a>
+    
+    <li ><a href="#method-i-onLeave">#onLeave</a>
+    
+    <li ><a href="#method-i-putNothing">#putNothing</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-MenuPrincipal">
+  <h1 id="class-MenuPrincipal" class="class">
+    class MenuPrincipal
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(pseudo)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="Menu.html#method-c-new">Menu.new</a>
+            </div>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File GtkMenuPrincipal.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">pseudo</span>)
+              <span class="ruby-keyword">super</span>(<span class="ruby-identifier">pseudo</span>)
+              <span class="ruby-identifier">lancerFenetre</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-lancerFenetre" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">lancerFenetre</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Crée le menu Gtk</p>
+          
+          
+
+          
+          <div class="method-source-code" id="lancerFenetre-source">
+            <pre><span class="ruby-comment"># File GtkMenuPrincipal.rb, line 20</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lancerFenetre</span>()
+            <span class="ruby-identifier">puts</span>(<span class="ruby-string">&quot;Creation fenetre Menu Principal&quot;</span>)
+
+<span class="ruby-ivar">@window</span> = <span class="ruby-identifier">creerWindow</span>()
+
+            <span class="ruby-identifier">grid</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Grid</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-identifier">hb</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Box</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:horizontal</span>, <span class="ruby-value">10</span>)
+            <span class="ruby-identifier">vb</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Box</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:vertical</span>, <span class="ruby-value">20</span>)
+
+            <span class="ruby-comment">#Label de bordure gauche</span>
+            <span class="ruby-identifier">hb</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot; &quot;</span>))
+
+            <span class="ruby-comment">#Label de bordure haut</span>
+            <span class="ruby-identifier">vb</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;\n&quot;</span>))
+
+            <span class="ruby-comment">#Label du pseudo</span>
+            <span class="ruby-identifier">lPseudo</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-identifier">lPseudo</span>.<span class="ruby-identifier">set_markup</span>(<span class="ruby-node">&quot;&lt;big&gt;&lt;i&gt;&lt;big&gt;&lt;b&gt;&lt;span foreground=&#39;white&#39;&gt;#{@pseudo}&lt;/span&gt;&lt;/b&gt;&lt;/big&gt;&lt;/i&gt;&lt;/big&gt;&quot;</span>)
+            <span class="ruby-identifier">vb</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">lPseudo</span>)
+
+            <span class="ruby-comment">#Label d&#39;espacement</span>
+            <span class="ruby-identifier">vb</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;\n\n\n&quot;</span>))
+
+            <span class="ruby-comment">#Création du bouton NEW PARTIE</span>
+            <span class="ruby-identifier">iNew</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/boutons/new.png&quot;</span>)
+<span class="ruby-ivar">@bNew</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">EventBox</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">iNew</span>)
+            <span class="ruby-ivar">@bNew</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;enter_notify_event&quot;</span>){
+                    <span class="ruby-identifier">onEnter</span>(<span class="ruby-ivar">@bNew</span>)
+            }
+            <span class="ruby-ivar">@bNew</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;leave_notify_event&quot;</span>){
+                    <span class="ruby-identifier">onLeave</span>(<span class="ruby-ivar">@bNew</span>)
+            }
+            <span class="ruby-comment">#Lorsque l&#39;on clique sur le bouton</span>
+            <span class="ruby-ivar">@bNew</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;button_press_event&quot;</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@window</span>.<span class="ruby-identifier">hide</span>
+    <span class="ruby-identifier">onDestroy</span>()
+    <span class="ruby-constant">MenuJouer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@pseudo</span>)
+<span class="ruby-keyword">end</span>
+            <span class="ruby-identifier">vb</span>.<span class="ruby-identifier">add</span>(<span class="ruby-ivar">@bNew</span>)
+
+            <span class="ruby-comment">#Création du boutton CHARGER</span>
+            <span class="ruby-identifier">iCharger</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/boutons/charger.png&quot;</span>)
+<span class="ruby-ivar">@bCharger</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">EventBox</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">iCharger</span>)
+            <span class="ruby-ivar">@bCharger</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;enter_notify_event&quot;</span>){
+                    <span class="ruby-identifier">onEnter</span>(<span class="ruby-ivar">@bCharger</span>)
+            }
+            <span class="ruby-ivar">@bCharger</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;leave_notify_event&quot;</span>){
+                    <span class="ruby-identifier">onLeave</span>(<span class="ruby-ivar">@bCharger</span>)
+            }
+            <span class="ruby-ivar">@bCharger</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;button_press_event&quot;</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@window</span>.<span class="ruby-identifier">hide</span>
+    <span class="ruby-identifier">onDestroy</span>()
+                            <span class="ruby-constant">MenuCharger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@pseudo</span>)
+<span class="ruby-keyword">end</span>
+            <span class="ruby-identifier">vb</span>.<span class="ruby-identifier">add</span>(<span class="ruby-ivar">@bCharger</span>)
+
+            <span class="ruby-comment">#Création du boutton SCOREBOARD</span>
+            <span class="ruby-identifier">iScore</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/boutons/scoreboard.png&quot;</span>)
+<span class="ruby-ivar">@bScore</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">EventBox</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">iScore</span>)
+            <span class="ruby-ivar">@bScore</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;enter_notify_event&quot;</span>){
+                    <span class="ruby-identifier">onEnter</span>(<span class="ruby-ivar">@bScore</span>)
+            }
+            <span class="ruby-ivar">@bScore</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;leave_notify_event&quot;</span>){
+                    <span class="ruby-identifier">onLeave</span>(<span class="ruby-ivar">@bScore</span>)
+            }
+            <span class="ruby-ivar">@bScore</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;button_press_event&quot;</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@window</span>.<span class="ruby-identifier">hide</span>
+    <span class="ruby-identifier">onDestroy</span>()
+                            <span class="ruby-constant">Scoreboard</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@pseudo</span>)
+<span class="ruby-keyword">end</span>
+            <span class="ruby-identifier">vb</span>.<span class="ruby-identifier">add</span>(<span class="ruby-ivar">@bScore</span>)
+
+<span class="ruby-comment">#Création du boutton CREDITS</span>
+            <span class="ruby-identifier">iCredits</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/boutons/credits.png&quot;</span>)
+<span class="ruby-ivar">@bCredits</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">EventBox</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">iCredits</span>)
+            <span class="ruby-ivar">@bCredits</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;enter_notify_event&quot;</span>){
+                    <span class="ruby-identifier">onEnter</span>(<span class="ruby-ivar">@bCredits</span>)
+            }
+<span class="ruby-ivar">@bCredits</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;button_press_event&quot;</span>){
+                    <span class="ruby-constant">Credits</span>.<span class="ruby-identifier">new</span>()
+            }
+            <span class="ruby-ivar">@bCredits</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;leave_notify_event&quot;</span>){
+                    <span class="ruby-identifier">onLeave</span>(<span class="ruby-ivar">@bCredits</span>)
+            }
+            <span class="ruby-identifier">vb</span>.<span class="ruby-identifier">add</span>(<span class="ruby-ivar">@bCredits</span>)
+
+<span class="ruby-comment">#Création du boutton QUITTER</span>
+            <span class="ruby-identifier">iQuitter</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/boutons/quitter.png&quot;</span>)
+<span class="ruby-ivar">@bQuitter</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">EventBox</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">iQuitter</span>)
+            <span class="ruby-ivar">@bQuitter</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;enter_notify_event&quot;</span>){
+                    <span class="ruby-identifier">onEnter</span>(<span class="ruby-ivar">@bQuitter</span>)
+            }
+            <span class="ruby-ivar">@bQuitter</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;leave_notify_event&quot;</span>){
+                    <span class="ruby-identifier">onLeave</span>(<span class="ruby-ivar">@bQuitter</span>)
+            }
+            <span class="ruby-ivar">@bQuitter</span>.<span class="ruby-identifier">signal_connect</span>(<span class="ruby-string">&quot;button_press_event&quot;</span>) <span class="ruby-keyword">do</span>
+                    <span class="ruby-identifier">onDestroy</span>()
+            <span class="ruby-keyword">end</span>
+            <span class="ruby-identifier">vb</span>.<span class="ruby-identifier">add</span>(<span class="ruby-ivar">@bQuitter</span>)
+
+            <span class="ruby-identifier">hb</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">vb</span>)
+
+            <span class="ruby-comment">#Label d&#39;espacement</span>
+            <span class="ruby-identifier">hb</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;\t\t\t\t\t\t\t&quot;</span>))
+
+            <span class="ruby-comment">#Partie droite</span>
+            <span class="ruby-identifier">vb2</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Box</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:vertical</span>,<span class="ruby-value">0</span>)
+            <span class="ruby-identifier">vb2</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;</span>))
+            <span class="ruby-ivar">@iIllustrative</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/illustrations/nothing.png&quot;</span>)
+            <span class="ruby-identifier">vb2</span>.<span class="ruby-identifier">add</span>(<span class="ruby-ivar">@iIllustrative</span>)
+            <span class="ruby-identifier">hb</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">vb2</span>)
+
+            <span class="ruby-identifier">grid</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">hb</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>)
+
+            <span class="ruby-comment">#Wallpaper</span>
+            <span class="ruby-identifier">image</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/wallpaper.jpg&quot;</span>)
+            <span class="ruby-identifier">grid</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-identifier">image</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">1</span>,<span class="ruby-value">1</span>)
+
+<span class="ruby-ivar">@window</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">grid</span>)
+
+<span class="ruby-ivar">@window</span>.<span class="ruby-identifier">show_all</span>
+
+<span class="ruby-constant">Gtk</span>.<span class="ruby-identifier">main</span>
+    <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-onEnter" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">onEnter</span><span
+            class="method-args">(button)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>MouseOver des boutons</p>
+
+<p>Param : Bouton concerné</p>
+          
+          
+
+          
+          <div class="method-source-code" id="onEnter-source">
+            <pre><span class="ruby-comment"># File GtkMenuPrincipal.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">onEnter</span>(<span class="ruby-identifier">button</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">button</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@bNew</span>
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span>)
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/boutons/newOver.png&quot;</span>)
+                <span class="ruby-ivar">@iIllustrative</span>.<span class="ruby-identifier">set_from_file</span>(<span class="ruby-string">&quot;../images/illustrations/new.png&quot;</span>)
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">show_all</span>
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">button</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@bCharger</span>
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span>)
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/boutons/chargerOver.png&quot;</span>)
+                <span class="ruby-ivar">@iIllustrative</span>.<span class="ruby-identifier">set_from_file</span>(<span class="ruby-string">&quot;../images/illustrations/load.png&quot;</span>)
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">show_all</span>
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">button</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@bScore</span>
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span>)
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/boutons/scoreboardOver.png&quot;</span>)
+                <span class="ruby-ivar">@iIllustrative</span>.<span class="ruby-identifier">set_from_file</span>(<span class="ruby-string">&quot;../images/illustrations/score.png&quot;</span>)
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">show_all</span>
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">button</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@bCredits</span>
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span>)
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/boutons/creditsOver.png&quot;</span>)
+                <span class="ruby-ivar">@iIllustrative</span>.<span class="ruby-identifier">set_from_file</span>(<span class="ruby-string">&quot;../images/illustrations/credits.png&quot;</span>)
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">show_all</span>
+        <span class="ruby-keyword">else</span> <span class="ruby-identifier">button</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@bQuitter</span>
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span>)
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/boutons/quitterOver.png&quot;</span>)
+                <span class="ruby-ivar">@iIllustrative</span>.<span class="ruby-identifier">set_from_file</span>(<span class="ruby-string">&quot;../images/illustrations/quitter.png&quot;</span>)
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">show_all</span>
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-onLeave" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">onLeave</span><span
+            class="method-args">(button)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>MouseLeave des boutons</p>
+
+<p>Param : Bouton concerné</p>
+          
+          
+
+          
+          <div class="method-source-code" id="onLeave-source">
+            <pre><span class="ruby-comment"># File GtkMenuPrincipal.rb, line 185</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">onLeave</span>(<span class="ruby-identifier">button</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">button</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@bNew</span>
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span>)
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/boutons/new.png&quot;</span>)
+                <span class="ruby-identifier">putNothing</span>
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">show_all</span>
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">button</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@bCharger</span>
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span>)
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/boutons/charger.png&quot;</span>)
+                <span class="ruby-identifier">putNothing</span>
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">show_all</span>
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">button</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@bScore</span>
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span>)
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/boutons/scoreboard.png&quot;</span>)
+                <span class="ruby-identifier">putNothing</span>
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">show_all</span>
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">button</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@bCredits</span>
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span>)
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/boutons/credits.png&quot;</span>)
+                <span class="ruby-identifier">putNothing</span>
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">show_all</span>
+        <span class="ruby-keyword">else</span> <span class="ruby-identifier">button</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@bQuitter</span>
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span>)
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">child</span> = <span class="ruby-constant">Gtk</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:file</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;../images/boutons/quitter.png&quot;</span>)
+                <span class="ruby-identifier">putNothing</span>
+                <span class="ruby-identifier">button</span>.<span class="ruby-identifier">show_all</span>
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-putNothing" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">putNothing</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Remplace l&#39;image par du vide</p>
+          
+          
+
+          
+          <div class="method-source-code" id="putNothing-source">
+            <pre><span class="ruby-comment"># File GtkMenuPrincipal.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">putNothing</span>()
+        <span class="ruby-ivar">@iIllustrative</span>.<span class="ruby-identifier">set_from_file</span>(<span class="ruby-string">&quot;../images/illustrations/nothing.png&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

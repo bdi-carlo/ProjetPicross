@@ -35,9 +35,6 @@ class IndiceFort < Indice
 
 
 ##
-# Vérification de la case sur la grille
-#
-#
 # Vérification dans la grille résultat si la case sélectionnée est coloriée ou non
 #
 	def envoyerIndice()

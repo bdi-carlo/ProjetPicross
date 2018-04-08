@@ -15,7 +15,8 @@ class MenuPrincipal < Menu
 		super(pseudo)
 		lancerFenetre()
   end
-
+  ##
+  # Crée le menu Gtk
 	def lancerFenetre()
 		puts("Creation fenetre Menu Principal")
 
@@ -140,11 +141,15 @@ class MenuPrincipal < Menu
 
     Gtk.main
 	end
-
+  ##
+  # Remplace l'image par du vide
 	def putNothing()
 		@iIllustrative.set_from_file("../images/illustrations/nothing.png")
 	end
-
+  ##
+  # MouseOver des boutons
+  #
+  # Param : Bouton concerné
 	def onEnter(button)
 		if button == @bNew
 			button.remove(button.child)
@@ -173,7 +178,10 @@ class MenuPrincipal < Menu
 			button.show_all
 		end
 	end
-
+  ##
+  # MouseLeave des boutons
+  #
+  # Param : Bouton concerné
 	def onLeave(button)
 		if button == @bNew
 			button.remove(button.child)

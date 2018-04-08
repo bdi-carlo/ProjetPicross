@@ -3,7 +3,8 @@ begin
  rescue LoadError
 end
 require 'gtk3'
-
+##
+# Classe représentant un curseur par défaut
 class CursorDefault
 
 	@@instance = nil

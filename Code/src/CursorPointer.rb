@@ -4,6 +4,8 @@ begin
 end
 require 'gtk3'
 
+##
+# Classe représentant un curseur sur un objet cliquable
 class CursorPointer
 
 	@@instance = nil

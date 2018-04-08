@@ -1,3 +1,4 @@
+##
 # Commande concrète pour une image du scénario
 class ImgCmd
   attr_reader :scenario

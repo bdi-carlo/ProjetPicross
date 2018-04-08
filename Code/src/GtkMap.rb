@@ -107,7 +107,7 @@ class Gui
 		dialog.signal_connect('response') { |dial,rep|
 			if rep == -3
         dialog.destroy
-        @window.hide        
+        @window.hide
         Gtk.main_quit
         MenuPrincipal.new(@pseudo)
       else
@@ -119,7 +119,7 @@ class Gui
 	end
 
 	##
-	#Méthode qui demande à l'utilisateur de sauvegarder ou non
+	# Méthode qui demande à l'utilisateur de sauvegarder ou non
 	def save?()
 		dialog = Gtk::Dialog.new("Sauvegarde?",
                              $main_application_window,
@@ -142,7 +142,8 @@ class Gui
 			dialog.destroy
 		}
 	end
-
+  ##
+  # Methode qui crée la fenêtre et contient la boucle principale du picross
 	def lancerGrille()
 		@indiceFortFlag = FALSE
 
@@ -177,7 +178,7 @@ class Gui
     sidenumbers = Gtk::Box.new(:vertical,10)
       #sidenumbers.add(Gtk::Label.new())
       for tab in side
-                                                                                   # A FAIRE
+
         tab.length.upto(@maxlens)do
           @temp << "   "
         end
@@ -303,7 +304,7 @@ class Gui
   end
 
 	##
-	#Méthode qui aplique ce qu'il y a faire lors de la victoire
+	# Méthode qui applique ce qu'il y a faire lors de la victoire
 	def victoire()
 		@timer.pause
 		dialog = Gtk::Dialog.new("Bravo",
@@ -337,7 +338,7 @@ class Gui
 	end
 
 	##
-	#Enregistre le score de la victoire dans le top 10 du scoreboard
+	# Enregistre le score de la victoire dans le top 10 du scoreboard
 	def enregistreScore()
 		chemin = "../scoreboard/"+@cheminMap.split("/")[2]
 		monFichier = File.open(chemin)
@@ -364,7 +365,7 @@ class Gui
 	end
 
 	##
-	#Méthode de tri bulle pour trier le tableau dans l'ordre croissant en fonction des scores
+	# Méthode de tri bulle pour trier le tableau dans l'ordre croissant en fonction des scores
 	def triScore(unTab)
 		trier = false
 		taille = unTab.length
@@ -386,7 +387,7 @@ class Gui
 	end
 
 	##
-	#Méthode qui coupe un tableau à partir du nombre maximum d'élement souhaité
+	# Méthode qui coupe un tableau à partir du nombre maximum d'élement souhaité
 	def coupeTabMaxElt(unTab,unMax)
 		while unTab.length > unMax do
 			unTab.pop
@@ -449,7 +450,13 @@ class Gui
       dialog.show_all
     end
   end
-
+  ##
+  # Callback MouseLeave pour les cases de la grille
+  #
+  # Param :
+  # * x : Coordonnée du bouton
+  # * y : Coordonnée du bouton
+  # * button : Event qui contient l'appui
   def onLeave(x,y,button)
     if (@map.accessAt(x,y).value == 1)
     #  print "color =#{@map.accessAt(x,y).color}\n"
@@ -473,7 +480,13 @@ class Gui
 			surlignageLigneColonne(0,x,y)
     end
   end
-
+  ##
+  # Crée la croix de surlignage pour voir ou l'on se situe
+  #
+  # Param :
+  # * indice : A colorier ou non
+  # * x : Coordonnée de la case
+  # * y : Coordonnée de la case
 	def surlignageLigneColonne(indice,x,y)
 		if indice == 0
 			i=x-1
@@ -507,7 +520,8 @@ class Gui
 			end
 		end
 	end
-
+  ##
+  # Callback pour l'aide 1
   def aide1()
     indice = IndiceFaible.create(@map)
     dialog = Gtk::Dialog.new("Aide1",
@@ -524,7 +538,8 @@ class Gui
     @timer.add(15)
 
   end
-
+  ##
+  # Callback pour l'aide 2
   def aide2()
     indice = IndiceMoyen.create(@map)
     res = indice.envoyerIndice.indice.split("-")
@@ -547,7 +562,8 @@ class Gui
       victoire()
     end
   end
-
+  ##
+  # Callback pour l'aide 3
   def aide3()
 
     @indiceFortFlag = TRUE
@@ -856,7 +872,8 @@ class Gui
     end
     return grid
   end
-
+  ##
+  # Actualise la grille avec la couleur des cases.
   def actuMap()
     0.upto(@map.rows-1) do |x|
       0.upto(@map.cols-1) do |y|
@@ -929,12 +946,21 @@ class Gui
 
 	##
 	# Change l'image d'un bouton
+  #
+  # Param:
+  # * unBouton : Bouton à changer
+  # * file : image par laquelle remplacer
 	def changeImage(unBouton,file)
 		unBouton.remove(unBouton.child)
 		unBouton.child = (Gtk::Image.new(:file => file ))
 		unBouton.show_all
 	end
-
+  ##
+  # Ajoute les bandes noire épaisses (ou non) selon la position de la case
+  #
+  # Param :
+  # * x : Coordonnée de la case
+  # * y : Coordonnée de la case
   def ajoutLimitation(x,y)
   	if((x+1)%5 == 0 && (y+1)%5 != 0 && (x != @map.rows - 1))
 			changeImage(@buttonTab[x][y],"../images/cases/blancCase5.png")
@@ -956,7 +982,12 @@ class Gui
   @timePress[x][y] = 0
     end
   end
-
+  ##
+  # Ajoute les bandes noire épaisses en MouseOver(ou non) selon la position de la case
+  #
+  # Param :
+  # * x : Coordonnée de la case
+  # * y : Coordonnée de la case
 	def ajoutLimitationOver(x,y)
 	  if((x+1)%5 == 0 && (y+1)%5 != 0 && (x != @map.rows - 1))
 	    changeImage(@buttonTab[x][y],"../images/cases/blancOver5h.png" )

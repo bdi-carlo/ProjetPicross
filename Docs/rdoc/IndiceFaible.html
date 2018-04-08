@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class IndiceFaible - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="Indice.html">Indice</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-create">::create</a>
+    
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-envoyerIndice">#envoyerIndice</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-IndiceFaible">
+  <h1 id="class-IndiceFaible" class="class">
+    class IndiceFaible
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-indice" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">indice</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>*VARIABLES D&#39;INSTANCE*</p>
+<ul><li>
+<p>penalites : Un indice faible correspond à 15s de pénalité</p>
+</li><li>
+<p>orientation : Choix entre ligne ou colonne</p>
+</li><li>
+<p>nbUtilisation : Nombre d&#39;utilisation de l&#39;indice</p>
+</li><li>
+<p>nbMax :  Un indice faible peut être utilisé au maximum 3 fois</p>
+</li></ul>
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-create" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create</span><span
+            class="method-args">(grille)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="create-source">
+            <pre><span class="ruby-comment"># File IndiceFaible.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-constant">IndiceFaible</span>.<span class="ruby-identifier ruby-title">create</span>(<span class="ruby-identifier">grille</span>)
+        <span class="ruby-identifier">new</span>(<span class="ruby-identifier">grille</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(grille)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="Indice.html#method-c-new">Indice.new</a>
+            </div>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File IndiceFaible.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">grille</span>)
+        <span class="ruby-ivar">@penalites</span> = <span class="ruby-value">15</span>
+        <span class="ruby-ivar">@indice</span> = <span class="ruby-keyword">nil</span>
+        <span class="ruby-ivar">@orientation</span> = <span class="ruby-keyword">false</span>
+        <span class="ruby-ivar">@nbUtilisation</span> = <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@nbMax</span> = <span class="ruby-value">3</span>
+        <span class="ruby-keyword">super</span>(<span class="ruby-identifier">grille</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-envoyerIndice" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">envoyerIndice</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Renvoie indice chaine de caractere contenant le plus gros chiffre “max” et
+sa position</p>
+          
+          
+
+          
+          <div class="method-source-code" id="envoyerIndice-source">
+            <pre><span class="ruby-comment"># File IndiceFaible.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">envoyerIndice</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@nbUtilisation</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@nbMax</span>
+                <span class="ruby-ivar">@nbUtilisation</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+                <span class="ruby-identifier">position</span> = <span class="ruby-value">0</span>
+                <span class="ruby-identifier">somme</span> = <span class="ruby-value">0</span>
+                <span class="ruby-identifier">max</span> = <span class="ruby-value">0</span>
+                <span class="ruby-identifier">side</span> = <span class="ruby-ivar">@map</span>.<span class="ruby-identifier">side</span>
+                <span class="ruby-identifier">top</span> = <span class="ruby-ivar">@map</span>.<span class="ruby-identifier">top</span>
+                <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
+                <span class="ruby-identifier">j</span> = <span class="ruby-value">0</span>
+
+                <span class="ruby-comment"># calcule le max sur les lignes</span>
+                <span class="ruby-keyword">for</span> <span class="ruby-identifier">row</span> <span class="ruby-keyword">in</span> <span class="ruby-identifier">side</span> <span class="ruby-keyword">do</span>
+                        <span class="ruby-comment">#somme = somme des chiffres present sur la ligne &quot;side&quot;</span>
+
+                  <span class="ruby-identifier">somme</span> = <span class="ruby-identifier">row</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-value">:+</span>)
+<span class="ruby-keyword">if</span> <span class="ruby-identifier">somme</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">somme</span> = <span class="ruby-value">0</span>
+<span class="ruby-keyword">end</span>
+
+                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">somme</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">max</span>
+                                <span class="ruby-identifier">max</span> = <span class="ruby-identifier">somme</span>
+                                <span class="ruby-identifier">position</span> = <span class="ruby-identifier">i</span>
+                                <span class="ruby-ivar">@orientation</span> = <span class="ruby-keyword">false</span>
+                        <span class="ruby-keyword">end</span>
+                        <span class="ruby-identifier">i</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+                <span class="ruby-keyword">end</span>
+
+                <span class="ruby-comment"># calcule le max sur les colonne</span>
+                <span class="ruby-keyword">for</span> <span class="ruby-identifier">col</span> <span class="ruby-keyword">in</span> <span class="ruby-identifier">top</span> <span class="ruby-keyword">do</span>
+                        <span class="ruby-comment">#somme = somme des chiffres present sur la colonne &quot;top&quot;</span>
+
+                  <span class="ruby-identifier">somme</span> = <span class="ruby-identifier">col</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-value">:+</span>)
+
+<span class="ruby-keyword">if</span> <span class="ruby-identifier">somme</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">somme</span> = <span class="ruby-value">0</span>
+<span class="ruby-keyword">end</span>
+                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">somme</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">max</span>
+                                <span class="ruby-identifier">max</span> = <span class="ruby-identifier">somme</span>
+                                <span class="ruby-identifier">position</span> = <span class="ruby-identifier">j</span>
+                                <span class="ruby-ivar">@orientation</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">end</span>
+                        <span class="ruby-identifier">j</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+                <span class="ruby-keyword">end</span>
+
+
+                <span class="ruby-comment"># affiche le plus gros chiffre avec son indice si c&#39;est une ligne</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@orientation</span>
+                        <span class="ruby-ivar">@indice</span> = <span class="ruby-node">&quot;La ligne #{position+1} possede le plus gros chiffre qui est #{max}\n&quot;</span>
+                <span class="ruby-keyword">end</span>
+
+                <span class="ruby-comment"># affiche le plus gros chiffre avec son indice si c&#39;est une colonne</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-ivar">@orientation</span>
+                        <span class="ruby-ivar">@indice</span> = <span class="ruby-node">&quot;La colonne #{position+1} possede le plus gros chiffre qui est #{max}\n&quot;</span>
+                <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-ivar">@indice</span> = <span class="ruby-string">&quot;Nombre d&#39;utilisation maximum de cet indice atteint.&quot;</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

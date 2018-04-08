@@ -3,7 +3,7 @@ load "Map.rb"
 class Indice
 
 ##
-# Classe abstraite 
+# Classe abstraite
 #
 
 # *VARIABLES D'INSTANCE*
@@ -14,16 +14,17 @@ class Indice
 	@penalites
 	@map
 	@indice
-	
+
 	attr_reader :indice
 
 	def initialize(grille)
 		@penalites = 0
 		@map = grille
 		@indice = ""
-	end		
-	
-	#envoie les penalites a la classe jeu pour les rajoutes au temps total
+	end
+
+	##
+	# Envoie les penalites a la classe jeu pour les rajoutes au temps total
 	def ajouterPenalites
 		return @penalites
 	end

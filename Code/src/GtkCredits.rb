@@ -3,7 +3,8 @@ begin
  rescue LoadError
 end
 require 'gtk3'
-
+##
+# Menu affichant les crédits
 class Credits < Menu
 
   def initialize
@@ -25,7 +26,7 @@ class Credits < Menu
     - Ouassim Messagier#{"\n"}
     - Samed Oktay#{"\n"}
     - Valentin Lion#{"\n"}
-    - Martin Lebourdais#{"\n"}
+    - Moi#{"\n"}
     Git du projet => <a href = 'https://github.com/bdi-carlo/ProjetPicross'>https://github.com/bdi-carlo/ProjetPicross</a>
 </span>"))
     #Création du boutton HOME

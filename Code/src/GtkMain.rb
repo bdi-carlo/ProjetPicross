@@ -12,7 +12,8 @@ class Main < Menu
     super(pseudo)
 		lancerFenetre()
   end
-
+  ##
+  # Crée le menu Gtk
 	def lancerFenetre()
 		puts("Creation fenetre Main")
 
@@ -79,10 +80,15 @@ class Main < Menu
     if !@os.downcase.include?('linux')
       dialogBox("Votre systeme d'exploitation est "+@os+". Vous risquez d\'avoir des problemes de compatibilite!")
     end
-    
+
     Gtk.main
 	end
-
+  ##
+  # Vérifie si le pseudo fait - de 10 caractères et ne comporte pas de caractères spéciaux
+  #
+  # Param : Pseudo à tester
+  #
+  # Retour : Validité du pseudo, 1=bon, -1 = pas bon
 	def verifPseudo(unPseudo)
 		if unPseudo == ""
 			dialogBox("Veuillez rentrer un pseudo avant de jouer!")
@@ -95,7 +101,8 @@ class Main < Menu
 		end
 	end
 
-	#Affiche une boite de dialogue avec un message
+	##
+  #Affiche une boite de dialogue avec un message
 	def dialogBox( message )
 		dialog = Gtk::Dialog.new("Alerte",
                              $main_application_window,

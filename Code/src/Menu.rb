@@ -6,7 +6,8 @@ require 'gtk3'
 
 load "CursorPointer.rb"
 load "CursorDefault.rb"
-
+##
+# Classe qui permet de créer une fenêtre
 class Menu
 
 	@@init = false
@@ -20,7 +21,8 @@ class Menu
 		@cursorPointer = CursorPointer.getInstance()
 		@cursorDefault = CursorDefault.getInstance()
 	end
-
+  ##
+  # Crée la fenêtre de menu de base
 	def creerWindow()
 		#Création de la fenêtre
     @window = Gtk::Window.new("PiCross")
