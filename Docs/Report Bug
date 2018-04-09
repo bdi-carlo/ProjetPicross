@@ -3,6 +3,12 @@ Mode Aventure - Fermer un picross - Non à la sauvegarde
 
 GtkMap.rb:690:in `initialize': Aucun fichier ou dossier de ce type @ rb_sysopen - ../sauvegardes/Azamor_Pont
 ------------------------------------------------------------------------
-Mode Aventure - Qr Vent 
+Mode Aventure - Qr Vent
 
 Image plantée, elle est pas assez grande.
+
+------------------------------------------------------------------------
+Lorsque l'on charge une save, la premiere hypo efface les cases coloriées
+
+------------------------------------------------------------------------
+Crash à la fermeture du menu principal lorsque l'on a chargé une partie durant la session de jeu.
