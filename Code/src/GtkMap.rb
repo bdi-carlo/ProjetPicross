@@ -77,7 +77,6 @@ class Gui
 		if @save_flag == true && @indiceTypeJeu == 0
 			save?()
 		end
-    puts @indiceTypeJeu
       Gtk.main_quit
       @window.destroy
 
@@ -266,7 +265,6 @@ class Gui
 
        @map.putAt!(x,y,Case.create(1))
        @map.accessAt(x,y).color=@nbHypo
-       #print "Color sur le enter #{@map.accessAt(x,y).color}\n"
       else
         @map.putAt!(x,y,Case.create(0))
       	changeImage(@buttonTab[x][y],"../images/cases/blanc.png")
@@ -287,7 +285,6 @@ class Gui
         ajoutLimitationOver(x,y)
 				surlignageLigneColonne(1,x,y)
       elsif (@map.accessAt(x,y).value == 1)
-        #  print "color =#{@map.accessAt(x,y).color}\n"
           if @map.accessAt(x,y).color != nil
             if (@map.accessAt(x,y).color == @nbHypo + 1)
               @timePress[x][y] = 1
@@ -309,6 +306,8 @@ class Gui
 	# Méthode qui applique ce qu'il y a faire lors de la victoire
 	def victoire()
 		@timer.pause
+    @map.nettoyer()
+    actuMap()
 		dialog = Gtk::Dialog.new("Bravo",
 														 $main_application_window,
 														 Gtk::DialogFlags::DESTROY_WITH_PARENT,
@@ -414,7 +413,6 @@ class Gui
           changeImage(@buttonTab[x][y],@tabCase[@nbHypo])
           @map.putAt!(x,y,Case.create(1))
           @map.accessAt(x,y).color=@nbHypo
-          #print "Color sur le press #{@map.accessAt(x,y).color}\n"
        	else
           @map.putAt!(x,y,Case.create(0))
           changeImage(@buttonTab[x][y],"../images/cases/blanc.png")
@@ -461,7 +459,6 @@ class Gui
   # * button : Event qui contient l'appui
   def onLeave(x,y,button)
     if (@map.accessAt(x,y).value == 1)
-    #  print "color =#{@map.accessAt(x,y).color}\n"
       if @map.accessAt(x,y).color != nil
         if (@map.accessAt(x,y).color == @nbHypo + 1)
           @timePress[x][y] = 1
@@ -548,10 +545,8 @@ class Gui
 
     x=res[0].to_i
     y=res[1].to_i
-    puts "Res de 2 #{res[2]}"
     if res[2]=="0"
       @map.putAt!(x,y,Case.create(2))
-      puts "Case blanche"
       changeImage(@buttonTab[x][y],"../images/cases/croix.png")
     else
       @map.putAt!(x,y,Case.create(1))
@@ -636,7 +631,6 @@ class Gui
 
       end
       wintop = Gtk::Box.new(:horizontal,100)
-      print "#{@maxlens}"
       splitHorizontal.add(Gtk::Label.new("__"*(@maxlens+2)))
       splitHorizontal.add(topnumbers)
       wintop.add(splitHorizontal)
@@ -879,9 +873,9 @@ class Gui
   def actuMap()
     0.upto(@map.rows-1) do |x|
       0.upto(@map.cols-1) do |y|
-        #print("value =#{@map.accessAt(x,y).value}\n")
+
         if (@map.accessAt(x,y).value == 1)
-        #  print "color =#{@map.accessAt(x,y).color}\n"
+
           if @map.accessAt(x,y).color != nil
             if (@map.accessAt(x,y).color == @nbHypo + 1)
               @timePress[x][y] = 1

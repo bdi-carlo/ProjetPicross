@@ -25,7 +25,7 @@ class Case
   # Retour : couleur de la case, colorié ou non
   def verifColor
     if @value == 1
-      return @value
+      return 1
     end
     if @value == 0
       return 0
@@ -34,7 +34,7 @@ class Case
       return 0
     end
   end
-  def
+
 
   ##
   # redéfinition de l'affichage terminal pour les tests
