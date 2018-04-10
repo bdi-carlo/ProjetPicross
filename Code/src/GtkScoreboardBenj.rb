@@ -122,6 +122,9 @@ class Scoreboard < Menu
 			@hb.remove(@hb.children.last)
 		end
 		vb = Gtk::Box.new(:vertical, 5)
+    if @os.downcase.include?('darwin')
+      vb.add(Gtk::Label.new("\n\n\n\n\n\n\n\n\n"))
+    end
 		vb.add(Gtk::Label.new.set_markup("<big><big><span foreground='black'>#{"\n\n\n\n\n\n\n\n\n"}Scoreboard#{"\n"}</span></big></big>"))
 
 		chemin = "../scoreboard/"+difficulte
