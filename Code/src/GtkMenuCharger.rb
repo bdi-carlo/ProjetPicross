@@ -131,6 +131,7 @@ class MenuCharger < Menu
 		          $map = YAML.load(current)
 		        when 1
 		          $hypo = YAML.load(current)
+              #$hypo = Hypothese.creer($map)
 		        when 2
 		          $pseudo = current.strip
 		        when 3
@@ -151,7 +152,7 @@ class MenuCharger < Menu
 
 			@window.destroy
 			Gui.new(0,1, $pseudo, $cheminMap, $inc, $start, $map, $hypo, $nbHypo)
-			onDestroy()
+			#onDestroy()
 		else
 			dialog = Gtk::Dialog.new("Erreur chargement",
 	                             $main_application_window,

@@ -202,10 +202,18 @@ class Map
     end
     print "\n"
     0.upto(9) do |x|
- 		  print " #{x} #{@res[x]}\n"
+			print" #{x}"
+			0.upto(@rows-1) do |y|
+ 		  	print @map[x][y].value
+			end
+				print "\n"
  		end
     10.upto(@rows-1) do |x|
-      print "#{x} #{@res[x]}\n"
+			print"#{x}"
+			0.upto(@rows-1) do |y|
+ 		  	print @map[x][y].value
+			end
+				print "\n"
     end
     return nil
 	end

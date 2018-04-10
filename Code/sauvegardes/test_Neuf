@@ -190,7 +190,52 @@ map:
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
+    value: 1
+    color: 0
+  - !ruby/object:Case
+    value: 1
+    color: 0
+  - !ruby/object:Case
     value: 0
+  - !ruby/object:Case
+    value: 0
+- - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 1
+    color: 0
+  - !ruby/object:Case
+    value: 1
+    color: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+- - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 0
+  - !ruby/object:Case
+    value: 1
+    color: 0
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
@@ -210,7 +255,8 @@ map:
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
-    value: 0
+    value: 1
+    color: 0
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
@@ -230,47 +276,8 @@ map:
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-- - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-- - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
-  - !ruby/object:Case
-    value: 0
+    value: 1
+    color: 0
   - !ruby/object:Case
     value: 0
   - !ruby/object:Case
@@ -531,7 +538,92 @@ grillePrim: !ruby/object:Map
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
       value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
@@ -598,6 +690,293 @@ grillePrim: !ruby/object:Map
       value: 0
     - !ruby/object:Case
       value: 0
+grillesHypothese:
+- !ruby/object:Map
+  side:
+  - []
+  - - 4
+  - - 1
+    - 1
+  - - 1
+    - 1
+  - - 1
+    - 1
+  - - 5
+  - - 1
+  - - 1
+  - - 5
+  - []
+  top:
+  - []
+  - []
+  - - 3
+  - - 1
+    - 1
+    - 1
+  - - 1
+    - 1
+    - 1
+  - - 1
+    - 1
+    - 1
+  - - 1
+    - 1
+    - 1
+  - - 7
+  - []
+  - []
+  res:
+  - - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 1
+    - 1
+    - 1
+    - 1
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  filename: "../grilles/facile/10x10/Neuf"
+  rows: 10
+  cols: 10
+  map:
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 1
+      color: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
   - - !ruby/object:Case
       value: 0
     - !ruby/object:Case
@@ -658,33 +1037,12 @@ grillePrim: !ruby/object:Map
       value: 0
     - !ruby/object:Case
       value: 0
-  - - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-    - !ruby/object:Case
-      value: 0
-grillesHypothese: []
 ***
 test
 ***
 1
 ***
-4
+53
 ***
 ../grilles/facile/10x10/Neuf
 ***
