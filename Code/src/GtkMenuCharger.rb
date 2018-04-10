@@ -148,6 +148,7 @@ class MenuCharger < Menu
 		    	current+=ligne.to_s
 				end
 			}
+			fic.close
 
 			@window.destroy
 			Gui.new(0,1, $pseudo, $cheminMap, $inc, $start, $map, $hypo, $nbHypo)

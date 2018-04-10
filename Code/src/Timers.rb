@@ -56,7 +56,7 @@ require 'facets/timer'
       def pause
         @timers.stop
         @time +=@inc
-      
+
         return nil
       end
 
@@ -76,9 +76,9 @@ require 'facets/timer'
       #
       # Retour : nil
       def add(temps)
-        self.pause
+        #self.pause
         @time+=temps
-        self.resume
+        #self.resume
         return nil
       end
     end

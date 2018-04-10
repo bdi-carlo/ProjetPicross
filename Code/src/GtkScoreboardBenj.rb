@@ -131,6 +131,7 @@ class Scoreboard < Menu
 		monFichier.each_line{ |ligne|
 			allScores.push(ligne.to_s.strip)
 		}
+		monFichier.close
 		if allScores.length == 0
 			vb.add(Gtk::Label.new.set_markup("<big><b><span foreground='white'>Personne n'a enregistre de score</span></b></big>"))
 		else
