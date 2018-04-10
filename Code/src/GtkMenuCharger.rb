@@ -127,20 +127,17 @@ class MenuCharger < Menu
 	    fic.each_line { |ligne|
 		    if ligne[0,3]=="***" then
 		      case nbOcc
-		        when 0
-		          $map = YAML.load(current)
-		        when 1
+						when 0
 		          $hypo = YAML.load(current)
-              #$hypo = Hypothese.creer($map)
-		        when 2
+		        when 1
 		          $pseudo = current.strip
-		        when 3
+		        when 2
 		          $inc = current.to_i
-		        when 4
+		        when 3
 		          $start = current.to_i
-		        when 5
+		        when 4
 		          $cheminMap = current.strip
-		        when 6
+		        when 5
 		          $nbHypo = current.to_i
 					end
 		    	nbOcc+=1;
@@ -152,7 +149,7 @@ class MenuCharger < Menu
 			fic.close
 
 			@window.destroy
-			Gui.new(0,1, $pseudo, $cheminMap, $inc, $start, $map, $hypo, $nbHypo)
+			Gui.new(0,1, $pseudo, $cheminMap, $inc, $start, $hypo, $nbHypo)
 			#onDestroy()
 		else
 			dialog = Gtk::Dialog.new("Erreur chargement",

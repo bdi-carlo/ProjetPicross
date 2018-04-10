@@ -23,7 +23,7 @@ class Gui
   attr_accessor :pseudo, :difficulte, :penalite, :score, :highscore, :taille, :time, :nomMap
 
 	# Initialize en cas de nouvelle partie
-  def initialize( indiceTypeJeu, charge, pseudo, cheminMap, inc, start, map, hypo, nbHypo )
+  def initialize( indiceTypeJeu, charge, pseudo, cheminMap, inc, start, hypo, nbHypo )
 		# Tableau pour gerer les couleurs des hypotheses
 		@tabCase = ["../images/cases/noir.png", "../images/cases/violet.png", "../images/cases/bleu.png", "../images/cases/rouge.png"]
 		@tabCaseOver = ["../images/cases/noirOver.png", "../images/cases/violetOver.png", "../images/cases/bleuOver.png", "../images/cases/rougeOver.png"]
@@ -31,20 +31,19 @@ class Gui
 		@start = start
 		@cheminMap = cheminMap
 		@pseudo = pseudo
-    @charge = charge
     @save_flag=true
 		@indiceTypeJeu = indiceTypeJeu
 		@flagHypo=false
-		if @charge == 0 then
+		if charge == 0 then
 			@nbHypo = 0
 			@map = Map.create(cheminMap)
 			@hypo = Hypothese.creer(@map)
-		elsif @charge == 1
+		elsif charge == 1
 			@nbHypo = nbHypo
-			@map = map
 			@hypo = hypo
-
-
+			#Réactualisation de la map en fonction de l'hypothese
+			@map = @hypo.faireHypothese()
+			@map = @hypo.validerHypothese()
 		end
 
 		@tabFaireHypo = ["../images/boutons/hypo/faireNoir.png","../images/boutons/hypo/faireViolet.png","../images/boutons/hypo/faireBleu.png","../images/boutons/hypo/faireRouge.png"]
@@ -242,7 +241,6 @@ class Gui
 
 		actuMap()
 
-
     Gtk.main
 	end
 
@@ -259,7 +257,6 @@ class Gui
   # * y : Coordonnée du bouton
   # * button : Event qui contient l'appui
   def onEnter(x,y,button)
-    @map.display
     Gdk.pointer_ungrab(Gdk::CURRENT_TIME)
     @buttonTab[x][y].set_focus(TRUE)
 
@@ -730,7 +727,7 @@ class Gui
 			if @nbHypo < 3
 				@nbHypo += 1
 				changeBoutonHypo()
-				@hypo.faireHypothese(@map)
+				@map = @hypo.faireHypothese()
 			end
 		end
 		boxHypo.add(@bFaireHypo)
@@ -925,13 +922,10 @@ class Gui
 	# Param : identificateurs d'une partie
 	def sauvegarder(unNom)
 		# Serialisation des différentes classes
-		map = @map.to_yaml()
 		hypo = @hypo.to_yaml()
 
 		# Ecriture dans le fichier
 		monFichier = File.open("../sauvegardes/"+unNom, "w")
-		monFichier.write(map)
-		monFichier.write("***\n")
 		monFichier.write(hypo)
 		monFichier.write("***\n")
 		monFichier.write(@pseudo)

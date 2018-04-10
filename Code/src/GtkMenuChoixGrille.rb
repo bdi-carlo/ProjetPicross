@@ -184,7 +184,7 @@ class MenuChoixGrille < Menu
 				event.signal_connect("button_press_event") do
 					#indiceTypeJeu => 0 = normal, 1 = compet, 2 = aventure
           @window.destroy
-					Gui.new(@indiceTypeJeu, 0, @pseudo, unRepertoire+"/"+elt, 1, 0, nil, nil, nil)
+					Gui.new(@indiceTypeJeu, 0, @pseudo, unRepertoire+"/"+elt, 1, 0, nil, nil)
 				end
 				vb.add(event)
 			}

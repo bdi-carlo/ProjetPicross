@@ -161,7 +161,6 @@ class Aventure
   end
   def onDestroy()
     fichier = File.open("../scoreboard/Save_scenar","a")
-    puts "QUIIIIIT"
     @window.hide
     fichier.puts("#{@pseudo}-#{@start}")
     fichier.close
