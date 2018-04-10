@@ -17,6 +17,7 @@ class Menu
 			Gtk.init
 			@@init = true
 		end
+    @os = RbConfig::CONFIG['host_os']
 		@pseudo = pseudo
 		@cursorPointer = CursorPointer.getInstance()
 		@cursorDefault = CursorDefault.getInstance()

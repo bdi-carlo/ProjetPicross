@@ -122,6 +122,9 @@ class Scoreboard < Menu
 			@hb.remove(@hb.children.last)
 		end
 		vb = Gtk::Box.new(:vertical, 5)
+    if @os.downcase.include?('darwin')
+      vb.add(Gtk::Label.new("\n\n\n\n\n\n\n\n\n"))
+    end
 		vb.add(Gtk::Label.new.set_markup("<big><big><span foreground='black'>#{"\n\n\n\n\n\n\n\n\n"}Scoreboard#{"\n"}</span></big></big>"))
 
 		chemin = "../scoreboard/"+difficulte
@@ -131,6 +134,7 @@ class Scoreboard < Menu
 		monFichier.each_line{ |ligne|
 			allScores.push(ligne.to_s.strip)
 		}
+		monFichier.close
 		if allScores.length == 0
 			vb.add(Gtk::Label.new.set_markup("<big><b><span foreground='white'>Personne n'a enregistre de score</span></b></big>"))
 		else

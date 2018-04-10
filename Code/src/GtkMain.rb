@@ -75,8 +75,6 @@ class Main < Menu
 
     @window.show_all
 
-    @os = RbConfig::CONFIG['host_os']
-
     if !@os.downcase.include?('linux')
       dialogBox("Votre systeme d'exploitation est "+@os+". Vous risquez d\'avoir des problemes de compatibilite!")
     end

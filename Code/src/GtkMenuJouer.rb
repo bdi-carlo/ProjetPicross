@@ -128,6 +128,9 @@ class MenuJouer < Menu
 
 		#Partie droite
 		vb2 = Gtk::Box.new(:vertical,0)
+    if @os.downcase.include?('darwin')
+      vb2.add(Gtk::Label.new("\n\n\n\n\n"))
+    end
 		vb2.add(Gtk::Label.new("\n\n\n\n\n\n\n\n\n\n\n\n\n\n"))
 		@iIllustrative = Gtk::Image.new(:file => "../images/illustrations/nothing.png")
 		vb2.add(@iIllustrative)
