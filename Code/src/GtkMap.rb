@@ -35,6 +35,7 @@ class Gui
 		@indiceTypeJeu = indiceTypeJeu
 		@flagHypo=false
 		@labelGitan=false
+    @os = RbConfig::CONFIG['host_os']
 		if charge == 0 then
 			@nbHypo = 0
 			@map = Map.create(cheminMap)
@@ -177,7 +178,11 @@ class Gui
       end
 
     end
-    sidenumbers = Gtk::Box.new(:vertical,10)
+    if @os.downcase.include?('darwin')
+      sidenumbers = Gtk::Box.new(:vertical,16)
+    else
+      sidenumbers = Gtk::Box.new(:vertical,10)
+    end
       #sidenumbers.add(Gtk::Label.new())
       for tab in side
 
@@ -604,10 +609,14 @@ class Gui
       end
     end
     splitHorizontal=Gtk::Box.new(:horizontal,5)
-    splitHorizontal.set_homogeneous(FALSE)                                                                                        #A MODIFIER
+    splitHorizontal.set_homogeneous(false)                                                                                        #A MODIFIER
     @temp =[]
-    topnumbers = Gtk::Box.new(:horizontal,8)
-    topnumbers.homogeneous=(TRUE)
+    if @os.downcase.include?('darwin')
+      topnumbers = Gtk::Box.new(:horizontal,7)
+    else
+      topnumbers = Gtk::Box.new(:horizontal,8)
+    end
+    topnumbers.homogeneous=(true)
 ########################################################################################################
 
       for tab in top
