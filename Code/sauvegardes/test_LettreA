@@ -2,36 +2,37 @@
 grillePrim: !ruby/object:Map
   side:
   - []
-  - - 4
+  - - 2
   - - 1
     - 1
   - - 1
     - 1
   - - 1
     - 1
-  - - 5
+  - - 8
   - - 1
+    - 1
   - - 1
-  - - 5
+    - 1
+  - - 1
+    - 1
   - []
   top:
   - []
-  - []
-  - - 3
+  - - 5
   - - 1
-    - 1
-    - 1
-  - - 1
-    - 1
     - 1
   - - 1
     - 1
+  - - 1
     - 1
   - - 1
     - 1
+  - - 1
     - 1
-  - - 7
-  - []
+  - - 1
+    - 1
+  - - 5
   - []
   res:
   - - 0
@@ -47,9 +48,19 @@ grillePrim: !ruby/object:Map
   - - 0
     - 0
     - 0
+    - 0
     - 1
     - 1
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
     - 1
+    - 0
+    - 0
     - 1
     - 0
     - 0
@@ -65,36 +76,37 @@ grillePrim: !ruby/object:Map
     - 0
     - 0
   - - 0
-    - 0
     - 1
     - 0
     - 0
     - 0
     - 0
-    - 1
     - 0
+    - 0
+    - 1
     - 0
   - - 0
-    - 0
     - 1
-    - 0
-    - 0
-    - 0
-    - 0
     - 1
-    - 0
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
     - 0
   - - 0
-    - 0
-    - 0
-    - 1
-    - 1
-    - 1
-    - 1
     - 1
     - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
     - 0
   - - 0
+    - 1
     - 0
     - 0
     - 0
@@ -102,9 +114,9 @@ grillePrim: !ruby/object:Map
     - 0
     - 0
     - 1
-    - 0
     - 0
   - - 0
+    - 1
     - 0
     - 0
     - 0
@@ -112,17 +124,6 @@ grillePrim: !ruby/object:Map
     - 0
     - 0
     - 1
-    - 0
-    - 0
-  - - 0
-    - 0
-    - 0
-    - 1
-    - 1
-    - 1
-    - 1
-    - 1
-    - 0
     - 0
   - - 0
     - 0
@@ -134,7 +135,7 @@ grillePrim: !ruby/object:Map
     - 0
     - 0
     - 0
-  filename: "../grilles/facile/10x10/Neuf"
+  filename: "../grilles/facile/10x10/LettreA"
   rows: 10
   cols: 10
   map:
@@ -213,8 +214,7 @@ grillePrim: !ruby/object:Map
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
-      value: 1
-      color: 0
+      value: 0
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
@@ -234,8 +234,7 @@ grillePrim: !ruby/object:Map
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
-      value: 1
-      color: 0
+      value: 0
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
@@ -255,8 +254,7 @@ grillePrim: !ruby/object:Map
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
-      value: 1
-      color: 0
+      value: 0
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
@@ -276,8 +274,7 @@ grillePrim: !ruby/object:Map
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
-      value: 1
-      color: 0
+      value: 0
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
@@ -293,14 +290,11 @@ grillePrim: !ruby/object:Map
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
-      value: 1
-      color: 0
+      value: 0
     - !ruby/object:Case
-      value: 1
-      color: 0
+      value: 0
     - !ruby/object:Case
-      value: 1
-      color: 0
+      value: 0
     - !ruby/object:Case
       value: 0
     - !ruby/object:Case
@@ -351,9 +345,9 @@ test
 ***
 1
 ***
-4
+1
 ***
-../grilles/facile/10x10/Neuf
+../grilles/facile/10x10/LettreA
 ***
 0
 ***

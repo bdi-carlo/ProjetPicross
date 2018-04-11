@@ -51,9 +51,12 @@ class MenuCharger < Menu
 		allSaves.each{ |elt|
 			tmp = elt.split('_')
 			if tmp[0] == @pseudo
+				hSaves = Gtk::Box.new(:horizontal, 5)
+				vNbSave = Gtk::Box.new(:vertical, 5)
+				vNomSave = Gtk::Box.new(:vertical, 5)
 				indice = true
 				nb += 1
-				lab = (Gtk::Label.new.set_markup("<span foreground='white'>Save #{nb.to_s+" - "+tmp[1]}</span>"))
+				lab = (Gtk::Label.new.set_markup("<span foreground='white'>#{tmp[1]}</span>"))
 				event = Gtk::EventBox.new.add(lab)
 				event.signal_connect("enter_notify_event"){
 					@window.window.set_cursor(@cursorPointer)
@@ -64,7 +67,10 @@ class MenuCharger < Menu
 				event.signal_connect("button_press_event") do
 					charger("../sauvegardes/"+@pseudo+"_"+tmp[1])
 				end
-				vb.add(event)
+				vNbSave.add(Gtk::Label.new.set_markup("<span foreground='white'>    Save #{nb.to_s+"   - "}</span>"))
+				vNomSave.add(event)
+				hSaves.add(vNbSave).add(vNomSave)
+				vb.add(hSaves)
 			end
 		}
 		if indice == false

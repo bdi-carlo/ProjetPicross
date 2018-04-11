@@ -610,7 +610,7 @@ class Gui
 ########################################################################################################
 
       for tab in top
-        tab.length.upto(maxlen) do
+        tab.length.upto(maxlen-1) do
           @temp << "\n"
         end
         if tab == []
@@ -911,30 +911,64 @@ class Gui
 	end
 
 	##
+	# Méthode qui retourne le nb de saves en dehors de la save en cours
+	def nbSaves()
+		res = 0
+
+		allSaves = Dir.entries("../sauvegardes")
+		allSaves.delete(".")
+		allSaves.delete("..")
+
+		allSaves.each{ |elt|
+			tmp = elt.split('_')
+			if tmp[0] == @pseudo && tmp[1] != recupNom(@cheminMap)
+				res += 1
+			end
+		}
+
+		return res
+	end
+
+	##
 	# Sauvegarde la partie
 	#
 	# Param : identificateurs d'une partie
 	def sauvegarder(unNom)
-		# Serialisation des différentes classes
-		hypo = @hypo.to_yaml()
+		if nbSaves() >= 8
+			dialog = Gtk::Dialog.new("Alerte",
+ 	                             $main_application_window,
+ 	                             :destroy_with_parent,
+ 	                             [ Gtk::Stock::OK, :none ])
+ 			dialog.set_window_position(:center_always)
 
-		# Ecriture dans le fichier
-		monFichier = File.open("../sauvegardes/"+unNom, "w")
-		monFichier.write(hypo)
-		monFichier.write("***\n")
-		monFichier.write(@pseudo)
-		monFichier.write("\n***\n")
-		monFichier.write(@inc)
-		monFichier.write("\n***\n")
-		monFichier.write(@time)
-		monFichier.write("\n***\n")
-		monFichier.write(@cheminMap)
-		monFichier.write("\n***\n")
-		monFichier.write(@nbHypo)
-		monFichier.write("\n***\n")
+ 	    # Ensure that the dialog box is destroyed when the user responds.
+ 	    dialog.signal_connect('response') { dialog.destroy }
 
-		# Fermeture du fichier
-		monFichier.close
+ 	    # Add the message in a label, and show everything we've added to the dialog.
+ 	    dialog.child.add(Gtk::Label.new( "\nImpossible:nombre maximum de sauvegardes atteint (8/8)!\n" ))
+ 	    dialog.show_all
+		else
+			# Serialisation des différentes classes
+			hypo = @hypo.to_yaml()
+
+			# Ecriture dans le fichier
+			monFichier = File.open("../sauvegardes/"+unNom, "w")
+			monFichier.write(hypo)
+			monFichier.write("***\n")
+			monFichier.write(@pseudo)
+			monFichier.write("\n***\n")
+			monFichier.write(@inc)
+			monFichier.write("\n***\n")
+			monFichier.write(@time)
+			monFichier.write("\n***\n")
+			monFichier.write(@cheminMap)
+			monFichier.write("\n***\n")
+			monFichier.write(@nbHypo)
+			monFichier.write("\n***\n")
+
+			# Fermeture du fichier
+			monFichier.close
+		end
 	end
 
 	##
