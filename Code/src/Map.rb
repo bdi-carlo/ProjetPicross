@@ -185,10 +185,10 @@ class Map
 	def nettoyer()
 		0.upto(@rows-1) do |row|
 			0.upto(@cols-1) do |col|
-					puts"#{self.accessAt(row,col).verifColor}"
+					
 					self.putAt!(row,col,Case.create(@map[row][col].verifColor))
 					accessAt(row,col).color = 1
-					
+
 
 			end
 		end

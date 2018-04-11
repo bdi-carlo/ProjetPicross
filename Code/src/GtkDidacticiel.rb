@@ -14,6 +14,8 @@ class GtkDidacticiel < Gui
 	#@verifcroix
 	#@verifhypo
 	#@verifaide
+  #@verifhypocase
+  #@verifhypofin
 
 	attr_accessor :verifcase,:verifcroix,:verifhypo,:verifaide
 
@@ -24,12 +26,15 @@ class GtkDidacticiel < Gui
 	@verifcroix = 0
 	@verifhypo  = 0
 	@verifaide = 0
+  @verifhypocase = 0
+  @verifhypofin = 0
+
 	puts "Coucou"
 	@dida = Didacticiel.new()
-	initDialogue()
-	@dida.etape += 1
+	#initDialogue()
+	#@dida.etape += 1
 	affichemessage()
-	super(indiceTypeJeu, charge, pseudo, cheminMap, inc, start, map, hypo, nbHypo)
+	super(indiceTypeJeu, charge, pseudo, cheminMap, inc, start, hypo, nbHypo)
   end
 	##
   # Actualise le texte de la variable message
@@ -42,36 +47,41 @@ class GtkDidacticiel < Gui
   ##
   # Création de la boite de dialogue ou va etre affiché les instructions
   def initDialogue()
+  @indice = 0
 
-	dialog = Gtk::Dialog.new("message",$main_application_window, Gtk::Dialog::DESTROY_WITH_PARENT,[ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
+	dialog = Gtk::Dialog.new("Message",$main_application_window, Gtk::Dialog::DESTROY_WITH_PARENT,[ Gtk::Stock::OK, Gtk::Dialog::RESPONSE_NONE ])
 	dialog.set_window_position(:center_always)
 	#dialogue.child.add(Gtk::Label.new( "\n"+@message+"\n" ))
 
-	dialog.signal_connect('response') { dialog.destroy }
+	dialog.signal_connect('response') {dialog.destroy}
 	##### LE MESSAGE A AFFICHER
 	res = @dida.message
 
    	dialog.child.add(Gtk::Label.new(res))
 	dialog.show_all
 
-
   end
   ##
-  # MouseOver pour la grille 
+  # MouseOver pour la grille
   def onEnter(x,y,button)
     Gdk.pointer_ungrab(Gdk::CURRENT_TIME)
     @buttonTab[x][y].set_focus(TRUE)
 
     if button.state.button1_mask?
       if @timePress[x][y]%2 == 0
+
         changeImage(@buttonTab[x][y],@tabCase[@nbHypo])
 
        @map.putAt!(x,y,Case.create(1))
 ############################################################################################
-		if(@dida.etape == 1 && @verifcase == 0)
+		if(@dida.etape == 2 && @verifcase == 0)
 			@verifcase += 1
 			#etape du didacticiel
-			@dida.etape += 1
+			affichemessage()
+		end
+    if(@dida.etape == 6 && @verifhypocase == 0)
+			@verifhypocase += 1
+			#etape du didacticiel
 			affichemessage()
 		end
 ############################################################################################
@@ -87,6 +97,13 @@ class GtkDidacticiel < Gui
 				victoire()
       end
     elsif button.state.button3_mask?
+      ############################################################################################
+        if(@dida.etape == 3 && @verifcroix == 0)
+          @verifcroix += 1
+          #etape du didacticiel
+          affichemessage()
+        end
+      ############################################################################################
       changeImage(@buttonTab[x][y],"../images/cases/croix.png")
       @map.putAt!(x,y,Case.create(2))
       @timePress[x][y]=0
@@ -189,6 +206,13 @@ class GtkDidacticiel < Gui
 		}
 		@bFaireHypo.signal_connect("button_press_event") do
 			if @nbHypo < 3
+        ############################################################################################
+          if(@dida.etape == 5 && @verifhypo == 0)
+            @verifhypo += 1
+            #etape du didacticiel
+            affichemessage()
+          end
+        ############################################################################################
 				@nbHypo += 1
 				changeBoutonHypo()
 				@map = @hypo.faireHypothese()
@@ -207,6 +231,13 @@ class GtkDidacticiel < Gui
 		}
 		@bValiderHypo.signal_connect("button_press_event") do
 			if @nbHypo > 0
+        ############################################################################################
+          if(@dida.etape == 7 && @verifhypofin  == 0)
+            @verifhypofin += 1
+            #etape du didacticiel
+            affichemessage()
+          end
+        ############################################################################################
 				@nbHypo -= 1
 				changeBoutonHypo()
 				@map = @hypo.validerHypothese()
@@ -226,6 +257,13 @@ class GtkDidacticiel < Gui
 		}
 		@bRejeterHypo.signal_connect("button_press_event") do
 			if @nbHypo > 0
+        ############################################################################################
+          if(@dida.etape == 7 && @verifhypofin == 0)
+            @verifhypofin += 1
+            #etape du didacticiel
+            affichemessage()
+          end
+        ############################################################################################
 				@nbHypo -= 1
 				changeBoutonHypo()
 				@map = @hypo.rejeterHypothese()
@@ -254,6 +292,13 @@ class GtkDidacticiel < Gui
 			@window.show_all
 		}
     @bAide1.signal_connect("button_press_event") do
+      ############################################################################################
+      		if(@dida.etape == 4 && @verifaide == 0)
+      			@verifaide += 1
+      			#etape du didacticiel
+      			affichemessage()
+      		end
+      ############################################################################################
       aide1()
     end
     boxAide.add(@bAide1)
@@ -271,6 +316,13 @@ class GtkDidacticiel < Gui
 			@window.show_all
 		}
     @bAide2.signal_connect("button_press_event") do
+      ############################################################################################
+        if(@dida.etape == 4 && @verifaide == 0)
+          @verifaide += 1
+          #etape du didacticiel
+          affichemessage()
+        end
+      ############################################################################################
       aide2()
     end
     boxAide.add(@bAide2)
@@ -288,6 +340,13 @@ class GtkDidacticiel < Gui
 			@window.show_all
 		}
     @bAide3.signal_connect("button_press_event") do
+      ############################################################################################
+        if(@dida.etape == 4 && @verifaide == 0)
+          @verifaide += 1
+          #etape du didacticiel
+          affichemessage()
+        end
+      ############################################################################################
       aide3()
     end
     boxAide.add(@bAide3)
