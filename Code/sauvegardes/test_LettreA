@@ -1,0 +1,353 @@
+--- !ruby/object:Hypothese
+grillePrim: !ruby/object:Map
+  side:
+  - []
+  - - 2
+  - - 1
+    - 1
+  - - 1
+    - 1
+  - - 1
+    - 1
+  - - 8
+  - - 1
+    - 1
+  - - 1
+    - 1
+  - - 1
+    - 1
+  - []
+  top:
+  - []
+  - - 5
+  - - 1
+    - 1
+  - - 1
+    - 1
+  - - 1
+    - 1
+  - - 1
+    - 1
+  - - 1
+    - 1
+  - - 1
+    - 1
+  - - 5
+  - []
+  res:
+  - - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 1
+    - 0
+    - 0
+    - 1
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+    - 0
+  - - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+  - - 0
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 0
+  - - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+  - - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+  - - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  filename: "../grilles/facile/10x10/LettreA"
+  rows: 10
+  cols: 10
+  map:
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+  - - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+    - !ruby/object:Case
+      value: 0
+grillesHypothese: []
+***
+test
+***
+1
+***
+1
+***
+../grilles/facile/10x10/LettreA
+***
+0
+***

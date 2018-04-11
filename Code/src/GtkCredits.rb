@@ -7,7 +7,7 @@ require 'gtk3'
 # Menu affichant les crédits
 class Credits < Menu
 
-  def initialize
+  def initialize(pseudo)
 
     puts("Creation de la fenetre")
 
@@ -26,7 +26,7 @@ class Credits < Menu
     - Ouassim Messagier#{"\n"}
     - Samed Oktay#{"\n"}
     - Valentin Lion#{"\n"}
-    - Moi#{"\n"}
+    - Martin Lebourdais#{"\n"}
     Git du projet => <a href = 'https://github.com/bdi-carlo/ProjetPicross'>https://github.com/bdi-carlo/ProjetPicross</a>
 </span>"))
     #Création du boutton HOME
@@ -43,7 +43,8 @@ class Credits < Menu
 			@bHome.show_all
 		}
 		@bHome.signal_connect("button_press_event") do
-			@window.destroy
+			onDestroy()
+			MenuPrincipal.new(pseudo)
 		end
     hb2 = Gtk::Box.new(:horizontal, 300)
     hb2.add(Gtk::Label.new("\t\t\t\t\t"))

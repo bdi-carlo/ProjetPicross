@@ -7,7 +7,7 @@ load "GtkMap.rb"
 load "GtkMenuJouer.rb"
 load "GtkMenuCharger.rb"
 load "GtkCredits.rb"
-load "GtkScoreboardBenj.rb"
+load "GtkScoreboard.rb"
 
 class MenuPrincipal < Menu
 
@@ -84,7 +84,6 @@ class MenuPrincipal < Menu
 		}
 		@bScore.signal_connect("button_press_event") do
         @window.hide
-        onDestroy()
 				Scoreboard.new(@pseudo)
     end
 		vb.add(@bScore)
@@ -96,7 +95,9 @@ class MenuPrincipal < Menu
 			onEnter(@bCredits)
 		}
     @bCredits.signal_connect("button_press_event"){
-			Credits.new()
+			@window.hide
+			onDestroy()
+			Credits.new(@pseudo)
 		}
 		@bCredits.signal_connect("leave_notify_event"){
 			onLeave(@bCredits)
