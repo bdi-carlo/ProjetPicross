@@ -103,8 +103,9 @@ class MenuCharger < Menu
 							@window.hide
 							onDestroy()
 							MenuCharger.new(@pseudo)
+						else
+							dialog.destroy
 						end
-						dialog.destroy
 					}
 				end
 				vCorbeille.add(event)
