@@ -31,7 +31,7 @@ class Didacticiel
 		#en attente du dossier final
 		#nom = "./grilles/didacticiel/sonnom"
 		#map = Gui.new(nom,0,0)
-		@etape = 0
+		@etape = 1
 	end
 
 	##
@@ -43,27 +43,38 @@ class Didacticiel
 		#definir le nombre d'etape
 		if(@etape == 1)
 			#determine quel case et si on le guide sur laquel on lui fait cliquer ?
-			@message = "cliquer sur une case pour la noircir"
+			@message = "Bienvenue dans le didacticiel #{@pseudo},\n cliquez-glissez sur des cases pour les noircir"
 			@etape += 1
 
 		elsif(@etape == 2)
 			#determine quel case et si on le guide sur laquel on lui fait cliquer ?
-			@message = "clique droit sur une case pour indiquer qu'elle ne doit pas etre noircie"
+			@message = "Ciquez-glissez droit sur des cases pour indiquer qu'elles ne doivent pas être noircies"
 			@etape += 1
 
 		elsif(@etape == 3)
 			#tout les indices ?
-			@message = "clique sur un des boutons d'indice representes par ?"
+			@message = "Cliquez sur un des boutons d'indice \nreprésentés par un point d'interrogation"
 			@etape += 1
 
 		elsif(@etape == 4)
 			#plusieurs hypothèse ?
-			@message = "les boutons d'hypotheses permettent de sauvegarder une position et d'y revenir "
+			@message = "Les boutons d'hypothèses permettent de \nsauvegarder une position et d'y revenir. Essayez ! "
 			@etape += 1
 
 		elsif(@etape == 5)
+			#plusieurs hypothèse ?
+			@message = "Vous êtes maintenant en mode hypothèse cliquez-glissez \nsur des cases elle seront d'une couleur différente ! "
+			@etape += 1
+
+		elsif(@etape == 6)
+			#plusieurs hypothèse ?
+			@message = "Vous pouvez valider votre hypothèse ou \nla rejeter avec les boutons sur le côté "
+			@etape += 1
+
+
+		elsif(@etape == 7)
 			#le laisser faire ou l'aider en disant ou cliquer ?
-			@message = "maintenant que tu connais les outils termine la grille"
+			@message = "Maintenant que vous connaissez les outils,\nles chiffres sur les côtés représente le nombre de cases noir sur la ligne,\n terminez la grille"
 			@etape += 1
 
 		end
