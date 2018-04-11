@@ -34,6 +34,7 @@ class Gui
     @save_flag=true
 		@indiceTypeJeu = indiceTypeJeu
 		@flagHypo=false
+		@labelGitan=false
 		if charge == 0 then
 			@nbHypo = 0
 			@map = Map.create(cheminMap)
@@ -648,13 +649,17 @@ class Gui
 		iAide1 = Gtk::Image.new(:file => "../images/boutons/aide1.png")
 		@bAide1 = Gtk::EventBox.new.add(iAide1)
 		@bAide1.signal_connect("enter_notify_event"){
+			@labelGitan = true
 			changeImage(@bAide1,"../images/boutons/aide1Over.png")
 			@vb.add(Gtk::Label.new.set_markup("<span foreground='white'>Aide qui vous indique la colonne qui a le plus gros chiffre</span>"))
 			@window.show_all
 		}
 		@bAide1.signal_connect("leave_notify_event"){
 			changeImage(@bAide1,"../images/boutons/aide1.png")
-			@vb.remove(@vb.children.last)
+			if @labelGitan
+				@vb.remove(@vb.children.last)
+				@labelGitan = false
+			end
 			@window.show_all
 		}
     @bAide1.signal_connect("button_press_event") do
