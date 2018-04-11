@@ -87,7 +87,6 @@ class Gui
       else
         Gtk.main_quit
       end
-
   end
 
 	##
@@ -332,10 +331,9 @@ class Gui
 			@save_flag = false
       if @indiceTypeJeu == 2
 			     Gtk.main_quit
-
+           @window.hide
       else
         @window.destroy
-
       end
 		 }
 		res = "Bravo, vous avez fait un temps de #{@time/60}min et #{@time%60} s"  #####QUOI FAIRE EN CAS DE VICTOIRE
