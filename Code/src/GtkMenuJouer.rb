@@ -75,19 +75,19 @@ class MenuJouer < Menu
 		vb.add(@bCompetition)
 
 		#Création du boutton NORMAL
-		iNormal = Gtk::Image.new(:file => "../images/boutons/normal.png")
-		@bNormal = Gtk::EventBox.new.add(iNormal)
-		@bNormal.signal_connect("enter_notify_event"){
-			onEnter(@bNormal)
+		iEntrainement = Gtk::Image.new(:file => "../images/boutons/entrainement.png")
+		@bEntrainement = Gtk::EventBox.new.add(iEntrainement)
+		@bEntrainement.signal_connect("enter_notify_event"){
+			onEnter(@bEntrainement)
 		}
-		@bNormal.signal_connect("leave_notify_event"){
-			onLeave(@bNormal)
+		@bEntrainement.signal_connect("leave_notify_event"){
+			onLeave(@bEntrainement)
 		}
-		@bNormal.signal_connect("button_press_event") do
+		@bEntrainement.signal_connect("button_press_event") do
 			onDestroy()
 			MenuChoixGrille.new(@pseudo,0)
 		end
-		vb.add(@bNormal)
+		vb.add(@bEntrainement)
 
 		#Création du boutton DIDACTICIEL
 		iDidacticiel = Gtk::Image.new(:file => "../images/boutons/didacticiel.png")
@@ -167,9 +167,9 @@ class MenuJouer < Menu
 			button.child = Gtk::Image.new(:file => "../images/boutons/competitionOver.png")
 			@iIllustrative.set_from_file("../images/illustrations/competition.png")
 			button.show_all
-		elsif button == @bNormal
+		elsif button == @bEntrainement
 			button.remove(button.child)
-			button.child = Gtk::Image.new(:file => "../images/boutons/normalOver.png")
+			button.child = Gtk::Image.new(:file => "../images/boutons/entrainementOver.png")
 			@iIllustrative.set_from_file("../images/illustrations/normal.png")
 			button.show_all
 		elsif button == @bDidacticiel
@@ -199,9 +199,9 @@ class MenuJouer < Menu
 			button.child = Gtk::Image.new(:file => "../images/boutons/competition.png")
 			putNothing
 			button.show_all
-		elsif button == @bNormal
+		elsif button == @bEntrainement
 			button.remove(button.child)
-			button.child = Gtk::Image.new(:file => "../images/boutons/normal.png")
+			button.child = Gtk::Image.new(:file => "../images/boutons/entrainement.png")
 			putNothing
 			button.show_all
 		elsif button == @bDidacticiel
