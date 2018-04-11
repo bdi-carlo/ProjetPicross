@@ -54,9 +54,12 @@ class MenuCharger < Menu
 				hSaves = Gtk::Box.new(:horizontal, 5)
 				vNbSave = Gtk::Box.new(:vertical, 5)
 				vNomSave = Gtk::Box.new(:vertical, 5)
+				vCorbeille = Gtk::Box.new(:vertical, 5)
 				indice = true
 				nb += 1
-				lab = (Gtk::Label.new.set_markup("<span foreground='white'>#{tmp[1]}</span>"))
+
+				# Label contenant le nom de la save
+				lab = (Gtk::Label.new.set_markup("<span foreground='white'>#{tmp[1]}    </span>"))
 				event = Gtk::EventBox.new.add(lab)
 				event.signal_connect("enter_notify_event"){
 					@window.window.set_cursor(@cursorPointer)
@@ -67,9 +70,46 @@ class MenuCharger < Menu
 				event.signal_connect("button_press_event") do
 					charger("../sauvegardes/"+@pseudo+"_"+tmp[1])
 				end
+
+				# Label contenant le num de la save
 				vNbSave.add(Gtk::Label.new.set_markup("<span foreground='white'>    Save #{nb.to_s+"   - "}</span>"))
 				vNomSave.add(event)
-				hSaves.add(vNbSave).add(vNomSave)
+
+				# Label contenant la corbeille permettant de supprimer la save
+				event = Gtk::EventBox.new.add(Gtk::Image.new(:file => "../images/boutons/corbeilleIco.png"))
+				event.signal_connect("enter_notify_event"){
+					@window.window.set_cursor(@cursorPointer)
+				}
+				event.signal_connect("leave_notify_event"){
+					@window.window.set_cursor(@cursorDefault)
+				}
+				event.signal_connect("button_press_event") do
+					dialog = Gtk::Dialog.new("Supprimer?",
+			                             $main_application_window,
+			                             Gtk::DialogFlags::MODAL | Gtk::DialogFlags::DESTROY_WITH_PARENT,
+			                             [ Gtk::Stock::YES, Gtk::ResponseType::ACCEPT ],
+																 	 [ Gtk::Stock::NO, Gtk::ResponseType::REJECT ])
+					dialog.set_window_position(:center_always)
+
+			    # Ensure that the dialog box is destroyed when the user responds.
+
+			    # Add the message in a label, and show everything we've added to the dialog.
+			    dialog.child.add(Gtk::Label.new( "\nVoulez-vous vraiment supprimer cette sauvegarde?\n" ))
+					dialog.show_all
+					dialog.signal_connect('response') { |dial,rep|
+						if rep == -3
+							File.delete("../sauvegardes/"+@pseudo+"_"+tmp[1])
+							dialog.destroy
+							@window.hide
+							onDestroy()
+							MenuCharger.new(@pseudo)
+						end
+						dialog.destroy
+					}
+				end
+				vCorbeille.add(event)
+
+				hSaves.add(vNbSave).add(vNomSave).add(vCorbeille)
 				vb.add(hSaves)
 			end
 		}
@@ -83,7 +123,7 @@ class MenuCharger < Menu
 		#Création du boutton RETOUR
 		vb2 = Gtk::Box.new(:vertical,0)
 		vb2.add(Gtk::Label.new("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"))
-		iRetour = Gtk::Image.new(:file => "../images/boutons/retour.png")
+		iRetour = Gtk::Image.new(:file => "../images/boutons/retour2.png")
 		@bRetour = Gtk::EventBox.new.add(iRetour)
 		@bRetour.signal_connect("enter_notify_event"){
 			@bRetour.remove(@bRetour.child)
@@ -92,7 +132,7 @@ class MenuCharger < Menu
 		}
 		@bRetour.signal_connect("leave_notify_event"){
 			@bRetour.remove(@bRetour.child)
-			@bRetour.child = Gtk::Image.new(:file => "../images/boutons/retour.png")
+			@bRetour.child = Gtk::Image.new(:file => "../images/boutons/retour2.png")
 			@bRetour.show_all
 		}
 		@bRetour.signal_connect("button_press_event") do
