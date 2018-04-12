@@ -74,7 +74,7 @@ class Didacticiel
 
 		elsif(@etape == 7)
 			#le laisser faire ou l'aider en disant ou cliquer ?
-			@message = "Maintenant que vous connaissez les outils,\nles chiffres sur les côtés représente le nombre de cases noir sur la ligne,\n terminez la grille"
+			@message = "Maintenant que vous connaissez les outils,\nles chiffres sur les côtés représentent le nombre de cases noir sur la ligne,\n Essayer maintenant de terminer la grille"
 			@etape += 1
 
 		end
