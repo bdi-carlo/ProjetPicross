@@ -2,6 +2,8 @@
 
 # ProjetPicross
 
+L3 project about the Picross game.
+
 ## Gems
 
 * facets
@@ -17,3 +19,7 @@ To install this gems:
 To run the game do this command in a terminal:
 
 ./picross.sh
+
+## Link
+
+https://github.com/bdi-carlo/ProjetPicross
