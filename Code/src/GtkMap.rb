@@ -691,15 +691,15 @@ class Gui
     end
     boxAide.add(@bAide2)
 
-		iAide3 = Gtk::Image.new(:file => "../images/boutons/aide120.png")
+		iAide3 = Gtk::Image.new(:file => "../images/boutons/aide3.png")
 		@bAide3 = Gtk::EventBox.new.add(iAide3)
 		@bAide3.signal_connect("enter_notify_event"){
-			changeImage(@bAide3,"../images/boutons/aide120Over.png")
+			changeImage(@bAide3,"../images/boutons/aide3Over.png")
 			@vb.add(Gtk::Label.new.set_markup("<span foreground='white'>Aide vous permettant d'appuyer sur une case et savoir si elle est coloriee ou non</span>"))
 			@window.show_all
 		}
 		@bAide3.signal_connect("leave_notify_event"){
-			changeImage(@bAide3,"../images/boutons/aide120.png")
+			changeImage(@bAide3,"../images/boutons/aide3.png")
 			@vb.remove(@vb.children.last)
 			@window.show_all
 		}
