@@ -84,6 +84,7 @@ class MenuPrincipal < Menu
 		}
 		@bScore.signal_connect("button_press_event") do
         @window.hide
+				onDestroy()
 				Scoreboard.new(@pseudo)
     end
 		vb.add(@bScore)

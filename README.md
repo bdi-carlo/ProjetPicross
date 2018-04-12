@@ -8,10 +8,12 @@
 * timer
 * gtk3
 
+To install this gems:
+
+./gems.sh
+
 ## Launching
 
-To launch the game do this command in a terminal:
+To run the game do this command in a terminal:
 
-cd Code/src
-
-make
+./picross.sh
